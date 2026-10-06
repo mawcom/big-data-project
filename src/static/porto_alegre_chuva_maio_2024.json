@@ -1,0 +1,175 @@
+{
+  "source": "Serviço Geológico do Brasil — Atlas Pluviométrico do Brasil",
+  "source_page": "https://rigeo.sgb.gov.br/items/bc33cf6b-674e-407f-83a0-6eb06160fa72",
+  "archive_url": "https://rigeo.sgb.gov.br/bitstreams/b72a78e2-3b2e-4a28-8f4a-ed4e496ce0e0/download",
+  "archive_sha256": "65d58709cf90d2b7b746b0e14e6946a632cd7f00f9feb1cc634da48c207c0f85",
+  "station": "Porto Alegre — Jardim Botânico",
+  "station_code": "03051011",
+  "period": "2024-05",
+  "measure": "Precipitação Total no Pluviograma (mm)",
+  "date_note": "A data segue o nome e o cabeçalho do arquivo diário do SGB; não equivale necessariamente ao dia civil de 00h a 24h.",
+  "summary": {
+    "days": 31,
+    "rainy_days": 21,
+    "total_mm": 464.23,
+    "peak_date": "2024-05-23",
+    "peak_mm": 98.27
+  },
+  "records": [
+    {
+      "date": "2024-05-01",
+      "rain_mm": 94.23,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-02",
+      "rain_mm": 18.2,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-03",
+      "rain_mm": 7.3,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-04",
+      "rain_mm": 23.2,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-05",
+      "rain_mm": 0.3,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-06",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-07",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-08",
+      "rain_mm": 5.25,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-09",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-10",
+      "rain_mm": 43.0,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-11",
+      "rain_mm": 48.75,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-12",
+      "rain_mm": 35.23,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-13",
+      "rain_mm": 0.77,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-14",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-15",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-16",
+      "rain_mm": 11.42,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-17",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-18",
+      "rain_mm": 0.83,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-19",
+      "rain_mm": 0.47,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-20",
+      "rain_mm": 0.25,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-21",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-22",
+      "rain_mm": 23.04,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-23",
+      "rain_mm": 98.27,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-24",
+      "rain_mm": 17.93,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-25",
+      "rain_mm": 2.01,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-26",
+      "rain_mm": 6.57,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-27",
+      "rain_mm": 24.37,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-28",
+      "rain_mm": 2.84,
+      "record_type": "CP"
+    },
+    {
+      "date": "2024-05-29",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-30",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    },
+    {
+      "date": "2024-05-31",
+      "rain_mm": 0.0,
+      "record_type": "SP"
+    }
+  ]
+}

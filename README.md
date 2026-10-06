@@ -2,7 +2,7 @@
 
 Protótipo estudantil para explorar como fases do El Niño podem se relacionar com extremos climáticos em diferentes regiões brasileiras, considerando o aquecimento global como contexto de longo prazo.
 
-> **Estado atual:** protótipo visual com dados simulados. Os gráficos não são resultados científicos nem observações oficiais.
+> **Estado atual:** o painel inclui uma pequena amostra observada de chuva do SGB (Porto Alegre, maio de 2024) e uma exploração regional ainda simulada. A amostra real não é uma análise causal do El Niño ou do aquecimento global.
 
 ## Abrir o painel
 
@@ -28,6 +28,7 @@ Se o comando `py` não existir, use `python` no lugar dele para criar o ambiente
 
 ## O que há no protótipo
 
+- gráfico diário de chuva observada em Porto Alegre em maio de 2024, com CSV para download e [método documentado](docs/dados-reais/README.md);
 - painel interativo com filtro por região, período e indicador;
 - mapa escuro e clicável das cinco Grandes Regiões, com limites simplificados do IBGE e ligado aos mesmos filtros;
 - séries mensais simuladas de chuva, temperatura, focos de calor e extremos;
@@ -38,13 +39,18 @@ Se o comando `py` não existir, use `python` no lugar dele para criar o ambiente
 ## Documentação
 
 - [Tema e método de análise](docs/tema/README.md)
+- [Amostra real: fonte, processamento e limites](docs/dados-reais/README.md)
 - [Arquitetura e decisões de programação](docs/arquitetura/README.md)
+
+## Reproduzir a amostra observada
+
+Com as dependências instaladas, execute `python src\build_real_sample.py`. O script baixa o ZIP oficial do SGB caso não esteja em `data/raw/sgb/`, valida o SHA-256 e gera os arquivos pequenos usados pelo painel. O painel já inclui esses arquivos derivados e funciona sem download na inicialização.
 
 ## Próximos passos recomendados
 
-1. **Fechar a pergunta e o recorte:** escolher uma região, período e extremos a comparar durante El Niño, La Niña e neutralidade.
-2. **Montar uma amostra real pequena:** baixar um ano de uma fonte oficial, preservando os arquivos originais e anotando URL, data de coleta, licença e cobertura.
-3. **Preparar os dados com pandas:** ler CSV em partes quando necessário, padronizar datas e unidades e registrar valores ausentes, duplicatas e critérios de qualidade.
+1. **Fechar a pergunta e o recorte:** escolher as regiões, o período e os extremos a comparar durante El Niño, La Niña e neutralidade.
+2. **Ampliar a amostra real com controle de qualidade:** analisar mais anos e estações, preservando os arquivos originais e registrando cobertura, ausências e diferenças entre instrumentos.
+3. **Preparar os dados com pandas:** padronizar datas e unidades, documentar valores ausentes, duplicatas e critérios de qualidade; ler em partes quando o volume exigir.
 4. **Definir a comparação científica:** documentar a fonte/classificação ENSO, a definição de cada extremo e como separar sazonalidade e aquecimento de longo prazo. Associação nos dados não prova causalidade.
 5. **Salvar uma camada tratada em Parquet:** particionar por fonte e ano, manter manifesto com hashes e testar se cada partição cabe na memória.
 6. **Validar e só então ampliar:** conferir resultados da amostra; usar DuckDB para consultas sobre Parquet se necessário; aumentar anos/fontes e incluir ANA depois.
