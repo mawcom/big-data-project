@@ -1,0 +1,2 @@
+# Dependências Python do protótipo.
+pandas>=2.2,<4

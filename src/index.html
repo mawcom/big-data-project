@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a18">
+  <title>Clima em Foco — protótipo</title>
+  <style>
+    :root { color-scheme:dark; --ink:#e6efeb; --muted:#9aada6; --line:#2a413a; --paper:#101917; --card:#172420; --green:#69c6a6; --teal:#48a88e; --orange:#e2a06e; --blue:#79a9c5; --control:#20312c; --soft:#1b2b26; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    .page { width:min(1180px,calc(100% - 40px)); margin:auto; padding:34px 0 54px; }
+    header { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:26px; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.12em; color:var(--green); font-weight:750; font-size:11px; }
+    h1 { font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:clamp(34px,5vw,54px); line-height:1.02; letter-spacing:-.04em; margin:9px 0 12px; max-width:740px; }
+    .subtitle { color:var(--muted); max-width:720px; line-height:1.6; margin:0; }
+    .badge { background:#32271e; color:#f0bb8e; border:1px solid #64482f; border-radius:999px; padding:9px 13px; font-weight:750; font-size:11px; letter-spacing:.07em; white-space:nowrap; }
+    .notice { display:flex; gap:12px; align-items:flex-start; padding:15px 17px; margin:23px 0; background:#2b251d; border:1px solid #5a422c; border-radius:13px; color:#e8c9a9; font-size:13px; line-height:1.5; }
+    .notice strong { display:block; margin-bottom:2px; }
+    .filters { display:grid; grid-template-columns:1fr 1.2fr 2fr; gap:14px; padding:17px; background:#17231f; border:1px solid var(--line); border-radius:15px; margin-bottom:18px; }
+    label { color:#536562; display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:750; margin-bottom:7px; }
+    select { width:100%; border:1px solid #3b544b; border-radius:9px; padding:11px 12px; font:inherit; color:var(--ink); background:var(--control); }
+    .range { display:flex; align-items:center; gap:9px; }
+    input[type=range] { accent-color:var(--green); width:100%; }
+    .year { font-variant-numeric:tabular-nums; font-weight:750; min-width:32px; }
+    .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:13px; margin-bottom:17px; }
+    .card,.panel { background:var(--card); border:1px solid var(--line); border-radius:15px; box-shadow:0 8px 24px #00000018; }
+    .card { padding:17px 18px; min-height:106px; }
+    .card-label { color:var(--muted); font-size:12px; }
+    .card-value { font-family:Georgia,"Times New Roman",serif; font-size:32px; letter-spacing:-.04em; margin-top:7px; }
+    .card-note { color:var(--muted); font-size:11px; margin-top:2px; }
+    .panel { padding:21px; }
+    .panel-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:7px; }
+    h2 { font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:24px; margin:0 0 5px; letter-spacing:-.02em; }
+    .panel-desc { color:var(--muted); font-size:12px; margin:0; }
+    .legend { display:flex; gap:14px; align-items:center; flex-wrap:wrap; font-size:11px; color:var(--muted); }
+    .key { display:inline-flex; align-items:center; gap:6px; }
+    .swatch { width:17px; height:7px; border-radius:4px; display:inline-block; }
+    .swatch.elnino { background:#f7dfcc; } .swatch.other { background:#d9e9e3; } .line-key { height:3px; background:var(--green); }
+    .chart-wrap { overflow-x:auto; padding-top:13px; }
+    .chart-wrap svg { display:block; width:100%; min-width:720px; height:310px; overflow:visible; }
+    .axis { stroke:#30463f; stroke-width:1; } .tick { fill:#9aada6; font-size:10px; } .series { fill:none; stroke:var(--green); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; } .dot { fill:#172420; stroke:var(--green); stroke-width:1.5; }
+    .footer-row { display:flex; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid var(--line); padding-top:13px; margin-top:12px; color:var(--muted); font-size:11px; }
+    button { border:1px solid #416154; color:#b6ead5; background:#1d3029; padding:8px 11px; border-radius:8px; font-weight:700; cursor:pointer; }
+    button:hover { background:#29443a; }
+    .table-panel { margin-top:16px; }
+    .table-scroll { overflow:auto; max-height:310px; margin-top:12px; }
+    table { border-collapse:collapse; width:100%; min-width:650px; font-size:12px; }
+    th { text-align:left; color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.06em; position:sticky; top:0; background:var(--card); }
+    th,td { padding:10px 11px; border-bottom:1px solid #263a33; }
+    td.num { font-variant-numeric:tabular-nums; }
+    .phase-pill { border-radius:20px; padding:4px 8px; background:#263a33; color:#b7c9c1; white-space:nowrap; }
+    .phase-pill.el { background:#402c20; color:#efb98b; }
+    .docs { display:flex; gap:17px; margin-top:17px; font-size:12px; }
+    a { color:var(--green); font-weight:700; }
+    .loading { color:var(--muted); padding:35px; text-align:center; }
+    .map-panel { margin-bottom:17px; }
+    .map-layout { display:grid; grid-template-columns:minmax(260px,1fr) minmax(220px,.72fr); gap:20px; align-items:center; }
+    .map-stage { display:flex; justify-content:center; padding:8px 10px; border-radius:12px; background:radial-gradient(ellipse at 48% 50%,#1e302a 0%,#172420 70%); }
+    #brazilMap { display:block; width:min(100%,470px); height:480px; overflow:visible; }
+    .map-region { stroke:#d4e4dc; stroke-width:1.25; stroke-linejoin:round; cursor:pointer; transition:filter .16s,stroke-width .16s; vector-effect:non-scaling-stroke; }
+    .map-region:hover,.map-region:focus-visible { filter:brightness(1.25); stroke:#f2faf6; stroke-width:2.5; outline:none; }
+    .map-region.selected { stroke:#fff; stroke-width:2.5; }
+    .map-label { fill:#f4fbf7; font-size:12px; font-weight:750; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#14231e; stroke-width:3px; stroke-linejoin:round; }
+    .map-key { color:var(--muted); font-size:12px; line-height:1.65; }
+    .map-key strong { color:var(--ink); }
+    .map-scale { display:flex; align-items:center; gap:8px; margin:15px 0 7px; }
+    .map-gradient { height:8px; flex:1; border-radius:8px; background:linear-gradient(90deg,#255540,#347c63,#4ba985,#82d3b1); }
+    .map-scale-label { font-size:10px; color:var(--muted); }
+    .map-selected { font-size:14px; margin-top:16px; color:var(--ink); }
+    .schematic-note { margin-top:10px; font-size:10px; color:var(--muted); }
+    @media(max-width:760px){ .page{width:min(100% - 26px,1180px);padding-top:24px} header{display:block}.badge{display:inline-block;margin-top:18px}.filters{grid-template-columns:1fr 1fr}.filters>div:last-child{grid-column:1/-1}.cards{grid-template-columns:1fr 1fr}.panel{padding:16px}.panel-heading{display:block}.legend{margin-top:12px}.footer-row{align-items:flex-start;flex-direction:column}.map-layout{grid-template-columns:1fr}.map-key{max-width:620px} }
+    @media(max-width:430px){.cards{grid-template-columns:1fr 1fr}.card{padding:13px;min-height:96px}.card-value{font-size:26px}.docs{flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <div class="eyebrow">Clima e dados abertos</div>
+        <h1>El Niño e extremos climáticos no Brasil</h1>
+        <p class="subtitle">Um primeiro olhar sobre como chuva, calor, estiagem e risco de fogo variam entre regiões e fases do ENSO — com o aquecimento global como contexto de longo prazo.</p>
+      </div>
+      <div class="badge">PROTÓTIPO · DADOS SIMULADOS</div>
+    </header>
+
+    <section class="notice" aria-label="Aviso sobre os dados">
+      <div aria-hidden="true">◈</div><div><strong>Este painel é uma demonstração, não uma análise observacional.</strong>Os valores e fases ENSO são simulados para mostrar como a interface e os filtros funcionarão. A próxima etapa é conectar séries oficiais do INMET e do INPE.</div>
+    </section>
+
+    <section class="filters" aria-label="Filtros do painel">
+      <div><label for="region">Região demonstrativa</label><select id="region"></select></div>
+      <div><label for="metric">Indicador</label><select id="metric"></select></div>
+      <div><label for="year">Período final</label><div class="range"><span class="year" id="startYear">2010</span><input id="year" type="range" min="2010" max="2025" value="2025"><span class="year" id="endYear">2025</span></div></div>
+    </section>
+
+    <section class="panel map-panel">
+      <div class="panel-heading">
+        <div><h2>Brasil por grandes regiões</h2><p class="panel-desc">Escolha uma região no mapa para filtrar a série e a tabela.</p></div>
+      </div>
+      <div class="map-layout">
+        <div class="map-stage">
+          <svg id="brazilMap" viewBox="0 0 500 520" role="img" aria-label="Mapa geográfico interativo das cinco Grandes Regiões do Brasil"></svg>
+        </div>
+        <div class="map-key">
+          <strong id="mapMetricTitle">Média por região</strong>
+          <p>O tom mostra a média do indicador selecionado no período. Clique no mapa ou use o filtro acima.</p>
+          <div class="map-scale"><span class="map-scale-label" id="mapMin">—</span><div class="map-gradient"></div><span class="map-scale-label" id="mapMax">—</span></div>
+          <div class="map-scale-label" id="mapUnit">Valores simulados</div>
+          <div class="map-selected" id="mapSelected" aria-live="polite">Região selecionada: —</div>
+          <div class="schematic-note">Limites das Grandes Regiões: IBGE, malha simplificada. <a href="https://servicodados.ibge.gov.br/api/docs/malhas?versao=3" target="_blank" rel="noreferrer">Fonte e documentação</a>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cards" aria-label="Resumo do período">
+      <article class="card"><div class="card-label">Média do indicador</div><div class="card-value" id="meanValue">—</div><div class="card-note" id="metricUnit">no período selecionado</div></article>
+      <article class="card"><div class="card-label">Maior valor do período</div><div class="card-value" id="maxValue">—</div><div class="card-note" id="maxDate">—</div></article>
+      <article class="card"><div class="card-label">Meses destacados</div><div class="card-value" id="elNinoMonths">—</div><div class="card-note">El Niño simulado</div></article>
+      <article class="card"><div class="card-label">Meses no recorte</div><div class="card-value" id="recordCount">—</div><div class="card-note">série mensal sintética</div></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div><h2 id="chartTitle">Série mensal</h2><p class="panel-desc">A faixa laranja marca meses rotulados como El Niño na simulação.</p></div>
+        <div class="legend"><span class="key"><i class="swatch elnino"></i>El Niño (simulado)</span><span class="key"><i class="swatch line-key"></i>Indicador</span></div>
+      </div>
+      <div class="chart-wrap"><svg id="chart" role="img" aria-label="Gráfico temporal do indicador"></svg></div>
+      <div class="footer-row"><span id="chartNote">Valores mensais simulados.</span><button id="download">Baixar tabela CSV</button></div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-heading"><div><h2>Dados do recorte</h2><p class="panel-desc">A tabela acompanha os filtros aplicados.</p></div></div>
+      <div class="table-scroll"><table><thead><tr><th>Mês</th><th>Fase demonstrativa</th><th>Chuva (mm)</th><th>Temp. (°C)</th><th>Focos (índice)</th><th>Seca (índice)</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </section>
+    <nav class="docs" aria-label="Documentação"><a href="../docs/tema/README.md">Sobre o tema e a pergunta científica →</a><a href="../docs/arquitetura/README.md">Arquitetura e métodos do protótipo →</a></nav>
+  </main>
+  <script>
+    let data;
+    let regionGeometry;
+    const REGION_NAMES = {1:'Norte',2:'Nordeste',3:'Sudeste',4:'Sul',5:'Centro-Oeste'};
+    const REGION_LABELS = {Norte:[-60,-4],Nordeste:[-40,-8],Sudeste:[-43,-20],Sul:[-51,-28],'Centro-Oeste':[-54,-15]};
+    const $ = (id) => document.getElementById(id);
+    const fmt = (value, digits=1) => Number(value).toLocaleString('pt-BR',{minimumFractionDigits:digits,maximumFractionDigits:digits});
+
+    async function init(){
+      const [response, mapResponse] = await Promise.all([fetch('/api/data'),fetch('/static/regioes_ibge.geojson')]);
+      if(!response.ok) throw new Error('Não foi possível carregar o conjunto de demonstração.');
+      if(!mapResponse.ok) throw new Error('Não foi possível carregar os limites geográficos do IBGE.');
+      [data,regionGeometry] = await Promise.all([response.json(),mapResponse.json()]);
+      const region = $('region');
+      data.regions.forEach((item)=>region.add(new Option(item,item)));
+      const metric = $('metric');
+      Object.entries(data.metrics).forEach(([key,value])=>metric.add(new Option(value.label,key)));
+      $('year').max = Math.max(...data.years);
+      ['region','metric'].forEach((id)=>$(id).addEventListener('change',render));
+      $('year').addEventListener('input',render);
+      document.querySelectorAll('.map-region').forEach((shape)=>{
+        shape.addEventListener('click',()=>{region.value=shape.dataset.region;render();});
+        shape.addEventListener('keydown',(event)=>{
+          if(event.key==='Enter'||event.key===' '){event.preventDefault();region.value=shape.dataset.region;render();}
+        });
+      });
+      drawRegionalMap();
+      $('download').addEventListener('click',downloadCsv);
+      render();
+    }
+
+    function drawRegionalMap(){
+      const svg=$('brazilMap'), ns='http://www.w3.org/2000/svg';
+      const allPoints=[];
+      const collect=(coords)=>{
+        if(typeof coords[0]==='number'){allPoints.push(coords);return;}
+        coords.forEach(collect);
+      };
+      regionGeometry.features.forEach((feature)=>collect(feature.geometry.coordinates));
+      const minLon=Math.min(...allPoints.map((p)=>p[0])),maxLon=Math.max(...allPoints.map((p)=>p[0]));
+      const minLat=Math.min(...allPoints.map((p)=>p[1])),maxLat=Math.max(...allPoints.map((p)=>p[1]));
+      const midLat=(minLat+maxLat)/2, cosLat=Math.cos(midLat*Math.PI/180);
+      const projected=allPoints.map(([lon,lat])=>[(lon-minLon)*cosLat,maxLat-lat]);
+      const xMin=Math.min(...projected.map((p)=>p[0])),xMax=Math.max(...projected.map((p)=>p[0]));
+      const yMin=Math.min(...projected.map((p)=>p[1])),yMax=Math.max(...projected.map((p)=>p[1]));
+      const pad=1.1, scale=Math.min((500-2*pad)/(xMax-xMin),(520-2*pad)/(yMax-yMin));
+      const mapWidth=(xMax-xMin)*scale,mapHeight=(yMax-yMin)*scale;
+      const xOffset=(500-mapWidth)/2,yOffset=(520-mapHeight)/2;
+      const project=([lon,lat])=>[xOffset+(lon-minLon)*cosLat*scale,yOffset+(maxLat-lat)*scale];
+      const pathFor=(geometry)=>{
+        const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
+        return polygons.flatMap((polygon)=>polygon.map((ring)=>ring.map((point,index)=>{
+          const [x,y]=project(point);return `${index?'L':'M'}${x.toFixed(2)},${y.toFixed(2)}`;
+        }).join(' ')+' Z')).join(' ');
+      };
+      svg.replaceChildren();
+      const shapes=document.createElementNS(ns,'g');
+      regionGeometry.features.forEach((feature)=>{
+        const region=REGION_NAMES[Number(feature.properties.codarea)];
+        const shape=document.createElementNS(ns,'path');
+        shape.setAttribute('d',pathFor(feature.geometry));shape.setAttribute('class','map-region');
+        shape.setAttribute('data-region',region);shape.setAttribute('tabindex','0');shape.setAttribute('role','button');
+        shape.setAttribute('aria-label',`Selecionar região ${region}`);
+        const title=document.createElementNS(ns,'title');title.textContent=region;shape.appendChild(title);shapes.appendChild(shape);
+      });
+      svg.appendChild(shapes);
+      Object.entries(REGION_LABELS).forEach(([name,point])=>{
+        const [x,y]=project(point),label=document.createElementNS(ns,'text');
+        label.setAttribute('x',x.toFixed(2));label.setAttribute('y',y.toFixed(2));label.setAttribute('class','map-label');label.textContent=name;svg.appendChild(label);
+      });
+      document.querySelectorAll('.map-region').forEach((shape)=>{
+        shape.addEventListener('click',()=>{$('region').value=shape.dataset.region;render();});
+        shape.addEventListener('keydown',(event)=>{
+          if(event.key==='Enter'||event.key===' '){event.preventDefault();$('region').value=shape.dataset.region;render();}
+        });
+      });
+    }
+
+    function selected(){
+      const region=$('region').value, metric=$('metric').value, end=Number($('year').value);
+      return data.records.filter((row)=>row.region===region && row.year<=end);
+    }
+
+    function render(){
+      const rows=selected(), metric=$('metric').value, meta=data.metrics[metric], values=rows.map(row=>Number(row[metric]));
+      $('startYear').textContent=rows[0]?.year ?? '—'; $('endYear').textContent=$('year').value;
+      $('chartTitle').textContent=`${meta.label} · ${$('region').value}`;
+      $('metricUnit').textContent=`${meta.unit} · série demonstrativa`;
+      renderMap(metric,meta);
+      if(!rows.length)return;
+      const mean=values.reduce((a,b)=>a+b,0)/values.length;
+      const maxIndex=values.indexOf(Math.max(...values));
+      $('meanValue').textContent=fmt(mean,metric==='extreme_rain_days'?1:1);
+      $('maxValue').textContent=fmt(values[maxIndex],1);
+      $('maxDate').textContent=new Date(rows[maxIndex].date+'T12:00:00').toLocaleDateString('pt-BR',{month:'short',year:'numeric'});
+      $('elNinoMonths').textContent=rows.filter(row=>row.enso_phase.startsWith('El Niño')).length;
+      $('recordCount').textContent=rows.length;
+      drawChart(rows,metric,meta.unit);
+      $('rows').innerHTML=rows.slice().reverse().map(row=>`<tr><td>${new Date(row.date+'T12:00:00').toLocaleDateString('pt-BR',{month:'short',year:'numeric'})}</td><td><span class="phase-pill ${row.enso_phase.startsWith('El Niño')?'el':''}">${row.enso_phase}</span></td><td class="num">${fmt(row.rain_anomaly_mm)}</td><td class="num">${fmt(row.temperature_anomaly_c,2)}</td><td class="num">${fmt(row.hotspot_index)}</td><td class="num">${fmt(row.drought_index)}</td></tr>`).join('');
+      $('chartNote').textContent=`${rows.length} meses · ${$('region').value} · valores simulados (${meta.unit})`;
+    }
+
+    function renderMap(metric,meta){
+      const end=Number($('year').value);
+      const regional=data.regions.map((region)=>{
+        const values=data.records.filter((row)=>row.region===region&&row.year<=end).map((row)=>Number(row[metric]));
+        return {region,mean:values.reduce((a,b)=>a+b,0)/Math.max(1,values.length)};
+      });
+      const values=regional.map((item)=>item.mean),low=Math.min(...values),high=Math.max(...values);
+      const stops=[[37,85,64],[52,124,99],[75,169,133],[130,211,177]];
+      const colorAt=(ratio)=>{
+        const scaled=Math.max(0,Math.min(.9999,ratio))*(stops.length-1),index=Math.floor(scaled),part=scaled-index;
+        const rgb=stops[index].map((value,channel)=>Math.round(value+(stops[index+1][channel]-value)*part));
+        return `rgb(${rgb.join(',')})`;
+      };
+      $('mapMetricTitle').textContent=`Média regional · ${meta.label}`;
+      $('mapMin').textContent=fmt(low,1); $('mapMax').textContent=fmt(high,1);
+      $('mapUnit').textContent=`${meta.unit} · média mensal simulada até ${end}`;
+      const chosen=$('region').value, chosenValue=regional.find((item)=>item.region===chosen)?.mean;
+      $('mapSelected').textContent=`${chosen}: ${fmt(chosenValue,1)} ${meta.unit} · média do período`;
+      document.querySelectorAll('.map-region').forEach((shape)=>{
+        const item=regional.find((entry)=>entry.region===shape.dataset.region);
+        shape.style.fill=colorAt((item.mean-low)/(high-low||1));
+        shape.classList.toggle('selected',shape.dataset.region===chosen);
+        shape.setAttribute('aria-pressed',String(shape.dataset.region===chosen));
+        shape.querySelector('title').textContent=`${item.region}: ${fmt(item.mean,1)} ${meta.unit} (simulado)`;
+      });
+    }
+
+    function drawChart(rows,metric,unit){
+      const svg=$('chart'), W=980,H=300,p={l:56,r:18,t:12,b:36};
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.replaceChildren();
+      const vals=rows.map((row)=>Number(row[metric]));
+      let min=Math.min(0,...vals),max=Math.max(0,...vals); if(min===max){min-=1;max+=1;}
+      const pad=(max-min)*.12; min-=pad;max+=pad;
+      const x=(i)=>p.l+(rows.length<2?0:i*(W-p.l-p.r)/(rows.length-1));
+      const y=(v)=>p.t+(max-v)*(H-p.t-p.b)/(max-min);
+      const ns='http://www.w3.org/2000/svg';
+      const add=(tag,attrs,parent=svg)=>{const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));parent.appendChild(el);return el;};
+      for(let i=0;i<=4;i++){
+        const value=min+(max-min)*i/4, yy=y(value);
+        add('line',{x1:p.l,y1:yy,x2:W-p.r,y2:yy,class:'axis'});
+        const label=add('text',{x:p.l-9,y:yy+3,'text-anchor':'end',class:'tick'});label.textContent=fmt(value,1);
+      }
+      rows.forEach((row,i)=>{
+        if(row.enso_phase.startsWith('El Niño')) add('rect',{x:x(i)-Math.max(1,(W-p.l-p.r)/rows.length/2),y:p.t,width:Math.max(2,(W-p.l-p.r)/rows.length),height:H-p.t-p.b,fill:'#8a5633',opacity:'.34'});
+      });
+      const points=rows.map((row,i)=>`${x(i)},${y(Number(row[metric]))}`).join(' ');
+      add('polyline',{points,class:'series'});
+      rows.forEach((row,i)=>{const c=add('circle',{cx:x(i),cy:y(Number(row[metric])),r:2.2,class:'dot'});const tip=add('title',{},c);tip.textContent=`${row.date.slice(0,7)} · ${fmt(row[metric])} ${unit} · ${row.enso_phase}`;});
+      rows.forEach((row,i)=>{if(row.month===1){const label=add('text',{x:x(i),y:H-10,'text-anchor':'middle',class:'tick'});label.textContent=String(row.year);}});
+      const axis=add('text',{x:14,y:18,class:'tick'});axis.textContent=unit;
+    }
+
+    function downloadCsv(){
+      const rows=selected(), keys=['date','region','enso_phase','rain_anomaly_mm','temperature_anomaly_c','hotspot_index','extreme_rain_days','drought_index','data_status'];
+      const quote=(value)=>`"${String(value).replaceAll('"','""')}"`;
+      const csv=[keys.join(';'),...rows.map(row=>keys.map(key=>quote(row[key])).join(';'))].join('\r\n');
+      const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+      a.href=url;a.download=`demo_${$('region').value.toLowerCase().replaceAll(' ','_')}.csv`;a.click();URL.revokeObjectURL(url);
+    }
+
+    init().catch((error)=>{document.querySelector('.page').innerHTML=`<section class="panel loading"><h2>Não foi possível abrir os dados</h2><p>${error.message}</p><p>Confira se o servidor Python segue aberto no terminal.</p></section>`;});
+  </script>
+</body>
+</html>
