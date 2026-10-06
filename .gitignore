@@ -179,3 +179,13 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Dados originais e derivados podem ocupar vários GB. Guardar apenas estrutura/documentação.
+data/raw/**
+data/processed/**
+data/analytics/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/analytics/.gitkeep
+manifests/*.jsonl
+reports/generated/
