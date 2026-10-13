@@ -68,13 +68,6 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 | 5. Dashboard | `dashboard/` | dashboard funcionando | frentes 2 e 4 (começa com dados parciais) | a preencher |
 | 6. Conclusões e apresentação | `docs/` | relatório, slides e roteiro | todas (começa cedo, com o esqueleto) | a preencher |
 
-## Regras de Git
-
-- Um branch por feature, com nome `feat/<assunto>` (por exemplo, `feat/ingestao-inmet`).
-- Abra um PR para `main`; a pessoa da frente 3 revisa.
-- Dado grande nunca entra no Git: `raw/`, `clean/` e `parquet/` são ignorados (só o `.gitkeep` fica). Arquivos pequenos de teste vão em `amostras/`.
-- Nada de senhas, tokens ou credenciais no repositório.
-
 ## Documentação
 
 - [Plano de trabalho](docs/plano-de-trabalho.pdf)
