@@ -1,57 +1,81 @@
-# El Niño, aquecimento global e extremos no Brasil
+# El Niño e Big Data em Python
 
-Protótipo estudantil para explorar como fases do El Niño podem se relacionar com extremos climáticos em diferentes regiões brasileiras, considerando o aquecimento global como contexto de longo prazo.
+Trabalho de faculdade que cruza dados meteorológicos do El Niño com indicadores de agricultura, saúde, energia e desastres no Brasil, para mostrar onde o fenômeno causa prejuízo, onde traz benefício e qual a força dessas relações. O resultado será um pipeline de big data em Python, um dashboard interativo e uma conclusão baseada nos dados.
 
-> **Estado atual:** o painel inclui uma pequena amostra observada de chuva do SGB (Porto Alegre, maio de 2024) e uma exploração regional ainda simulada. A amostra real não é uma análise causal do El Niño ou do aquecimento global.
+Plano completo: [docs/plano-de-trabalho.pdf](docs/plano-de-trabalho.pdf)
 
-## Abrir o painel
+> **Estado atual:** estrutura do repositório pronta. O painel em `dashboard/prototipo/` é um protótipo com dados **simulados** e uma pequena amostra real de chuva (Porto Alegre, maio de 2024). Nada ali é resultado do trabalho.
 
-Requer Python 3.10 ou mais recente. O arquivo `requirements.txt` lista as dependências Python (neste protótipo, pandas). No PowerShell, na pasta do projeto:
+## Perguntas de pesquisa
 
-```powershell
-py -3 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python src\app.py
+Cada uma vira uma página do dashboard.
+
+1. A intensidade do El Niño (índice ONI) muda a chuva e a temperatura de forma diferente em cada região do Brasil?
+2. Safras como soja, milho e café variam em anos de El Niño, e a variação é positiva ou negativa conforme a região?
+3. Existe defasagem entre o ONI e os casos de dengue (por exemplo, de 2 a 4 meses)?
+4. A geração hidrelétrica e o nível dos reservatórios caem em anos de El Niño em alguma região?
+5. Desastres naturais (secas e enchentes) são mais frequentes ou mais graves nesses anos?
+
+## Estrutura do repositório
+
+```text
+raw/                  dados brutos, como baixados (fora do Git)
+clean/                dados limpos e padronizados (fora do Git)
+parquet/              dados em Parquet, particionados por ano (fora do Git)
+amostras/             arquivos pequenos versionados, para testar sem baixar tudo
+notebooks/            análises e notebooks
+src/
+  ingestao/           scripts de coleta (download das bases)
+  limpeza/            limpeza, padronização e integração (ETL)
+  bigdata/            Parquet, PySpark/Dask e benchmark
+  analise/            código de apoio às análises estatísticas
+dashboard/
+  prototipo/          protótipo anterior (dados simulados), mantido como referência
+docs/
+  plano-de-trabalho.pdf
+  legado/             documentos da fase de protótipo
+requirements.txt      dependências Python
 ```
 
-Abra [http://127.0.0.1:8000](http://127.0.0.1:8000). Para encerrar o servidor, volte ao terminal e pressione `Ctrl+C`.
+## Como rodar
 
-Se o comando `py` não existir, use `python` no lugar dele para criar o ambiente. Se o PowerShell bloquear a ativação do ambiente, rode os comandos diretamente pelo executável local:
+Requer Python 3.10 ou mais recente. Na pasta do projeto:
 
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe src\app.py
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows (PowerShell): .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
 
-É possível alterar a porta: `python src\app.py --port 8080`.
+Para abrir o protótipo do painel:
 
-## O que há no protótipo
+```bash
+python dashboard/prototipo/app.py
+```
 
-- gráfico diário de chuva observada em Porto Alegre em maio de 2024, com CSV para download e [método documentado](docs/dados-reais/README.md);
-- painel interativo com filtro por região, período e indicador;
-- mapa escuro e clicável das cinco Grandes Regiões, com limites simplificados do IBGE e ligado aos mesmos filtros;
-- séries mensais simuladas de chuva, temperatura, focos de calor e extremos;
-- marcação visual de fases ENSO simuladas;
-- resumo e tabela mensal exportável como CSV pelo navegador;
-- documentação de contexto científico e de arquitetura.
+Abra <http://127.0.0.1:8000>. Para outra porta: `--port 8080`. Para encerrar: `Ctrl+C`.
+
+## Frentes de trabalho
+
+Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
+
+| Frente | Pasta | Entrega | Depende de | Responsável (GitHub) |
+|---|---|---|---|---|
+| 1. Coleta de dados | `src/ingestao/`, `raw/` | `raw/` completa e documento de fontes | — | a preencher |
+| 2. Limpeza e integração (ETL) | `src/limpeza/`, `clean/` | `clean/` e a tabela cruzada | frente 1 | a preencher |
+| 3. Engenharia de big data | `src/bigdata/`, `parquet/` | `parquet/`, código do pipeline e benchmark | frentes 1 e 2 (começa com amostra) | a preencher |
+| 4. Análise estatística | `notebooks/`, `src/analise/` | notebook de análise e tabela de achados | frente 2 | a preencher |
+| 5. Dashboard | `dashboard/` | dashboard funcionando | frentes 2 e 4 (começa com dados parciais) | a preencher |
+| 6. Conclusões e apresentação | `docs/` | relatório, slides e roteiro | todas (começa cedo, com o esqueleto) | a preencher |
+
+## Regras de Git
+
+- Um branch por feature, com nome `feat/<assunto>` (por exemplo, `feat/ingestao-inmet`).
+- Abra um PR para `main`; a pessoa da frente 3 revisa.
+- Dado grande nunca entra no Git: `raw/`, `clean/` e `parquet/` são ignorados (só o `.gitkeep` fica). Arquivos pequenos de teste vão em `amostras/`.
+- Nada de senhas, tokens ou credenciais no repositório.
 
 ## Documentação
 
-- [Tema e método de análise](docs/tema/README.md)
-- [Amostra real: fonte, processamento e limites](docs/dados-reais/README.md)
-- [Arquitetura e decisões de programação](docs/arquitetura/README.md)
-
-## Reproduzir a amostra observada
-
-Com as dependências instaladas, execute `python src\build_real_sample.py`. O script baixa o ZIP oficial do SGB caso não esteja em `data/raw/sgb/`, valida o SHA-256 e gera os arquivos pequenos usados pelo painel. O painel já inclui esses arquivos derivados e funciona sem download na inicialização.
-
-## Próximos passos recomendados
-
-1. **Fechar a pergunta e o recorte:** escolher as regiões, o período e os extremos a comparar durante El Niño, La Niña e neutralidade.
-2. **Ampliar a amostra real com controle de qualidade:** analisar mais anos e estações, preservando os arquivos originais e registrando cobertura, ausências e diferenças entre instrumentos.
-3. **Preparar os dados com pandas:** padronizar datas e unidades, documentar valores ausentes, duplicatas e critérios de qualidade; ler em partes quando o volume exigir.
-4. **Definir a comparação científica:** documentar a fonte/classificação ENSO, a definição de cada extremo e como separar sazonalidade e aquecimento de longo prazo. Associação nos dados não prova causalidade.
-5. **Salvar uma camada tratada em Parquet:** particionar por fonte e ano, manter manifesto com hashes e testar se cada partição cabe na memória.
-6. **Validar e só então ampliar:** conferir resultados da amostra; usar DuckDB para consultas sobre Parquet se necessário; aumentar anos/fontes e incluir ANA depois.
-7. **Ligar os resultados observados ao painel:** preservar a identificação da fonte, período e cobertura e distinguir visualmente dados observados de simulações.
+- [Plano de trabalho](docs/plano-de-trabalho.pdf)
+- [Documentos da fase de protótipo](docs/legado/README.md)

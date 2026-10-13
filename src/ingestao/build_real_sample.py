@@ -1,6 +1,6 @@
 """Extrai chuva observada de maio de 2024 do Atlas Pluviométrico do SGB.
 
-O ZIP oficial fica em data/raw (ignorado pelo Git). O CSV pequeno e o JSON do
+O ZIP oficial fica em raw/ (ignorado pelo Git). O CSV pequeno e o JSON do
 painel são derivados reproduzíveis e podem ser versionados.
 """
 
@@ -16,10 +16,10 @@ from pathlib import Path
 import pandas as pd
 
 
-ROOT = Path(__file__).resolve().parents[1]
-ARCHIVE = ROOT / "data" / "raw" / "sgb" / "porto_alegre_diarios_1975_2024.zip"
-SAMPLE_CSV = ROOT / "data" / "sample" / "porto_alegre_chuva_maio_2024.csv"
-PANEL_JSON = ROOT / "src" / "static" / "porto_alegre_chuva_maio_2024.json"
+ROOT = Path(__file__).resolve().parents[2]
+ARCHIVE = ROOT / "raw" / "sgb" / "porto_alegre_diarios_1975_2024.zip"
+SAMPLE_CSV = ROOT / "amostras" / "porto_alegre_chuva_maio_2024.csv"
+PANEL_JSON = ROOT / "dashboard" / "prototipo" / "static" / "porto_alegre_chuva_maio_2024.json"
 SOURCE_PAGE = "https://rigeo.sgb.gov.br/items/bc33cf6b-674e-407f-83a0-6eb06160fa72"
 ARCHIVE_URL = "https://rigeo.sgb.gov.br/bitstreams/b72a78e2-3b2e-4a28-8f4a-ed4e496ce0e0/download"
 ARCHIVE_SHA256 = "65d58709cf90d2b7b746b0e14e6946a632cd7f00f9feb1cc634da48c207c0f85"
