@@ -2,7 +2,7 @@
 
 ## 1. Estado e limite desta documentação
 
-Este documento descreve o **protótipo inicial** implementado neste repositório e a arquitetura planejada para substituir a simulação por dados oficiais. A interface atual carrega um conjunto criado deterministicamente pelo código em `src/demo_data.py`; nenhum download de INMET, INPE ou ANA é feito. Valores, fases ENSO, índices e padrões regionais na demonstração são artificiais e não devem ser citados como resultados.
+Este documento descreve o **protótipo inicial** e a arquitetura planejada para ampliar o uso de dados oficiais. A interface carrega uma amostra observada de chuva do SGB, separada da exploração regional criada deterministicamente por `src/demo_data.py`. Nenhum download de INMET, INPE ou ANA ocorre ao abrir o painel. Valores, fases ENSO, índices e padrões da exploração regional são artificiais e não devem ser citados como resultados.
 
 ## 2. Objetivo técnico
 
@@ -22,24 +22,35 @@ big-data-project/
 ├── requirements.txt
 ├── src/
 │   ├── app.py                 # servidor HTTP local e rotas
+│   ├── build_real_sample.py   # extração reprodutível do recorte SGB
 │   ├── demo_data.py           # criação determinística do conjunto simulado
 │   ├── index.html             # painel, mapa, gráficos SVG e interação
 │   └── static/
-│       └── regioes_ibge.geojson # geometria oficial simplificada das regiões
+│       ├── regioes_ibge.geojson # geometria oficial simplificada das regiões
+│       └── porto_alegre_chuva_maio_2024.json # amostra observada para o painel
 ├── docs/
 │   ├── tema/README.md         # pergunta científica, conceitos, fontes e limites
 │   └── arquitetura/README.md  # desenho técnico, esquema, decisões e expansão
 ├── data/                      # planejado; ignorar dados grandes no Git
 │   ├── raw/                   # origem imutável por fonte/ano
+│   ├── sample/                # pequeno recorte observado versionado
 │   ├── processed/             # arquivos normalizados Parquet
 │   └── analytics/             # agregados que alimentam análises
 ├── manifests/                 # planejado; inventários/checksums de ingestão
 └── reports/                   # planejado; perfis e resumos da execução
 ```
 
-Os diretórios de dados reais só serão criados ao implementar a coleta. Dados grandes e credenciais não devem entrar no Git.
+O arquivo bruto do SGB fica em `data/raw/sgb/` e é ignorado pelo Git. O CSV pequeno da amostra em `data/sample/` pode ser versionado. Dados grandes e credenciais não devem entrar no Git.
 
 ## 4. Componentes que já existem
+
+### `src/build_real_sample.py`
+
+- Baixa, quando necessário, o ZIP de dados pluviográficos diários do SGB para `data/raw/sgb/`.
+- Confere o SHA-256 da edição usada nesta demonstração.
+- Lê somente os 31 arquivos da estação `03051011` referentes a maio de 2024 diretamente de dentro do ZIP, sem extração geral.
+- Confere cobertura diária e valores e usa pandas para gerar CSV, resumo e JSON.
+- Mantém o nome do arquivo original em cada linha do CSV para rastreabilidade. O método e os limites estão em `docs/dados-reais/README.md`.
 
 ### `src/demo_data.py`
 
@@ -56,6 +67,7 @@ Os diretórios de dados reais só serão criados ao implementar a coleta. Dados 
 - Usa `ThreadingHTTPServer` e `BaseHTTPRequestHandler`, ambas da biblioteca padrão.
 - Serve `/` e `/index.html` com a interface estática.
 - Serve `/api/data` como JSON gerado por `demo_payload()`.
+- Serve `/api/observed` com o JSON derivado do SGB e `/sample/porto_alegre_chuva_maio_2024.csv` para download do CSV pequeno.
 - Escuta por padrão apenas em `127.0.0.1:8000`; `--host` e `--port` são configuráveis.
 - Não precisa de banco, segredo, conta, serviço externo nem framework web.
 - Trata `Ctrl+C` para parar o servidor e fecha o socket no bloco `finally`.
@@ -63,7 +75,8 @@ Os diretórios de dados reais só serão criados ao implementar a coleta. Dados 
 ### `src/index.html`
 
 - É uma página responsiva sem build frontend.
-- Busca `/api/data`, expõe filtros para região, indicador e ano final.
+- Busca `/api/observed` e desenha uma série diária de chuva observada, identificando fonte e limites da interpretação.
+- Busca `/api/data`, expõe filtros para região, indicador e ano final na exploração simulada.
 - Inclui mapa SVG clicável com os limites simplificados oficiais das cinco Grandes Regiões do IBGE, colorido pela média sintética do indicador e conectado ao filtro regional. A geometria fica em `src/static/regioes_ibge.geojson` e é servida localmente.
 - Desenha gráfico temporal em SVG diretamente no navegador e constrói a tabela.
 - Exporta o recorte selecionado como CSV com delimitador `;` e BOM UTF-8 para uso comum no Excel pt-BR.
@@ -181,6 +194,8 @@ Não definir os limiares de extremos depois de observar quais geram o resultado 
 | `/` | GET | página HTML do painel |
 | `/index.html` | GET | mesma página |
 | `/api/data` | GET | JSON de demonstração, metadados e registros |
+| `/api/observed` | GET | amostra observada do SGB e resumo de maio de 2024 |
+| `/sample/porto_alegre_chuva_maio_2024.csv` | GET | download do recorte observado com nomes dos arquivos de origem |
 | `/static/regioes_ibge.geojson` | GET | geometria simplificada das cinco Grandes Regiões (IBGE) |
 | demais | GET | HTTP 404 |
 
@@ -220,9 +235,8 @@ No workspace atual, o comando `python` não estava disponível no PATH. Foi enco
 ## 14. Próximas entregas sugeridas
 
 1. Validar recorte regional e pergunta com a equipe.
-2. Selecionar um arquivo oficial pequeno e registrar metadados/licença/URL.
-3. Criar ingestão de amostra com hash, manifesto e validação sem paralelismo agressivo.
-4. Produzir dicionário de dados e perfil de qualidade antes da análise.
+2. Ampliar a amostra oficial para mais anos e estações, sem confundir instrumentos e períodos de medição.
+3. Produzir dicionário de dados, manifesto e perfil de qualidade para as séries ampliadas.
 5. Definir normal climatológica, índice ENSO, indicador de extremo e regra espacial.
 6. Trocar simulador por dados reais mantendo uma bandeira visível de fonte e cobertura.
 7. Comparar tempo/memória de CSV e Parquet; decidir se DuckDB agrega valor.

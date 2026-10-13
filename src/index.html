@@ -18,7 +18,7 @@
     .notice { display:flex; gap:12px; align-items:flex-start; padding:15px 17px; margin:23px 0; background:#2b251d; border:1px solid #5a422c; border-radius:13px; color:#e8c9a9; font-size:13px; line-height:1.5; }
     .notice strong { display:block; margin-bottom:2px; }
     .filters { display:grid; grid-template-columns:1fr 1.2fr 2fr; gap:14px; padding:17px; background:#17231f; border:1px solid var(--line); border-radius:15px; margin-bottom:18px; }
-    label { color:#536562; display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:750; margin-bottom:7px; }
+    label { color:var(--muted); display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:750; margin-bottom:7px; }
     select { width:100%; border:1px solid #3b544b; border-radius:9px; padding:11px 12px; font:inherit; color:var(--ink); background:var(--control); }
     .range { display:flex; align-items:center; gap:9px; }
     input[type=range] { accent-color:var(--green); width:100%; }
@@ -54,6 +54,20 @@
     .docs { display:flex; gap:17px; margin-top:17px; font-size:12px; }
     a { color:var(--green); font-weight:700; }
     .loading { color:var(--muted); padding:35px; text-align:center; }
+    .observed-panel { border-color:#34556a; background:linear-gradient(145deg,#182831,#172420 62%); margin-bottom:17px; }
+    .observed-topline { color:#a9d3e7; text-transform:uppercase; letter-spacing:.12em; font-size:10px; font-weight:800; margin-bottom:7px; }
+    .observed-panel h2 { font-size:clamp(22px,3vw,30px); }
+    .observed-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin:17px 0 8px; }
+    .observed-stat { background:#20333d; border:1px solid #355465; border-radius:11px; padding:12px 14px; }
+    .observed-stat span { color:#a9bec8; font-size:11px; }
+    .observed-stat strong { display:block; font-family:Georgia,"Times New Roman",serif; font-size:28px; font-weight:500; margin-top:4px; }
+    .observed-stat small { display:block; color:#a9bec8; font-size:11px; margin-top:2px; }
+    .observed-chart-wrap { overflow-x:auto; }
+    #observedChart { display:block; width:100%; min-width:650px; height:255px; }
+    .observed-note { color:#a9bec8; font-size:11px; line-height:1.55; }
+    .observed-footer { display:flex; justify-content:space-between; gap:14px; align-items:flex-start; border-top:1px solid #355465; padding-top:12px; margin-top:8px; }
+    .observed-footer a { white-space:nowrap; }
+    .simulated-heading { color:#efb98b; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; margin:22px 0 10px; }
     .map-panel { margin-bottom:17px; }
     .map-layout { display:grid; grid-template-columns:minmax(260px,1fr) minmax(220px,.72fr); gap:20px; align-items:center; }
     .map-stage { display:flex; justify-content:center; padding:8px 10px; border-radius:12px; background:radial-gradient(ellipse at 48% 50%,#1e302a 0%,#172420 70%); }
@@ -69,7 +83,7 @@
     .map-scale-label { font-size:10px; color:var(--muted); }
     .map-selected { font-size:14px; margin-top:16px; color:var(--ink); }
     .schematic-note { margin-top:10px; font-size:10px; color:var(--muted); }
-    @media(max-width:760px){ .page{width:min(100% - 26px,1180px);padding-top:24px} header{display:block}.badge{display:inline-block;margin-top:18px}.filters{grid-template-columns:1fr 1fr}.filters>div:last-child{grid-column:1/-1}.cards{grid-template-columns:1fr 1fr}.panel{padding:16px}.panel-heading{display:block}.legend{margin-top:12px}.footer-row{align-items:flex-start;flex-direction:column}.map-layout{grid-template-columns:1fr}.map-key{max-width:620px} }
+    @media(max-width:760px){ .page{width:min(100% - 26px,1180px);padding-top:24px} header{display:block}.badge{display:inline-block;margin-top:18px}.filters{grid-template-columns:1fr 1fr}.filters>div:last-child{grid-column:1/-1}.cards{grid-template-columns:1fr 1fr}.panel{padding:16px}.panel-heading{display:block}.legend{margin-top:12px}.footer-row{align-items:flex-start;flex-direction:column}.map-layout{grid-template-columns:1fr}.map-key{max-width:620px}.observed-stats{grid-template-columns:1fr 1fr}.observed-footer{flex-direction:column} }
     @media(max-width:430px){.cards{grid-template-columns:1fr 1fr}.card{padding:13px;min-height:96px}.card-value{font-size:26px}.docs{flex-direction:column;gap:8px}}
   </style>
 </head>
@@ -81,12 +95,30 @@
         <h1>El Niño e extremos climáticos no Brasil</h1>
         <p class="subtitle">Um primeiro olhar sobre como chuva, calor, estiagem e risco de fogo variam entre regiões e fases do ENSO — com o aquecimento global como contexto de longo prazo.</p>
       </div>
-      <div class="badge">PROTÓTIPO · DADOS SIMULADOS</div>
+      <div class="badge">AMOSTRA REAL + SIMULAÇÃO</div>
     </header>
 
-    <section class="notice" aria-label="Aviso sobre os dados">
-      <div aria-hidden="true">◈</div><div><strong>Este painel é uma demonstração, não uma análise observacional.</strong>Os valores e fases ENSO são simulados para mostrar como a interface e os filtros funcionarão. A próxima etapa é conectar séries oficiais do INMET e do INPE.</div>
+    <section class="panel observed-panel" aria-label="Amostra de dados observados">
+      <div class="observed-topline">Dados observados · Serviço Geológico do Brasil</div>
+      <h2>Chuva em Porto Alegre — maio de 2024</h2>
+      <p class="panel-desc">Estação Porto Alegre–Jardim Botânico (03051011). Totais diários registrados no Atlas Pluviométrico do Brasil.</p>
+      <div class="observed-stats">
+        <div class="observed-stat"><span>Total dos 31 registros</span><strong id="observedTotal">—</strong></div>
+        <div class="observed-stat"><span>Maior total diário</span><strong id="observedPeak">—</strong><small id="observedPeakDate">—</small></div>
+        <div class="observed-stat"><span>Registros com chuva</span><strong id="observedRainy">—</strong></div>
+      </div>
+      <div class="observed-chart-wrap"><svg id="observedChart" role="img" aria-label="Precipitação diária observada em maio de 2024, em milímetros"></svg></div>
+      <div class="observed-footer">
+        <div class="observed-note">Uma única estação e um único mês. As datas seguem os arquivos diários do SGB; o período medido pode cruzar dois dias civis. Esta amostra não permite atribuir a chuva ao El Niño ou ao aquecimento global. <a id="observedSource" href="https://rigeo.sgb.gov.br/items/bc33cf6b-674e-407f-83a0-6eb06160fa72" target="_blank" rel="noreferrer">Fonte oficial</a>.</div>
+        <a href="/sample/porto_alegre_chuva_maio_2024.csv">Baixar CSV da amostra</a>
+      </div>
     </section>
+
+    <section class="notice" aria-label="Aviso sobre os dados">
+      <div aria-hidden="true">◈</div><div><strong>A exploração regional abaixo usa dados simulados.</strong>Os valores e fases ENSO dessa seção demonstram como os filtros funcionam. A amostra observada do SGB aparece separada acima.</div>
+    </section>
+
+    <div class="simulated-heading">Exploração demonstrativa · séries simuladas</div>
 
     <section class="filters" aria-label="Filtros do painel">
       <div><label for="region">Região demonstrativa</label><select id="region"></select></div>
@@ -133,21 +165,26 @@
       <div class="panel-heading"><div><h2>Dados do recorte</h2><p class="panel-desc">A tabela acompanha os filtros aplicados.</p></div></div>
       <div class="table-scroll"><table><thead><tr><th>Mês</th><th>Fase demonstrativa</th><th>Chuva (mm)</th><th>Temp. (°C)</th><th>Focos (índice)</th><th>Seca (índice)</th></tr></thead><tbody id="rows"></tbody></table></div>
     </section>
-    <nav class="docs" aria-label="Documentação"><a href="../docs/tema/README.md">Sobre o tema e a pergunta científica →</a><a href="../docs/arquitetura/README.md">Arquitetura e métodos do protótipo →</a></nav>
+    <nav class="docs" aria-label="Documentação"><a href="../docs/tema/README.md">Sobre o tema e a pergunta científica →</a><a href="../docs/dados-reais/README.md">Amostra real e método →</a><a href="../docs/arquitetura/README.md">Arquitetura e métodos do protótipo →</a></nav>
   </main>
   <script>
     let data;
     let regionGeometry;
+    let observed;
     const REGION_NAMES = {1:'Norte',2:'Nordeste',3:'Sudeste',4:'Sul',5:'Centro-Oeste'};
     const REGION_LABELS = {Norte:[-60,-4],Nordeste:[-40,-8],Sudeste:[-43,-20],Sul:[-51,-28],'Centro-Oeste':[-54,-15]};
     const $ = (id) => document.getElementById(id);
     const fmt = (value, digits=1) => Number(value).toLocaleString('pt-BR',{minimumFractionDigits:digits,maximumFractionDigits:digits});
 
     async function init(){
-      const [response, mapResponse] = await Promise.all([fetch('/api/data'),fetch('/static/regioes_ibge.geojson')]);
+      const [response, mapResponse, observedResponse] = await Promise.all([
+        fetch('/api/data'),fetch('/static/regioes_ibge.geojson'),fetch('/api/observed')
+      ]);
       if(!response.ok) throw new Error('Não foi possível carregar o conjunto de demonstração.');
       if(!mapResponse.ok) throw new Error('Não foi possível carregar os limites geográficos do IBGE.');
-      [data,regionGeometry] = await Promise.all([response.json(),mapResponse.json()]);
+      if(!observedResponse.ok) throw new Error('Não foi possível carregar a amostra observada do SGB.');
+      [data,regionGeometry,observed] = await Promise.all([response.json(),mapResponse.json(),observedResponse.json()]);
+      drawObservedChart();
       const region = $('region');
       data.regions.forEach((item)=>region.add(new Option(item,item)));
       const metric = $('metric');
@@ -164,6 +201,44 @@
       drawRegionalMap();
       $('download').addEventListener('click',downloadCsv);
       render();
+    }
+
+    function drawObservedChart(){
+      const summary=observed.summary, rows=observed.records;
+      $('observedTotal').textContent=`${fmt(summary.total_mm,2)} mm`;
+      $('observedPeak').textContent=`${fmt(summary.peak_mm,2)} mm`;
+      $('observedPeakDate').textContent=`${Number(summary.peak_date.slice(-2))} de maio`;
+      $('observedRainy').textContent=`${summary.rainy_days} de ${summary.days}`;
+      $('observedSource').href=observed.source_page;
+      const svg=$('observedChart'), ns='http://www.w3.org/2000/svg', W=980,H=250;
+      const p={left:42,right:10,top:15,bottom:34};
+      const plotW=W-p.left-p.right,plotH=H-p.top-p.bottom;
+      const max=Math.ceil(Math.max(...rows.map(row=>row.rain_mm))/25)*25 || 25;
+      const add=(tag,attributes,parent=svg)=>{
+        const element=document.createElementNS(ns,tag);
+        Object.entries(attributes).forEach(([key,value])=>element.setAttribute(key,value));
+        parent.appendChild(element);return element;
+      };
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+      for(let step=0;step<=4;step++){
+        const value=max*step/4,y=p.top+plotH*(1-value/max);
+        add('line',{x1:p.left,y1:y,x2:W-p.right,y2:y,class:'axis'});
+        const label=add('text',{x:p.left-8,y:y+3,'text-anchor':'end',class:'tick'});
+        label.textContent=fmt(value,0);
+      }
+      const slot=plotW/rows.length,barWidth=Math.max(4,slot-5);
+      rows.forEach((row,index)=>{
+        const x=p.left+index*slot+(slot-barWidth)/2;
+        const height=plotH*row.rain_mm/max,y=p.top+plotH-height;
+        const bar=add('rect',{x,y,width:barWidth,height:Math.max(row.rain_mm>0?2:0,height),rx:2,fill:row.date===summary.peak_date?'#e2a06e':'#79a9c5'});
+        const title=add('title',{},bar);title.textContent=`${row.date.slice(-2)}/05/2024: ${fmt(row.rain_mm,2)} mm`;
+        const day=Number(row.date.slice(-2));
+        if([1,5,10,15,20,25,31].includes(day)){
+          const tick=add('text',{x:p.left+(index+.5)*slot,y:H-12,'text-anchor':'middle',class:'tick'});
+          tick.textContent=String(day);
+        }
+      });
+      const axis=add('text',{x:W-p.right,y:12,'text-anchor':'end',class:'tick'});axis.textContent='mm';
     }
 
     function drawRegionalMap(){

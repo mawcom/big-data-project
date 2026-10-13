@@ -14,6 +14,8 @@ from demo_data import demo_payload
 ROOT = Path(__file__).resolve().parents[1]
 HTML_PATH = ROOT / "src" / "index.html"
 REGION_MAP_PATH = ROOT / "src" / "static" / "regioes_ibge.geojson"
+OBSERVED_PATH = ROOT / "src" / "static" / "porto_alegre_chuva_maio_2024.json"
+OBSERVED_CSV_PATH = ROOT / "data" / "sample" / "porto_alegre_chuva_maio_2024.csv"
 
 
 class DashboardHandler(BaseHTTPRequestHandler):
@@ -24,6 +26,26 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/api/observed":
+            body = OBSERVED_PATH.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/sample/porto_alegre_chuva_maio_2024.csv":
+            body = OBSERVED_CSV_PATH.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/csv; charset=utf-8")
+            self.send_header("Content-Disposition", 'attachment; filename="porto_alegre_chuva_maio_2024.csv"')
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
@@ -41,6 +63,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
 
         docs_routes = {
             "/docs/tema/README.md": ROOT / "docs" / "tema" / "README.md",
+            "/docs/dados-reais/README.md": ROOT / "docs" / "dados-reais" / "README.md",
             "/docs/arquitetura/README.md": ROOT / "docs" / "arquitetura" / "README.md",
         }
         if route in docs_routes:
