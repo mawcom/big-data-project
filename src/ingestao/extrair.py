@@ -5,7 +5,8 @@ import urllib.request
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 
-OUTPUT_DIR = "dados_inmet_raw"
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+OUTPUT_DIR = os.path.join(ROOT, "raw", "inmet")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 ANOS = list(range(2018, 2027))

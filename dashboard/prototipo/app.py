@@ -11,11 +11,13 @@ from urllib.parse import urlparse
 from demo_data import demo_payload
 
 
-ROOT = Path(__file__).resolve().parents[1]
-HTML_PATH = ROOT / "src" / "index.html"
-REGION_MAP_PATH = ROOT / "src" / "static" / "regioes_ibge.geojson"
-OBSERVED_PATH = ROOT / "src" / "static" / "porto_alegre_chuva_maio_2024.json"
-OBSERVED_CSV_PATH = ROOT / "data" / "sample" / "porto_alegre_chuva_maio_2024.csv"
+ROOT = Path(__file__).resolve().parents[2]
+PROTOTYPE_DIR = ROOT / "dashboard" / "prototipo"
+HTML_PATH = PROTOTYPE_DIR / "index.html"
+REGION_MAP_PATH = PROTOTYPE_DIR / "static" / "regioes_ibge.geojson"
+OBSERVED_PATH = PROTOTYPE_DIR / "static" / "porto_alegre_chuva_maio_2024.json"
+OBSERVED_CSV_PATH = ROOT / "amostras" / "porto_alegre_chuva_maio_2024.csv"
+LEGACY_DOCS = ROOT / "docs" / "legado"
 
 
 class DashboardHandler(BaseHTTPRequestHandler):
@@ -62,9 +64,9 @@ class DashboardHandler(BaseHTTPRequestHandler):
             return
 
         docs_routes = {
-            "/docs/tema/README.md": ROOT / "docs" / "tema" / "README.md",
-            "/docs/dados-reais/README.md": ROOT / "docs" / "dados-reais" / "README.md",
-            "/docs/arquitetura/README.md": ROOT / "docs" / "arquitetura" / "README.md",
+            "/docs/tema/README.md": LEGACY_DOCS / "tema" / "README.md",
+            "/docs/dados-reais/README.md": LEGACY_DOCS / "dados-reais" / "README.md",
+            "/docs/arquitetura/README.md": LEGACY_DOCS / "arquitetura" / "README.md",
         }
         if route in docs_routes:
             body = docs_routes[route].read_bytes()
