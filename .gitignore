@@ -180,12 +180,11 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
-# Dados originais e derivados podem ocupar vários GB. Guardar apenas estrutura/documentação.
-data/raw/**
-data/processed/**
-data/analytics/**
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/analytics/.gitkeep
-manifests/*.jsonl
-reports/generated/
+# Dados brutos, limpos e em Parquet podem ocupar vários GB e não entram no Git.
+# Só as pastas (via .gitkeep) são versionadas; amostras pequenas ficam em amostras/.
+raw/*
+clean/*
+parquet/*
+!raw/.gitkeep
+!clean/.gitkeep
+!parquet/.gitkeep
