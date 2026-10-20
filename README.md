@@ -1,20 +1,20 @@
-# El Niño e Big Data em Python
+# El Niño, chuvas e queimadas no Nordeste
 
-Trabalho de faculdade que cruza dados meteorológicos do El Niño com indicadores de agricultura, saúde, energia e desastres no Brasil, para mostrar onde o fenômeno causa prejuízo, onde traz benefício e qual a força dessas relações. O resultado será um pipeline de big data em Python, um dashboard interativo e uma conclusão baseada nos dados.
+Trabalho de faculdade que investiga como episódios de El Niño se relacionam com a chuva e os focos de fogo detectados no Nordeste brasileiro. A análise compara as séries ao longo do tempo e por estado, considerando a sazonalidade e os limites dos dados observacionais. O projeto terá coleta reproduzível em Python, dados preparados para análise e um dashboard interativo.
 
-Plano completo: [docs/plano-de-trabalho.pdf](docs/plano-de-trabalho.pdf)
+O conceito, as perguntas de pesquisa, as fontes e o recorte estão em [docs/conceito.md](docs/conceito.md). O [plano de trabalho original](docs/plano-de-trabalho.pdf) registra a proposta anterior, mais ampla.
 
-> **Estado atual:** estrutura do repositório pronta. O painel em `dashboard/prototipo/` é um protótipo com dados **simulados** e uma pequena amostra real de chuva (Porto Alegre, maio de 2024). Nada ali é resultado do trabalho.
+> **Estado atual:** a estrutura do repositório está pronta. O painel em `dashboard/prototipo/` usa dados **simulados** e uma pequena amostra real de chuva de Porto Alegre, em maio de 2024; nada ali é resultado desta análise.
 
-## Perguntas de pesquisa
+## Recorte de dados
 
-Cada uma vira uma página do dashboard.
+- Período comparável de chuva e fogo: 2003–2025.
+- Chuva: CHIRPS v3 mensal, 1991–2025, para calcular anomalias usando a climatologia 1991–2020.
+- Fogo: focos do satélite de referência publicados pelo INPE, 2003–2025.
+- ENSO: índice ONI mensal/semanal sazonal histórico da NOAA CPC.
+- Limite de armazenamento e análise: 20 GB. Dados brutos e derivados não entram no Git.
 
-1. A intensidade do El Niño (índice ONI) muda a chuva e a temperatura de forma diferente em cada região do Brasil?
-2. Safras como soja, milho e café variam em anos de El Niño, e a variação é positiva ou negativa conforme a região?
-3. Existe defasagem entre o ONI e os casos de dengue (por exemplo, de 2 a 4 meses)?
-4. A geração hidrelétrica e o nível dos reservatórios caem em anos de El Niño em alguma região?
-5. Desastres naturais (secas e enchentes) são mais frequentes ou mais graves nesses anos?
+O papel de coleta está atribuído a **@Asageki**.
 
 ## Estrutura do repositório
 
@@ -61,7 +61,7 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 
 | Frente | Pasta | Entrega | Depende de | Responsável (GitHub) |
 |---|---|---|---|---|
-| 1. Coleta de dados | `src/ingestao/`, `raw/` | `raw/` completa e documento de fontes | — | a preencher |
+| 1. Coleta de dados | `src/ingestao/`, `raw/` | `raw/` completa e documento de fontes | — | @Asageki |
 | 2. Limpeza e integração (ETL) | `src/limpeza/`, `clean/` | `clean/` e a tabela cruzada | frente 1 | a preencher |
 | 3. Engenharia de big data | `src/bigdata/`, `parquet/` | `parquet/`, código do pipeline e benchmark | frentes 1 e 2 (começa com amostra) | a preencher |
 | 4. Análise estatística | `notebooks/`, `src/analise/` | notebook de análise e tabela de achados | frente 2 | a preencher |
@@ -70,5 +70,6 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 
 ## Documentação
 
+- [Conceito e fontes dos dados](docs/conceito.md)
 - [Plano de trabalho](docs/plano-de-trabalho.pdf)
 - [Documentos da fase de protótipo](docs/legado/README.md)
