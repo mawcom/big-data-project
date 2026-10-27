@@ -31,24 +31,26 @@ O acervo do INPE para o satélite de referência começa em 2003 nesta série an
 | ENSO | [NOAA CPC — ONI v6](https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php) | Série histórica publicada pela NOAA | Intensidade e fase do El Niño–Oscilação Sul |
 | Precipitação | [CHIRPS v3 mensal, América Latina](https://data.chc.ucsb.edu/products/CHIRPS/v3.0/monthly/latam/bils/) | 1981–set. 2026 | Acumulados mensais e anomalias de chuva no Nordeste |
 | Focos de fogo | [INPE Programa Queimadas — satélite de referência](https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/) | 2003–2025 | Contagem de focos por estado e mês |
+| Estações meteorológicas | [INMET — dados históricos anuais](https://portal.inmet.gov.br/dadoshistoricos) | Arquivos disponíveis desde 2000; recorte comparável 2003–2025 | Chuva e temperatura observadas por estação |
+| Energia | [ONS — Balanço de Energia nos Subsistemas](https://dados.ons.org.br/dataset/balanco-energia-subsistema) e [EAR Diário por Subsistema](https://dados.ons.org.br/dataset/ear-diario-por-subsistema) | Séries históricas disponíveis desde 2000; recorte comparável 2003–2025 | Geração e energia armazenada no subsistema Nordeste |
 
 O CHIRPS v3 é um produto mensal de precipitação em grade de 0,05° que combina estimativas de satélite e dados de estações. Os arquivos baixados cobrem a América Latina e serão recortados para o Nordeste no processamento. Os focos do INPE são detecções orbitais de fogo ativo; não equivalem diretamente à área queimada nem a uma contagem perfeita de incêndios. Mudanças de sensor e cobertura também limitam comparações longas.
 
 ## Volume e armazenamento
 
-O teto total para os dados deste estudo é 20 GB: até 2 GiB para os arquivos brutos em `raw/` e até 18 GiB para dados limpos e derivados. A coleta baixa as bases originais completas disponíveis para o escopo temporal: CHIRPS mensal de toda a América Latina para 1981–setembro de 2026, focos anuais de todo o Brasil do satélite de referência do INPE para 2003–2025 e a série histórica do ONI. Os arquivos baixados permanecem compactados em `raw/`; o recorte do Nordeste acontece somente no processamento analítico. A coleta interrompe downloads que ultrapassem a reserva de 2 GiB para arquivos brutos.
+O comando `fetch_raw` baixa as fontes escolhidas em `raw/`, com o intervalo de anos definido por `--range` ou toda a cobertura disponível quando o parâmetro é omitido. As fontes incluem CHIRPS mensal da América Latina, focos anuais do INPE, ONI, INMET, ONS e os produtos globais descritos em [fontes.md](fontes.md). Os arquivos baixados permanecem em `raw/`. O comando `ingest_raw` cria tabelas DuckDB com os registros de origem; recortes e agregações analíticas pertencem às etapas seguintes.
 
 Para coletar ou completar arquivos ausentes:
 
 ```powershell
-python src\ingestao\coletar_bases.py
+uv run poe fetch_raw --effort medium
 ```
 
-O script salva um manifesto em `raw/manifest.json` com URLs, tamanhos, hashes e horários de coleta. `raw/`, `clean/` e `parquet/` são ignorados pelo Git.
+O comando salva um manifesto em `raw/manifesto_coleta.json` com URLs, tamanhos, hashes e horários de coleta. `raw/`, `clean/` e `parquet/` são ignorados pelo Git.
 
 ## Responsabilidade
 
-**Coleta de dados: @Asageki.** A entrega inclui as bases brutas, o manifesto e este documento com fontes, período, unidade e limitações.
+**Coleta de dados: @Asageki.** A entrega inclui as bases brutas, manifestos, tabelas consultáveis no DuckDB e documentação de fontes, períodos, unidades e limitações.
 
 ## Limites de interpretação
 
