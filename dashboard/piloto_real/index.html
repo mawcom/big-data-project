@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1416">
+  <title>El Niño, chuva e focos no Nordeste — dados reais</title>
+  <style>
+    :root { color-scheme:dark; --bg:#0c1416; --panel:#152126; --line:#2b4148; --text:#ecf5f3; --muted:#a9bfc1; --cyan:#71d4ce; --warm:#f4ad72; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(ellipse at 75% -10%,#1d383b 0%,var(--bg) 58%); }
+    main { max-width:1220px; margin:auto; padding:28px 24px 60px; }
+    a { color:var(--cyan); }
+    .back { font-size:13px; }
+    .eyebrow { margin-top:28px; color:var(--cyan); text-transform:uppercase; letter-spacing:.15em; font-size:11px; font-weight:800; }
+    h1 { font-family:Georgia,"Times New Roman",serif; font-size:clamp(34px,5vw,58px); font-weight:500; letter-spacing:-.045em; line-height:1.06; margin:9px 0; }
+    .lead { color:var(--muted); line-height:1.55; max-width:790px; font-size:15px; }
+    .notice { border-left:3px solid var(--warm); background:#2c251f; padding:12px 15px; color:#eacdb6; border-radius:0 10px 10px 0; font-size:13px; line-height:1.45; margin:23px 0; }
+    .event-strip { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:15px 18px; border:1px solid #865841; border-radius:13px; background:linear-gradient(100deg,#503323,#252b2a 80%); margin-bottom:16px; }
+    .event-strip strong { display:block; color:#ffcf9c; font-family:Georgia,"Times New Roman",serif; font-size:20px; font-weight:500; }
+    .event-strip p { color:#e8cbb9; margin:5px 0 0; font-size:12px; line-height:1.4; }
+    .event-strip button { border:1px solid #bc8767; border-radius:9px; background:#5e3d2b; color:#fff0df; padding:10px 13px; cursor:pointer; white-space:nowrap; }
+    .controls { display:flex; gap:17px; flex-wrap:wrap; align-items:end; margin:23px 0 16px; }
+    .control { min-width:180px; }
+    .control.wide { flex:1; min-width:230px; }
+    label { display:block; text-transform:uppercase; letter-spacing:.1em; font-size:10px; font-weight:750; color:var(--muted); margin-bottom:8px; }
+    select,input[type=range] { width:100%; accent-color:var(--cyan); }
+    select { font:inherit; color:var(--text); background:#1a2d33; border:1px solid #3b5960; border-radius:9px; padding:10px 12px; }
+    .monthlabel { font-size:13px; color:var(--cyan); font-weight:750; min-width:88px; padding-bottom:11px; }
+    .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0; }
+    .card,.panel { border:1px solid var(--line); background:var(--panel); border-radius:13px; }
+    .card { padding:16px; background:linear-gradient(150deg,#1c3337 0%,var(--panel) 82%); box-shadow:0 12px 28px #00000020; }
+    .card span { display:block; font-size:11px; color:var(--muted); }
+    .card strong { display:block; font-family:Georgia,"Times New Roman",serif; font-size:29px; font-weight:500; margin-top:5px; }
+    .card small { color:var(--muted); font-size:10px; }
+    .grid { display:grid; grid-template-columns:minmax(320px,1fr) minmax(320px,1fr); gap:15px; }
+    .panel { padding:19px; min-width:0; }
+    .visual-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; margin-bottom:15px; }
+    .visual-grid .wide-panel { grid-column:1/-1; }
+    .chart { display:block; width:100%; height:auto; min-height:195px; }
+    .chart text { fill:var(--muted); font:11px Inter,ui-sans-serif,system-ui,sans-serif; }
+    .chart .gridline { stroke:#344b50; stroke-width:1; }
+    .chart .selected-line { stroke:#e5f5f0; stroke-width:1; stroke-dasharray:4 5; opacity:.65; }
+    .chart .hit { cursor:pointer; }
+    .chart .hit:hover { filter:brightness(1.2); }
+    .chart-note { color:var(--muted); font-size:11px; line-height:1.4; margin:2px 0 0; }
+    .panel-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .panel-top h2 { margin-bottom:5px; }
+    .pill { display:inline-block; border-radius:999px; border:1px solid #40625f; background:#1d3b39; color:#9ce7dd; font-size:10px; font-weight:800; letter-spacing:.08em; padding:6px 9px; white-space:nowrap; }
+    .pill.orange { background:#3a2b25; color:#f0b582; border-color:#75543e; }
+    .rank-controls { margin-bottom:12px; }
+    .rank-list { display:grid; gap:8px; }
+    .rank-row { display:grid; grid-template-columns:37px minmax(0,1fr) 78px; gap:10px; align-items:center; border:0; background:transparent; color:var(--text); width:100%; padding:3px 0; cursor:pointer; text-align:left; font:inherit; }
+    .rank-row:hover .rank-track { box-shadow:0 0 0 1px var(--cyan); }
+    .rank-row .uf { font-size:12px; font-weight:800; }
+    .rank-track { height:16px; background:#253a3e; border-radius:6px; overflow:hidden; }
+    .rank-bar { display:block; height:100%; border-radius:6px; background:linear-gradient(90deg,#2d8b86,#8aebe0); }
+    .rank-row.fire .rank-bar { background:linear-gradient(90deg,#8e4b39,#f4ae72); }
+    .rank-value { font-size:12px; text-align:right; font-variant-numeric:tabular-nums; }
+    .heat-scroll { overflow:auto; }
+    .heatmap { display:grid; grid-template-columns:36px repeat(12,minmax(26px,1fr)); gap:5px; min-width:570px; }
+    .heatmap .head,.heatmap .rowname { color:var(--muted); font-size:10px; text-align:center; align-self:center; font-weight:800; }
+    .heatmap .rowname { text-align:left; }
+    .heat-cell { aspect-ratio:1.18; border:1px solid #ffffff20; border-radius:5px; cursor:pointer; position:relative; }
+    .heat-cell:hover,.heat-cell:focus-visible { outline:2px solid #fff; outline-offset:1px; }
+    .heat-cell.selected { outline:2px solid #fff; }
+    .heat-legend { display:flex; gap:8px; align-items:center; color:var(--muted); font-size:10px; margin-top:11px; }
+    .heat-gradient { flex:1; max-width:150px; height:8px; border-radius:99px; background:linear-gradient(90deg,#294b4b,#49aaa3,#a3f4e9); }
+    .heat-gradient.fire { background:linear-gradient(90deg,#49342e,#b76e4f,#ffd29e); }
+    .projection { border-color:#65533f; background:linear-gradient(145deg,#243032,#1e282a 65%,#2a2521); margin:16px 0; }
+    .projection-head { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .projection-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .projection-chart { width:100%; height:auto; display:block; }
+    .projection-chart text { fill:#b7c6c4; font:10px Inter,ui-sans-serif,system-ui,sans-serif; }
+    .projection-chart .gridline { stroke:#435053; stroke-width:1; }
+    .projection-legend { display:flex; gap:18px; flex-wrap:wrap; color:var(--muted); font-size:11px; margin:11px 0 14px; }
+    .legend-line { display:inline-block; width:19px; height:3px; vertical-align:middle; margin-right:5px; border-radius:3px; }
+    .legend-line.actual { background:var(--cyan); } .legend-line.future { background:#f7f2e9; }
+    .legend-line.band { height:8px; background:#f4ad7250; }
+    .projection-stat { margin:0; color:#e0c4ac; font-size:12px; line-height:1.5; }
+    h2 { font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:25px; margin:0 0 6px; }
+    .sub { color:var(--muted); font-size:12px; line-height:1.45; margin:0 0 12px; }
+    #map { width:100%; height:470px; display:block; }
+    .state { stroke:#d9e7e4; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; transition:filter .15s; }
+    .state:hover,.state:focus-visible { filter:brightness(1.26); stroke:#fff; stroke-width:2.2; outline:none; }
+    .state.selected { stroke:#fff; stroke-width:3; }
+    .state-label { fill:#fff; font-size:11px; font-weight:800; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#183238; stroke-width:3px; }
+    #mapHint { color:var(--muted); font-size:11px; min-height:30px; }
+    .scale { height:8px; border-radius:9px; background:linear-gradient(90deg,#2c544f,#45a79d,#a2ece0); margin:10px 0 6px; }
+    .scale-labels { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; }
+    .tablewrap { overflow:auto; max-height:470px; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th { text-align:right; color:var(--muted); font-size:10px; letter-spacing:.06em; text-transform:uppercase; position:sticky; top:0; background:var(--panel); }
+    th:first-child,td:first-child { text-align:left; }
+    td,th { border-bottom:1px solid var(--line); padding:10px 7px; white-space:nowrap; }
+    td { text-align:right; font-variant-numeric:tabular-nums; }
+    tr.highlight td { color:var(--cyan); background:#203538; }
+    .chip { border:1px solid #68503c; color:#f1bb8f; background:#342a23; padding:3px 7px; border-radius:99px; font-size:10px; }
+    .sources { color:var(--muted); font-size:12px; line-height:1.6; margin-top:20px; }
+    @media(max-width:850px) { .grid,.visual-grid,.projection-grid { grid-template-columns:1fr; } .visual-grid .wide-panel { grid-column:auto; } .cards { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:500px) { main { padding:20px 14px 42px; } .cards { gap:8px; } .card strong { font-size:24px; } .event-strip { display:block; } .event-strip button { margin-top:12px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← Voltar ao protótipo anterior</a>
+    <div class="eyebrow" id="periodBadge">Carregando bases observadas</div>
+    <h1>El Niño, chuva e focos no Nordeste</h1>
+    <p class="lead" id="lead">Explore os anos observados por estado e mês. Novos anos completos aparecem quando suas bases CHIRPS e INPE são baixadas.</p>
+    <div class="notice" id="projectionDisclaimer">As projeções são referências sazonais exploratórias; não são previsões meteorológicas nem atribuem eventos ao El Niño ou ao aquecimento global.</div>
+    <section class="event-strip" id="ensoSummary" hidden><div><strong id="ensoTitle"></strong><p id="ensoDescription"></p></div><button id="ensoJump" type="button">Ver episódio</button></section>
+    <div class="notice" id="syncWarning" hidden></div>
+    <div class="controls">
+      <div class="control"><label for="year">Ano observado</label><select id="year"></select></div>
+      <div class="control"><label for="uf">Estado</label><select id="uf"></select></div>
+      <div class="control wide"><label for="month">Mês do mapa</label><input id="month" type="range" min="1" max="12" value="9"></div>
+      <div class="monthlabel" id="monthLabel">Carregando...</div>
+    </div>
+    <div class="cards">
+      <div class="card"><span>Chuva no estado · mês selecionado</span><strong id="rain">—</strong><small>Média das células CHIRPS, mm</small></div>
+      <div class="card"><span>Focos no estado · mês selecionado</span><strong id="fires">—</strong><small>Detecções do INPE</small></div>
+      <div class="card"><span>ONI · mês selecionado</span><strong id="oni">—</strong><small id="phase">Índice sazonal NOAA CPC</small></div>
+      <div class="card"><span>Cobertura de chuva</span><strong id="coverage">—</strong><small>Células válidas no estado</small></div>
+    </div>
+    <div class="visual-grid">
+      <section class="panel">
+        <div class="panel-top"><div><h2>Ritmo das chuvas</h2><p class="sub">Média mensal das células CHIRPS no estado selecionado.</p></div><span class="pill">CHIRPS · REAL</span></div>
+        <svg id="rainChart" class="chart" viewBox="0 0 700 240" role="img" aria-label="Gráfico mensal de chuva no ano observado"></svg>
+        <p class="chart-note">Clique em um mês no gráfico para atualizar o mapa e os indicadores.</p>
+      </section>
+      <section class="panel">
+        <div class="panel-top"><div><h2>Focos detectados</h2><p class="sub">Quantidade mensal de detecções do satélite de referência.</p></div><span class="pill orange">INPE · REAL</span></div>
+        <svg id="fireChart" class="chart" viewBox="0 0 700 240" role="img" aria-label="Gráfico mensal de focos no ano observado"></svg>
+        <p class="chart-note">Focos detectados não equivalem a incêndios individuais ou área queimada.</p>
+      </section>
+      <section class="panel wide-panel">
+        <div class="panel-top"><div><h2>Índice ENSO ao longo do ano</h2><p class="sub">ONI histórico por janela sazonal; a linha pontilhada marca +0,5 °C.</p></div><span class="pill orange">NOAA · REAL</span></div>
+        <svg id="oniChart" class="chart" viewBox="0 0 900 210" role="img" aria-label="Gráfico mensal do índice ONI no ano observado"></svg>
+        <p class="chart-note">Fase classificada com cinco janelas consecutivas. A NOAA usa RONI no monitoramento operacional atual.</p>
+      </section>
+      <section class="panel">
+        <div class="panel-top"><div><h2>Comparação entre estados</h2><p class="sub">Ranking do mês selecionado.</p></div><span class="pill">9 UFs</span></div>
+        <div class="rank-controls"><label for="rankMetric">Medida</label><select id="rankMetric"><option value="chuva_media_mm">Chuva média (mm)</option><option value="focos_inpe">Focos detectados</option></select></div>
+        <div class="rank-list" id="rankList"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-top"><div><h2>Calendário do Nordeste</h2><p class="sub">Cada quadrado representa um estado e um mês do ano selecionado.</p></div><span class="pill">108 OBSERVAÇÕES</span></div>
+        <div class="rank-controls"><label for="heatMetric">Medida</label><select id="heatMetric"><option value="chuva_media_mm">Chuva média (mm)</option><option value="focos_inpe">Focos detectados</option></select></div>
+        <div class="heat-scroll"><div class="heatmap" id="heatmap"></div></div>
+        <div class="heat-legend"><span>Menor valor</span><span class="heat-gradient" id="heatGradient"></span><span>Maior valor</span></div>
+      </section>
+    </div>
+    <section class="panel projection" id="projectionPanel" aria-label="Projeção sazonal exploratória">
+      <div class="projection-head"><div><h2 id="projectionTitle">Referência sazonal</h2><p class="sub" id="projectionSubtitle"></p></div><span class="pill orange">PROJEÇÃO · NÃO OBSERVADO</span></div>
+      <div class="projection-legend"><span><i class="legend-line actual"></i><span id="legendObserved"></span></span><span><i class="legend-line future"></i><span id="legendFuture"></span></span><span><i class="legend-line band"></i><span id="legendBand"></span></span></div>
+      <div class="projection-grid">
+        <div><h2>Chuva média mensal</h2><svg id="projectionRain" class="projection-chart" viewBox="0 0 710 265" role="img" aria-label="Série de chuva observada e referência sazonal projetada"></svg></div>
+        <div><h2>Focos detectados</h2><svg id="projectionFire" class="projection-chart" viewBox="0 0 710 265" role="img" aria-label="Série de focos observada e referência sazonal projetada"></svg></div>
+      </div>
+      <p class="projection-stat" id="projectionNote"></p>
+    </section>
+    <div class="grid">
+      <section class="panel">
+        <h2>Chuva por estado</h2>
+        <p class="sub">Mapa das nove UFs com limites simplificados do IBGE. Cor = média mensal de chuva em mm; clique em uma UF para ver seus dados.</p>
+        <svg id="map" viewBox="0 0 540 470" role="img" aria-label="Mapa dos nove estados do Nordeste"></svg>
+        <div id="mapHint"></div>
+        <div class="scale"></div><div class="scale-labels"><span id="scaleMin">Menor chuva</span><span id="scaleMax">Maior chuva</span></div>
+      </section>
+      <section class="panel">
+        <h2 id="tableTitle">Série mensal</h2>
+        <p class="sub">Chuva média estadual, focos detectados e ONI. Valores reais do ano selecionado.</p>
+        <div class="tablewrap"><table><thead><tr><th>Mês</th><th>Chuva (mm)</th><th>Focos</th><th>ONI (°C)</th><th>Fase</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </section>
+    </div>
+    <p class="sources">Fontes: <a href="https://data.chc.ucsb.edu/products/CHIRPS/v3.0/monthly/latam/bils/">CHIRPS v3</a>, <a href="https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/">INPE</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php">NOAA CPC ONI v6</a> e <a href="https://servicodados.ibge.gov.br/api/docs/malhas?versao=3">IBGE</a>. Foco é detecção de satélite, não incêndio individual nem área queimada. A média de chuva usa o centro das células e não pondera a área. ONI e fase ENSO não são projetados. <a href="/docs/processamento">Método e verificações do processamento →</a></p>
+  </main>
+  <script>
+    const $ = id => document.getElementById(id);
+    const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    const mesesCurtos = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    const fmt = (n,d=0) => Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+    let linhas=[], features=[], projecoes=[], metodoProjecao={};
+    const coords = g => g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+    const todosPontos = g => coords(g).flat(2);
+    const escolherMes = mes => { $('month').value=String(mes); render(); };
+    function renderSerie(serie, campo, id, cor, tipo, mes) {
+      const svg=$(id), W=700,H=240,L=50,R=17,T=18,B=34, base=H-B, alto=base-T;
+      const valores=serie.map(r=>Number(r[campo]));
+      const maior=Math.max(...valores,1), passo=Math.pow(10,Math.floor(Math.log10(maior)));
+      const teto=Math.ceil(maior/passo/2)*passo*2;
+      const x=i=>L+i*(W-L-R)/11, y=v=>base-(v/teto)*alto;
+      const pontos=valores.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+      const grade=[0,.25,.5,.75,1].map(fr=>`<line class="gridline" x1="${L}" y1="${y(teto*fr)}" x2="${W-R}" y2="${y(teto*fr)}"/><text x="${L-9}" y="${y(teto*fr)+4}" text-anchor="end">${fmt(teto*fr,0)}</text>`).join('');
+      const eixo=mesesCurtos.map((nome,i)=>`<text x="${x(i)}" y="${H-9}" text-anchor="middle" fill="${i+1===mes?'#f3ffff':'#a9bfc1'}">${nome}</text>`).join('');
+      const marcador=`<line class="selected-line" x1="${x(mes-1)}" x2="${x(mes-1)}" y1="${T}" y2="${base}"/>`;
+      const idGrad=`grad-${id}`;
+      const defs=`<defs><linearGradient id="${idGrad}" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="${cor}" stop-opacity=".55"/><stop offset="100%" stop-color="${cor}" stop-opacity=".04"/></linearGradient></defs>`;
+      let desenho='';
+      if (tipo==='linha') {
+        desenho=`<polygon points="${x(0)},${base} ${pontos} ${x(11)},${base}" fill="url(#${idGrad})"/><polyline points="${pontos}" fill="none" stroke="${cor}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`+
+          valores.map((v,i)=>`<circle data-month="${i+1}" class="hit" cx="${x(i)}" cy="${y(v)}" r="${i+1===mes?7:5}" fill="${i+1===mes?'#fff':cor}" stroke="#102226" stroke-width="2"><title>${meses[i]}: ${fmt(v,1)} mm</title></circle>`).join('');
+      } else {
+        desenho=valores.map((v,i)=>`<rect data-month="${i+1}" class="hit" x="${x(i)-17}" y="${y(v)}" width="34" height="${base-y(v)}" rx="5" fill="${i+1===mes?'#ffd2a6':'url(#'+idGrad+')'}" stroke="${i+1===mes?'#fff':'none'}"><title>${meses[i]}: ${fmt(v)} focos</title></rect>`).join('');
+      }
+      svg.innerHTML=defs+grade+marcador+desenho+eixo;
+      svg.querySelectorAll('[data-month]').forEach(el=>el.addEventListener('click',()=>escolherMes(Number(el.dataset.month))));
+    }
+    function renderOni(serie, mes) {
+      const svg=$('oniChart'),W=900,H=210,L=46,R=20,T=20,B=31,base=H-B,alto=base-T;
+      const valores=serie.map(r=>Number(r.oni_c)), superior=Math.max(2,Math.ceil(Math.max(...valores)*2)/2),inferior=Math.min(-.5,Math.floor(Math.min(...valores)*2)/2);
+      const x=i=>L+i*(W-L-R)/11,y=v=>base-(v-inferior)/(superior-inferior)*alto;
+      const faixas=serie.map((r,i)=>`<rect x="${x(i)-27}" y="${T}" width="54" height="${alto}" fill="${r.fase_enso==='El Niño'?'#5a3929':'#1b3938'}" opacity=".55"/>`).join('');
+      const grade=[inferior,0,.5,1,1.5,superior].filter((v,i,a)=>a.indexOf(v)===i).map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="${v===.5?'#f6ae72':'#344b50'}" stroke-dasharray="${v===.5?'5 5':'none'}"/><text x="${L-9}" y="${y(v)+4}" text-anchor="end">${fmt(v,1)}</text>`).join('');
+      const pontos=valores.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+      const marcadores=valores.map((v,i)=>`<circle data-month="${i+1}" class="hit" cx="${x(i)}" cy="${y(v)}" r="${i+1===mes?7:5}" fill="${i+1===mes?'#fff':'#f4ad72'}" stroke="#231b18" stroke-width="2"><title>${meses[i]} · ${serie[i].janela_oni}: ${fmt(v,1)} °C</title></circle>`).join('');
+      const eixo=mesesCurtos.map((nome,i)=>`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${nome}</text>`).join('');
+      svg.innerHTML=faixas+grade+`<line class="selected-line" x1="${x(mes-1)}" x2="${x(mes-1)}" y1="${T}" y2="${base}"/><polyline points="${pontos}" fill="none" stroke="#f4ad72" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`+marcadores+eixo;
+      svg.querySelectorAll('[data-month]').forEach(el=>el.addEventListener('click',()=>escolherMes(Number(el.dataset.month))));
+    }
+    function renderRanking(ano,mes) {
+      const campo=$('rankMetric').value, recorte=linhas.filter(r=>Number(r.ano)===ano&&Number(r.mes)===mes).sort((a,b)=>Number(b[campo])-Number(a[campo]));
+      const maior=Math.max(...recorte.map(r=>Number(r[campo])),1), fogo=campo==='focos_inpe';
+      $('rankList').innerHTML=recorte.map(r=>`<button class="rank-row ${fogo?'fire':''}" data-uf="${r.uf_sigla}" title="Selecionar ${r.uf_nome}"><span class="uf">${r.uf_sigla}</span><span class="rank-track"><span class="rank-bar" style="width:${Math.max(2,100*Number(r[campo])/maior)}%"></span></span><span class="rank-value">${fmt(r[campo],fogo?0:1)}${fogo?'':' mm'}</span></button>`).join('');
+      $('rankList').querySelectorAll('button').forEach(el=>el.addEventListener('click',()=>{$('uf').value=el.dataset.uf;render();}));
+    }
+    function renderHeatmap(ano,uf, mes) {
+      const recorte=linhas.filter(r=>Number(r.ano)===ano);
+      const campo=$('heatMetric').value, fogo=campo==='focos_inpe', valores=recorte.map(r=>Number(r[campo]));
+      const minimo=Math.min(...valores),maximo=Math.max(...valores), normal=v=>Math.sqrt((v-minimo)/(maximo-minimo||1));
+      const ordem=[...new Map(recorte.map(r=>[r.uf_sigla,r.uf_nome])).entries()];
+      $('heatGradient').classList.toggle('fire',fogo);
+      $('heatmap').innerHTML='<span></span>'+mesesCurtos.map(m=>`<span class="head">${m}</span>`).join('')+ordem.map(([sigla,nome])=>{
+        const serie=recorte.filter(r=>r.uf_sigla===sigla).sort((a,b)=>Number(a.mes)-Number(b.mes));
+        return `<span class="rowname">${sigla}</span>`+serie.map(r=>{
+          const valor=Number(r[campo]),t=normal(valor),cor=fogo?`hsl(23 64% ${22+48*t}%)`:`hsl(173 46% ${20+52*t}%)`;
+          const legenda=`${nome}, ${meses[Number(r.mes)-1]}: ${fmt(valor,fogo?0:1)} ${fogo?'focos':'mm'}`;
+          return `<button class="heat-cell ${sigla===uf&&Number(r.mes)===mes?'selected':''}" style="background:${cor}" data-uf="${sigla}" data-month="${r.mes}" title="${legenda}" aria-label="${legenda}"></button>`;
+        }).join('');
+      }).join('');
+      $('heatmap').querySelectorAll('button').forEach(el=>el.addEventListener('click',()=>{$('uf').value=el.dataset.uf;escolherMes(Number(el.dataset.month));}));
+    }
+    function renderProjection(uf,campo,id,cor) {
+      if (!metodoProjecao) return;
+      const anoAnterior=Number(metodoProjecao.ano_anterior),anoBase=Number(metodoProjecao.ano_base),anoProjetado=Number(metodoProjecao.ano_projetado);
+      const observados=linhas.filter(r=>r.uf_sigla===uf&&(Number(r.ano)===anoAnterior||Number(r.ano)===anoBase)).sort((a,b)=>Number(a.ano)-Number(b.ano)||Number(a.mes)-Number(b.mes));
+      const futuros=projecoes.filter(r=>r.uf_sigla===uf).sort((a,b)=>Number(a.mes)-Number(b.mes));
+      if(observados.length!==24||futuros.length!==12) return;
+      const chuva=campo==='chuva', nome=chuva?'chuva_media_mm':'focos_inpe';
+      const ref=chuva?'chuva_referencia_mm':'focos_referencia';
+      const min=chuva?'chuva_faixa_min_mm':'focos_faixa_min',max=chuva?'chuva_faixa_max_mm':'focos_faixa_max';
+      const reais=observados.map(r=>Number(r[nome])),centro=futuros.map(r=>Number(r[ref]));
+      const baixa=futuros.map(r=>Number(r[min])),alta=futuros.map(r=>Number(r[max]));
+      const svg=$(id),W=710,H=265,L=45,R=12,T=19,B=45,base=H-B,altura=base-T;
+      const maior=Math.max(...reais,...alta,1),passo=Math.pow(10,Math.floor(Math.log10(maior))),teto=Math.ceil(maior/passo/2)*passo*2;
+      const x=i=>L+i*(W-L-R)/35,y=v=>base-(v/teto)*altura;
+      const grade=[0,.25,.5,.75,1].map(t=>`<line class="gridline" x1="${L}" y1="${y(t*teto)}" x2="${W-R}" y2="${y(t*teto)}"/><text x="${L-6}" y="${y(t*teto)+4}" text-anchor="end">${fmt(t*teto)}</text>`).join('');
+      const futuroInicio=(x(23)+x(24))/2;
+      const fundo=`<rect x="${futuroInicio}" y="${T}" width="${W-R-futuroInicio}" height="${altura}" fill="#f4ad72" opacity=".08"/>`;
+      const faixa=[...alta.map((v,i)=>`${x(i+24)},${y(v)}`),...baixa.map((v,i)=>`${x(35-i)},${y(baixa[11-i])}`)].join(' ');
+      const linhaReal=reais.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
+      const linhaFutura=[`${x(23)},${y(reais[23])}`,...centro.map((v,i)=>`${x(i+24)},${y(v)}`)].join(' ');
+      const separadores=[11.5,23.5].map(i=>`<line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${base}" stroke="#768c89" stroke-dasharray="3 5" opacity=".55"/>`).join('');
+      const mesesMarcados=[0,3,6,9,12,15,18,21,24,27,30,33].map(i=>`<text x="${x(i)}" y="${H-24}" text-anchor="middle">${mesesCurtos[i%12]}</text>`).join('');
+      const anos=[anoAnterior,anoBase,anoProjetado].map((ano,i)=>`<text x="${x(i*12+5.5)}" y="${H-5}" text-anchor="middle" fill="${i===2?'#f4ad72':'#d9e9e6'}" font-weight="800">${ano}${i===2?' · projeção':''}</text>`).join('');
+      const pontosReais=reais.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="2.6" fill="${cor}"><title>${meses[i%12]} ${anoAnterior+Math.floor(i/12)}: ${fmt(v,chuva?1:0)} ${chuva?'mm':'focos'}</title></circle>`).join('');
+      const pontosFuturos=centro.map((v,i)=>`<circle cx="${x(i+24)}" cy="${y(v)}" r="3.2" fill="#f7f2e9"><title>${meses[i]} ${anoProjetado}: referência ${fmt(v,chuva?1:0)}, faixa ${fmt(baixa[i],chuva?1:0)}–${fmt(alta[i],chuva?1:0)}</title></circle>`).join('');
+      svg.innerHTML=fundo+grade+`<polygon points="${faixa}" fill="#f4ad72" opacity=".23"/>`+separadores+`<polyline points="${linhaReal}" fill="none" stroke="${cor}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="${linhaFutura}" fill="none" stroke="#f7f2e9" stroke-width="2.8" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>`+pontosReais+pontosFuturos+mesesMarcados+anos;
+    }
+    function render() {
+      const uf=$('uf').value, mes=Number($('month').value),ano=Number($('year').value);
+      const selecionada=linhas.find(r=>r.uf_sigla===uf && Number(r.ano)===ano && Number(r.mes)===mes);
+      if (!selecionada) return;
+      $('monthLabel').textContent=`${meses[mes-1]} ${ano}`;
+      $('rain').textContent=fmt(selecionada.chuva_media_mm,1);
+      $('fires').textContent=fmt(selecionada.focos_inpe);
+      $('oni').textContent=fmt(selecionada.oni_c,1);
+      $('phase').textContent=`${selecionada.fase_enso} · janela ${selecionada.janela_oni}`;
+      $('coverage').textContent=`${fmt(selecionada.cobertura_chuva_pct,0)}%`;
+      $('tableTitle').textContent=`Série mensal · ${selecionada.uf_nome} · ${ano}`;
+      const serie=linhas.filter(r=>r.uf_sigla===uf&&Number(r.ano)===ano).sort((a,b)=>Number(a.mes)-Number(b.mes));
+      $('rows').innerHTML=serie.map(r=>`<tr class="${Number(r.mes)===mes?'highlight':''}"><td>${meses[Number(r.mes)-1]}</td><td>${fmt(r.chuva_media_mm,1)}</td><td>${fmt(r.focos_inpe)}</td><td>${fmt(r.oni_c,1)}</td><td>${r.fase_enso==='El Niño'?'<span class="chip">El Niño</span>':r.fase_enso}</td></tr>`).join('');
+      renderSerie(serie,'chuva_media_mm','rainChart','#71d4ce','linha',mes);
+      renderSerie(serie,'focos_inpe','fireChart','#f4ad72','barra',mes);
+      renderOni(serie,mes);
+      renderRanking(ano,mes);
+      renderHeatmap(ano,uf,mes);
+      if (metodoProjecao) {
+        renderProjection(uf,'chuva','projectionRain','#71d4ce');
+        renderProjection(uf,'focos','projectionFire','#f4ad72');
+        const erros=metodoProjecao.erros_por_uf?.[uf];
+        $('projectionNote').textContent=erros?`Teste simples: usar ${metodoProjecao.ano_anterior} para estimar ${metodoProjecao.ano_base} teria erro médio de ${fmt(erros.mae_chuva_mm,1)} mm de chuva e ${fmt(erros.mae_focos,1)} focos por mês em ${uf}. A faixa de ${metodoProjecao.ano_projetado} representa a diferença observada entre os dois anos, sem probabilidade associada.`:'';
+      }
+      renderMap(ano,mes,uf);
+    }
+    function renderMap(ano,mes, selecionada) {
+      const atuais=linhas.filter(r=>Number(r.ano)===ano&&Number(r.mes)===mes);
+      const chuva=atuais.map(r=>Number(r.chuva_media_mm));
+      const minimo=Math.min(...chuva), maximo=Math.max(...chuva);
+      $('scaleMin').textContent=`${fmt(minimo,0)} mm`;
+      $('scaleMax').textContent=`${fmt(maximo,0)} mm`;
+      const pontos=features.flatMap(f=>todosPontos(f.geometry));
+      const xs=pontos.map(p=>p[0]), ys=pontos.map(p=>p[1]);
+      const xMin=Math.min(...xs),xMax=Math.max(...xs),yMin=Math.min(...ys),yMax=Math.max(...ys);
+      const escala=Math.min(455/(xMax-xMin),420/(yMax-yMin));
+      const offsetX=(540-(xMax-xMin)*escala)/2, offsetY=(470-(yMax-yMin)*escala)/2;
+      const xy=p=>[offsetX+(p[0]-xMin)*escala,offsetY+(yMax-p[1])*escala];
+      const caminho=g=>coords(g).map(pol=>pol.map(anel=>anel.map((p,i)=>`${i?'L':'M'}${xy(p)[0].toFixed(2)},${xy(p)[1].toFixed(2)}`).join('')+'Z').join('')).join('');
+      const svg=$('map'); svg.replaceChildren();
+      for (const f of features) {
+        const sigla=f.properties.SIGLA_UF, r=atuais.find(x=>x.uf_sigla===sigla);
+        const t=(Number(r.chuva_media_mm)-minimo)/(maximo-minimo||1);
+        const cor=`hsl(${170+8*t} 40% ${24+45*t}%)`;
+        const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+        path.setAttribute('d',caminho(f.geometry));path.setAttribute('fill',cor);
+        path.setAttribute('fill-rule','evenodd');path.setAttribute('class',`state ${sigla===selecionada?'selected':''}`);
+        path.setAttribute('tabindex','0');path.setAttribute('aria-label',`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm de chuva`);
+        const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm`;path.appendChild(title);
+        path.addEventListener('click',()=>{$('uf').value=sigla;render();});
+        path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('uf').value=sigla;render();}});
+        path.addEventListener('mouseenter',()=>{$('mapHint').textContent=`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm de chuva em ${meses[mes-1].toLowerCase()} de ${ano}.`;});
+        path.addEventListener('mouseleave',()=>{$('mapHint').textContent='';});
+        svg.appendChild(path);
+      }
+      for (const f of features) {
+        const vertices=todosPontos(f.geometry), cx=vertices.reduce((s,p)=>s+p[0],0)/vertices.length,cy=vertices.reduce((s,p)=>s+p[1],0)/vertices.length;
+        const [x,y]=xy([cx,cy]);
+        const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+        label.setAttribute('x',x.toFixed(1));label.setAttribute('y',y.toFixed(1));label.setAttribute('class','state-label');
+        label.textContent=f.properties.SIGLA_UF;svg.appendChild(label);
+      }
+    }
+    function configurarEpisodio() {
+      const serie=linhas.filter(r=>r.uf_sigla==='MA').sort((a,b)=>Number(a.ano)-Number(b.ano)||Number(a.mes)-Number(b.mes));
+      const grupos=[];let grupo=[];
+      for (const r of serie) {
+        const atual=Number(r.ano)*12+Number(r.mes);
+        const anterior=grupo.length?Number(grupo.at(-1).ano)*12+Number(grupo.at(-1).mes):null;
+        if (r.fase_enso==='El Niño' && (anterior===null||atual===anterior+1)) grupo.push(r);
+        else {
+          if(grupo.length) grupos.push(grupo);
+          grupo=r.fase_enso==='El Niño'?[r]:[];
+        }
+      }
+      if(grupo.length) grupos.push(grupo);
+      if(!grupos.length) return;
+      const evento=grupos.at(-1),inicio=evento[0],fim=evento.at(-1);
+      $('ensoTitle').textContent=`El Niño: ${mesesCurtos[Number(inicio.mes)-1]}/${inicio.ano} a ${mesesCurtos[Number(fim.mes)-1]}/${fim.ano}`;
+      $('ensoDescription').textContent=`${evento.length} janelas mensais classificadas como El Niño pelo ONI histórico. Compare chuva e focos nos gráficos sem inferir causalidade.`;
+      $('ensoJump').onclick=()=>{$('year').value=inicio.ano;$('month').value=inicio.mes;render();};
+      $('ensoSummary').hidden=false;
+    }
+    function configurarPeriodos(dados) {
+      const anos=dados.anos_observados;
+      if(!anos?.length) throw new Error('Ainda não há um ano completo de ONI, CHIRPS e INPE processado.');
+      const primeiro=anos[0],ultimo=anos.at(-1),faixa=primeiro===ultimo?String(primeiro):`${primeiro}–${ultimo}`;
+      document.title=`Nordeste ${faixa} — dados reais`;
+      $('periodBadge').textContent=`Dados observados ${faixa}${dados.ano_projetado&&metodoProjecao?` · projeção exploratória ${dados.ano_projetado}`:''}`;
+      $('lead').textContent=`Explore os arquivos oficiais de ${faixa} por estado e mês. Novos anos completos aparecem automaticamente quando suas bases CHIRPS e INPE são baixadas.`;
+      $('year').innerHTML=anos.map(ano=>`<option value="${ano}">${ano}</option>`).join('');
+      $('year').value=String(ultimo);
+      const pendentes=Object.entries(dados.anos_pendentes||{});
+      const aviso=dados.aviso_sincronizacao||(pendentes.length?`Base ainda incompleta: ${pendentes.map(([ano,arquivos])=>`${ano} (${arquivos.length} arquivo(s) faltando)`).join(', ')}. O ano aparecerá quando a coleta terminar.`:'');
+      $('syncWarning').hidden=!aviso;
+      if(aviso) $('syncWarning').textContent=aviso;
+      const projeto=Boolean(metodoProjecao&&projecoes.length);
+      $('projectionPanel').hidden=!projeto;
+      if(projeto) {
+        const anterior=metodoProjecao.ano_anterior,base=metodoProjecao.ano_base,alvo=metodoProjecao.ano_projetado;
+        $('projectionDisclaimer').textContent=`A referência de ${alvo} repete o valor de cada mês de ${base}; a faixa mostra quanto esse mês variou entre ${anterior} e ${base}. Ela não é um intervalo de confiança nem uma previsão meteorológica. Os gráficos não atribuem eventos ao El Niño ou ao aquecimento global.`;
+        $('projectionTitle').textContent=`${alvo} · referência sazonal`;
+        $('projectionSubtitle').textContent=`Chuva e focos do estado selecionado: observações de ${anterior}–${base} e projeção exploratória de ${alvo}.`;
+        $('legendObserved').textContent=`Observado ${anterior}–${base}`;
+        $('legendFuture').textContent=`Referência ${alvo}`;
+        $('legendBand').textContent=`Variação observada ${anterior}–${base}`;
+      }
+      configurarEpisodio();
+    }
+    Promise.all([fetch('/api/piloto-real').then(r=>{if(!r.ok)throw Error('Dados indisponíveis');return r.json();}),fetch('/static/ufs_nordeste_ibge.geojson').then(r=>r.json())])
+      .then(([dados,mapa])=>{
+        linhas=dados.linhas;features=mapa.features;projecoes=dados.projecao;metodoProjecao=dados.metodo_projecao;
+        configurarPeriodos(dados);
+        const nomes=[...new Map(linhas.map(r=>[r.uf_sigla,r.uf_nome])).entries()];
+        $('uf').innerHTML=nomes.map(([sigla,nome])=>`<option value="${sigla}">${nome}</option>`).join('');
+        $('uf').value='MA';
+        $('uf').addEventListener('change',render);$('month').addEventListener('input',render);$('year').addEventListener('change',render);
+        $('rankMetric').addEventListener('change',render);$('heatMetric').addEventListener('change',render);
+        render();
+      }).catch(err=>{document.querySelector('.grid').textContent=`Não foi possível abrir o painel: ${err.message}. Confira as bases em raw/ e o guia de processamento.`;});
+  </script>
+</body>
+</html>

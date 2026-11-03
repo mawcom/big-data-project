@@ -1,0 +1,109 @@
+competencia,ano,mes,uf_codigo_ibge,uf_sigla,uf_nome,ano_base,ano_anterior,chuva_anterior_mm,chuva_base_mm,focos_anterior,focos_base,chuva_referencia_mm,chuva_faixa_min_mm,chuva_faixa_max_mm,focos_referencia,focos_faixa_min,focos_faixa_max,metodo,data_status
+2026-01-01,2026,1,21,MA,Maranhão,2025,2024,166.689,269.135,457,434,269.135,166.689,371.581,434,411,457,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,22,PI,Piauí,2025,2024,156.102,247.823,153,127,247.823,156.102,339.544,127,101,153,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,23,CE,Ceará,2025,2024,54.967,174.1,330,248,174.1,54.967,293.233,248,166,330,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,24,RN,Rio Grande do Norte,2025,2024,39.897,124.042,40,51,124.042,39.897,208.187,51,40,62,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,25,PB,Paraíba,2025,2024,53.735,163.898,48,98,163.898,53.735,274.061,98,48,148,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,26,PE,Pernambuco,2025,2024,66.079,168.301,85,132,168.301,66.079,270.523,132,85,179,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,27,AL,Alagoas,2025,2024,51.229,89.855,41,28,89.855,51.229,128.481,28,15,41,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,28,SE,Sergipe,2025,2024,81.565,128.086,19,47,128.086,81.565,174.607,47,19,75,persistencia_sazonal,projecao_exploratoria
+2026-01-01,2026,1,29,BA,Bahia,2025,2024,241.7,192.722,268,217,192.722,143.744,241.7,217,166,268,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,21,MA,Maranhão,2025,2024,287.65,235.452,98,105,235.452,183.254,287.65,105,98,112,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,22,PI,Piauí,2025,2024,211.519,86.238,41,78,86.238,0.0,211.519,78,41,115,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,23,CE,Ceará,2025,2024,203.587,93.936,42,41,93.936,0.0,203.587,41,40,42,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,24,RN,Rio Grande do Norte,2025,2024,157.152,84.034,15,17,84.034,10.916,157.152,17,15,19,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,25,PB,Paraíba,2025,2024,166.341,68.817,17,36,68.817,0.0,166.341,36,17,55,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,26,PE,Pernambuco,2025,2024,135.121,40.313,48,65,40.313,0.0,135.121,65,48,82,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,27,AL,Alagoas,2025,2024,83.414,62.878,28,22,62.878,42.342,83.414,22,16,28,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,28,SE,Sergipe,2025,2024,92.669,33.512,13,16,33.512,0.0,92.669,16,13,19,persistencia_sazonal,projecao_exploratoria
+2026-02-01,2026,2,29,BA,Bahia,2025,2024,177.286,32.655,133,227,32.655,0.0,177.286,227,133,321,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,21,MA,Maranhão,2025,2024,319.025,269.974,159,63,269.974,220.923,319.025,63,0,159,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,22,PI,Piauí,2025,2024,170.616,132.425,126,53,132.425,94.234,170.616,53,0,126,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,23,CE,Ceará,2025,2024,237.538,182.955,16,16,182.955,128.372,237.538,16,16,16,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,24,RN,Rio Grande do Norte,2025,2024,258.767,173.383,9,18,173.383,87.999,258.767,18,9,27,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,25,PB,Paraíba,2025,2024,204.661,113.335,2,11,113.335,22.009,204.661,11,2,20,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,26,PE,Pernambuco,2025,2024,135.556,49.037,43,38,49.037,0.0,135.556,38,33,43,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,27,AL,Alagoas,2025,2024,88.271,26.547,40,22,26.547,0.0,88.271,22,4,40,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,28,SE,Sergipe,2025,2024,53.968,26.599,26,28,26.599,0.0,53.968,28,26,30,persistencia_sazonal,projecao_exploratoria
+2026-03-01,2026,3,29,BA,Bahia,2025,2024,68.032,30.192,408,342,30.192,0.0,68.032,342,276,408,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,21,MA,Maranhão,2025,2024,296.588,171.72,95,134,171.72,46.852,296.588,134,95,173,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,22,PI,Piauí,2025,2024,203.768,106.008,54,62,106.008,8.248,203.768,62,54,70,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,23,CE,Ceará,2025,2024,234.594,133.62,10,17,133.62,32.646,234.594,17,10,24,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,24,RN,Rio Grande do Norte,2025,2024,185.843,62.991,4,24,62.991,0.0,185.843,24,4,44,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,25,PB,Paraíba,2025,2024,174.032,80.924,1,20,80.924,0.0,174.032,20,1,39,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,26,PE,Pernambuco,2025,2024,174.639,72.546,21,59,72.546,0.0,174.639,59,21,97,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,27,AL,Alagoas,2025,2024,183.237,71.551,10,25,71.551,0.0,183.237,25,10,40,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,28,SE,Sergipe,2025,2024,195.477,91.117,5,37,91.117,0.0,195.477,37,5,69,persistencia_sazonal,projecao_exploratoria
+2026-04-01,2026,4,29,BA,Bahia,2025,2024,108.14,74.706,186,331,74.706,41.272,108.14,331,186,476,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,21,MA,Maranhão,2025,2024,79.204,72.126,434,455,72.126,65.048,79.204,455,434,476,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,22,PI,Piauí,2025,2024,29.494,16.654,166,223,16.654,3.814,29.494,223,166,280,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,23,CE,Ceará,2025,2024,61.815,53.089,14,32,53.089,44.363,61.815,32,14,50,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,24,RN,Rio Grande do Norte,2025,2024,72.616,42.744,7,15,42.744,12.872,72.616,15,7,23,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,25,PB,Paraíba,2025,2024,68.801,44.717,5,20,44.717,20.633,68.801,20,5,35,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,26,PE,Pernambuco,2025,2024,65.563,64.13,25,37,64.13,62.697,65.563,37,25,49,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,27,AL,Alagoas,2025,2024,244.229,170.985,1,19,170.985,97.741,244.229,19,1,37,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,28,SE,Sergipe,2025,2024,269.605,269.999,3,7,269.999,269.605,270.393,7,3,11,persistencia_sazonal,projecao_exploratoria
+2026-05-01,2026,5,29,BA,Bahia,2025,2024,32.822,54.115,384,357,54.115,32.822,75.408,357,330,384,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,21,MA,Maranhão,2025,2024,35.249,36.626,1166,755,36.626,35.249,38.003,755,344,1166,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,22,PI,Piauí,2025,2024,3.091,3.441,281,358,3.441,3.091,3.791,358,281,435,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,23,CE,Ceará,2025,2024,42.812,25.036,30,50,25.036,7.26,42.812,50,30,70,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,24,RN,Rio Grande do Norte,2025,2024,89.198,28.931,1,17,28.931,0.0,89.198,17,1,33,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,25,PB,Paraíba,2025,2024,77.884,49.312,9,8,49.312,20.74,77.884,8,7,9,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,26,PE,Pernambuco,2025,2024,88.449,79.546,8,34,79.546,70.643,88.449,34,8,60,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,27,AL,Alagoas,2025,2024,201.361,250.167,0,6,250.167,201.361,298.973,6,0,12,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,28,SE,Sergipe,2025,2024,176.0,189.555,0,0,189.555,176.0,203.11,0,0,0,persistencia_sazonal,projecao_exploratoria
+2026-06-01,2026,6,29,BA,Bahia,2025,2024,36.273,31.016,446,518,31.016,25.759,36.273,518,446,590,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,21,MA,Maranhão,2025,2024,12.307,24.711,2320,1548,24.711,12.307,37.115,1548,776,2320,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,22,PI,Piauí,2025,2024,4.005,3.884,609,933,3.884,3.763,4.005,933,609,1257,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,23,CE,Ceará,2025,2024,11.774,14.049,58,100,14.049,11.774,16.324,100,58,142,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,24,RN,Rio Grande do Norte,2025,2024,30.7,32.714,18,8,32.714,30.7,34.728,8,0,18,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,25,PB,Paraíba,2025,2024,45.755,44.2,22,15,44.2,42.645,45.755,15,8,22,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,26,PE,Pernambuco,2025,2024,58.154,49.138,23,31,49.138,40.122,58.154,31,23,39,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,27,AL,Alagoas,2025,2024,148.05,119.652,1,0,119.652,91.254,148.05,0,0,1,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,28,SE,Sergipe,2025,2024,117.209,106.959,1,0,106.959,96.709,117.209,0,0,1,persistencia_sazonal,projecao_exploratoria
+2026-07-01,2026,7,29,BA,Bahia,2025,2024,21.988,21.434,655,771,21.434,20.88,21.988,771,655,887,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,21,MA,Maranhão,2025,2024,7.414,21.188,2892,2493,21.188,7.414,34.962,2493,2094,2892,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,22,PI,Piauí,2025,2024,2.016,3.297,1489,1472,3.297,2.016,4.578,1472,1455,1489,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,23,CE,Ceará,2025,2024,3.844,5.174,189,198,5.174,3.844,6.504,198,189,207,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,24,RN,Rio Grande do Norte,2025,2024,9.698,25.5,27,24,25.5,9.698,41.302,24,21,27,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,25,PB,Paraíba,2025,2024,15.566,48.559,32,35,48.559,15.566,81.552,35,32,38,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,26,PE,Pernambuco,2025,2024,20.666,52.88,61,59,52.88,20.666,85.094,59,57,61,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,27,AL,Alagoas,2025,2024,59.748,155.475,9,1,155.475,59.748,251.202,1,0,9,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,28,SE,Sergipe,2025,2024,73.198,118.824,7,1,118.824,73.198,164.45,1,0,7,persistencia_sazonal,projecao_exploratoria
+2026-08-01,2026,8,29,BA,Bahia,2025,2024,23.829,17.21,949,1345,17.21,10.591,23.829,1345,949,1741,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,21,MA,Maranhão,2025,2024,6.971,8.609,4132,4595,8.609,6.971,10.247,4595,4132,5058,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,22,PI,Piauí,2025,2024,3.375,3.309,3152,2147,3.309,3.243,3.375,2147,1142,3152,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,23,CE,Ceará,2025,2024,2.56,3.306,297,647,3.306,2.56,4.052,647,297,997,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,24,RN,Rio Grande do Norte,2025,2024,5.489,9.007,48,56,9.007,5.489,12.525,56,48,64,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,25,PB,Paraíba,2025,2024,11.48,18.676,77,91,18.676,11.48,25.872,91,77,105,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,26,PE,Pernambuco,2025,2024,14.45,27.14,212,276,27.14,14.45,39.83,276,212,340,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,27,AL,Alagoas,2025,2024,45.234,87.651,15,3,87.651,45.234,130.068,3,0,15,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,28,SE,Sergipe,2025,2024,28.32,73.992,6,0,73.992,28.32,119.664,0,0,6,persistencia_sazonal,projecao_exploratoria
+2026-09-01,2026,9,29,BA,Bahia,2025,2024,13.5,19.588,2753,3337,19.588,13.5,25.676,3337,2753,3921,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,21,MA,Maranhão,2025,2024,31.411,21.162,4500,5019,21.162,10.913,31.411,5019,4500,5538,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,22,PI,Piauí,2025,2024,31.657,14.053,2160,3709,14.053,0.0,31.657,3709,2160,5258,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,23,CE,Ceará,2025,2024,2.246,2.707,1169,1532,2.707,2.246,3.168,1532,1169,1895,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,24,RN,Rio Grande do Norte,2025,2024,4.211,4.447,118,149,4.447,4.211,4.683,149,118,180,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,25,PB,Paraíba,2025,2024,6.792,8.857,160,235,8.857,6.792,10.922,235,160,310,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,26,PE,Pernambuco,2025,2024,13.735,12.333,653,846,12.333,10.931,13.735,846,653,1039,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,27,AL,Alagoas,2025,2024,12.173,23.308,28,21,23.308,12.173,34.443,21,14,28,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,28,SE,Sergipe,2025,2024,13.881,40.154,17,1,40.154,13.881,66.427,1,0,17,persistencia_sazonal,projecao_exploratoria
+2026-10-01,2026,10,29,BA,Bahia,2025,2024,65.563,44.36,2198,3304,44.36,23.157,65.563,3304,2198,4410,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,21,MA,Maranhão,2025,2024,56.164,58.703,4046,5784,58.703,56.164,61.242,5784,4046,7522,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,22,PI,Piauí,2025,2024,83.963,78.864,1443,1941,78.864,73.765,83.963,1941,1443,2439,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,23,CE,Ceará,2025,2024,2.726,1.765,2475,2902,1.765,0.804,2.726,2902,2475,3329,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,24,RN,Rio Grande do Norte,2025,2024,2.261,1.128,181,155,1.128,0.0,2.261,155,129,181,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,25,PB,Paraíba,2025,2024,2.912,3.144,387,319,3.144,2.912,3.376,319,251,387,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,26,PE,Pernambuco,2025,2024,28.652,14.649,515,536,14.649,0.646,28.652,536,515,557,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,27,AL,Alagoas,2025,2024,17.583,10.465,47,42,10.465,3.347,17.583,42,37,47,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,28,SE,Sergipe,2025,2024,20.277,24.231,36,5,24.231,20.277,28.185,5,0,36,persistencia_sazonal,projecao_exploratoria
+2026-11-01,2026,11,29,BA,Bahia,2025,2024,127.606,121.457,324,938,121.457,115.308,127.606,938,324,1552,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,21,MA,Maranhão,2025,2024,88.137,183.231,2580,2915,183.231,88.137,278.325,2915,2580,3250,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,22,PI,Piauí,2025,2024,74.363,145.257,913,703,145.257,74.363,216.151,703,493,913,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,23,CE,Ceará,2025,2024,42.448,36.119,2530,2069,36.119,29.79,42.448,2069,1608,2530,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,24,RN,Rio Grande do Norte,2025,2024,36.224,13.143,156,105,13.143,0.0,36.224,105,54,156,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,25,PB,Paraíba,2025,2024,40.626,22.98,314,173,22.98,5.334,40.626,173,32,314,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,26,PE,Pernambuco,2025,2024,18.893,23.317,363,222,23.317,18.893,27.741,222,81,363,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,27,AL,Alagoas,2025,2024,12.311,13.107,65,39,13.107,12.311,13.903,39,13,65,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,28,SE,Sergipe,2025,2024,4.349,5.982,57,15,5.982,4.349,7.615,15,0,57,persistencia_sazonal,projecao_exploratoria
+2026-12-01,2026,12,29,BA,Bahia,2025,2024,49.768,101.288,456,402,101.288,49.768,152.808,402,348,456,persistencia_sazonal,projecao_exploratoria

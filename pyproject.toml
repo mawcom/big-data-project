@@ -23,6 +23,11 @@ executor = "uv"
 
 [tool.poe.tasks]
 fetch_raw = { cmd = "python src/ingestao/fetch_raw_data.py", help = "Baixa as bases com --range ANO ou ANO-ANO e --effort low, medium ou high." }
+fetch_uf_geometry = { cmd = "python src/limpeza/baixar_malha_ufs.py", help = "Baixa as malhas simplificadas das nove UFs do Nordeste pela API do IBGE." }
+process_pilot = { cmd = "python src/limpeza/processar_piloto.py", help = "Processa um ano real de ONI, CHIRPS e INPE em tabelas mensais para conferência." }
+project_2026 = { cmd = "python src/analise/projetar_2026.py", help = "Gera referência sazonal exploratória de 2026 com base em 2024 e 2025." }
+sync_data = { cmd = "python src/limpeza/sincronizar_dados.py", help = "Detecta automaticamente anos completos em raw/, processa os novos e projeta o ano seguinte." }
+project_next = { cmd = "python src/analise/projetar_proximo_ano.py", help = "Projeta o ano após o último ano observado disponível." }
 ingest_raw = { cmd = "python src/ingestao/ingest_raw_to_sql.py", help = "Converte os arquivos baixados em tabelas DuckDB." }
 export_landing = { cmd = "python -m src.bigdata.export_landing", help = "Exporta ONI, CHIRPS e INPE do DuckDB para Parquet de landing." }
 build_chirps_lookup = { cmd = "python -m src.bigdata.build_chirps_lookup", help = "Cria o mapa auditável de células CHIRPS para UFs do Nordeste." }

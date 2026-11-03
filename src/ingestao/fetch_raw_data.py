@@ -181,7 +181,9 @@ def resumo(url: str, caminho: Path, estado: str, tamanho_bloco: int) -> dict:
 def baixar_arquivo(tarefa: tuple[str, str, Path], tamanho_bloco: int) -> dict:
     fonte, url, destino = tarefa
     destino.parent.mkdir(parents=True, exist_ok=True)
-    if destino.exists() and destino.stat().st_size:
+    # ONI é uma série cumulativa: uma cópia antiga pode não conter o novo ano.
+    # O download usa .part e só substitui o arquivo anterior após a validação.
+    if fonte != "oni" and destino.exists() and destino.stat().st_size:
         verificar(destino)
         return {"fonte": fonte, **resumo(url, destino, "já existia", tamanho_bloco)}
 
@@ -336,7 +338,7 @@ def tarefas_coleta(
     ano_atual = datetime.now(timezone.utc).year
     if "oni" not in fontes:
         periodos["oni"] = "fonte não selecionada"
-    elif intervalo is None or (intervalo[0] <= ano_atual and intervalo[1] >= 1950):
+    elif intervalo is None or intervalo[1] >= 1950:
         tarefas.append((
             "oni",
             "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php",

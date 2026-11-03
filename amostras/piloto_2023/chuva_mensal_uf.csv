@@ -1,0 +1,109 @@
+ano,mes,uf_codigo_ibge,chuva_media_mm,celulas_validas,celulas_mapeadas,cobertura_chuva_pct,uf_sigla,uf_nome,regiao,destaque_maranhao
+2023,1,21,178.635,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,1,22,138.481,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,1,23,115.092,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,1,24,38.099,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,1,25,57.19,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,1,26,52.468,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,1,27,46.081,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,1,28,27.142,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,1,29,104.747,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,2,21,206.858,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,2,22,118.455,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,2,23,124.708,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,2,24,89.747,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,2,25,99.051,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,2,26,69.95,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,2,27,43.673,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,2,28,53.882,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,2,29,34.769,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,3,21,342.281,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,3,22,208.012,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,3,23,301.842,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,3,24,247.881,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,3,25,216.259,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,3,26,171.874,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,3,27,95.541,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,3,28,106.158,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,3,29,88.599,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,4,21,213.559,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,4,22,135.818,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,4,23,191.498,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,4,24,153.877,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,4,25,145.888,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,4,26,96.869,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,4,27,124.732,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,4,28,127.074,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,4,29,72.215,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,5,21,118.511,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,5,22,57.25,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,5,23,42.146,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,5,24,39.941,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,5,25,66.102,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,5,26,74.614,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,5,27,163.825,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,5,28,172.762,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,5,29,38.223,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,6,21,43.256,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,6,22,7.258,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,6,23,29.752,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,6,24,43.952,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,6,25,77.81,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,6,26,87.479,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,6,27,229.353,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,6,28,168.831,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,6,29,24.603,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,7,21,11.853,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,7,22,3.608,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,7,23,9.858,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,7,24,32.047,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,7,25,44.714,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,7,26,51.952,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,7,27,163.769,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,7,28,119.37,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,7,29,23.612,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,8,21,9.41,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,8,22,5.205,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,8,23,4.343,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,8,24,18.768,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,8,25,29.513,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,8,26,34.638,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,8,27,89.283,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,8,28,64.611,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,8,29,21.324,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,9,21,9.1,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,9,22,7.215,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,9,23,2.956,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,9,24,10.562,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,9,25,20.874,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,9,26,22.815,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,9,27,69.01,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,9,28,44.2,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,9,29,19.721,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,10,21,21.357,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,10,22,4.59,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,10,23,2.118,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,10,24,4.244,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,10,25,4.958,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,10,26,7.483,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,10,27,21.296,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,10,28,14.29,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,10,29,22.867,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,11,21,60.077,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,11,22,77.319,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,11,23,7.954,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,11,24,53.475,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,11,25,27.591,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,11,26,22.512,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,11,27,9.457,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,11,28,14.66,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,11,29,45.467,18792,18792,100.0,BA,Bahia,Nordeste,false
+2023,12,21,109.382,10726,10726,100.0,MA,Maranhão,Nordeste,true
+2023,12,22,100.608,8258,8258,100.0,PI,Piauí,Nordeste,false
+2023,12,23,52.3,4861,4861,100.0,CE,Ceará,Nordeste,false
+2023,12,24,49.094,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false
+2023,12,25,45.975,1852,1852,100.0,PB,Paraíba,Nordeste,false
+2023,12,26,50.37,3220,3220,100.0,PE,Pernambuco,Nordeste,false
+2023,12,27,44.138,910,910,100.0,AL,Alagoas,Nordeste,false
+2023,12,28,53.374,726,726,100.0,SE,Sergipe,Nordeste,false
+2023,12,29,75.389,18792,18792,100.0,BA,Bahia,Nordeste,false

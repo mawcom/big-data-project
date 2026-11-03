@@ -1,0 +1,13 @@
+ano,mes,janela_oni,oni_c,fase_enso,focos_nordeste,chuva_media_ufs_mm,ufs_com_chuva
+2024,1,DJF,1.8,El Niño,1441,101.329,9
+2024,2,JFM,1.5,El Niño,435,168.304,9
+2024,3,FMA,1.2,El Niño,829,170.715,9
+2024,4,MAM,0.8,El Niño,386,195.146,9
+2024,5,AMJ,0.4,neutro,1039,102.683,9
+2024,6,MJJ,0.2,neutro,1941,83.369,9
+2024,7,JJA,0.1,neutro,3707,49.994,9
+2024,8,JAS,0.0,neutro,5655,23.998,9
+2024,9,ASO,-0.1,neutro,10692,14.598,9
+2024,10,SON,-0.2,neutro,11003,20.185,9
+2024,11,OND,-0.3,neutro,9454,38.016,9
+2024,12,NDJ,-0.4,neutro,7434,40.791,9

@@ -1,0 +1,164 @@
+{
+  "recorte": {
+    "ano": 2024,
+    "ufs": [
+      "MA",
+      "PI",
+      "CE",
+      "RN",
+      "PB",
+      "PE",
+      "AL",
+      "SE",
+      "BA"
+    ],
+    "grao": "uf_mes"
+  },
+  "manifesto_coleta": {
+    "arquivo": "raw/manifesto_coleta.json",
+    "arquivos_verificados": 1,
+    "arquivos_locais_sem_registro": [
+      "raw/inpe_focos_sat_ref/focos_br_ref_2024.zip",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202401.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202402.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202403.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202404.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202405.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202406.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202407.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202408.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202409.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202410.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202411.tar.gz",
+      "raw/chirps_v3_mensal_latam/chirps-v3.0.202412.tar.gz"
+    ],
+    "coletado_em_utc": "2026-11-03T22:07:01.406507+00:00"
+  },
+  "oni": {
+    "arquivo": "raw/enso/oni_cpc_v6.html",
+    "sha256": "4b8e5ae8d2accf3673eabd49a9d5e7081d16cf9059b982f96e24130ad1c4c232",
+    "linhas_historicas": 912
+  },
+  "inpe": {
+    "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2024.zip",
+    "sha256": "a2cec2f67483a4a95956a471d5cbdb7b3cbd93b21c9b87c845a649ef89abf4e1",
+    "linhas_lidas": 278299,
+    "datas_invalidas": 0,
+    "fora_do_ano": 0,
+    "fora_do_nordeste": 224283,
+    "focos_nordeste": 54016,
+    "primeira_data": "2024-01-01 16:24:00",
+    "ultima_data": "2024-12-31 17:53:00",
+    "arquivo_anual_com_janeiro_e_dezembro": true
+  },
+  "chirps": {
+    "arquivos": [
+      {
+        "mes": 1,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202401.tar.gz",
+        "sha256": "d5f9c48a9c550cb283616783ffb647dc83f4c03bbedc1f381df95f92e1d17145",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 2,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202402.tar.gz",
+        "sha256": "e49bb9cd5dfbb2560e378a4320c5dc47d128b2342a4a992558f5ba756467c9a0",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 3,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202403.tar.gz",
+        "sha256": "34b657e1746ce22aeab9d5785eb1443f44ffd69f79cb9a57434c62387bf38b0d",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 4,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202404.tar.gz",
+        "sha256": "c2a12ccf390f031cb35f407e8fbf40401cb43fbf0d9d3c7b26a38b7c5f2d0000",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 5,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202405.tar.gz",
+        "sha256": "3e96a54a7289f5e2e86339f2bad52f3af318fa01f82234856bd4518a9b44175e",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 6,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202406.tar.gz",
+        "sha256": "ffee1b24af91b02c189bfd23380da3315537d507b055be54be259ab340418b0c",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 7,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202407.tar.gz",
+        "sha256": "5232363b46e86b89ed7646062e940fe108e97f702f6beacc878c73665cd4ffcb",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 8,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202408.tar.gz",
+        "sha256": "fb7ba03389134caaa3266bbcabc3c1b07d419c4d9aeea927269d799c6c701e08",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 9,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202409.tar.gz",
+        "sha256": "d62d5170927685b07a1e960ac4f5f109eff54b78e2e8aa6cefdfd4d047c5010f",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 10,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202410.tar.gz",
+        "sha256": "6f97d0be3bc0e0e0d98bc0df71ee2c4c74650f48bdf46d49edba17c21dd956e5",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 11,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202411.tar.gz",
+        "sha256": "dc6b00da12ebf3d56d10f349ef28e4f58ad7c9d1108ad70c9177b43ea2952ffd",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 12,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202412.tar.gz",
+        "sha256": "e4a701cc3de93ce1d3c6bb6fed7c439b9b747d3138444f7ad144acf768073628",
+        "celulas_sem_valor": 0
+      }
+    ],
+    "celulas_mapeadas": 51061,
+    "metodo_espacial": "centro_da_celula_em_malha_ibge_simplificada",
+    "agregacao": "media_aritmetica_de_celulas_validas; sem_peso_de_area"
+  },
+  "lookup_espacial": {
+    "arquivo": "clean/referencias/chirps_celula_uf_piloto_2024.csv",
+    "sha256": "fbb41e90c29be33d5223c0d9a5bce33d755bc09a9485c1e2187e4b1c28f27e77",
+    "linhas": 51061
+  },
+  "malha_ibge": {
+    "arquivo": "raw/referencias/ufs_ibge.geojson",
+    "sha256": "9a08abb8ce149d269c58cedb08299b86901b8ab2478ddcab83573e27b407523f",
+    "versao": "API v3, qualidade minima, capturada para este piloto"
+  },
+  "saidas": {
+    "linhas_fato": 108,
+    "linhas_resumo": 12,
+    "meses_por_uf": {
+      "AL": 12,
+      "BA": 12,
+      "CE": 12,
+      "MA": 12,
+      "PB": 12,
+      "PE": 12,
+      "PI": 12,
+      "RN": 12,
+      "SE": 12
+    },
+    "focos_nordeste": 54016
+  },
+  "limites": [
+    "Ano único: anomalia de chuva e atribuição climática não calculadas.",
+    "Média de células por UF sem ponderação de área; malha IBGE simplificada.",
+    "Focos são detecções de satélite, não incêndios individuais ou área queimada."
+  ]
+}

@@ -12,10 +12,10 @@ O recorte analítico já documentado no repositório é **Nordeste, por UF e mê
 |---|---|---|
 | Coleta bruta | Parcialmente implementada | `fetch_raw_data.py` descobre e baixa fontes, valida formatos e grava manifesto com hash SHA-256. |
 | Landing local | Implementada | `ingest_raw_to_sql.py` recria `raw.duckdb` com uma tabela por fonte e `_arquivo_origem`. |
-| Limpeza e integração | Não implementada | `src/limpeza/` ainda está vazio. |
+| Limpeza e integração | Pilotos de 2023 a 2025 implementados | `src/limpeza/sincronizar_dados.py` detecta anos completos em `raw/`, processa novos arquivos por UF/mês e atualiza a projeção; a série histórica completa ainda não foi executada. |
 | Parquet e Spark | Implementados, aguardando dados/JDK | Jobs Spark criam lookup espacial, Silver e Gold; `pyspark` e `pyarrow` estão travados no ambiente. |
 | Camada para dashboard | Implementada, sem dados reais publicados | O exportador produz JSON pequeno e metadados a partir da Gold. |
-| Dashboard existente | Apenas protótipo | O painel usa séries simuladas; a pequena amostra de Porto Alegre não pertence ao recorte do estudo. |
+| Dashboard existente | Protótipo e página de piloto real | A página inicial usa séries simuladas; `/piloto-real` descobre os anos observados disponíveis, hoje 2023–2025, e apresenta a referência sazonal exploratória do ano seguinte. A amostra de Porto Alegre na página inicial não pertence ao estudo do Nordeste. |
 
 Assim, `raw.duckdb` é uma camada de inspeção e auditoria, não a fonte que o front-end deve consultar.
 
