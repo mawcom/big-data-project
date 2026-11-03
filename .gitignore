@@ -185,6 +185,8 @@ cython_debug/
 raw/*
 clean/*
 parquet/*
+*.duckdb
+*.duckdb.*
 !raw/.gitkeep
 !clean/.gitkeep
 !parquet/.gitkeep
