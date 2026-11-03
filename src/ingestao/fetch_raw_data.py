@@ -327,12 +327,16 @@ def descobrir_ons(
 
 def tarefas_coleta(
     trabalhadores: int, estimativas: dict[str, int], intervalo: tuple[int, int] | None = None,
+    fontes: set[str] | None = None,
 ) -> tuple[list[tuple[str, str, Path]], list[dict], dict[str, str]]:
     tarefas = []
     erros = []
     periodos = {}
+    fontes = fontes or set(COBERTURA)
     ano_atual = datetime.now(timezone.utc).year
-    if intervalo is None or (intervalo[0] <= ano_atual and intervalo[1] >= 1950):
+    if "oni" not in fontes:
+        periodos["oni"] = "fonte não selecionada"
+    elif intervalo is None or (intervalo[0] <= ano_atual and intervalo[1] >= 1950):
         tarefas.append((
             "oni",
             "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php",
@@ -349,45 +353,62 @@ def tarefas_coleta(
             erros.append({"fonte": fonte, "arquivo": "catalogo", "erro": str(erro)})
             return []
 
-    chirps = "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/monthly/latam/bils/"
-    meses_chirps = consultar_catalogo("chirps", chirps, r"chirps-v3\.0\.(\d{6})\.tar\.gz")
-    meses_chirps = [mes for mes in meses_chirps if intervalo is None or intervalo[0] <= mes // 100 <= intervalo[1]]
-    periodos["chirps"] = descrever_anos(sorted({mes // 100 for mes in meses_chirps}))
-    for mes in meses_chirps:
-        nome = f"chirps-v3.0.{mes}.tar.gz"
-        tarefas.append(("chirps", chirps + nome, BRUTOS / "chirps_v3_mensal_latam" / nome))
+    if "chirps" in fontes:
+        chirps = "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/monthly/latam/bils/"
+        meses_chirps = consultar_catalogo("chirps", chirps, r"chirps-v3\.0\.(\d{6})\.tar\.gz")
+        meses_chirps = [mes for mes in meses_chirps if intervalo is None or intervalo[0] <= mes // 100 <= intervalo[1]]
+        periodos["chirps"] = descrever_anos(sorted({mes // 100 for mes in meses_chirps}))
+        for mes in meses_chirps:
+            nome = f"chirps-v3.0.{mes}.tar.gz"
+            tarefas.append(("chirps", chirps + nome, BRUTOS / "chirps_v3_mensal_latam" / nome))
+    else:
+        periodos["chirps"] = "fonte não selecionada"
 
-    inpe = "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/"
-    anos_inpe = selecionar_anos(consultar_catalogo("inpe", inpe, r"focos_br_ref_(\d{4})\.zip"), intervalo)
-    periodos["inpe"] = descrever_anos(anos_inpe)
-    for ano in anos_inpe:
-        nome = f"focos_br_ref_{ano}.zip"
-        tarefas.append(("inpe", inpe + nome, BRUTOS / "inpe_focos_sat_ref" / nome))
+    if "inpe" in fontes:
+        inpe = "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/"
+        anos_inpe = selecionar_anos(consultar_catalogo("inpe", inpe, r"focos_br_ref_(\d{4})\.zip"), intervalo)
+        periodos["inpe"] = descrever_anos(anos_inpe)
+        for ano in anos_inpe:
+            nome = f"focos_br_ref_{ano}.zip"
+            tarefas.append(("inpe", inpe + nome, BRUTOS / "inpe_focos_sat_ref" / nome))
+    else:
+        periodos["inpe"] = "fonte não selecionada"
 
-    anos_inmet = selecionar_anos(consultar_catalogo(
-        "inmet", "https://portal.inmet.gov.br/dadoshistoricos", r"dadoshistoricos/(\d{4})\.zip",
-    ), intervalo)
-    periodos["inmet"] = descrever_anos(anos_inmet)
-    for ano in anos_inmet:
-        tarefas.append(("inmet", f"https://portal.inmet.gov.br/uploads/dadoshistoricos/{ano}.zip", BRUTOS / "inmet" / f"{ano}.zip"))
+    if "inmet" in fontes:
+        anos_inmet = selecionar_anos(consultar_catalogo(
+            "inmet", "https://portal.inmet.gov.br/dadoshistoricos", r"dadoshistoricos/(\d{4})\.zip",
+        ), intervalo)
+        periodos["inmet"] = descrever_anos(anos_inmet)
+        for ano in anos_inmet:
+            tarefas.append(("inmet", f"https://portal.inmet.gov.br/uploads/dadoshistoricos/{ano}.zip", BRUTOS / "inmet" / f"{ano}.zip"))
+    else:
+        periodos["inmet"] = "fonte não selecionada"
 
-    try:
-        arquivos_ghcn, estimativas["ghcn_daily"] = descobrir_ghcn(intervalo)
-        tarefas.extend(arquivos_ghcn)
-        periodos["ghcn_daily"] = descrever_anos([int(item[2].name[:4]) for item in arquivos_ghcn])
-    except Exception as erro:
-        erros.append({"fonte": "ghcn_daily", "arquivo": "catalogo", "erro": str(erro)})
-        periodos["ghcn_daily"] = "catálogo indisponível"
+    if "ghcn_daily" in fontes:
+        try:
+            arquivos_ghcn, estimativas["ghcn_daily"] = descobrir_ghcn(intervalo)
+            tarefas.extend(arquivos_ghcn)
+            periodos["ghcn_daily"] = descrever_anos([int(item[2].name[:4]) for item in arquivos_ghcn])
+        except Exception as erro:
+            erros.append({"fonte": "ghcn_daily", "arquivo": "catalogo", "erro": str(erro)})
+            periodos["ghcn_daily"] = "catálogo indisponível"
+    else:
+        periodos["ghcn_daily"] = "fonte não selecionada"
 
-    indice = "https://www.ncei.noaa.gov/data/international-comprehensive-ocean-atmosphere/v3/archive/nrt/daily/"
-    anos_icoads = selecionar_anos(consultar_catalogo("icoads", indice, r'href="(\d{4})(?:/)?"'), intervalo)
-    for ano in anos_icoads:
-        icoads, falhas_icoads = descobrir_icoads(trabalhadores, ano, estimativas)
-        tarefas.extend(icoads)
-        erros.extend(falhas_icoads)
-    periodos["icoads"] = descrever_anos(anos_icoads)
+    if "icoads" in fontes:
+        indice = "https://www.ncei.noaa.gov/data/international-comprehensive-ocean-atmosphere/v3/archive/nrt/daily/"
+        anos_icoads = selecionar_anos(consultar_catalogo("icoads", indice, r'href="(\d{4})(?:/)?"'), intervalo)
+        for ano in anos_icoads:
+            icoads, falhas_icoads = descobrir_icoads(trabalhadores, ano, estimativas)
+            tarefas.extend(icoads)
+            erros.extend(falhas_icoads)
+        periodos["icoads"] = descrever_anos(anos_icoads)
+    else:
+        periodos["icoads"] = "fonte não selecionada"
 
-    if intervalo is None or (intervalo[0] <= ano_atual and intervalo[1] >= 1850):
+    if "noaa_globaltemp" not in fontes:
+        periodos["noaa_globaltemp"] = "fonte não selecionada"
+    elif intervalo is None or (intervalo[0] <= ano_atual and intervalo[1] >= 1850):
         try:
             tarefas.append(descobrir_globaltemp())
             periodos["noaa_globaltemp"] = "série cumulativa desde 1850"
@@ -400,6 +421,9 @@ def tarefas_coleta(
         ("ons_balanco", "balanco-energia-subsistema", "balanco_energia_subsistema"),
         ("ons_ear", "ear-diario-por-subsistema", "ear_diario_subsistema"),
     ):
+        if fonte not in fontes:
+            periodos[fonte] = "fonte não selecionada"
+            continue
         try:
             arquivos_ons = descobrir_ons(fonte, produto, pasta, intervalo)
             tarefas.extend(arquivos_ons)
@@ -415,6 +439,7 @@ def executar_tarefas(
     erros: list[dict],
     esforco: str,
     caminho_manifesto: Path,
+    fontes: set[str],
     ano: int | None = None,
 ) -> None:
     trabalhadores, tamanho_bloco = PERFIS[esforco]
@@ -435,6 +460,7 @@ def executar_tarefas(
     manifesto = {
         "coletado_em_utc": datetime.now(timezone.utc).isoformat(),
         "esforco": esforco,
+        "fontes_solicitadas": sorted(fontes),
         "total_bytes": sum(item["bytes"] for item in registros),
         "bytes_por_fonte": {
             fonte: sum(item["bytes"] for item in registros if item["fonte"] == fonte)
@@ -459,15 +485,20 @@ def main() -> None:
         help="low: 2 threads/256 KiB; medium: 6 threads/1 MiB; high: 12 threads/4 MiB",
     )
     analisador.add_argument(
+        "--sources", nargs="+", choices=sorted(COBERTURA), default=sorted(COBERTURA),
+        help="Fontes a baixar. Exemplo do MVP: --sources oni chirps inpe.",
+    )
+    analisador.add_argument(
         "--range", dest="intervalo", type=interpretar_intervalo,
         help="Ano ou intervalo inclusivo, por exemplo 2024 ou 2000-2003; sem ele, seleciona todos os anos disponíveis.",
     )
     argumentos = analisador.parse_args()
     trabalhadores, _ = PERFIS[argumentos.effort]
     estimativas = {}
-    tarefas, erros, periodos = tarefas_coleta(trabalhadores, estimativas, argumentos.intervalo)
+    fontes = set(argumentos.sources)
+    tarefas, erros, periodos = tarefas_coleta(trabalhadores, estimativas, argumentos.intervalo, fontes)
     apresentar_previsao(tarefas, estimativas, periodos)
-    executar_tarefas(tarefas, erros, argumentos.effort, BRUTOS / "manifesto_coleta.json")
+    executar_tarefas(tarefas, erros, argumentos.effort, BRUTOS / "manifesto_coleta.json", fontes)
 
 
 if __name__ == "__main__":

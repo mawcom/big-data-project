@@ -190,3 +190,7 @@ parquet/*
 !raw/.gitkeep
 !clean/.gitkeep
 !parquet/.gitkeep
+
+# Exportações reais do dashboard são derivadas da camada Gold.
+dashboard/data/*
+!dashboard/data/.gitkeep

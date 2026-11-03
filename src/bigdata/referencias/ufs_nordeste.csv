@@ -1,0 +1,10 @@
+uf_codigo_ibge;uf_sigla;uf_nome;regiao;destaque_maranhao
+21;MA;Maranhão;Nordeste;true
+22;PI;Piauí;Nordeste;false
+23;CE;Ceará;Nordeste;false
+24;RN;Rio Grande do Norte;Nordeste;false
+25;PB;Paraíba;Nordeste;false
+26;PE;Pernambuco;Nordeste;false
+27;AL;Alagoas;Nordeste;false
+28;SE;Sergipe;Nordeste;false
+29;BA;Bahia;Nordeste;false

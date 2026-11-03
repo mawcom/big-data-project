@@ -42,7 +42,7 @@ uv.lock               versões resolvidas pelo uv
 
 ## Como rodar
 
-Requer Python 3.10 ou mais recente e [uv](https://docs.astral.sh/uv/getting-started/installation/). Na pasta do projeto:
+Requer Python 3.10 ou mais recente, [uv](https://docs.astral.sh/uv/getting-started/installation/) e um JDK compatível para os jobs Spark. Na pasta do projeto:
 
 ```bash
 uv sync
@@ -55,10 +55,18 @@ As dependências ficam em `pyproject.toml`; `uv.lock` fixa as versões para repr
 |---|---|---|
 | `fetch_raw` | `uv run poe fetch_raw --range 2024 --effort medium` | Baixar as bases selecionadas para um ano ou intervalo. Sem `--range`, seleciona todos os anos disponíveis nos catálogos. |
 | `ingest_raw` | `uv run poe ingest_raw` | Converter os arquivos presentes em `raw/` em tabelas DuckDB. |
+| `export_landing` | `uv run poe export_landing` | Exportar ONI, CHIRPS e INPE do DuckDB para Parquet de landing; aceita CSV apenas para baseline. |
+| `build_chirps_lookup` | `uv run poe build_chirps_lookup -- --uf-geojson CAMINHO` | Criar o mapa auditável de células CHIRPS para UFs do Nordeste. |
+| `silver_oni` | `uv run poe silver_oni` | Normalizar ONI e classificar a fase ENSO. |
+| `silver_chirps` | `uv run poe silver_chirps` | Agregar chuva CHIRPS por UF com lookup espacial auditado. |
+| `silver_inpe` | `uv run poe silver_inpe` | Agregar focos INPE por UF/mês. |
+| `build_gold` | `uv run poe build_gold` | Produzir a tabela mensal para o front e o resumo regional. |
+| `export_dashboard` | `uv run poe export_dashboard` | Gerar JSON leve em `dashboard/data/`. |
+| `benchmark` | `uv run poe benchmark -- --csv ARQUIVO` | Comparar CSV/pandas, Parquet/pandas e Parquet/PySpark na mesma agregação CHIRPS. |
 
-O esforço `low` usa 2 threads e blocos de 256 KiB; `medium`, 6 threads e blocos de 1 MiB; `high`, 12 threads e blocos de 4 MiB. O padrão é `medium`. `--range` aceita um ano (`2024`) ou intervalo inclusivo (`2000-2003`). Cada fonte baixa os arquivos disponíveis nesses anos. ONI e NOAA GlobalTemp têm arquivos históricos cumulativos: quando o intervalo alcança sua cobertura, o arquivo inteiro é baixado. Sem `--range`, o comando seleciona todos os anos publicados pelas fontes. O `fetch_raw` mostra os anos selecionados e a estimativa por fonte com base no piloto de 2024, quando disponível. Ao terminar, informa o volume e grava `raw/manifesto_coleta.json`.
+O esforço `low` usa 2 threads e blocos de 256 KiB; `medium`, 6 threads e blocos de 1 MiB; `high`, 12 threads e blocos de 4 MiB. O padrão é `medium`. `--range` aceita um ano (`2024`) ou intervalo inclusivo (`2000-2003`). `--sources` limita a coleta às bases necessárias; para o MVP do painel use `--sources oni chirps inpe`. ONI e NOAA GlobalTemp têm arquivos históricos cumulativos: quando o intervalo alcança sua cobertura, o arquivo inteiro é baixado. Sem `--range`, o comando seleciona todos os anos publicados pelas fontes selecionadas. O `fetch_raw` mostra os anos selecionados e a estimativa por fonte com base no piloto de 2024, quando disponível. Ao terminar, informa o volume e grava `raw/manifesto_coleta.json` com as fontes solicitadas.
 
-Para medir o volume de um ano antes de completar a coleta, use `uv run poe fetch_raw --range 2024 --effort low`. Execute os downloads somente após decidir usar espaço e rede para a coleta.
+Para medir o volume do MVP de um ano antes de completar a coleta, use `uv run poe fetch_raw --range 2024 --sources oni chirps inpe --effort low`. Execute os downloads somente após decidir usar espaço e rede para a coleta.
 
 O `ingest_raw` recria `raw.duckdb` na raiz do projeto, sem acumular linhas de execuções anteriores, e interrompe a carga se encontrar arquivos brutos idênticos em caminhos diferentes. Para NOAA GlobalTemp, carrega apenas o arquivo cumulativo mais recente se houver várias versões locais. As tabelas são `oni`, `chirps`, `inpe`, `inmet`, `ghcn_daily`, `icoads`, `noaa_globaltemp`, `ons_balanco` e `ons_ear`, conforme os arquivos presentes. Cada tabela inclui `_arquivo_origem`; as colunas dos CSVs mantêm o texto de entrada, e os formatos numéricos mantêm seus valores. Para o CHIRPS, cada célula da grade vira uma linha com `linha`, `coluna`, `latitude`, `longitude` e `precipitacao`. O script informa a quantidade de linhas e o tamanho do banco ao terminar. Registros iguais presentes em arquivos diferentes continuam como dados de origem; sua avaliação cabe à etapa de análise e padronização.
 
@@ -81,5 +89,7 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 
 - [Conceito e fontes dos dados](docs/conceito.md)
 - [Fontes escolhidas e estado da coleta](docs/fontes.md)
+- [Contrato de dados e plano de ingestão para o dashboard](docs/contrato-dados-dashboard.md)
+- [Guia de execução e roteiro de apresentação](docs/guia-execucao-apresentacao.md)
 - [Plano de trabalho](docs/plano-de-trabalho.pdf)
 - [Documentos da fase de protótipo](docs/legado/README.md)

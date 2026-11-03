@@ -8,6 +8,8 @@ dependencies = [
     "netcdf4>=1.7.3",
     "numpy>=2.2.6",
     "pandas>=2.2,<4",
+    "pyarrow>=15",
+    "pyspark>=3.5,<4",
 ]
 
 [dependency-groups]
@@ -22,3 +24,11 @@ executor = "uv"
 [tool.poe.tasks]
 fetch_raw = { cmd = "python src/ingestao/fetch_raw_data.py", help = "Baixa as bases com --range ANO ou ANO-ANO e --effort low, medium ou high." }
 ingest_raw = { cmd = "python src/ingestao/ingest_raw_to_sql.py", help = "Converte os arquivos baixados em tabelas DuckDB." }
+export_landing = { cmd = "python -m src.bigdata.export_landing", help = "Exporta ONI, CHIRPS e INPE do DuckDB para Parquet de landing." }
+build_chirps_lookup = { cmd = "python -m src.bigdata.build_chirps_lookup", help = "Cria o mapa auditável de células CHIRPS para UFs do Nordeste." }
+silver_oni = { cmd = "python -m src.bigdata.silver_oni", help = "Normaliza ONI em dimensão mensal com fase ENSO." }
+silver_chirps = { cmd = "python -m src.bigdata.silver_chirps", help = "Agrega CHIRPS para UF usando o lookup espacial auditado." }
+silver_inpe = { cmd = "python -m src.bigdata.silver_inpe", help = "Agrega focos INPE por UF e mês." }
+build_gold = { cmd = "python -m src.bigdata.build_gold", help = "Cria fatos Gold por UF e o resumo mensal do Nordeste." }
+export_dashboard = { cmd = "python -m src.bigdata.export_dashboard", help = "Exporta JSON leve derivado da camada Gold para o dashboard." }
+benchmark = { cmd = "python -m src.bigdata.benchmark", help = "Compara pandas e PySpark na agregação CHIRPS por UF." }

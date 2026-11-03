@@ -1,0 +1,1 @@
+"""Código executável do projeto."""
