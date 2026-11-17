@@ -24,6 +24,7 @@ OBSERVED_PATH = PROTOTYPE_DIR / "static" / "porto_alegre_chuva_maio_2024.json"
 OBSERVED_CSV_PATH = ROOT / "amostras" / "porto_alegre_chuva_maio_2024.csv"
 LEGACY_DOCS = ROOT / "docs" / "legado"
 PILOT_DIR = ROOT / "dashboard" / "piloto_real"
+PAINEL_DIR = ROOT / "dashboard" / "painel"
 PILOT_SAMPLES = ROOT / "amostras"
 RAW_DIR = ROOT / "raw"
 SYNC_SCRIPT = ROOT / "src" / "limpeza" / "sincronizar_dados.py"
@@ -118,8 +119,9 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
             return
 
-        if route in {"/piloto-real", "/piloto-real/"}:
-            body = (PILOT_DIR / "index.html").read_bytes()
+        if route in {"/piloto-real", "/piloto-real/", "/painel", "/painel/"}:
+            pasta = PAINEL_DIR if route.startswith("/painel") else PILOT_DIR
+            body = (pasta / "index.html").read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
@@ -154,8 +156,8 @@ class DashboardHandler(BaseHTTPRequestHandler):
             return
 
         malha_uf = re.fullmatch(r"/static/municipios/([A-Z]{2})\.geojson", route)
-        if malha_uf and (PILOT_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").is_file():
-            body = (PILOT_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").read_bytes()
+        if malha_uf and (PAINEL_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").is_file():
+            body = (PAINEL_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "application/geo+json; charset=utf-8")
             self.send_header("Cache-Control", "public, max-age=86400")
@@ -231,7 +233,7 @@ def main() -> None:
     args = parser.parse_args()
 
     server = ThreadingHTTPServer((args.host, args.port), DashboardHandler)
-    print("Página inicial: simulação. /piloto-real: anos observados disponíveis e projeção exploratória.")
+    print("Página inicial: simulação. /piloto-real: anos observados disponíveis e projeção exploratória. /painel: versão final do painel.")
     print(f"Painel disponível em http://{args.host}:{args.port} — Ctrl+C para encerrar")
     try:
         server.serve_forever()
