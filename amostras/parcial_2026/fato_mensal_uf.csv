@@ -1,0 +1,91 @@
+competencia,ano,mes,uf_codigo_ibge,chuva_media_mm,celulas_validas,celulas_mapeadas,cobertura_chuva_pct,uf_sigla,uf_nome,regiao,destaque_maranhao,focos_inpe,janela_oni,oni_c,fase_enso,fonte_chuva,fonte_fogo,fonte_enso,data_status,qualidade_fogo
+2026-01-01,2026,1,21,134.78,10726,10726,100.0,MA,Maranhão,Nordeste,true,990,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,22,119.29,8258,8258,100.0,PI,Piauí,Nordeste,false,251,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,23,70.009,4861,4861,100.0,CE,Ceará,Nordeste,false,476,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,24,26.93,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,81,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,25,28.336,1852,1852,100.0,PB,Paraíba,Nordeste,false,76,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,26,33.332,3220,3220,100.0,PE,Pernambuco,Nordeste,false,146,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,27,26.165,910,910,100.0,AL,Alagoas,Nordeste,false,46,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,28,29.939,726,726,100.0,SE,Sergipe,Nordeste,false,43,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-01-01,2026,1,29,116.777,18792,18792,100.0,BA,Bahia,Nordeste,false,229,DJF,-0.4,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,21,204.239,10726,10726,100.0,MA,Maranhão,Nordeste,true,97,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,22,209.239,8258,8258,100.0,PI,Piauí,Nordeste,false,32,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,23,175.147,4861,4861,100.0,CE,Ceará,Nordeste,false,84,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,24,134.435,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,28,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,25,186.753,1852,1852,100.0,PB,Paraíba,Nordeste,false,27,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,26,157.717,3220,3220,100.0,PE,Pernambuco,Nordeste,false,77,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,27,102.97,910,910,100.0,AL,Alagoas,Nordeste,false,39,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,28,131.921,726,726,100.0,SE,Sergipe,Nordeste,false,24,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-02-01,2026,2,29,192.934,18792,18792,100.0,BA,Bahia,Nordeste,false,244,JFM,-0.2,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,21,296.916,10726,10726,100.0,MA,Maranhão,Nordeste,true,45,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,22,202.689,8258,8258,100.0,PI,Piauí,Nordeste,false,33,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,23,172.837,4861,4861,100.0,CE,Ceará,Nordeste,false,10,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,24,148.043,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,34,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,25,155.914,1852,1852,100.0,PB,Paraíba,Nordeste,false,21,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,26,138.591,3220,3220,100.0,PE,Pernambuco,Nordeste,false,39,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,27,130.596,910,910,100.0,AL,Alagoas,Nordeste,false,35,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,28,65.142,726,726,100.0,SE,Sergipe,Nordeste,false,36,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-03-01,2026,3,29,147.197,18792,18792,100.0,BA,Bahia,Nordeste,false,298,FMA,0.1,neutro,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,21,314.992,10726,10726,100.0,MA,Maranhão,Nordeste,true,44,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,22,171.988,8258,8258,100.0,PI,Piauí,Nordeste,false,59,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,23,225.596,4861,4861,100.0,CE,Ceará,Nordeste,false,7,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,24,261.337,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,6,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,25,241.388,1852,1852,100.0,PB,Paraíba,Nordeste,false,3,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,26,143.619,3220,3220,100.0,PE,Pernambuco,Nordeste,false,35,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,27,150.952,910,910,100.0,AL,Alagoas,Nordeste,false,28,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,28,100.428,726,726,100.0,SE,Sergipe,Nordeste,false,16,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-04-01,2026,4,29,48.08,18792,18792,100.0,BA,Bahia,Nordeste,false,417,MAM,0.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,21,125.656,10726,10726,100.0,MA,Maranhão,Nordeste,true,294,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,22,21.18,8258,8258,100.0,PI,Piauí,Nordeste,false,129,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,23,106.905,4861,4861,100.0,CE,Ceará,Nordeste,false,20,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,24,139.345,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,8,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,25,116.075,1852,1852,100.0,PB,Paraíba,Nordeste,false,4,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,26,80.244,3220,3220,100.0,PE,Pernambuco,Nordeste,false,19,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,27,159.554,910,910,100.0,AL,Alagoas,Nordeste,false,22,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,28,113.17,726,726,100.0,SE,Sergipe,Nordeste,false,7,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-05-01,2026,5,29,33.223,18792,18792,100.0,BA,Bahia,Nordeste,false,555,AMJ,0.9,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,21,38.331,10726,10726,100.0,MA,Maranhão,Nordeste,true,565,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,22,6.352,8258,8258,100.0,PI,Piauí,Nordeste,false,209,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,23,23.549,4861,4861,100.0,CE,Ceará,Nordeste,false,35,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,24,45.375,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,6,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,25,61.436,1852,1852,100.0,PB,Paraíba,Nordeste,false,5,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,26,59.207,3220,3220,100.0,PE,Pernambuco,Nordeste,false,16,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,27,158.467,910,910,100.0,AL,Alagoas,Nordeste,false,8,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,28,134.592,726,726,100.0,SE,Sergipe,Nordeste,false,1,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-06-01,2026,6,29,25.068,18792,18792,100.0,BA,Bahia,Nordeste,false,625,MJJ,1.4,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,21,19.11,10726,10726,100.0,MA,Maranhão,Nordeste,true,673,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,22,7.792,8258,8258,100.0,PI,Piauí,Nordeste,false,291,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,23,11.331,4861,4861,100.0,CE,Ceará,Nordeste,false,82,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,24,34.593,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,8,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,25,38.383,1852,1852,100.0,PB,Paraíba,Nordeste,false,9,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,26,42.277,3220,3220,100.0,PE,Pernambuco,Nordeste,false,69,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,27,79.004,910,910,100.0,AL,Alagoas,Nordeste,false,19,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,28,86.287,726,726,100.0,SE,Sergipe,Nordeste,false,4,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-07-01,2026,7,29,20.627,18792,18792,100.0,BA,Bahia,Nordeste,false,588,JJA,1.8,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,21,5.926,10726,10726,100.0,MA,Maranhão,Nordeste,true,1937,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,22,1.606,8258,8258,100.0,PI,Piauí,Nordeste,false,1024,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,23,3.379,4861,4861,100.0,CE,Ceará,Nordeste,false,189,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,24,13.677,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,33,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,25,23.727,1852,1852,100.0,PB,Paraíba,Nordeste,false,31,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,26,30.561,3220,3220,100.0,PE,Pernambuco,Nordeste,false,72,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,27,73.831,910,910,100.0,AL,Alagoas,Nordeste,false,17,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,28,59.974,726,726,100.0,SE,Sergipe,Nordeste,false,9,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-08-01,2026,8,29,15.244,18792,18792,100.0,BA,Bahia,Nordeste,false,1351,JAS,2.2,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,21,11.922,10726,10726,100.0,MA,Maranhão,Nordeste,true,2481,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,22,5.282,8258,8258,100.0,PI,Piauí,Nordeste,false,1848,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,23,2.65,4861,4861,100.0,CE,Ceará,Nordeste,false,466,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,24,6.666,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,51,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,25,11.662,1852,1852,100.0,PB,Paraíba,Nordeste,false,76,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,26,19.21,3220,3220,100.0,PE,Pernambuco,Nordeste,false,178,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,27,50.491,910,910,100.0,AL,Alagoas,Nordeste,false,40,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,28,44.087,726,726,100.0,SE,Sergipe,Nordeste,false,9,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-09-01,2026,9,29,16.93,18792,18792,100.0,BA,Bahia,Nordeste,false,2747,ASO,2.5,El Niño,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,21,23.165,10726,10726,100.0,MA,Maranhão,Nordeste,true,4225,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,22,30.78,8258,8258,100.0,PI,Piauí,Nordeste,false,1817,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,23,1.327,4861,4861,100.0,CE,Ceará,Nordeste,false,1042,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,24,2.5,1716,1716,100.0,RN,Rio Grande do Norte,Nordeste,false,100,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,25,4.491,1852,1852,100.0,PB,Paraíba,Nordeste,false,209,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,26,8.684,3220,3220,100.0,PE,Pernambuco,Nordeste,false,436,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,27,16.054,910,910,100.0,AL,Alagoas,Nordeste,false,43,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,28,22.659,726,726,100.0,SE,Sergipe,Nordeste,false,36,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
+2026-10-01,2026,10,29,76.432,18792,18792,100.0,BA,Bahia,Nordeste,false,3308,,,,CHIRPS v3 mensal,"INPE mensal, satelite AQUA_M-T",NOAA CPC ONI v6,real_parcial,mensal_preliminar
