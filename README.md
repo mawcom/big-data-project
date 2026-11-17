@@ -111,5 +111,6 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 - [Contrato de dados e plano de ingestão para o dashboard](docs/contrato-dados-dashboard.md)
 - [Guia de execução e roteiro de apresentação](docs/guia-execucao-apresentacao.md)
 - [Guia da frente de processamento de dados](docs/guia-processamento-dados.md)
+- [Decisões de visualização do painel](docs/visualizacao.md)
 - [Plano de trabalho](docs/plano-de-trabalho.pdf)
 - [Documentos da fase de protótipo](docs/legado/README.md)
