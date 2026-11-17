@@ -85,8 +85,6 @@
     .grid26 h2 { font-size:16px; flex:none; }
     .grid26 .p-r26 h2,.grid26 .p-f26 h2 { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .grid26 .note,.grid26 .scale { flex:none; }
-    .key.line { width:14px; height:0; border-radius:0; border-top:2px solid var(--nino); vertical-align:3px; }
-    .key.line.dash { border-top-style:dashed; }
     .chart .hit { cursor:pointer; }
     .chart .hit:hover { fill:#2b10550a; }
     footer { color:var(--muted); font-size:11px; line-height:1.4; }
@@ -169,12 +167,12 @@
       <section class="panel p-r26">
         <h2 id="r26Title">Chuva: 2026 observado vs. o que o passado previa</h2>
         <svg id="r26Chart" class="chart" role="img" aria-label="Chuva observada em 2026 comparada com a média histórica e com a média dos El Niños passados, com projeção até junho do ano seguinte"></svg>
-        <p class="note"><i class="key" style="background:var(--chuva)"></i>observado · <i class="key" style="background:var(--context)"></i>normal 1991–2020 · <i class="key line"></i>média dos El Niños · <i class="key line dash"></i>só fortes · <span id="r26Note"></span></p>
+        <p class="note">Diferença para o normal do mês (1991–2020), em mm; faixa = entre os El Niños passados. <span id="r26Note"></span></p>
       </section>
       <section class="panel p-f26">
         <h2 id="f26Title">Focos: 2026 observado vs. o que o passado previa</h2>
         <svg id="f26Chart" class="chart" role="img" aria-label="Focos observados em 2026 comparados com a média histórica e com a média dos El Niños passados, com projeção até junho do ano seguinte"></svg>
-        <p class="note"><i class="key" style="background:var(--fogo)"></i>observado (INPE, preliminar) · <i class="key" style="background:var(--context)"></i>normal 2003–2025 · <i class="key line"></i>média dos El Niños · <i class="key line dash"></i>só fortes · <span id="f26Note"></span></p>
+        <p class="note">Diferença para o normal do mês (2003–2025); 2026 preliminar; faixa = entre os El Niños passados. <span id="f26Note"></span></p>
       </section>
       <section class="panel p-e26">
         <h2 id="e26Title">Quanto cada regra errou</h2>
@@ -269,9 +267,10 @@
       return c;
     }
 
-    // Escala divergente: zero em cinza-lilás; para chuva, mais = roxo e menos = magenta; para focos, o inverso.
+    // Escala divergente: zero em cinza-lilás, "mais" na cor da métrica (roxo = chuva, magenta = focos) e "menos" em cinza escuro.
+    // O lado negativo nunca usa a cor da outra métrica (Gestalt, similaridade: mesma cor = mesma métrica no painel todo).
     function corDivergente(t,fogo) {
-      const alvo = (t>0) !== fogo ? [106,27,154] : [216,27,96], a=Math.min(1,Math.abs(t));
+      const alvo = t>0 ? (fogo ? [216,27,96] : [106,27,154]) : [95,90,107], a=Math.min(1,Math.abs(t));
       const [r,g,b]=COR.neutro.map((n,i)=>Math.round(n+(alvo[i]-n)*a));
       return `rgb(${r},${g},${b})`;
     }
@@ -507,25 +506,36 @@
       svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
       if (EN.erro) return semDados26(svg);
       const ps=serie26(medida), chuva=medida==='chuva', un=chuva?' mm':' focos', casas=chuva?1:0;
-      const L=46,R=8,T=24,B=22, base=H-B, alto=base-T, passo=(W-L-R)/ps.length, x=i=>L+passo*i+passo/2;
-      const maior=Math.max(...ps.flatMap(p=>[p.obs??0,p.clim,p.comp,p.forte,p.q3??0]),1);
-      const p10=Math.pow(10,Math.floor(Math.log10(maior))), teto=Math.ceil(maior/p10/2)*p10*2, y=v=>base-(v/teto)*alto;
-      const iFut=ps.findIndex(p=>p.obs===null), wRef=Math.min(passo*.78,40), wObs=wRef*.5;
+      // Gráfico indexado (aula: "prefira gráfico indexado"): o eixo é a diferença para o normal do mês, então o zero É o normal.
+      // Em unidades (mm, focos) e não em %: nos meses secos ou com poucos focos o % explode.
+      const an=(p,c)=>p[c]-p.clim, com=v=>`${v>0?'+':v<0?'−':''}${fmt(Math.abs(v),Math.abs(v)<10&&casas?1:0)}`;
+      const L=56,R=112,T=24,B=22, base=H-B, alto=base-T, passo=(W-L-R)/ps.length, x=i=>L+passo*i+passo/2;
+      const vals=ps.flatMap(p=>[p.obs!==null?an(p,'obs'):0, an(p,'comp'), p.q1!==undefined?an(p,'q1'):0, p.q3!==undefined?an(p,'q3'):0]);
+      const lo0=Math.min(0,...vals), hi0=Math.max(0,...vals), bruto=Math.max(hi0-lo0,1)/4, p10=Math.pow(10,Math.floor(Math.log10(bruto))), m=bruto/p10;
+      const step=(m<=1?1:m<=2?2:m<=5?5:10)*p10, lo=Math.floor(lo0/step)*step, hi=Math.max(step,Math.ceil(hi0/step)*step);
+      const y=v=>T+(hi-v)/(hi-lo)*alto;
+      const iFut=ps.findIndex(p=>p.obs===null), obsPs=ps.map((p,i)=>[p,i]).filter(([p])=>p.obs!==null);
       let s='';
       if (iFut>=0) s+=`<rect x="${x(iFut)-passo/2}" y="${T-18}" width="${W-R-(x(iFut)-passo/2)}" height="${alto+18}" fill="${COR.nino}" opacity=".07"/>`+
         `<text class="annot" x="${x(iFut)-passo/2+6}" y="${T-6}" style="fill:#b86a0c;font-size:10px;letter-spacing:.08em">PROJEÇÃO →</text>`+
         `<text class="annot" x="${x(iFut)-passo/2-6}" y="${T-6}" text-anchor="end" style="font-size:10px;letter-spacing:.08em">← OBSERVADO</text>`;
-      s+=[0,teto/2,teto].map(v=>`<text x="${L-8}" y="${y(v)+4}" text-anchor="end">${fmt(v)}</text>`).join('');
-      s+=`<line x1="${L}" x2="${W-R}" y1="${base}" y2="${base}" stroke="${COR.eixo}"/>`;
-      ps.forEach((p,i)=>{
-        s+=`<rect x="${x(i)-wRef/2}" y="${y(p.clim)}" width="${wRef}" height="${Math.max(0,base-y(p.clim))}" rx="3" fill="${COR.contexto}"/>`;
-        if (p.obs!==null) s+=`<rect x="${x(i)-wObs/2}" y="${y(p.obs)}" width="${wObs}" height="${Math.max(0,base-y(p.obs))}" rx="2" fill="${cor}"/>`;
-        if (p.q1!==undefined) s+=`<line x1="${x(i)}" x2="${x(i)}" y1="${y(p.q1)}" y2="${y(p.q3)}" stroke="${COR.nino}" stroke-width="3" opacity=".45" stroke-linecap="round"/>`;
-        if (passo>=34 || p.mes%2===1) s+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${p.mes===1?' class="annot"':''}>${p.mes===1?p.ano:mesesCurtos[p.mes-1]}</text>`;
-      });
-      const linha=(campo,extra)=>`<polyline points="${ps.map((p,i)=>`${x(i)},${y(p[campo])}`).join(' ')}" fill="none" stroke="${COR.nino}" stroke-width="2.2" stroke-linejoin="round"${extra}/>`;
-      s+=linha('forte',' stroke-dasharray="5 4" opacity=".85"')+linha('comp','');
-      s+=ps.map((p,i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${alto}" fill="transparent"><title>${rotuloMes(p.ano,p.mes)} · ${p.obs!==null?`observado ${fmt(p.obs,casas)}${un} · `:''}média histórica ${fmt(p.clim,casas)}${un} · média dos El Niños ${fmt(p.comp,casas)}${un} · só fortes ${fmt(p.forte,casas)}${un}${p.q1!==undefined?` · faixa ${fmt(p.q1,casas)}–${fmt(p.q3,casas)}${un}`:''}</title></rect>`).join('');
+      s+=[lo,hi].filter(v=>v!==0).map(v=>`<text x="${L-8}" y="${y(v)+4}" text-anchor="end">${com(v)}</text>`).join('');
+      s+=`<text x="${L-8}" y="${y(0)+4}" text-anchor="end">0</text><line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="${COR.limiar}"/>`;
+      ps.forEach((p,i)=>{ if (passo>=34 || p.mes%2===1) s+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${p.mes===1?' class="annot"':''}>${p.mes===1?p.ano:mesesCurtos[p.mes-1]}</text>`; });
+      // Contexto em cinza: faixa entre os El Niños passados (só na projeção) e a média deles.
+      const faixa=ps.map((p,i)=>[p,i]).filter(([p])=>p.q1!==undefined);
+      if (faixa.length) s+=`<polygon points="${[...faixa.map(([p,i])=>`${x(i)},${y(an(p,'q3'))}`),...[...faixa].reverse().map(([p,i])=>`${x(i)},${y(an(p,'q1'))}`)].join(' ')}" fill="${COR.contexto}" opacity=".55"/>`;
+      s+=`<polyline points="${ps.map((p,i)=>`${x(i)},${y(an(p,'comp'))}`).join(' ')}" fill="none" stroke="${COR.limiar}" stroke-width="2" stroke-linejoin="round"/>`;
+      // Único destaque: 2026 observado na cor da métrica.
+      if (obsPs.length) s+=`<polyline points="${obsPs.map(([p,i])=>`${x(i)},${y(an(p,'obs'))}`).join(' ')}" fill="none" stroke="${cor}" stroke-width="2.6" stroke-linejoin="round"/>`+
+        obsPs.map(([p,i])=>`<circle cx="${x(i)}" cy="${y(an(p,'obs'))}" r="3" fill="${cor}"/>`).join('');
+      // Rótulos diretos (proximidade) no lugar da legenda: fim da linha de 2026, fim da média e a linha do zero.
+      const xFim=W-R+6, yComp=y(an(ps.at(-1),'comp')), yZero=y(0), afasta=(a,b)=>Math.abs(a-b)<13?(a<=b?[a-(13-Math.abs(a-b))/2,b+(13-Math.abs(a-b))/2]:[a+(13-Math.abs(a-b))/2,b-(13-Math.abs(a-b))/2]):[a,b];
+      const [yc,yz]=afasta(yComp,yZero);
+      s+=`<text x="${xFim}" y="${yc+4}" style="fill:${COR.limiar}">El Niños passados</text><text x="${xFim}" y="${yz+4}">normal do mês</text>`;
+      if (obsPs.length) { const [p,i]=obsPs.at(-1), yo=y(an(p,'obs'));
+        s+=`<text class="annot" x="${x(i)+7}" y="${Math.min(base-4,Math.max(T+10,yo+4))}" style="fill:${cor};paint-order:stroke;stroke:#fff;stroke-width:3px">${EN.ano}: ${com(an(p,'obs'))}${un}</text>`; }
+      s+=ps.map((p,i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${alto}" fill="transparent"><title>${rotuloMes(p.ano,p.mes)} · normal ${fmt(p.clim,casas)}${un}${p.obs!==null?` · observado ${fmt(p.obs,casas)}${un} (${com(an(p,'obs'))})`:''} · média dos El Niños ${fmt(p.comp,casas)}${un} (${com(an(p,'comp'))}) · só fortes ${fmt(p.forte,casas)}${un} (${com(an(p,'forte'))})${p.q1!==undefined?` · faixa ${fmt(p.q1,casas)}–${fmt(p.q3,casas)}${un}`:''}</title></rect>`).join('');
       svg.innerHTML=s;
       // Título: meses de El Niño já observados; nota: o trecho-chave da projeção.
       const ini=EN.metodo.inicio_el_nino_ano_corrente_mes||1, obs=ps.filter(p=>p.obs!==null && p.mes>=ini);
@@ -545,17 +555,22 @@
       const nomes={persistencia:`Repetir ${EN.ano-1}`, analogo:`Repetir ${EN.metodo.series.chuva.analogo} (último El Niño)`};
       const dados=REGRAS26.map(([k,n])=>({k,n:nomes[k]||n,chuva:erro('chuva',k),focos:erro('focos',k)}));
       const melhor=Object.fromEntries(['chuva','focos'].map(m=>[m,dados.reduce((a,b)=>b[m]<a[m]?b:a).k]));
-      // Nome da regra acima das duas barras (chuva e focos): a coluna é estreita.
-      const R=40,T=4,B=18, linha=(H-T-B)/dados.length, mx=Math.max(...dados.flatMap(d=>[d.chuva,d.focos]),1);
-      const xv=e=>(e/mx)*(W-R), hb=Math.max(4,Math.min(10,(linha-16)/2-1));
-      let s=dados.map((d,i)=>{
-        const y0=T+linha*i, best=d.k===melhor.chuva||d.k===melhor.focos;
-        return `<text x="0" y="${y0+11}"${best?' class="annot"':''}>${d.n}</text>`+
-          [['chuva',COR.chuva,0],['focos',COR.fogo,1]].map(([m,cor,k])=>{ const yb=y0+15+k*(hb+2), b=d.k===melhor[m];
-            return `<rect x="0" y="${yb}" width="${Math.max(1,xv(d[m]))}" height="${hb}" rx="2" fill="${b?cor:COR.contexto}"><title>${d.n}: erro de ${fmt(d[m],1)}% em ${m}</title></rect>`+
-              `<text x="${xv(d[m])+5}" y="${yb+hb}"${b?' class="annot"':''} style="font-size:10px">${fmt(d[m])}%</text>`; }).join('');
-      }).join('');
-      s+=`<text x="0" y="${H-4}">erro, menor = melhor · <tspan fill="${COR.chuva}">■</tspan> chuva <tspan fill="${COR.fogo}">■</tspan> focos</text>`;
+      // Pequenos múltiplos (um bloco por medida, mesma escala) no lugar de barras agrupadas;
+      // cada bloco ordenado do menor erro para o maior, com só a melhor regra em cor.
+      const curtos={climatologia:'Média histórica',persistencia:`Repetir ${EN.ano-1}`,analogo:`Repetir ${EN.metodo.series.chuva.analogo}`,composto:'Média El Niños',composto_forte:'Só El Niños fortes'};
+      const L=112,R=40,B=18,gap=12,cab=16, hBloco=(H-B-gap)/2, linha=(hBloco-cab)/dados.length, hb=Math.max(5,Math.min(16,linha*.72));
+      const mx=Math.max(...dados.flatMap(d=>[d.chuva,d.focos]),1), xv=e=>(e/mx)*(W-L-R);
+      let s='';
+      [['chuva','Chuva',COR.chuva],['focos','Focos',COR.fogo]].forEach(([m,rot,cor],k)=>{
+        const y0=k*(hBloco+gap), ord=[...dados].sort((a,b)=>a[m]-b[m]);
+        s+=`<text class="annot" x="0" y="${y0+11}" style="fill:${cor}">${rot}</text>`;
+        s+=ord.map((d,i)=>{ const yc=y0+cab+linha*i+linha/2, b=i===0;
+          return `<g><title>${d.n}: erro de ${fmt(d[m],1)}% em ${m}</title>`+
+            `<text x="${L-8}" y="${yc+4}" text-anchor="end"${b?' class="annot"':''}>${curtos[d.k]}</text>`+
+            `<rect x="${L}" y="${yc-hb/2}" width="${Math.max(1,xv(d[m]))}" height="${hb}" rx="2" fill="${b?cor:COR.contexto}"/>`+
+            `<text x="${L+xv(d[m])+5}" y="${yc+4}"${b?' class="annot"':''}>${fmt(d[m])}%</text></g>`; }).join('');
+      });
+      s+=`<text x="0" y="${H-4}">erro relativo · menor = melhor</text>`;
       svg.innerHTML=s;
       const nomeDe=k=>{ const n=dados.find(d=>d.k===k).n; return n[0].toLowerCase()+n.slice(1); };
       const per=`${mesesCurtos[meses[0]-1]}–${mesesCurtos[meses.at(-1)-1]}/${String(EN.ano).slice(2)}`;
