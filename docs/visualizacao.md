@@ -1,6 +1,60 @@
-# Decisões de visualização do painel `/piloto-real`
+# Decisões de visualização do painel
 
 Este documento aplica ao painel os conceitos da aula *Visualização de Dados* (Big Data em Python, FACIMP Wyden). Ele serve de roteiro para defender cada visual na apresentação.
+
+- **`/painel`** (versão final): focado em um tema, *principais impactos causados pelo El Niño no Nordeste*. É descrito na primeira parte.
+- **`/piloto-real`** (versão exploratória): todos os visuais, com rolagem. É descrito na segunda parte.
+
+# Painel final `/painel`: impactos do El Niño no Nordeste
+
+## Contexto antes de desenhar
+
+- **Tipo de painel:** explanatório, com um único tema e sem poluição visual.
+- **Pergunta:** o que mudou na chuva e nos focos de fogo do Nordeste durante o El Niño?
+- **Comparação usada em todo o painel:** cada mês do episódio é comparado com a **média do mesmo mês do calendário em anos sem El Niño**. Comparar mai/2023 com mai/2024 e mai/2025, e não com o resto do ano, neutraliza a sazonalidade, que é muito mais forte do que o efeito do ENSO.
+- **Episódio:** é detectado nos dados como o último trecho contínuo de meses com fase El Niño (ONI ≥ +0,5 °C). Com 2023–2025, vai de mai/2023 a abr/2024 (12 meses, pico de +2,0 °C em dez/2023).
+- **Big Idea (gerada a partir dos dados):** "Nordeste, El Niño de mai/23 a abr/24: +16% de chuva e 0% de focos em relação aos mesmos meses sem El Niño — o episódio não trouxe a seca esperada." A frase muda com o recorte (Nordeste ou estado).
+
+## Tela única por aba (sem rolagem)
+
+Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verificado em 1366 × 768 e 1715 × 969. O resumo fica fixo e só a área de baixo muda entre as abas. Abaixo disso, o painel volta ao fluxo com rolagem.
+
+```
+┌ título · filtro único: Recorte (Nordeste ou estado) ────────────────┐
+│ Big Idea                                                             │
+│ [Episódio] [Pico ONI] [Chuva vs. normal] [Focos vs. normal]          │
+│ Visão geral | Linha do tempo | Por estado                            │
+├──────────────────────────────────────────────────────────────────────┤
+│ Visão geral:    chuva mês a mês │ mapa (chuva/focos)  │ Leitura      │
+│                 focos mês a mês │                     │              │
+│ Linha do tempo: ONI, chuva e focos 2023–2025 alinhados, El Niño      │
+│                 sombreado                                            │
+│ Por estado:     ranking de chuva %  │  ranking de focos %            │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+- **Um único filtro.** O recorte pode ser escolhido no seletor, no mapa ou nas barras por estado. Clicar de novo no mesmo estado, ou apertar `Esc`, volta ao Nordeste.
+- **Cada aba tem um endereço** (`/painel#geral`, `#tempo`, `#estados`), para abrir direto na apresentação.
+- **Ficaram fora** municípios, projeção de 2026, tabela, calendário e ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
+
+## Checklist de defesa por visual
+
+| Visual | Pergunta que responde | Por que este tipo | Destaque pré-atentivo | Honestidade |
+|---|---|---|---|---|
+| KPIs | Quanto durou, quão forte foi e o que mudou? | "Às vezes o melhor gráfico é um número" | Cor da métrica (verde-água = chuva, laranja = focos) | Cada % mostra os dois totais comparados |
+| Chuva / focos mês a mês | Em que meses o El Niño se afastou do normal? | Barra colorida (El Niño) dentro de barra cinza (normal), mesmo eixo | Rótulo direto só no mês com maior diferença | Eixo no zero; ONI de cada mês sob o eixo; anos de referência no tooltip |
+| Mapa | Onde mudou? | Coroplético divergente, com zero em cinza | Estado do recorte com contorno branco | Escala simétrica (−X% a +X%); valor escrito nos estados grandes, tooltip nos pequenos |
+| Leitura | O que concluir? | Texto curto calculado | Rótulos coloridos por métrica | Último item sempre traz a ressalva: um episódio só, associação não é causa |
+| Linha do tempo | O efeito aparece antes, durante e depois? | Small multiples alinhados no mesmo eixo de meses, sem eixo Y duplo | Barras coloridas só no episódio, cinza fora dele; faixa sombreada | Limiar +0,5 °C desenhado e rotulado |
+| Por estado | Quais estados mudaram mais? | Barras horizontais divergentes e ordenadas | Estado do recorte em cor, os demais em cinza | Zero rotulado ("igual ao normal"); intervalo citado no título |
+
+## Resultado com 2023–2025
+
+- **Chuva:** choveu mais nos 9 estados durante o episódio (de +1% em SE a +30% em RN). Na estação chuvosa de fev–abr/2024, o Nordeste teve +48%. A seca que se costuma esperar no norte do Nordeste não apareceu neste episódio.
+- **Focos:** no total da região, ficaram estáveis (0%). Subiram em 3 estados (PI +17%, BA +14%, AL +5%) e caíram em 6. O pico de focos cai em outubro todos os anos, com ou sem El Niño.
+- **Limite:** há um único episódio, comparado com dois anos. O resultado não vale para todo El Niño e mostra associação, não causa. Todos os textos são recalculados quando novos anos entram em `amostras/`.
+
+# Painel exploratório `/piloto-real`
 
 ## Contexto antes de desenhar
 
