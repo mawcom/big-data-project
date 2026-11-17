@@ -33,6 +33,7 @@ Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verific
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
+- **Paleta da aula** (extraída do PDF da disciplina), em tema claro: fundo neutro `#f5f5f6`, títulos `#2b1055`, texto `#3e3a47`; **roxo `#6a1b9a` = chuva**, **magenta `#d81b60` = focos**, **laranja `#f7941d` = período de El Niño**, cinza-lilás `#d3cfda` = referência (meses sem El Niño). No mapa, a escala é divergente entre roxo e magenta, com o zero em cinza-lilás.
 - **Um único filtro.** O recorte pode ser escolhido no seletor, no mapa ou nas barras por estado. Clicar de novo no mesmo estado, ou apertar `Esc`, volta ao Nordeste.
 - **Cada aba tem um endereço** (`/painel#geral`, `#tempo`, `#estados`), para abrir direto na apresentação.
 - **Ficaram fora** municípios, projeção de 2026, tabela, calendário e ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
@@ -41,7 +42,7 @@ Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verific
 
 | Visual | Pergunta que responde | Por que este tipo | Destaque pré-atentivo | Honestidade |
 |---|---|---|---|---|
-| KPIs | Quanto durou, quão forte foi e o que mudou? | "Às vezes o melhor gráfico é um número" | Cor da métrica (verde-água = chuva, laranja = focos) | Cada % mostra os dois totais comparados |
+| KPIs | Quanto durou, quão forte foi e o que mudou? | "Às vezes o melhor gráfico é um número" | Cor da métrica (roxo = chuva, magenta = focos) | Cada % mostra os dois totais comparados |
 | Chuva / focos mês a mês | Em que meses o El Niño se afastou do normal? | Barra colorida (El Niño) dentro de barra cinza (normal), mesmo eixo | Rótulo direto só no mês com maior diferença | Eixo no zero; ONI de cada mês sob o eixo; anos de referência no tooltip |
 | Mapa | Onde mudou? | Coroplético divergente, com zero em cinza | Estado do recorte com contorno branco | Escala simétrica (−X% a +X%); valor escrito nos estados grandes, tooltip nos pequenos |
 | Leitura | O que concluir? | Texto curto calculado | Rótulos coloridos por métrica | Último item sempre traz a ressalva: um episódio só, associação não é causa |
