@@ -83,6 +83,13 @@ O protótipo do painel pode ser aberto diretamente com `uv run python dashboard/
 
 Depois de iniciar o servidor, abra <http://127.0.0.1:8000/piloto-real> para ver os anos reais disponíveis por estado e mês, com mapa das UFs, gráficos de ONI, chuva e focos INPE, além da referência sazonal exploratória. A página inicial continua identificada como protótipo com simulação.
 
+### Com Docker
+
+```bash
+docker compose up --build                          # painel em http://localhost:8000/piloto-real
+docker compose run --rm app uv run poe sync_data   # qualquer tarefa da tabela acima
+```
+
 ## Frentes de trabalho
 
 Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
