@@ -11,7 +11,7 @@ import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from demo_data import demo_payload
 
@@ -131,6 +131,34 @@ class DashboardHandler(BaseHTTPRequestHandler):
             body = (PILOT_DIR / "ufs_nordeste_ibge.geojson").read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "application/geo+json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/api/municipios":
+            consulta = parse_qs(urlparse(self.path).query)
+            ano, uf = consulta.get("ano", [""])[0], consulta.get("uf", [""])[0].upper()
+            caminho = PILOT_SAMPLES / f"piloto_{ano}" / "fato_mensal_municipio.csv"
+            if not re.fullmatch(r"\d{4}", ano) or not re.fullmatch(r"[A-Z]{2}", uf) or not caminho.is_file():
+                self.send_error(404, "Recorte municipal indisponível para este ano")
+                return
+            with caminho.open(encoding="utf-8", newline="") as arquivo:
+                linhas = [linha for linha in csv.DictReader(arquivo) if linha["uf_sigla"] == uf]
+            body = json.dumps({"ano": int(ano), "uf": uf, "linhas": linhas}, ensure_ascii=False).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        malha_uf = re.fullmatch(r"/static/municipios/([A-Z]{2})\.geojson", route)
+        if malha_uf and (PILOT_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").is_file():
+            body = (PILOT_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/geo+json; charset=utf-8")
+            self.send_header("Cache-Control", "public, max-age=86400")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)

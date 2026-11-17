@@ -16,23 +16,9 @@
   },
   "manifesto_coleta": {
     "arquivo": "raw/manifesto_coleta.json",
-    "arquivos_verificados": 1,
-    "arquivos_locais_sem_registro": [
-      "raw/inpe_focos_sat_ref/focos_br_ref_2025.zip",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202501.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202502.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202503.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202504.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202505.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202506.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202507.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202508.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202509.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202510.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202511.tar.gz",
-      "raw/chirps_v3_mensal_latam/chirps-v3.0.202512.tar.gz"
-    ],
-    "coletado_em_utc": "2026-11-03T22:07:01.406507+00:00"
+    "arquivos_verificados": 14,
+    "arquivos_locais_sem_registro": [],
+    "coletado_em_utc": "2026-11-17T14:38:45.532185+00:00"
   },
   "oni": {
     "arquivo": "raw/enso/oni_cpc_v6.html",
@@ -110,19 +96,19 @@
       {
         "mes": 10,
         "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202510.tar.gz",
-        "sha256": "dcbf3783a96afaf973f9791768d533c569bb3712aeeb00ee331487317e3fb826",
+        "sha256": "055592d0d40f443f1930609c798058d15c8f8ff6df0451e4ab1731a73ba7cf03",
         "celulas_sem_valor": 0
       },
       {
         "mes": 11,
         "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202511.tar.gz",
-        "sha256": "80aa6e45ff56931b750674738b204684ecbdcb38216e4a4245858da94e55ebf0",
+        "sha256": "eb8cf1ce135c0f340ff1a482f410d70319343f97b1a6aae9d520373576aa1382",
         "celulas_sem_valor": 0
       },
       {
         "mes": 12,
         "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202512.tar.gz",
-        "sha256": "da1a938082f7de600d81c7706323cfe2c8a8708e6f07ed31c2636f7d4840233f",
+        "sha256": "ca94b3c32bc853ba3ea4f21f5acccd0ebdef99bea3053e80ada739b42afa4548",
         "celulas_sem_valor": 0
       }
     ],
@@ -132,7 +118,7 @@
   },
   "lookup_espacial": {
     "arquivo": "clean/referencias/chirps_celula_uf_piloto_2025.csv",
-    "sha256": "fbb41e90c29be33d5223c0d9a5bce33d755bc09a9485c1e2187e4b1c28f27e77",
+    "sha256": "8f2f2c568ce7b00c9113eac183e2073b76533a294e29a911060a2c09bd1c163d",
     "linhas": 51061
   },
   "malha_ibge": {

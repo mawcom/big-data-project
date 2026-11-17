@@ -108,6 +108,13 @@ def sincronizar(force: bool = False) -> dict:
             atualizados.append(ano)
         except subprocess.CalledProcessError as erro:
             falhas[ano] = f"Processamento falhou (código {erro.returncode})."
+    for ano in completos:
+        if ano in falhas or not (force or ano in atualizados or not (AMOSTRAS / f"piloto_{ano}" / "fato_mensal_municipio.csv").is_file()):
+            continue
+        try:
+            executar(RAIZ / "src" / "limpeza" / "processar_municipios.py", "--ano", str(ano))
+        except subprocess.CalledProcessError as erro:
+            falhas[ano] = f"Processamento municipal falhou (código {erro.returncode})."
     disponiveis = [ano for ano in completos if produto_atualizado(ano)]
     ano_base = max((ano for ano in disponiveis if ano - 1 in disponiveis), default=None)
     projecao = None

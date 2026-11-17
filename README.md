@@ -56,6 +56,7 @@ As dependências ficam em `pyproject.toml`; `uv.lock` fixa as versões para repr
 | `fetch_raw` | `uv run poe fetch_raw --range 2024 --effort medium` | Baixar as bases selecionadas para um ano ou intervalo. Sem `--range`, seleciona todos os anos disponíveis nos catálogos. |
 | `fetch_uf_geometry` | `uv run poe fetch_uf_geometry` | Baixar a malha simplificada das nove UFs pela API do IBGE. |
 | `process_pilot` | `uv run poe process_pilot --ano 2024` | Validar os arquivos reais e produzir tabelas mensais e relatório de qualidade em `amostras/piloto_2024/`. |
+| `process_municipalities` | `uv run poe process_municipalities --ano 2025` | Gerar chuva e focos por município (1.794 municípios) e a malha municipal usada no zoom do mapa. Também roda no `sync_data`. |
 | `project_2026` | `uv run poe project_2026` | Calcular a referência sazonal de 2026, a faixa de variação e o erro da comparação de 2024 para 2025. |
 | `sync_data` | `uv run poe sync_data` | Detectar anos completos em `raw/`, processar apenas os novos ou alterados e atualizar a projeção. O painel também executa essa sincronização ao abrir. |
 | `project_next` | `uv run poe project_next` | Refazer manualmente a projeção do ano posterior à última base observada. |

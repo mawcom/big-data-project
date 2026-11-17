@@ -81,11 +81,44 @@
     .projection-stat { margin:0; color:#e0c4ac; font-size:12px; line-height:1.5; }
     h2 { font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:25px; margin:0 0 6px; }
     .sub { color:var(--muted); font-size:12px; line-height:1.45; margin:0 0 12px; }
+    .map-wrap { position:relative; border-radius:11px; overflow:hidden; background:radial-gradient(ellipse at 50% 40%,#18292d 0%,#111c1f 75%); }
     #map { width:100%; height:470px; display:block; }
-    .state { stroke:#d9e7e4; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; transition:filter .15s; }
+    .state { stroke:#d9e7e4; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; transition:filter .15s, opacity .5s ease; }
     .state:hover,.state:focus-visible { filter:brightness(1.26); stroke:#fff; stroke-width:2.2; outline:none; }
     .state.selected { stroke:#fff; stroke-width:3; }
-    .state-label { fill:#fff; font-size:11px; font-weight:800; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#183238; stroke-width:3px; }
+    #map.zoomed .state:not(.selected) { opacity:.28; filter:saturate(.4); }
+    #map.zoomed .state:not(.selected):hover { opacity:.6; }
+    .state-label { fill:#fff; font-size:calc(11px * var(--k,1)); font-weight:800; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#183238; stroke-width:calc(3px * var(--k,1)); transition:opacity .5s ease; }
+    #map.zoomed .state-label:not(.selected) { opacity:.35; }
+    .map-crumbs { position:absolute; top:10px; left:10px; display:flex; align-items:center; gap:6px; font-size:12px; background:#0c1416cc; border:1px solid var(--line); border-radius:9px; padding:6px 10px; backdrop-filter:blur(6px); }
+    .map-crumbs button { border:0; background:none; color:var(--cyan); font:inherit; cursor:pointer; padding:0; }
+    .map-crumbs button:disabled { color:var(--text); cursor:default; }
+    .map-crumbs .sep { color:var(--muted); }
+    #map.com-municipios .state.selected { fill-opacity:0; stroke-opacity:0; }
+    #map.com-municipios .state-label.selected { display:none; }
+    .mun { stroke:#0c1416; stroke-opacity:.55; stroke-width:.5; vector-effect:non-scaling-stroke; cursor:crosshair; }
+    .mun:hover { stroke:#fff; stroke-opacity:1; stroke-width:1.6; filter:brightness(1.2); }
+    #munLayer.entrar { animation:munEntrar .55s ease .35s both; }
+    @keyframes munEntrar { from { opacity:0; } to { opacity:1; } }
+    @media (prefers-reduced-motion: reduce) { #munLayer.entrar { animation:none; } }
+    .map-metric { position:absolute; top:10px; right:10px; display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:#0c1416cc; }
+    .map-metric button { border:0; background:none; color:var(--muted); font:600 11px Inter,ui-sans-serif,system-ui,sans-serif; padding:7px 10px; cursor:pointer; }
+    .map-metric button[aria-pressed=true] { background:#1d3b39; color:#9ce7dd; }
+    .map-metric button.fire[aria-pressed=true] { background:#3a2b25; color:#f0b582; }
+    .scale.fire { background:linear-gradient(90deg,#1f2a2c,#8e4b39,#ffd29e); }
+    #munStatus { color:var(--muted); font-size:11px; margin-top:6px; }
+    #map.zoom-mun .mun:not(.selected) { opacity:.45; transition:opacity .5s ease; }
+    .mun.selected { stroke:#fff; stroke-opacity:1; stroke-width:2.6; }
+    .mun-label { fill:#fff; font-size:calc(13px * var(--k,1)); font-weight:800; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#0c1416; stroke-width:calc(4px * var(--k,1)); }
+    .mun-card { position:absolute; left:10px; bottom:10px; width:min(250px,calc(100% - 64px)); background:#0c1416e6; border:1px solid var(--line); border-radius:11px; padding:11px 13px; backdrop-filter:blur(6px); font-size:12px; animation:munEntrar .4s ease both; }
+    .mun-card strong { display:block; font-family:Georgia,"Times New Roman",serif; font-size:17px; font-weight:500; margin-bottom:2px; }
+    .mun-card .sub { margin:0 0 8px; font-size:11px; }
+    .mun-card dl { display:grid; grid-template-columns:1fr auto; gap:3px 10px; margin:0; }
+    .mun-card dt { color:var(--muted); } .mun-card dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; }
+    .mun-spark { display:block; width:100%; height:34px; margin-top:8px; }
+    .map-zoom { position:absolute; right:10px; bottom:10px; display:grid; gap:4px; }
+    .map-zoom button { width:30px; height:30px; border:1px solid var(--line); border-radius:8px; background:#0c1416cc; color:var(--text); font:600 16px/1 Inter,ui-sans-serif,system-ui,sans-serif; cursor:pointer; }
+    .map-zoom button:hover { border-color:var(--cyan); }
     #mapHint { color:var(--muted); font-size:11px; min-height:30px; }
     .scale { height:8px; border-radius:9px; background:linear-gradient(90deg,#2c544f,#45a79d,#a2ece0); margin:10px 0 6px; }
     .scale-labels { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; }
@@ -162,9 +195,16 @@
     </section>
     <div class="grid">
       <section class="panel">
-        <h2>Chuva por estado</h2>
-        <p class="sub">Mapa das nove UFs com limites simplificados do IBGE. Cor = média mensal de chuva em mm; clique em uma UF para ver seus dados.</p>
-        <svg id="map" viewBox="0 0 540 470" role="img" aria-label="Mapa dos nove estados do Nordeste"></svg>
+        <h2 id="mapTitle">Chuva por estado</h2>
+        <p class="sub">Mapa das nove UFs com limites simplificados do IBGE. Cor = média mensal de chuva em mm; clique em uma UF para aproximar e ver os municípios.</p>
+        <div class="map-wrap">
+          <svg id="map" viewBox="0 0 540 470" role="img" aria-label="Mapa dos nove estados do Nordeste"></svg>
+          <nav class="map-crumbs" aria-label="Navegação do mapa"><button id="crumbRoot" type="button" disabled>Nordeste</button><span class="sep" id="crumbSep" hidden>›</span><button id="crumbUf" type="button" hidden disabled></button><span class="sep" id="crumbSepMun" hidden>›</span><span id="crumbMun" hidden></span></nav>
+          <div class="mun-card" id="munCard" hidden></div>
+          <div class="map-metric" id="mapMetric" role="group" aria-label="Medida dos municípios" hidden><button type="button" data-metrica="chuva" aria-pressed="true">Chuva</button><button type="button" class="fire" data-metrica="focos" aria-pressed="false">Focos</button></div>
+          <div class="map-zoom"><button id="zoomIn" type="button" aria-label="Aproximar">+</button><button id="zoomOut" type="button" aria-label="Afastar">−</button></div>
+        </div>
+        <div id="munStatus"></div>
         <div id="mapHint"></div>
         <div class="scale"></div><div class="scale-labels"><span id="scaleMin">Menor chuva</span><span id="scaleMax">Maior chuva</span></div>
       </section>
@@ -306,7 +346,8 @@
       const escala=Math.min(455/(xMax-xMin),420/(yMax-yMin));
       const offsetX=(540-(xMax-xMin)*escala)/2, offsetY=(470-(yMax-yMin)*escala)/2;
       const xy=p=>[offsetX+(p[0]-xMin)*escala,offsetY+(yMax-p[1])*escala];
-      const caminho=g=>coords(g).map(pol=>pol.map(anel=>anel.map((p,i)=>`${i?'L':'M'}${xy(p)[0].toFixed(2)},${xy(p)[1].toFixed(2)}`).join('')+'Z').join('')).join('');
+      projetar=xy;
+      const caminho=g=>caminhoSVG(g,xy);
       const svg=$('map'); svg.replaceChildren();
       for (const f of features) {
         const sigla=f.properties.SIGLA_UF, r=atuais.find(x=>x.uf_sigla===sigla);
@@ -317,20 +358,196 @@
         path.setAttribute('fill-rule','evenodd');path.setAttribute('class',`state ${sigla===selecionada?'selected':''}`);
         path.setAttribute('tabindex','0');path.setAttribute('aria-label',`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm de chuva`);
         const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm`;path.appendChild(title);
-        path.addEventListener('click',()=>{$('uf').value=sigla;render();});
-        path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('uf').value=sigla;render();}});
+        path.addEventListener('click',()=>focarUF(sigla));
+        path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focarUF(sigla);}});
         path.addEventListener('mouseenter',()=>{$('mapHint').textContent=`${r.uf_nome}: ${fmt(r.chuva_media_mm,1)} mm de chuva em ${meses[mes-1].toLowerCase()} de ${ano}.`;});
         path.addEventListener('mouseleave',()=>{$('mapHint').textContent='';});
         svg.appendChild(path);
+        const tela=todosPontos(f.geometry).map(xy), txs=tela.map(p=>p[0]), tys=tela.map(p=>p[1]);
+        limitesUF[sigla]=[Math.min(...txs),Math.min(...tys),Math.max(...txs),Math.max(...tys)];
       }
       for (const f of features) {
         const vertices=todosPontos(f.geometry), cx=vertices.reduce((s,p)=>s+p[0],0)/vertices.length,cy=vertices.reduce((s,p)=>s+p[1],0)/vertices.length;
         const [x,y]=xy([cx,cy]);
         const label=document.createElementNS('http://www.w3.org/2000/svg','text');
-        label.setAttribute('x',x.toFixed(1));label.setAttribute('y',y.toFixed(1));label.setAttribute('class','state-label');
+        label.setAttribute('x',x.toFixed(1));label.setAttribute('y',y.toFixed(1));label.setAttribute('class',`state-label ${f.properties.SIGLA_UF===selecionada?'selected':''}`);
         label.textContent=f.properties.SIGLA_UF;svg.appendChild(label);
       }
+      if (zoomUF&&zoomUF!==selecionada) { zoomUF=selecionada; zoomMun=null; }
+      atualizarZoom();
+      desenharMunicipios(ano,mes);
     }
+    const caminhoSVG=(g,xy)=>coords(g).map(pol=>pol.map(anel=>anel.map((p,i)=>{const [x,y]=xy(p);return `${i?'L':'M'}${x.toFixed(2)},${y.toFixed(2)}`;}).join('')+'Z').join('')).join('');
+    const malhasMun={}, dadosMun={};
+    let projetar=null, metricaMapa='chuva', ultimaUFMun=null, zoomMun=null;
+    function carregarMunicipios(ano,uf) {
+      malhasMun[uf]??=fetch(`/static/municipios/${uf}.geojson`).then(r=>r.ok?r.json():null).catch(()=>null);
+      dadosMun[`${ano}-${uf}`]??=fetch(`/api/municipios?ano=${ano}&uf=${uf}`).then(r=>r.ok?r.json():null).catch(()=>null);
+      return Promise.all([malhasMun[uf],dadosMun[`${ano}-${uf}`]]);
+    }
+    function legendaMunicipios(valores) {
+      $('mapMetric').hidden=!valores;
+      $('map').classList.toggle('com-municipios',Boolean(valores));
+      $('mapTitle').textContent=!valores?'Chuva por estado':metricaMapa==='focos'?'Focos por município':'Chuva por município';
+      document.querySelector('.scale').classList.toggle('fire',Boolean(valores)&&metricaMapa==='focos');
+      if (!valores) return;
+      const fogo=metricaMapa==='focos';
+      $('scaleMin').textContent=fogo?'0 focos':`${fmt(Math.min(...valores),0)} mm`;
+      $('scaleMax').textContent=fogo?`${fmt(Math.max(...valores,0))} focos`:`${fmt(Math.max(...valores),0)} mm`;
+    }
+    function desenharMunicipios(ano,mes) {
+      const uf=zoomUF;
+      if (!uf) { legendaMunicipios(null); $('munStatus').textContent=''; ultimaUFMun=null; zoomMun=null; mostrarCidade(null); return; }
+      carregarMunicipios(ano,uf).then(([malha,dados])=>{
+        if (zoomUF!==uf||Number($('year').value)!==ano||Number($('month').value)!==mes) return;
+        const svg=$('map'); svg.querySelector('#munLayer')?.remove();
+        if (!malha||!dados) {
+          legendaMunicipios(null);
+          if (zoomMun) { zoomMun=null; atualizarZoom(); }
+          mostrarCidade(null);
+          $('munStatus').textContent=`Recorte por município ainda não processado para ${ano}.`;
+          return;
+        }
+        const linhasMes=new Map(dados.linhas.filter(r=>Number(r.mes)===mes).map(r=>[r.municipio_codigo_ibge,r]));
+        const fogo=metricaMapa==='focos', campo=fogo?'focos_inpe':'chuva_media_mm';
+        const valores=[...linhasMes.values()].map(r=>r[campo]).filter(v=>v!=='').map(Number);
+        const minimo=Math.min(...valores), maximo=Math.max(...valores);
+        const cor=v=>{
+          if (v==='') return '#3a4446';
+          const n=Number(v);
+          if (fogo) return n===0?'#1f2a2c':`hsl(23 64% ${22+48*Math.sqrt(n/(maximo||1))}%)`;
+          const t=(n-minimo)/(maximo-minimo||1); return `hsl(${170+8*t} 40% ${24+45*t}%)`;
+        };
+        const camada=document.createElementNS('http://www.w3.org/2000/svg','g');
+        camada.id='munLayer';
+        if (ultimaUFMun!==uf) camada.classList.add('entrar');
+        for (const f of malha.features) {
+          const r=linhasMes.get(f.properties.cd); if (!r) continue;
+          if (!f._d) {
+            f._d=caminhoSVG(f.geometry,projetar);
+            const tela=todosPontos(f.geometry).map(projetar), txs=tela.map(p=>p[0]), tys=tela.map(p=>p[1]);
+            f._caixa=[Math.min(...txs),Math.min(...tys),Math.max(...txs),Math.max(...tys)];
+          }
+          const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+          path.setAttribute('d',f._d); path.setAttribute('fill',cor(r[campo])); path.setAttribute('fill-rule','evenodd');
+          path.setAttribute('class',`mun ${f.properties.cd===zoomMun?.cd?'selected':''}`);
+          path.setAttribute('tabindex','0');
+          path.addEventListener('click',()=>focarMunicipio(f));
+          path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focarMunicipio(f);}});
+          const chuva=r.chuva_media_mm===''?'sem dado de chuva':`${fmt(r.chuva_media_mm,1)} mm`;
+          const texto=`${f.properties.nome} (${uf}): ${chuva} · ${fmt(r.focos_inpe)} focos em ${meses[mes-1].toLowerCase()} de ${ano}.`;
+          const title=document.createElementNS('http://www.w3.org/2000/svg','title'); title.textContent=texto; path.appendChild(title);
+          path.addEventListener('mouseenter',()=>{$('mapHint').textContent=texto;});
+          path.addEventListener('mouseleave',()=>{$('mapHint').textContent='';});
+          camada.appendChild(path);
+        }
+        const escolhido=camada.querySelector('.mun.selected');
+        if (escolhido) {
+          camada.appendChild(escolhido);
+          const [x0,y0,x1,y1]=zoomMun.caixa, rotulo=document.createElementNS('http://www.w3.org/2000/svg','text');
+          rotulo.setAttribute('x',((x0+x1)/2).toFixed(2)); rotulo.setAttribute('y',(y0-4*viewBoxAlvo[2]/MAPA[2]).toFixed(2));
+          rotulo.setAttribute('class','mun-label'); rotulo.textContent=zoomMun.nome; camada.appendChild(rotulo);
+        }
+        svg.insertBefore(camada,svg.querySelector('.state-label'));
+        ultimaUFMun=uf;
+        mostrarCidade(zoomMun?dados.linhas.filter(r=>r.municipio_codigo_ibge===zoomMun.cd).sort((a,b)=>a.mes-b.mes):null,mes,ano);
+        legendaMunicipios(valores);
+        const proximas=dados.linhas.filter(r=>Number(r.mes)===mes&&r.metodo_chuva==='celula_mais_proxima').length;
+        $('munStatus').textContent=`${linhasMes.size} municípios · ${fogo?'focos detectados pelo INPE':'chuva média CHIRPS'} em ${meses[mes-1].toLowerCase()} de ${ano}.`+
+          (!fogo&&proximas?` ${proximas} município(s) menor(es) que uma célula usam a célula mais próxima.`:'');
+      });
+    }
+    function mostrarCidade(serie,mes,ano) {
+      const card=$('munCard');
+      if (!serie?.length) { card.hidden=true; return; }
+      const atual=serie.find(r=>Number(r.mes)===mes), fogo=metricaMapa==='focos';
+      const chuvaAno=serie.reduce((s,r)=>s+(r.chuva_media_mm===''?0:Number(r.chuva_media_mm)),0);
+      const focosAno=serie.reduce((s,r)=>s+Number(r.focos_inpe),0);
+      const vals=serie.map(r=>Number(fogo?r.focos_inpe:r.chuva_media_mm)||0), maior=Math.max(...vals,1);
+      const barras=vals.map((v,i)=>`<rect x="${i*20+2}" y="${32-30*v/maior}" width="16" height="${Math.max(1,30*v/maior)}" rx="2" fill="${i+1===mes?'#fff':fogo?'#f4ad72':'#71d4ce'}" opacity="${i+1===mes?1:.6}"><title>${mesesCurtos[i]}: ${fmt(v,fogo?0:1)}${fogo?' focos':' mm'}</title></rect>`).join('');
+      card.innerHTML=`<strong>${zoomMun.nome}</strong><p class="sub">${zoomUF} · ${meses[mes-1]} de ${ano}</p>
+        <dl><dt>Chuva no mês</dt><dd>${atual.chuva_media_mm===''?'sem dado':fmt(atual.chuva_media_mm,1)+' mm'}</dd>
+        <dt>Focos no mês</dt><dd>${fmt(atual.focos_inpe)}</dd>
+        <dt>Chuva no ano</dt><dd>${fmt(chuvaAno,0)} mm</dd><dt>Focos no ano</dt><dd>${fmt(focosAno)}</dd></dl>
+        <svg class="mun-spark" viewBox="0 0 240 34" preserveAspectRatio="none" role="img" aria-label="${fogo?'Focos':'Chuva'} mês a mês em ${zoomMun.nome}">${barras}</svg>`;
+      card.hidden=false;
+    }
+    function focarMunicipio(f) {
+      zoomManual=1;
+      zoomMun=zoomMun?.cd===f.properties.cd?null:{cd:f.properties.cd,nome:f.properties.nome,caixa:f._caixa};
+      atualizarZoom();
+      desenharMunicipios(Number($('year').value),Number($('month').value));
+    }
+    function voltarUF() { zoomMun=null; zoomManual=1; atualizarZoom(); desenharMunicipios(Number($('year').value),Number($('month').value)); }
+    $('crumbUf').addEventListener('click',voltarUF);
+    $('mapMetric').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+      metricaMapa=b.dataset.metrica;
+      $('mapMetric').querySelectorAll('button').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));
+      desenharMunicipios(Number($('year').value),Number($('month').value));
+    }));
+    const MAPA=[0,0,540,470];
+    const limitesUF={};
+    let zoomUF=null, viewBoxAtual=[...MAPA], viewBoxAlvo=[...MAPA], animacao=0, zoomManual=1;
+    const reduzirMovimento=matchMedia('(prefers-reduced-motion: reduce)');
+    const suavizar=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    function enquadrar([x0,y0,x1,y1],folga=.22) {
+      const proporcao=MAPA[2]/MAPA[3];
+      let w=(x1-x0)*(1+2*folga), h=(y1-y0)*(1+2*folga);
+      if (w/h>proporcao) h=w/proporcao; else w=h*proporcao;
+      return [(x0+x1)/2-w/2,(y0+y1)/2-h/2,w,h];
+    }
+    function aplicarViewBox(vb) {
+      const svg=$('map');
+      svg.setAttribute('viewBox',vb.map(v=>v.toFixed(2)).join(' '));
+      svg.style.setProperty('--k',(vb[2]/MAPA[2]).toFixed(4));
+      viewBoxAtual=vb;
+    }
+    function animarViewBox(alvo,duracao=850) {
+      viewBoxAlvo=alvo;
+      cancelAnimationFrame(animacao);
+      if (reduzirMovimento.matches) { aplicarViewBox(alvo); return; }
+      const inicio=[...viewBoxAtual], t0=performance.now();
+      const centro=vb=>[vb[0]+vb[2]/2,vb[1]+vb[3]/2];
+      const [cx0,cy0]=centro(inicio),[cx1,cy1]=centro(alvo);
+      const passo=agora=>{
+        const t=Math.min(1,(agora-t0)/duracao), e=suavizar(t);
+        const w=inicio[2]*Math.pow(alvo[2]/inicio[2],e), h=w*MAPA[3]/MAPA[2];
+        const cx=cx0+(cx1-cx0)*e, cy=cy0+(cy1-cy0)*e;
+        aplicarViewBox([cx-w/2,cy-h/2,w,h]);
+        if (t<1) animacao=requestAnimationFrame(passo);
+      };
+      animacao=requestAnimationFrame(passo);
+    }
+    function atualizarZoom() {
+      let base=[...MAPA];
+      if (zoomUF&&zoomMun) {
+        const [x0,y0,x1,y1]=zoomMun.caixa, cx=(x0+x1)/2, cy=(y0+y1)/2, minimo=22;
+        base=enquadrar([Math.min(x0,cx-minimo/2),Math.min(y0,cy-minimo/2),Math.max(x1,cx+minimo/2),Math.max(y1,cy+minimo/2)],.5);
+        base[0]-=base[2]*.2; base[1]+=base[3]*.1;
+      } else if (zoomUF&&limitesUF[zoomUF]) base=enquadrar(limitesUF[zoomUF]);
+      const w=base[2]/zoomManual, h=base[3]/zoomManual;
+      const alvo=[base[0]+(base[2]-w)/2,base[1]+(base[3]-h)/2,w,h];
+      $('map').classList.toggle('zoomed',Boolean(zoomUF));
+      const nome=zoomUF?linhas.find(r=>r.uf_sigla===zoomUF)?.uf_nome:'';
+      $('crumbRoot').disabled=!zoomUF&&zoomManual===1;
+      $('crumbSep').hidden=$('crumbUf').hidden=!zoomUF;
+      $('crumbUf').textContent=nome||'';
+      $('crumbUf').disabled=!zoomMun;
+      $('crumbSepMun').hidden=$('crumbMun').hidden=!zoomMun;
+      $('crumbMun').textContent=zoomMun?.nome||'';
+      $('map').classList.toggle('zoom-mun',Boolean(zoomMun));
+      if (alvo.some((v,i)=>Math.abs(v-viewBoxAlvo[i])>.01)) animarViewBox(alvo);
+    }
+    function focarUF(sigla) {
+      zoomManual=1;
+      if (zoomUF===sigla) { voltarNordeste(); return; }
+      zoomUF=sigla; zoomMun=null; $('uf').value=sigla; render();
+    }
+    function voltarNordeste() { zoomUF=null; zoomMun=null; zoomManual=1; render(); }
+    $('crumbRoot').addEventListener('click',voltarNordeste);
+    $('zoomIn').addEventListener('click',()=>{zoomManual=Math.min(4,zoomManual*1.5);atualizarZoom();});
+    $('zoomOut').addEventListener('click',()=>{if(zoomManual>1){zoomManual=Math.max(1,zoomManual/1.5);}else if(zoomMun){voltarUF();return;}else if(zoomUF){voltarNordeste();return;}atualizarZoom();});
+    document.addEventListener('keydown',e=>{if(e.key!=='Escape')return; if(zoomMun)voltarUF(); else if(zoomUF||zoomManual!==1)voltarNordeste();});
     function configurarEpisodio() {
       const serie=linhas.filter(r=>r.uf_sigla==='MA').sort((a,b)=>Number(a.ano)-Number(b.ano)||Number(a.mes)-Number(b.mes));
       const grupos=[];let grupo=[];
@@ -384,7 +601,7 @@
         const nomes=[...new Map(linhas.map(r=>[r.uf_sigla,r.uf_nome])).entries()];
         $('uf').innerHTML=nomes.map(([sigla,nome])=>`<option value="${sigla}">${nome}</option>`).join('');
         $('uf').value='MA';
-        $('uf').addEventListener('change',render);$('month').addEventListener('input',render);$('year').addEventListener('change',render);
+        $('uf').addEventListener('change',()=>{zoomUF=$('uf').value;zoomMun=null;zoomManual=1;render();});$('month').addEventListener('input',render);$('year').addEventListener('change',render);
         $('rankMetric').addEventListener('change',render);$('heatMetric').addEventListener('change',render);
         render();
       }).catch(err=>{document.querySelector('.grid').textContent=`Não foi possível abrir o painel: ${err.message}. Confira as bases em raw/ e o guia de processamento.`;});
