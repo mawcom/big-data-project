@@ -76,14 +76,16 @@ def dimensao_uf() -> pd.DataFrame:
     return quadro
 
 
-def ler_oni(ano: int) -> tuple[pd.DataFrame, dict]:
+def serie_oni() -> tuple[pd.DataFrame, Path]:
+    """Lê o histórico ONI completo e classifica a fase ENSO de cada mês."""
     caminho = exigir(RAW / "enso" / "oni_cpc_v6.html")
     pagina = caminho.read_text(encoding="utf-8", errors="replace")
     registros = []
     for linha in re.findall(r"<tr[^>]*>.*?</tr>", pagina, flags=re.I | re.S):
         celulas = re.findall(r"<td\b[^>]*>(.*?)</td>", linha, flags=re.I | re.S)
         partes = [html.unescape(re.sub(r"<[^>]+>", " ", celula)).strip() for celula in celulas]
-        if len(partes) < 13 or not re.fullmatch(r"(?:19|20)\d{2}", partes[0]):
+        # O ano em curso tem menos de 12 janelas publicadas.
+        if len(partes) < 2 or not re.fullmatch(r"(?:19|20)\d{2}", partes[0]):
             continue
         for mes, (janela, texto) in enumerate(zip(JANELAS_ONI, partes[1:13]), start=1):
             try:
@@ -113,6 +115,11 @@ def ler_oni(ano: int) -> tuple[pd.DataFrame, dict]:
                     fase[inicio:pos] = rotulo
                 inicio = None
     serie["fase_enso"] = fase
+    return serie, caminho
+
+
+def ler_oni(ano: int) -> tuple[pd.DataFrame, dict]:
+    serie, caminho = serie_oni()
     resultado = serie.loc[serie.ano.eq(ano), ["ano", "mes", "janela_oni", "oni_c", "fase_enso"]].copy()
     if len(resultado) != 12:
         raise ValueError(f"ONI de {ano} tem {len(resultado)} meses, não 12.")
@@ -238,16 +245,17 @@ def lookup_uf(campos: dict, ufs: pd.DataFrame) -> pd.DataFrame:
     return resultado.sort_values(["uf_codigo_ibge", "linha", "coluna"]).reset_index(drop=True)
 
 
-def ler_chirps(ano: int, ufs: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
-    caminhos = [exigir(RAW / "chirps_v3_mensal_latam" / f"chirps-v3.0.{ano}{mes:02d}.tar.gz") for mes in range(1, 13)]
+def ler_chirps(ano: int, ufs: pd.DataFrame, meses: list[int] | None = None) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    meses = meses or list(range(1, 13))
+    caminhos = [exigir(RAW / "chirps_v3_mensal_latam" / f"chirps-v3.0.{ano}{mes:02d}.tar.gz") for mes in meses]
     cabecalho, dados = cabecalho_chirps(caminhos[0])
     lookup = lookup_uf(cabecalho, ufs)
     ncol, nlin = int(cabecalho["NCOLS"]), int(cabecalho["NROWS"])
     indices = lookup.linha.to_numpy() * ncol + lookup.coluna.to_numpy()
     registros = []
     estatisticas = []
-    for mes, caminho in enumerate(caminhos, start=1):
-        campos, grade = (cabecalho, dados) if mes == 1 else cabecalho_chirps(caminho)
+    for posicao, (mes, caminho) in enumerate(zip(meses, caminhos)):
+        campos, grade = (cabecalho, dados) if posicao == 0 else cabecalho_chirps(caminho)
         if campos != cabecalho:
             raise ValueError(f"Georreferência da grade CHIRPS mudou em {caminho}")
         tipo = "<f4" if campos["BYTEORDER"] == "I" else ">f4"

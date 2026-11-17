@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f6">
+  <title>Impactos do El Niño no Nordeste</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    /* Paleta da aula (FACIMP): roxo = chuva, magenta = focos, laranja = El Niño, cinza-lilás = referência. */
+    :root { color-scheme:light; --bg:#f5f5f6; --panel:#ffffff; --line:#e6e0ee; --title:#2b1055; --text:#3e3a47; --muted:#6e6880; --context:#d3cfda; --chuva:#6a1b9a; --fogo:#d81b60; --nino:#f7941d; --soft:#f4eefa; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    html,body { margin:0; background:var(--bg); }
+    body { font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--text); }
+    a { color:var(--chuva); }
+    .screen { display:flex; flex-direction:column; gap:10px; max-width:1680px; margin:auto; padding:12px 20px; }
+    header { display:flex; justify-content:space-between; align-items:flex-end; gap:12px 24px; flex-wrap:wrap; }
+    .eyebrow { color:var(--chuva); text-transform:uppercase; letter-spacing:.15em; font-size:11px; font-weight:800; }
+    h1 { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-weight:500; letter-spacing:-.03em; font-size:clamp(24px,2.3vw,34px); line-height:1.1; margin:4px 0 0; }
+    .filter { display:flex; gap:10px; align-items:center; }
+    label { text-transform:uppercase; letter-spacing:.1em; font-size:11px; font-weight:750; color:var(--muted); }
+    select { font:inherit; font-size:14px; color:var(--text); background:#fff; border:1px solid #c9c4d1; border-radius:9px; padding:8px 12px; cursor:pointer; }
+    .big-idea { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-size:clamp(17px,1.45vw,22px); line-height:1.3; margin:0; }
+    .big-idea b { color:var(--fogo); font-weight:700; }
+    .big-idea b.rain { color:var(--chuva); }
+    .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .card,.panel { border:1px solid var(--line); background:var(--panel); border-radius:13px; box-shadow:0 1px 2px #2b105510; }
+    .card { padding:10px 14px; }
+    .card span { display:block; font-size:12px; color:var(--muted); }
+    .card strong { display:block; color:var(--title); font-family:Georgia,"Times New Roman",serif; font-size:26px; font-weight:500; margin-top:4px; font-variant-numeric:tabular-nums; }
+    .card small { color:var(--muted); font-size:12px; }
+    .card.rain strong { color:var(--chuva); } .card.fire strong { color:var(--fogo); } .card.rain { border-top:3px solid var(--chuva); } .card.fire { border-top:3px solid var(--fogo); }
+    .grid { display:grid; gap:10px; grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr) minmax(270px,.9fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"rain map read" "fire map read"; }
+    .p-rain { grid-area:rain; } .p-fire { grid-area:fire; } .p-map { grid-area:map; } .p-map h2 { font-size:16px; } .p-read { grid-area:read; }
+    .panel { padding:12px 14px; min-width:0; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+    h2 { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:18px; line-height:1.25; margin:0 0 2px; }
+    .note { color:var(--muted); font-size:12px; line-height:1.4; margin:4px 0 0; }
+    .chart { flex:1; min-height:150px; width:100%; display:block; }
+    .chart text { fill:var(--muted); font:12px Inter,ui-sans-serif,system-ui,sans-serif; }
+    .chart text.annot { fill:var(--text); font-weight:700; }
+    .chart text.halo { paint-order:stroke; stroke:#fff; stroke-width:3px; }
+    .chart text.oni { font-size:11px; fill:#b86a0c; }
+    .panel-top { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+    .toggle { display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; flex:none; }
+    .toggle button { border:0; background:none; color:var(--muted); font:600 12px Inter,ui-sans-serif,system-ui,sans-serif; padding:6px 10px; cursor:pointer; }
+    .toggle button[aria-pressed=true] { background:#eaddf5; color:var(--chuva); }
+    .toggle button.fire[aria-pressed=true] { background:#fbe3ec; color:var(--fogo); }
+    .map-wrap { flex:1; min-height:0; position:relative; }
+    #map { width:100%; height:100%; display:block; }
+    .state { stroke:#ffffff; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
+    .state:hover,.state:focus-visible { stroke:var(--title); stroke-width:2; outline:none; }
+    .state.selected { stroke:var(--title); stroke-width:3; }
+    .state-label { fill:var(--title); font:800 calc(12px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    .state-value { fill:var(--text); font:600 calc(11px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    #map.zoomed .state { fill:#eceaef; cursor:pointer; }
+    #map.zoomed .state.selected { opacity:1; fill:#ffffff; }
+    #map.zoomed .state-label,#map.zoomed .state-value { display:none; }
+    .mun { stroke:#ffffff; stroke-width:.5; vector-effect:non-scaling-stroke; cursor:pointer; }
+    .mun:hover,.mun:focus-visible { stroke:var(--title); stroke-width:1.5; outline:none; }
+    .mun.selected { stroke:var(--title); stroke-width:2.5; }
+    .mun-label { fill:var(--title); font:800 calc(12px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(4px * var(--k,1)); }
+    .crumbs { position:absolute; top:6px; left:6px; display:flex; gap:6px; align-items:center; font-size:12px; background:#ffffffe6; border:1px solid var(--line); border-radius:9px; padding:5px 9px; }
+    .crumbs button { border:0; background:none; padding:0; font:inherit; color:var(--chuva); cursor:pointer; }
+    .crumbs button:disabled { color:var(--title); font-weight:700; cursor:default; }
+    .crumbs .sep { color:var(--muted); }
+    .map-status { position:absolute; inset:auto 6px 6px auto; font-size:11px; color:var(--muted); background:#ffffffe6; padding:3px 8px; border-radius:7px; }
+    select:disabled { opacity:.5; cursor:default; }
+    .scale { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; margin-top:4px; }
+    .scale i { flex:1; height:8px; border-radius:9px; }
+    .p-read { overflow-y:auto; }
+    .reading { list-style:none; padding:0; margin:6px 0 0; display:grid; gap:7px; font-size:12.5px; line-height:1.35; color:var(--muted); }
+    .reading b { color:var(--text); font-weight:650; }
+    .reading .tag { display:inline-block; min-width:62px; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-right:4px; }
+    .tag.rain { color:var(--chuva); } .tag.fire { color:var(--fogo); } .tag.warn { color:var(--muted); } .tag.act { color:var(--title); }
+    .reading li.act { border-top:1px solid var(--line); padding-top:9px; color:var(--text); }
+    .tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); }
+    .tabs button { border:0; border-bottom:2px solid transparent; background:none; color:var(--muted); font:600 13px Inter,ui-sans-serif,system-ui,sans-serif; padding:7px 14px; cursor:pointer; margin-bottom:-1px; }
+    .tabs button:hover { color:var(--text); }
+    .tabs button[aria-selected=true] { color:var(--title); border-bottom-color:var(--fogo); }
+    .tab-one { display:flex; } .tab-one .panel { flex:1; }
+    .tab-two { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .grid26 { display:grid; gap:10px; grid-template-columns:minmax(0,1.55fr) minmax(250px,.8fr) minmax(250px,.85fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"r26 e26 m26" "f26 e26 m26"; }
+    .p-r26 { grid-area:r26; } .p-f26 { grid-area:f26; } .p-e26 { grid-area:e26; } .p-m26 { grid-area:m26; }
+    #map26 { width:100%; height:100%; display:block; }
+    .grid26 .chart { min-height:90px; } .grid26 .map-wrap { min-height:90px; }
+    .grid26 h2 { font-size:16px; flex:none; }
+    .grid26 .p-r26 h2,.grid26 .p-f26 h2 { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .grid26 .note,.grid26 .scale { flex:none; }
+    .chart .hit { cursor:pointer; }
+    .chart .hit:hover { fill:#2b10550a; }
+    footer { color:var(--muted); font-size:11px; line-height:1.4; }
+    .error { border-left:3px solid var(--fogo); background:#fbe3ec; padding:12px 15px; color:var(--text); border-radius:0 10px 10px 0; font-size:13px; }
+    @media (min-width:1000px) and (min-height:600px) { .screen { height:100vh; height:100dvh; } .tab { flex:1; min-height:0; } }
+    @media (max-width:1099px) and (min-width:700px) { .grid { grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); grid-template-areas:"rain map" "fire read"; } }
+    @media (max-width:699px), (max-height:599px) { .grid { grid-template-columns:1fr; grid-template-rows:none; grid-template-areas:"rain" "fire" "map" "read"; } .tab-two { grid-template-columns:1fr; } .grid26 { grid-template-columns:1fr; grid-template-rows:none; grid-template-areas:"r26" "f26" "e26" "m26"; } .chart { height:240px; flex:none; } #timeChart { height:420px; } .map-wrap { height:340px; flex:none; } }
+    @media (max-width:1099px) and (min-width:700px) { .grid26 { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); grid-template-rows:repeat(2,minmax(0,1fr)); grid-template-areas:"r26 e26" "f26 m26"; } }
+    @media (max-width:640px) { .screen { padding:12px 16px; } .cards { grid-template-columns:repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <!-- Tela única por aba: um tema (impactos do El Niño), um filtro; resumo fixo no topo e abas embaixo. Nada abaixo da dobra. -->
+  <main class="screen">
+    <header>
+      <div>
+        <div class="eyebrow" id="eyebrow">Carregando dados observados…</div>
+        <h1>O que o El Niño mudou no Nordeste</h1>
+      </div>
+      <div class="filter"><label for="regiao">Recorte</label><select id="regiao"><option value="NE">Nordeste inteiro</option></select><select id="cidade" disabled aria-label="Município"><option value="">Todos os municípios</option></select></div>
+    </header>
+    <p class="big-idea" id="bigIdea">Carregando…</p>
+    <div class="cards">
+      <div class="card"><span>Episódio El Niño</span><strong id="kEpisode">—</strong><small id="kEpisodeNote"></small></div>
+      <div class="card"><span>Pico de intensidade (ONI)</span><strong id="kPeak">—</strong><small id="kPeakNote"></small></div>
+      <div class="card rain"><span>Chuva no episódio vs. normal</span><strong id="kRain">—</strong><small id="kRainNote"></small></div>
+      <div class="card fire"><span>Focos no episódio vs. normal</span><strong id="kFire">—</strong><small id="kFireNote"></small></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Abas do painel">
+      <button type="button" role="tab" data-tab="geral" aria-selected="true">Visão geral</button>
+      <button type="button" role="tab" data-tab="tempo" aria-selected="false">Linha do tempo</button>
+      <button type="button" role="tab" data-tab="estados" aria-selected="false">Por estado</button>
+      <button type="button" role="tab" data-tab="2026" aria-selected="false">2026 vs. passado</button>
+    </div>
+    <div class="grid tab" id="tab-geral" role="tabpanel">
+      <section class="panel p-rain">
+        <h2 id="rainTitle">Chuva mês a mês</h2>
+        <svg id="rainChart" class="chart" role="img" aria-label="Chuva em cada mês do El Niño comparada com os mesmos meses sem El Niño"></svg>
+        <p class="note">Normal = média do mesmo mês em anos sem El Niño. Abaixo do mês, o ONI (°C). Fonte: CHIRPS v3.</p>
+      </section>
+      <section class="panel p-fire">
+        <h2 id="fireTitle">Focos de fogo mês a mês</h2>
+        <svg id="fireChart" class="chart" role="img" aria-label="Focos em cada mês do El Niño comparados com os mesmos meses sem El Niño"></svg>
+        <p class="note">Normal = média do mesmo mês em anos sem El Niño. Fonte: INPE (satélite de referência).</p>
+      </section>
+      <section class="panel p-map">
+        <div class="panel-top">
+          <h2 id="mapTitle">Onde mudou</h2>
+          <div class="toggle" role="group" aria-label="Medida do mapa"><button type="button" data-m="chuva" aria-pressed="true">Chuva</button><button type="button" class="fire" data-m="focos" aria-pressed="false">Focos</button></div>
+        </div>
+        <div class="map-wrap"><svg id="map" role="img" aria-label="Variação por estado ou município durante o El Niño"></svg><nav class="crumbs" id="crumbs" aria-label="Navegação do mapa" hidden></nav><span class="map-status" id="mapStatus" hidden></span></div>
+        <div class="scale"><span id="scaleMin"></span><i id="scaleBar"></i><span id="scaleMax"></span></div>
+        <p class="note" id="mapNote"></p>
+      </section>
+      <section class="panel p-read">
+        <h2>Leitura</h2>
+        <ul class="reading" id="reading"></ul>
+      </section>
+    </div>
+    <div class="tab tab-one" id="tab-tempo" role="tabpanel" hidden>
+      <section class="panel">
+        <h2 id="timeTitle">Antes, durante e depois do El Niño</h2>
+        <svg id="timeChart" class="chart" role="img" aria-label="ONI, chuva e focos mês a mês, com o período de El Niño sombreado"></svg>
+        <p class="note">Faixa laranja: meses de El Niño (ONI ≥ +0,5 °C). Barras coloridas dentro do episódio, cinza fora dele. Passe o mouse sobre um mês para ver os três valores. Fontes: NOAA, CHIRPS v3, INPE.</p>
+      </section>
+    </div>
+    <div class="tab tab-two" id="tab-estados" role="tabpanel" hidden>
+      <section class="panel">
+        <h2 id="stRainTitle">Chuva por estado</h2>
+        <svg id="stRain" class="chart" role="img" aria-label="Variação de chuva por estado nos meses de El Niño"></svg>
+        <p class="note">Chuva somada nos meses do episódio vs. média dos mesmos meses sem El Niño. Clique em um estado para filtrar o painel.</p>
+      </section>
+      <section class="panel">
+        <h2 id="stFireTitle">Focos por estado</h2>
+        <svg id="stFire" class="chart" role="img" aria-label="Variação de focos por estado nos meses de El Niño"></svg>
+        <p class="note">Focos somados nos meses do episódio vs. média dos mesmos meses sem El Niño. Foco é detecção de satélite, não área queimada.</p>
+      </section>
+    </div>
+    <div class="tab grid26" id="tab-2026" role="tabpanel" hidden>
+      <section class="panel p-r26">
+        <h2 id="r26Title">Chuva: 2026 observado vs. o que o passado previa</h2>
+        <svg id="r26Chart" class="chart" role="img" aria-label="Chuva observada em 2026 comparada com a média histórica e com a média dos El Niños passados, com projeção até junho do ano seguinte"></svg>
+        <p class="note">Diferença para o normal do mês (1991–2020), em mm; faixa = entre os El Niños passados. <span id="r26Note"></span></p>
+      </section>
+      <section class="panel p-f26">
+        <h2 id="f26Title">Focos: 2026 observado vs. o que o passado previa</h2>
+        <svg id="f26Chart" class="chart" role="img" aria-label="Focos observados em 2026 comparados com a média histórica e com a média dos El Niños passados, com projeção até junho do ano seguinte"></svg>
+        <p class="note">Diferença para o normal do mês (2003–2025); 2026 preliminar; faixa = entre os El Niños passados. <span id="f26Note"></span></p>
+      </section>
+      <section class="panel p-e26">
+        <h2 id="e26Title">Quanto cada regra errou</h2>
+        <svg id="e26Chart" class="chart" role="img" aria-label="Erro relativo de cada regra de previsão nos meses de El Niño já observados em 2026"></svg>
+        <p class="note" id="e26Note"></p>
+      </section>
+      <section class="panel p-m26">
+        <h2 id="m26Title">Quadra chuvosa depois dos El Niños fortes</h2>
+        <div class="map-wrap"><svg id="map26" role="img" aria-label="Variação da chuva de fevereiro a maio após os El Niños fortes, por município"></svg><span class="map-status" id="map26Status" hidden></span></div>
+        <div class="scale"><span id="scale26Min"></span><i id="scale26Bar"></i><span id="scale26Max"></span></div>
+        <p class="note" id="m26Note"></p>
+      </section>
+    </div>
+    <footer id="footer">Fontes: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php">NOAA CPC ONI v6</a>, <a href="https://data.chc.ucsb.edu/products/CHIRPS/v3.0/monthly/latam/bils/">CHIRPS v3</a>, <a href="https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/">INPE</a>, <a href="https://servicodados.ibge.gov.br/api/docs/malhas?versao=3">IBGE</a>. El Niño = ONI ≥ +0,5 °C. Foco é detecção de satélite, não área queimada. Associação não é causalidade.</footer>
+  </main>
+  <script>
+    const $ = id => document.getElementById(id);
+    const mesesCurtos = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const fmt = (n,d=0) => Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+    const pct = v => { const r=Math.round(v); return `${r>0?'+':r<0?'−':''}${fmt(Math.abs(r))}%`; };
+    const sinal = v => `${v>0?'+':v<0?'−':''}${fmt(Math.abs(v),1)}`;
+    const media = xs => xs.length ? xs.reduce((a,b)=>a+b,0)/xs.length : 0;
+    const COR = { chuva:'#6a1b9a', fogo:'#d81b60', nino:'#f7941d', oni:'#2b1055', contexto:'#d3cfda', eixo:'#c9c4d1', limiar:'#6e6880', neutro:[236,232,241] };
+    const svgNS = 'http://www.w3.org/2000/svg';
+    let linhas=[], features=[], ufs=[], episodio=[], fasePorMes=new Map(), regiao='NE', metricaMapa='chuva', ANOS=[];
+    // Recorte municipal: carregado sob demanda quando um estado é escolhido.
+    let cidade=null; const munIdx=new Map(), munUF={};
+    const alvo = () => cidade ? `m:${cidade.cd}` : regiao;
+
+    const chave = (ano,mes) => `${ano}-${mes}`;
+    const rotuloMes = (ano,mes) => `${mesesCurtos[mes-1]}/${String(ano).slice(2)}`;
+    // Valor de um mês no recorte: chuva = média dos estados (mm); focos = soma dos estados.
+    function valor(ano,mes,campo,sel) {
+      if (sel.startsWith('m:')) { const r=munIdx.get(`${sel.slice(2)}-${ano}-${mes}`); return !r || r[campo]==='' ? null : Number(r[campo]); }
+      const rs = linhas.filter(r=>r._ano===ano && r._mes===mes && (sel==='NE' || r.uf_sigla===sel));
+      if (!rs.length) return null;
+      const vs = rs.map(r=>Number(r[campo]));
+      return campo==='chuva_media_mm' ? media(vs) : vs.reduce((a,b)=>a+b,0);
+    }
+    // Referência: média do mesmo mês do calendário nos anos em que não havia El Niño.
+    function referencia(mes,campo,sel) {
+      const anos = ANOS.filter(a=>fasePorMes.get(chave(a,mes)) && fasePorMes.get(chave(a,mes))!=='El Niño');
+      const vs = anos.map(a=>valor(a,mes,campo,sel)).filter(v=>v!==null);
+      return vs.length ? { v:media(vs), anos } : null;
+    }
+    function comparar(campo,sel) {
+      const meses = episodio.map(e=>({ ...e, nino:valor(e.ano,e.mes,campo,sel), ref:referencia(e.mes,campo,sel) })).filter(m=>m.nino!==null && m.ref);
+      const nino = meses.reduce((s,m)=>s+m.nino,0), ref = meses.reduce((s,m)=>s+m.ref.v,0);
+      return { meses, nino, ref, dif: ref ? 100*(nino/ref-1) : 0 };
+    }
+    const nomeRecorte = sel => sel==='NE' ? 'Nordeste' : sel.startsWith('m:') ? `${cidade.nome} (${regiao})` : ufs.find(u=>u[0]===sel)[1];
+
+    // Último trecho contínuo de meses classificados como El Niño.
+    function encontrarEpisodio() {
+      const meses = [...fasePorMes.entries()].map(([k,f])=>{ const [a,m]=k.split('-').map(Number); return {ano:a,mes:m,fase:f,i:a*12+m}; }).sort((a,b)=>a.i-b.i);
+      const grupos=[]; let g=[];
+      for (const m of meses) {
+        if (m.fase==='El Niño' && (!g.length || m.i===g.at(-1).i+1)) g.push(m);
+        else { if (g.length) grupos.push(g); g = m.fase==='El Niño' ? [m] : []; }
+      }
+      if (g.length) grupos.push(g);
+      return grupos.at(-1) || [];
+    }
+    const oniDe = (ano,mes) => Number(linhas.find(r=>r._ano===ano && r._mes===mes)?.oni_c);
+    const intensidade = v => v>=2 ? 'muito forte' : v>=1.5 ? 'forte' : v>=1 ? 'moderado' : 'fraco';
+
+    function desenharComparacao(id,campo,cor,sel) {
+      const svg=$(id), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H) return;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      const c=comparar(campo,sel), chuva=campo==='chuva_media_mm', un=chuva?' mm':'';
+      const L=54,R=62,T=20,B=34, base=H-B, alto=base-T, n=c.meses.length, passo=(W-L-R)/n;
+      const maior=Math.max(...c.meses.flatMap(m=>[m.nino,m.ref.v]),1);
+      const p10=Math.pow(10,Math.floor(Math.log10(maior))), teto=Math.ceil(maior/p10/2)*p10*2;
+      const y=v=>base-(v/teto)*alto, x=i=>L+passo*i+passo/2;
+      const wRef=Math.min(passo*.78,46), wNino=wRef*.5;
+      // O único destaque de texto: o mês com a maior diferença absoluta.
+      const iDestaque=c.meses.reduce((best,m,i)=>Math.abs(m.nino-m.ref.v)>Math.abs(c.meses[best].nino-c.meses[best].ref.v)?i:best,0);
+      let s=[0,teto/2,teto].map(v=>`<text x="${L-8}" y="${y(v)+4}" text-anchor="end">${fmt(v)}</text>`).join('');
+      s+=`<line x1="${L}" x2="${W-R}" y1="${base}" y2="${base}" stroke="${COR.eixo}"/>`;
+      c.meses.forEach((m,i)=>{
+        const dif=m.nino-m.ref.v, tip=`${rotuloMes(m.ano,m.mes)} (El Niño, ONI ${sinal(oniDe(m.ano,m.mes))} °C): ${fmt(m.nino,chuva?1:0)}${un||' focos'} · sem El Niño (${m.ref.anos.join(', ')}): ${fmt(m.ref.v,chuva?1:0)}${un||' focos'}`;
+        s+=`<g><title>${tip}</title>`+
+          `<rect x="${x(i)-wRef/2}" y="${y(m.ref.v)}" width="${wRef}" height="${Math.max(0,base-y(m.ref.v))}" rx="3" fill="${COR.contexto}"/>`+
+          `<rect x="${x(i)-wNino/2}" y="${y(m.nino)}" width="${wNino}" height="${Math.max(0,base-y(m.nino))}" rx="2" fill="${cor}"/>`+
+          `<rect x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${alto}" fill="transparent"/></g>`;
+        // Rótulo acima das barras do mês e das vizinhas, com contorno branco, para não encostar em nenhuma.
+        if (i===iDestaque) { const topo=Math.min(...c.meses.slice(Math.max(0,i-1),i+2).flatMap(v=>[y(v.nino),y(v.ref.v)]));
+          s+=`<text class="annot halo" x="${x(i)}" y="${Math.max(T-6,topo-7)}" text-anchor="middle">${dif>0?'+':'−'}${fmt(Math.abs(dif))}${un||' focos'}</text>`; }
+        // Sem espaço para todos os meses, mostra um sim, um não (e sempre o mês em destaque).
+        const cabe=passo>=46 || i%2===iDestaque%2;
+        if (cabe) s+=`<text x="${x(i)}" y="${H-19}" text-anchor="middle"${i===iDestaque?' class="annot"':''}>${rotuloMes(m.ano,m.mes)}</text>`;
+        if (chuva && cabe) s+=`<text class="oni" x="${x(i)}" y="${H-5}" text-anchor="middle">${sinal(oniDe(m.ano,m.mes))}</text>`;
+      });
+      // Rótulo direto (proximidade) no último mês, no lugar da legenda embaixo do gráfico.
+      const u=c.meses.at(-1), xl=x(n-1)+wRef/2+6; let ya=y(u.nino), yb=y(u.ref.v);
+      if (Math.abs(ya-yb)<14) { const m=(ya+yb)/2, cima=ya<=yb; ya=m+(cima?-7:7); yb=m+(cima?7:-7); }
+      ya=Math.min(base-2,ya); yb=Math.min(base-2,yb); if (Math.abs(ya-yb)<14) ya=yb-14;
+      s+=`<text class="annot" x="${xl}" y="${ya+4}" style="fill:${cor}">El Niño</text><text x="${xl}" y="${yb+4}">normal</text>`;
+      svg.innerHTML=s;
+      return c;
+    }
+
+    // Escala divergente: zero em cinza-lilás, "mais" na cor da métrica (roxo = chuva, magenta = focos) e "menos" em cinza escuro.
+    // O lado negativo nunca usa a cor da outra métrica (Gestalt, similaridade: mesma cor = mesma métrica no painel todo).
+    // Focos usam um cinza mais claro: na protanopia, magenta e cinza escuro ficam quase iguais (ΔE 4; com #9b98a3, ΔE 26).
+    function corDivergente(t,fogo) {
+      const alvo = t>0 ? (fogo ? [216,27,96] : [106,27,154]) : (fogo ? [155,152,163] : [95,90,107]), a=Math.min(1,Math.abs(t));
+      const [r,g,b]=COR.neutro.map((n,i)=>Math.round(n+(alvo[i]-n)*a));
+      return `rgb(${r},${g},${b})`;
+    }
+    function carregarUF(uf) {
+      munUF[uf] ??= Promise.all([
+        fetch(`/static/municipios/${uf}.geojson`).then(x=>x.ok?x.json():Promise.reject()),
+        ...ANOS.map(a=>fetch(`/api/municipios?ano=${a}&uf=${uf}`).then(x=>x.ok?x.json():Promise.reject()))
+      ]).then(([malha,...anos])=>{
+        for (const d of anos) for (const r of d.linhas) munIdx.set(`${r.municipio_codigo_ibge}-${Number(r.ano)}-${Number(r.mes)}`,r);
+        return { features:malha.features, lista:malha.features.map(f=>[f.properties.cd,f.properties.nome]).sort((a,b)=>a[1].localeCompare(b[1],'pt-BR')) };
+      }).catch(()=>null);
+      return munUF[uf];
+    }
+    const aneis = g => g.type==='Polygon' ? [g.coordinates] : g.coordinates;
+    const caminho = (g,xy) => aneis(g).map(pol=>pol.map(anel=>anel.map((p,i)=>{const [a,b]=xy(p);return `${i?'L':'M'}${a.toFixed(2)},${b.toFixed(2)}`;}).join('')+'Z').join('')).join('');
+    const caixa = pts => [Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))];
+    // Limite da escala: percentil 95 do valor absoluto, para um município extremo não apagar os demais.
+    const limite = (vs,passo) => { const a=vs.map(Math.abs).sort((x,y)=>x-y); return Math.max(passo,Math.ceil((a[Math.floor(.95*(a.length-1))]||0)/passo)*passo); };
+    function desenharMapa() {
+      const svg=$('map'), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H) return;
+      const fogo=metricaMapa==='focos', campo=fogo?'focos_inpe':'chuva_media_mm', medida=fogo?'focos':'chuva';
+      const pts=features.flatMap(f=>aneis(f.geometry).flat(2));
+      const [x0,y0,x1,y1]=caixa(pts);
+      const k=Math.min((W-8)/(x1-x0),(H-8)/(y1-y0)), ox=(W-(x1-x0)*k)/2, oy=(H-(y1-y0)*k)/2;
+      const xy=p=>[ox+(p[0]-x0)*k, oy+(y1-p[1])*k];
+      const uf=regiao!=='NE'?regiao:null, malha=uf?munCarregado[uf]:null;
+      // Enquadramento: Nordeste inteiro ou o estado escolhido, mantendo a proporção do painel.
+      let vb=[0,0,W,H];
+      if (uf) {
+        const f=features.find(f=>f.properties.SIGLA_UF===uf), [a,b,c,d]=caixa(aneis(f.geometry).flat(2).map(xy));
+        let w=(c-a)*1.1, h=(d-b)*1.1; if (w/h>W/H) h=w*H/W; else w=h*W/H;
+        vb=[(a+c)/2-w/2,(b+d)/2-h/2,w,h];
+      }
+      svg.setAttribute('viewBox',vb.map(v=>v.toFixed(2)).join(' '));
+      svg.style.setProperty('--k',(vb[2]/W).toFixed(4));
+      svg.classList.toggle('zoomed',Boolean(uf));
+      svg.replaceChildren();
+      const difs=Object.fromEntries(ufs.map(([s])=>[s,comparar(campo,s).dif]));
+      const limUF=Math.max(5,Math.ceil(Math.max(...Object.values(difs).map(Math.abs))/5)*5);
+      const rotulos=[];
+      for (const f of features) {
+        const sigla=f.properties.SIGLA_UF, dif=difs[sigla], nome=nomeRecorte(sigla);
+        const path=document.createElementNS(svgNS,'path');
+        path.setAttribute('d',caminho(f.geometry,xy)); path.setAttribute('fill',corDivergente(dif/limUF,fogo)); path.setAttribute('fill-rule','evenodd');
+        path.setAttribute('class',`state${sigla===regiao?' selected':''}`); path.setAttribute('tabindex','0');
+        path.setAttribute('aria-label',`${nome}: ${pct(dif)} de ${medida} no El Niño`);
+        const t=document.createElementNS(svgNS,'title'); t.textContent=`${nome}: ${pct(dif)} de ${medida} nos meses de El Niño`; path.appendChild(t);
+        const escolher=()=>selecionar(regiao===sigla?'NE':sigla);
+        path.addEventListener('click',escolher);
+        path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();escolher();}});
+        svg.appendChild(path);
+        const anel=aneis(f.geometry).reduce((a,b)=>b[0].length>a[0].length?b:a)[0];
+        const [cx,cy]=xy([media(anel.map(p=>p[0])),media(anel.map(p=>p[1]))]), [a,b,c,d]=caixa(anel.map(xy));
+        // Estados pequenos ficam só com a sigla; o valor aparece no tooltip.
+        rotulos.push(`<text class="state-label" x="${cx}" y="${cy}">${sigla}</text>`+(c-a>62&&d-b>42?`<text class="state-value" x="${cx}" y="${cy+13}">${pct(dif)}</text>`:''));
+      }
+      let lim=limUF, unidade='%', titulo, nota;
+      if (uf && malha) {
+        // Municípios: chuva em %; focos em diferença absoluta, porque muitos municípios têm poucos focos e o % explode.
+        const dados=malha.features.map(f=>{ const c=comparar(campo,`m:${f.properties.cd}`); return {f,c,v:fogo?c.nino-c.ref:c.dif,ok:c.meses.length>0}; });
+        const validos=dados.filter(d=>d.ok);
+        lim=fogo?limite(validos.map(d=>d.v),10):limite(validos.map(d=>d.v),5); unidade=fogo?' focos':'%';
+        const g=document.createElementNS(svgNS,'g');
+        for (const d of dados) {
+          const p=document.createElementNS(svgNS,'path'), cd=d.f.properties.cd, nome=d.f.properties.nome;
+          // O traçado depende do tamanho do mapa: refaz quando o painel muda de tamanho.
+          if (d.f._tam!==`${W}x${H}`) { d.f._d=caminho(d.f.geometry,xy); d.f._tam=`${W}x${H}`; }
+          p.setAttribute('d',d.f._d); p.setAttribute('fill-rule','evenodd');
+          p.setAttribute('fill',d.ok?corDivergente(Math.max(-1,Math.min(1,d.v/lim)),fogo):'#ece8f1');
+          p.setAttribute('class',`mun${cidade?.cd===cd?' selected':''}`); p.setAttribute('tabindex','0');
+          const txt=!d.ok?`${nome}: sem dado`:fogo?`${nome}: ${fmt(d.c.nino)} focos no El Niño vs. ${fmt(d.c.ref)} sem El Niño (${d.v>=0?'+':'−'}${fmt(Math.abs(d.v))})`:`${nome}: ${pct(d.v)} de chuva no El Niño (${fmt(d.c.nino)} vs. ${fmt(d.c.ref)} mm)`;
+          const t=document.createElementNS(svgNS,'title'); t.textContent=txt; p.appendChild(t);
+          const escolher=()=>selecionarCidade(cd);
+          p.addEventListener('click',escolher);
+          p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();escolher();}});
+          g.appendChild(p);
+        }
+        const sel=g.querySelector('.mun.selected'); if (sel) g.appendChild(sel);
+        svg.appendChild(g);
+        if (cidade) { const f=malha.features.find(f=>f.properties.cd===cidade.cd); if (f) { const [a,b,c]=caixa(aneis(f.geometry).flat(2).map(xy)); rotulos.push(`<text class="mun-label" x="${(a+c)/2}" y="${b-6*vb[2]/W}">${cidade.nome}</text>`); } }
+        const subiram=validos.filter(d=>fogo?d.v>=1:Math.round(d.v)>0).length;
+        titulo=`Mais ${medida} em ${subiram}/${validos.length} municípios`;
+        nota=`Cada município no El Niño vs. os mesmos meses sem El Niño${fogo?' (diferença em número de focos)':''}. Clique em um município para focar o painel nele.`;
+      } else {
+        const subiram=Object.values(difs).filter(v=>Math.round(v)>0).length;
+        titulo=`Mais ${medida} em ${subiram} de ${ufs.length} estados`;
+        nota=uf?'Carregando municípios…':'Variação do episódio inteiro vs. os mesmos meses sem El Niño. Clique em um estado para ver os municípios.';
+      }
+      svg.insertAdjacentHTML('beforeend',rotulos.join(''));
+      $('mapTitle').textContent=titulo; $('mapNote').textContent=nota;
+      $('mapStatus').hidden=!(uf && munUF[uf] && munCarregado[uf]===null);
+      $('mapStatus').textContent='Recorte municipal indisponível';
+      $('scaleMin').textContent=`−${fmt(lim)}${unidade}`; $('scaleMax').textContent=`+${fmt(lim)}${unidade}`;
+      $('scaleBar').style.background=`linear-gradient(90deg,${corDivergente(-1,fogo)},${corDivergente(0,fogo)},${corDivergente(1,fogo)})`;
+      // Navegação estrutural: Nordeste › estado › município.
+      const crumbs=$('crumbs'); crumbs.hidden=!uf;
+      if (uf) {
+        crumbs.innerHTML=`<button type="button" data-nav="NE">Nordeste</button><span class="sep">›</span><button type="button" data-nav="UF"${cidade?'':' disabled'}>${nomeRecorte(uf)}</button>`+(cidade?`<span class="sep">›</span><button type="button" disabled>${cidade.nome}</button>`:'');
+        crumbs.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>b.dataset.nav==='NE'?selecionar('NE'):selecionarCidade(null)));
+      }
+    }
+
+    function render() {
+      const nome=nomeRecorte(alvo()), ini=episodio[0], fim=episodio.at(-1);
+      const periodo=`${rotuloMes(ini.ano,ini.mes)} a ${rotuloMes(fim.ano,fim.mes)}`;
+      const chuva=comparar('chuva_media_mm',alvo()), fogo=comparar('focos_inpe',alvo());
+      // Só desenha a aba visível: as outras têm tamanho zero e são ignoradas.
+      desenharComparacao('rainChart','chuva_media_mm',COR.chuva,alvo());
+      desenharComparacao('fireChart','focos_inpe',COR.fogo,alvo());
+      desenharLinhaTempo();
+      desenharEstados('stRain','chuva_media_mm',COR.chuva,'stRainTitle');
+      desenharEstados('stFire','focos_inpe',COR.fogo,'stFireTitle');
+      const anosRef=[...new Set(chuva.meses.flatMap(m=>m.ref.anos))].sort();
+      const pico=episodio.reduce((a,b)=>oniDe(b.ano,b.mes)>oniDe(a.ano,a.mes)?b:a), oniPico=oniDe(pico.ano,pico.mes);
+      const mais=v=>v>=0?'mais':'menos';
+      $('bigIdea').innerHTML=`${nome}, El Niño de ${periodo}: <b class="rain">${pct(chuva.dif)} de chuva</b> e <b>${pct(fogo.dif)} de focos</b> em relação aos mesmos meses sem El Niño${chuva.dif>0?' — o episódio não trouxe a seca esperada':''}.`;
+      $('kEpisode').textContent=periodo;
+      $('kEpisodeNote').textContent=`${episodio.length} meses seguidos com ONI ≥ +0,5 °C`;
+      $('kPeak').textContent=`${sinal(oniPico)} °C`;
+      $('kPeakNote').textContent=`${rotuloMes(pico.ano,pico.mes)} · episódio ${intensidade(oniPico)}`;
+      $('kRain').textContent=pct(chuva.dif);
+      $('kRainNote').textContent=`${fmt(chuva.nino)} mm vs. ${fmt(chuva.ref)} mm sem El Niño`;
+      $('kFire').textContent=pct(fogo.dif);
+      $('kFireNote').textContent=`${fmt(fogo.nino)} vs. ${fmt(fogo.ref)} focos sem El Niño`;
+      $('rainTitle').textContent=`Chuva: ${pct(chuva.dif)} nos meses de El Niño em ${nome === 'Nordeste' ? 'todo o Nordeste' : nome}`;
+      $('fireTitle').textContent=`Focos: ${pct(fogo.dif)} nos meses de El Niño em ${nome === 'Nordeste' ? 'todo o Nordeste' : nome}`;
+      // Leitura: estação chuvosa (fev–mai) e temporada de fogo (ago–dez) dentro do episódio.
+      const trecho=(c,meses)=>{ const ms=c.meses.filter(m=>meses.includes(m.mes)); const a=ms.reduce((s,m)=>s+m.nino,0), b=ms.reduce((s,m)=>s+m.ref.v,0); return ms.length&&b?{dif:100*(a/b-1),de:ms[0],ate:ms.at(-1)}:null; };
+      const chuvosa=trecho(chuva,[2,3,4]), seca=trecho(fogo,[8,9,10,11,12]);
+      const estadosMaisChuva=ufs.filter(([s])=>comparar('chuva_media_mm',s).dif>0).length;
+      const itens=[];
+      itens.push(`<li><span class="tag rain">Chuva</span><b>${estadosMaisChuva} de ${ufs.length} estados</b> tiveram mais chuva no episódio: a seca esperada no norte do Nordeste não apareceu.</li>`);
+      const faixaMeses=t=>t.de.ano===t.ate.ano?`${mesesCurtos[t.de.mes-1]}–${rotuloMes(t.ate.ano,t.ate.mes)}`:`${rotuloMes(t.de.ano,t.de.mes)}–${rotuloMes(t.ate.ano,t.ate.mes)}`;
+      if (chuvosa) itens.push(`<li><span class="tag rain">Estação</span>Na estação chuvosa (${faixaMeses(chuvosa)}), ${nome} teve <b>${pct(chuvosa.dif)}</b> de chuva vs. o normal.</li>`);
+      if (seca) itens.push(`<li><span class="tag fire">Fogo</span>Na temporada de focos (${faixaMeses(seca)}), ${nome} teve <b>${pct(seca.dif)}</b>: o fogo segue o calendário seco, ${Math.abs(seca.dif)<15?'com pouca mudança':mais(seca.dif)==='mais'?'e foi mais intenso':'e foi menos intenso'} no El Niño.</li>`);
+      itens.push(`<li><span class="tag warn">Cuidado</span>Um único episódio, vs. os mesmos meses de ${anosRef.length>1?anosRef.slice(0,-1).join(', ')+' e '+anosRef.at(-1):anosRef[0]}: associação, não causa.</li>`);
+      const acao=acaoQuadra(); if (acao) itens.push(`<li class="act"><span class="tag act">O que fazer</span>${acao}</li>`);
+      $('reading').innerHTML=itens.join('');
+      desenharMapa();
+      render26();
+    }
+    function desenharLinhaTempo() {
+      const svg=$('timeChart'), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H) return;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      const meses=[...fasePorMes.keys()].map(k=>k.split('-').map(Number)).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+      const nino=new Set(episodio.map(e=>chave(e.ano,e.mes))), nome=nomeRecorte(alvo());
+      const L=88,R=10,T=26,B=24, n=meses.length, passo=(W-L-R)/n, x=i=>L+passo*i+passo/2, gap=14;
+      const util=H-T-B-2*gap, hOni=util*.24, hRow=util*.38;
+      const linhas3=[{nome:'ONI (°C)',y0:T,h:hOni},{nome:'Chuva (mm)',y0:T+hOni+gap,h:hRow},{nome:'Focos',y0:T+hOni+hRow+2*gap,h:hRow}];
+      const iIni=meses.findIndex(([a,m])=>nino.has(chave(a,m))), iFim=meses.map(([a,m])=>nino.has(chave(a,m))).lastIndexOf(true);
+      let s=`<rect x="${x(iIni)-passo/2}" y="${T-14}" width="${passo*(iFim-iIni+1)}" height="${H-B-T+14}" fill="${COR.nino}" opacity=".12"/>`+
+        `<text class="annot" x="${x(iIni)-passo/2+6}" y="${T-3}" style="fill:#b86a0c;font-size:11px;letter-spacing:.08em">EL NIÑO ${rotuloMes(episodio[0].ano,episodio[0].mes).toUpperCase()}–${rotuloMes(episodio.at(-1).ano,episodio.at(-1).mes).toUpperCase()}</text>`;
+      s+=linhas3.map(l=>`<text x="${L-10}" y="${l.y0+l.h/2+4}" text-anchor="end" class="annot">${l.nome}</text>`).join('');
+      // ONI: linha com limiar de El Niño.
+      const oni=meses.map(([a,m])=>oniDe(a,m)), oMax=Math.max(2,...oni), oMin=Math.min(-1,...oni), yo=v=>linhas3[0].y0+(oMax-v)/(oMax-oMin)*linhas3[0].h;
+      s+=`<line x1="${L}" x2="${W-R}" y1="${yo(0)}" y2="${yo(0)}" stroke="${COR.eixo}"/><line x1="${L}" x2="${W-R}" y1="${yo(.5)}" y2="${yo(.5)}" stroke="${COR.limiar}" stroke-dasharray="4 5"/><text class="halo" x="${L+4}" y="${yo(.5)-4}" style="font-size:11px">≥ +0,5 °C = El Niño</text>`;
+      s+=`<polyline points="${oni.map((v,i)=>`${x(i)},${yo(v)}`).join(' ')}" fill="none" stroke="${COR.oni}" stroke-width="2.2" stroke-linejoin="round"/>`;
+      const iPico=oni.indexOf(Math.max(...oni));
+      s+=`<text class="annot" x="${x(iPico)}" y="${yo(oni[iPico])-6}" text-anchor="middle">${sinal(oni[iPico])} °C</text>`;
+      // Chuva e focos: barras coloridas no episódio, cinza fora dele.
+      [['chuva_media_mm',COR.chuva,1],['focos_inpe',COR.fogo,2]].forEach(([campo,cor,k])=>{
+        const l=linhas3[k], vs=meses.map(([a,m])=>valor(a,m,campo,alvo())||0), mx=Math.max(...vs,1), base=l.y0+l.h;
+        s+=`<line x1="${L}" x2="${W-R}" y1="${base}" y2="${base}" stroke="${COR.eixo}"/><text x="${L-10}" y="${l.y0+8}" text-anchor="end">${fmt(mx)}</text>`;
+        s+=vs.map((v,i)=>`<rect x="${x(i)-passo*.34}" y="${base-l.h*v/mx}" width="${passo*.68}" height="${l.h*v/mx}" rx="2" fill="${nino.has(chave(...meses[i]))?cor:COR.contexto}"/>`).join('');
+      });
+      s+=meses.map(([a,m],i)=>m%3===1?`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${m===1?' class="annot"':''}>${m===1?a:mesesCurtos[m-1]}</text>`:'').join('');
+      s+=meses.map(([a,m],i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${H-B-T}" fill="transparent"><title>${rotuloMes(a,m)} · ONI ${sinal(oniDe(a,m))} °C (${fasePorMes.get(chave(a,m))}) · ${fmt(valor(a,m,'chuva_media_mm',alvo())??0,1)} mm · ${fmt(valor(a,m,'focos_inpe',alvo())??0)} focos</title></rect>`).join('');
+      svg.innerHTML=s;
+      // Título: o pico de focos cai no mesmo período todo ano, com ou sem El Niño?
+      const anos=[...new Set(meses.map(([a])=>a))];
+      const picos=[...new Set(anos.map(a=>{ const ms=meses.filter(([b])=>b===a); return ms.reduce((best,[b,m])=>valor(b,m,'focos_inpe',alvo())>valor(b,best,'focos_inpe',alvo())?m:best,ms[0][1]); }))].sort((a,b)=>a-b);
+      $('timeTitle').textContent=`${nome}: o pico de focos cai em ${picos.map(m=>mesesCurtos[m-1]).join(' ou ')} todo ano, com ou sem El Niño`;
+    }
+    function desenharEstados(id,campo,cor,tituloId) {
+      const svg=$(id), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H) return;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      const fogo=campo==='focos_inpe';
+      const dados=ufs.map(([sigla,nome])=>({sigla,nome,...comparar(campo,sigla)})).sort((a,b)=>b.dif-a.dif);
+      const L=128,R=56,T=8,B=22, linha=(H-T-B)/dados.length, folga=mnNeg=>mnNeg?48:0;
+      const lim=Math.max(5,...dados.map(d=>Math.abs(d.dif))), mn=Math.min(0,...dados.map(d=>d.dif))<0?-lim:0;
+      const x0r=L+folga(mn<0), xv=v=>x0r+(v-mn)/(lim-mn)*(W-x0r-R), zero=xv(0);
+      let s=dados.map((d,i)=>{
+        const yc=T+linha*i+linha/2, sel=regiao===d.sigla, ativo=regiao==='NE'||sel, x0=Math.min(zero,xv(d.dif));
+        const un=fogo?'focos':'mm', tip=`${d.nome}: ${pct(d.dif)} (${fmt(d.nino)} vs. ${fmt(d.ref)} ${un} sem El Niño)`;
+        return `<g class="hit" data-uf="${d.sigla}"><title>${tip}</title><rect x="0" y="${yc-linha/2}" width="${W}" height="${linha}" fill="transparent"/>`+
+          `<text x="${L-10}" y="${yc+4}" text-anchor="end"${sel?' class="annot"':''}>${d.nome}</text>`+
+          `<rect x="${x0}" y="${yc-Math.min(13,linha*.32)}" width="${Math.max(1,Math.abs(xv(d.dif)-zero))}" height="${Math.min(26,linha*.64)}" rx="3" fill="${ativo?cor:COR.contexto}"/>`+
+          `<text x="${d.dif>=0?xv(d.dif)+6:xv(d.dif)-6}" y="${yc+4}" text-anchor="${d.dif>=0?'start':'end'}"${sel?' class="annot"':''}>${pct(d.dif)}</text></g>`;
+      }).join('');
+      s+=`<line x1="${zero}" x2="${zero}" y1="${T}" y2="${H-B}" stroke="${COR.limiar}"/><text x="${zero}" y="${H-6}" text-anchor="middle">0% = igual ao normal</text>`;
+      svg.innerHTML=s;
+      svg.querySelectorAll('[data-uf]').forEach(g=>g.addEventListener('click',()=>selecionar(regiao===g.dataset.uf?'NE':g.dataset.uf)));
+      const altas=dados.filter(d=>Math.round(d.dif)>0).length, topo=dados[0], fundo=dados.at(-1);
+      $(tituloId).textContent=fogo?`Focos subiram em ${altas} de ${dados.length} estados no El Niño (de ${pct(fundo.dif)} em ${fundo.sigla} a ${pct(topo.dif)} em ${topo.sigla})`
+        :`Choveu mais em ${altas} de ${dados.length} estados no El Niño (de ${pct(fundo.dif)} em ${fundo.sigla} a ${pct(topo.dif)} em ${topo.sigla})`;
+    }
+    // ---- Aba "2026 vs. passado": dados de amostras/projecao_el_nino_<ano>/ (src/analise/projetar_el_nino.py).
+    let EN=null, enPedido=null, munTodos=null, malhasPedido=null;
+    const REGRAS26=[['climatologia','Média histórica do mês'],['persistencia','Repetir o ano anterior'],['analogo','Repetir o último El Niño'],['composto','Média dos El Niños'],['composto_forte','Média só dos fortes']];
+    const ufRecorte = () => regiao==='NE' ? null : regiao;
+    const somaOuMedia = (medida,vs) => medida==='chuva' ? media(vs) : vs.reduce((a,b)=>a+b,0);
+    function carregarElNino() {
+      // Carregado na abertura: além da aba 2026, alimenta o "O que fazer" da Leitura.
+      enPedido ??= fetch('/api/el-nino').then(r=>r.ok?r.json():Promise.reject(Error('rode uv run poe project_el_nino')))
+        .then(d=>{ EN=d; }).catch(e=>{ EN={erro:e.message}; }).then(()=>render());
+      return enPedido;
+    }
+    // Fim da história (aula: começo, meio e chamada para ação): o que esperar da próxima quadra chuvosa,
+    // pela mesma projeção da aba "2026 vs. passado", no recorte escolhido.
+    function acaoQuadra() {
+      if (!EN || EN.erro) return null;
+      const ps=serie26('chuva').filter(p=>p.obs===null && p.ano>EN.ano && p.mes>=2 && p.mes<=5);
+      if (!ps.length) return null;
+      const soma=c=>ps.reduce((a,p)=>a+p[c],0), comp=100*(soma('comp')/soma('clim')-1), forte=100*(soma('forte')/soma('clim')-1);
+      const quadra=`fev–mai/${String(EN.ano+1).slice(2)}`, uf=ufRecorte(), faixa=`${pct(comp)} a ${pct(forte)} vs. o normal`;
+      const linha=cidade && EN.municipios.find(r=>String(r.municipio_codigo_ibge)===String(cidade.cd));
+      let hist='';
+      if (linha) hist=`${cidade.nome} ficou abaixo do normal depois de ${linha.fortes_abaixo_da_media} de ${linha.fortes} El Niños fortes`;
+      else { const vs=EN.municipios.filter(r=>!uf||r.uf_sigla===uf).map(r=>Number(r.anomalia_fortes_pct));
+        if (vs.length) hist=`${fmt(100*vs.filter(v=>v<0).length/vs.length)}% dos municípios${uf?' do estado':''} ficaram mais secos depois de El Niños fortes`; }
+      const fim=' Reavaliar com a previsão oficial em fevereiro.', onde=cidade?' do estado':'';
+      if (Math.max(comp,forte)<=-5) return `<b>Planejar ${quadra} para chuva abaixo do normal.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
+      if (Math.min(comp,forte)>=5) return `<b>Preparar ${quadra} para chuva acima do normal.</b> Projeção${onde}: ${faixa}.${fim}`;
+      return `<b>Sem sinal claro para ${quadra}.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
+    }
+    function carregarMalhas() {
+      malhasPedido ??= Promise.all(ufs.map(([s])=>fetch(`/static/municipios/${s}.geojson`).then(r=>r.ok?r.json():null).catch(()=>null)))
+        .then(ms=>{ munTodos=ms.flatMap((m,i)=>m?m.features.map(f=>({...f,uf:ufs[i][0]})):[]); desenharQuadra(); });
+      return malhasPedido;
+    }
+    function semDados26(svg) { svg.innerHTML=`<text x="12" y="24">Projeção indisponível: ${EN.erro}.</text>`; }
+    // Observado + validação (meses já publicados) e projeção (meses seguintes) no recorte: chuva = média das UFs, focos = soma.
+    function serie26(medida) {
+      const uf=ufRecorte(), filtra=rs=>rs.filter(r=>!uf||r.uf_sigla===uf), ag=(rs,c)=>somaOuMedia(medida,rs.map(r=>Number(r[`${medida}_${c}`])));
+      const pontos=[];
+      for (let m=1;m<=12;m++) {
+        const rs=filtra(EN.validacao).filter(r=>Number(r.mes)===m);
+        if (rs.length) pontos.push({ano:EN.ano,mes:m,obs:ag(rs,'observado'),clim:ag(rs,'climatologia'),comp:ag(rs,'composto'),forte:ag(rs,'composto_forte'),ant:ag(rs,'persistencia')});
+      }
+      const grupos=new Map();
+      for (const r of filtra(EN.projecao)) { if (!grupos.has(r.competencia)) grupos.set(r.competencia,[]); grupos.get(r.competencia).push(r); }
+      for (const [,rs] of [...grupos].sort((a,b)=>a[0].localeCompare(b[0])))
+        pontos.push({ano:Number(rs[0].ano),mes:Number(rs[0].mes),obs:null,clim:ag(rs,'climatologia'),comp:ag(rs,'composto'),forte:ag(rs,'composto_forte'),q1:ag(rs,'q1'),q3:ag(rs,'q3')});
+      return pontos;
+    }
+    const nomeRecorte26 = () => ufRecorte() ? nomeRecorte(ufRecorte())+(cidade?' (dados do estado)':'') : 'Nordeste';
+    const intervalo = ps => `${mesesCurtos[ps[0].mes-1]}–${mesesCurtos[ps.at(-1).mes-1]}/${String(ps.at(-1).ano).slice(2)}`;
+    function desenhar26(id,medida,cor,tituloId,notaId) {
+      const svg=$(id), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H || !EN) return;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      if (EN.erro) return semDados26(svg);
+      const ps=serie26(medida), chuva=medida==='chuva', un=chuva?' mm':' focos', casas=chuva?1:0;
+      // Gráfico indexado (aula: "prefira gráfico indexado"): o eixo é a diferença para o normal do mês, então o zero É o normal.
+      // Em unidades (mm, focos) e não em %: nos meses secos ou com poucos focos o % explode.
+      const an=(p,c)=>p[c]-p.clim, com=v=>`${v>0?'+':v<0?'−':''}${fmt(Math.abs(v),Math.abs(v)<10&&casas?1:0)}`;
+      const L=56,R=112,T=24,B=22, base=H-B, alto=base-T, passo=(W-L-R)/ps.length, x=i=>L+passo*i+passo/2;
+      const vals=ps.flatMap(p=>[p.obs!==null?an(p,'obs'):0, an(p,'comp'), p.q1!==undefined?an(p,'q1'):0, p.q3!==undefined?an(p,'q3'):0]);
+      const lo0=Math.min(0,...vals), hi0=Math.max(0,...vals), bruto=Math.max(hi0-lo0,1)/4, p10=Math.pow(10,Math.floor(Math.log10(bruto))), m=bruto/p10;
+      const step=(m<=1?1:m<=2?2:m<=5?5:10)*p10, lo=Math.floor(lo0/step)*step, hi=Math.max(step,Math.ceil(hi0/step)*step);
+      const y=v=>T+(hi-v)/(hi-lo)*alto;
+      const iFut=ps.findIndex(p=>p.obs===null), obsPs=ps.map((p,i)=>[p,i]).filter(([p])=>p.obs!==null);
+      let s='';
+      if (iFut>=0) s+=`<rect x="${x(iFut)-passo/2}" y="${T-18}" width="${W-R-(x(iFut)-passo/2)}" height="${alto+18}" fill="${COR.nino}" opacity=".07"/>`+
+        `<text class="annot" x="${x(iFut)-passo/2+6}" y="${T-6}" style="fill:#b86a0c;font-size:11px;letter-spacing:.08em">PROJEÇÃO →</text>`+
+        `<text class="annot" x="${x(iFut)-passo/2-6}" y="${T-6}" text-anchor="end" style="font-size:11px;letter-spacing:.08em">← OBSERVADO</text>`;
+      s+=[lo,hi].filter(v=>v!==0).map(v=>`<text x="${L-8}" y="${y(v)+4}" text-anchor="end">${com(v)}</text>`).join('');
+      s+=`<text x="${L-8}" y="${y(0)+4}" text-anchor="end">0</text><line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="${COR.limiar}"/>`;
+      ps.forEach((p,i)=>{ if (passo>=34 || p.mes%2===1) s+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${p.mes===1?' class="annot"':''}>${p.mes===1?p.ano:mesesCurtos[p.mes-1]}</text>`; });
+      // Contexto em cinza: faixa entre os El Niños passados (só na projeção) e a média deles.
+      const faixa=ps.map((p,i)=>[p,i]).filter(([p])=>p.q1!==undefined);
+      if (faixa.length) s+=`<polygon points="${[...faixa.map(([p,i])=>`${x(i)},${y(an(p,'q3'))}`),...[...faixa].reverse().map(([p,i])=>`${x(i)},${y(an(p,'q1'))}`)].join(' ')}" fill="${COR.contexto}" opacity=".55"/>`;
+      s+=`<polyline points="${ps.map((p,i)=>`${x(i)},${y(an(p,'comp'))}`).join(' ')}" fill="none" stroke="${COR.limiar}" stroke-width="2" stroke-linejoin="round"/>`;
+      // Único destaque: 2026 observado na cor da métrica.
+      if (obsPs.length) s+=`<polyline points="${obsPs.map(([p,i])=>`${x(i)},${y(an(p,'obs'))}`).join(' ')}" fill="none" stroke="${cor}" stroke-width="2.6" stroke-linejoin="round"/>`+
+        obsPs.map(([p,i])=>`<circle cx="${x(i)}" cy="${y(an(p,'obs'))}" r="3" fill="${cor}"/>`).join('');
+      // Rótulos diretos (proximidade) no lugar da legenda: fim da linha de 2026, fim da média e a linha do zero.
+      const xFim=W-R+6, yComp=y(an(ps.at(-1),'comp')), yZero=y(0), afasta=(a,b)=>Math.abs(a-b)<13?(a<=b?[a-(13-Math.abs(a-b))/2,b+(13-Math.abs(a-b))/2]:[a+(13-Math.abs(a-b))/2,b-(13-Math.abs(a-b))/2]):[a,b];
+      const [yc,yz]=afasta(yComp,yZero);
+      s+=`<text x="${xFim}" y="${yc+4}" style="fill:${COR.limiar}">El Niños passados</text><text x="${xFim}" y="${yz+4}">normal do mês</text>`;
+      if (obsPs.length) { const [p,i]=obsPs.at(-1), yo=y(an(p,'obs'));
+        s+=`<text class="annot" x="${x(i)+7}" y="${Math.min(base-4,Math.max(T+10,yo+4))}" style="fill:${cor};paint-order:stroke;stroke:#fff;stroke-width:3px">${EN.ano}: ${com(an(p,'obs'))}${un}</text>`; }
+      s+=ps.map((p,i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${alto}" fill="transparent"><title>${rotuloMes(p.ano,p.mes)} · normal ${fmt(p.clim,casas)}${un}${p.obs!==null?` · observado ${fmt(p.obs,casas)}${un} (${com(an(p,'obs'))})`:''} · média dos El Niños ${fmt(p.comp,casas)}${un} (${com(an(p,'comp'))}) · só fortes ${fmt(p.forte,casas)}${un} (${com(an(p,'forte'))})${p.q1!==undefined?` · faixa ${fmt(p.q1,casas)}–${fmt(p.q3,casas)}${un}`:''}</title></rect>`).join('');
+      svg.innerHTML=s;
+      // Título: meses de El Niño já observados; nota: o trecho-chave da projeção.
+      const ini=EN.metodo.inicio_el_nino_ano_corrente_mes||1, obs=ps.filter(p=>p.obs!==null && p.mes>=ini);
+      const soma=(xs,c)=>xs.reduce((a,p)=>a+p[c],0), dif=(xs,c)=>100*(soma(xs,c)/soma(xs,'clim')-1);
+      const nome=nomeRecorte26();
+      if (obs.length) { const t=`${chuva?'Chuva':'Focos'}${ufRecorte()?' · '+ufRecorte():''} ${intervalo(obs)}: ${pct(dif(obs,'obs'))} vs. normal; El Niños previam ${pct(dif(obs,'comp'))}`; $(tituloId).textContent=t; $(tituloId).title=t; }
+      const fut=ps.filter(p=>p.obs===null && (chuva ? p.ano>EN.ano && p.mes>=2 && p.mes<=5 : p.ano===EN.ano));
+      if (fut.length) $(notaId).innerHTML=`<b>Projeção ${intervalo(fut)}: ${pct(dif(fut,'comp'))} (todos) e ${pct(dif(fut,'forte'))} (fortes) vs. o normal.</b>`;
+    }
+    function desenharErros26() {
+      const svg=$('e26Chart'), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H || !EN) return;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+      if (EN.erro) return semDados26(svg);
+      const v=EN.metodo.validacao.durante_el_nino, uf=ufRecorte(), meses=v.meses;
+      const erro=(medida,regra)=>(uf ? v[medida].por_uf[uf][regra] : v[medida].nordeste_uf_mes[regra]).erro_relativo_pct;
+      const nomes={persistencia:`Repetir ${EN.ano-1}`, analogo:`Repetir ${EN.metodo.series.chuva.analogo} (último El Niño)`};
+      const dados=REGRAS26.map(([k,n])=>({k,n:nomes[k]||n,chuva:erro('chuva',k),focos:erro('focos',k)}));
+      const melhor=Object.fromEntries(['chuva','focos'].map(m=>[m,dados.reduce((a,b)=>b[m]<a[m]?b:a).k]));
+      // Pequenos múltiplos (um bloco por medida, mesma escala) no lugar de barras agrupadas;
+      // cada bloco ordenado do menor erro para o maior, com só a melhor regra em cor.
+      const curtos={climatologia:'Média histórica',persistencia:`Repetir ${EN.ano-1}`,analogo:`Repetir ${EN.metodo.series.chuva.analogo}`,composto:'Média El Niños',composto_forte:'Só El Niños fortes'};
+      const L=124,R=40,B=18,gap=12,cab=17, hBloco=(H-B-gap)/2, linha=(hBloco-cab)/dados.length, hb=Math.max(5,Math.min(16,linha*.72));
+      const mx=Math.max(...dados.flatMap(d=>[d.chuva,d.focos]),1), xv=e=>(e/mx)*(W-L-R);
+      let s='';
+      [['chuva','Chuva',COR.chuva],['focos','Focos',COR.fogo]].forEach(([m,rot,cor],k)=>{
+        const y0=k*(hBloco+gap), ord=[...dados].sort((a,b)=>a[m]-b[m]);
+        s+=`<text class="annot" x="0" y="${y0+11}" style="fill:${cor}">${rot}</text>`;
+        s+=ord.map((d,i)=>{ const yc=y0+cab+linha*i+linha/2, b=i===0;
+          return `<g><title>${d.n}: erro de ${fmt(d[m],1)}% em ${m}</title>`+
+            `<text x="${L-8}" y="${yc+4}" text-anchor="end"${b?' class="annot"':''}>${curtos[d.k]}</text>`+
+            `<rect x="${L}" y="${yc-hb/2}" width="${Math.max(1,xv(d[m]))}" height="${hb}" rx="2" fill="${b?cor:COR.contexto}"/>`+
+            `<text x="${L+xv(d[m])+5}" y="${yc+4}"${b?' class="annot"':''}>${fmt(d[m])}%</text></g>`; }).join('');
+      });
+      s+=`<text x="0" y="${H-4}">erro relativo · menor = melhor</text>`;
+      svg.innerHTML=s;
+      const nomeDe=k=>{ const n=dados.find(d=>d.k===k).n; return n[0].toLowerCase()+n.slice(1); };
+      const per=`${mesesCurtos[meses[0]-1]}–${mesesCurtos[meses.at(-1)-1]}/${String(EN.ano).slice(2)}`;
+      $('e26Title').textContent=`Quanto cada regra errou em ${per}`;
+      $('e26Title').title=`Melhor: ${nomeDe(melhor.chuva)} (chuva) e ${nomeDe(melhor.focos)} (focos)`;
+      const clim=dados[0], comp=dados[3];
+      const rc=comp.chuva<clim.chuva, rf=comp.focos<clim.focos;
+      const efeito=rc&&rf?'reduziu o erro na chuva e nos focos':!rc&&!rf?'não reduziu o erro na chuva nem nos focos':rc?'reduziu o erro na chuva, mas não nos focos':'reduziu o erro nos focos, mas não na chuva';
+      $('e26Note').textContent=`Comparada à média histórica, a média dos El Niños ${efeito}. Abr–out é estação seca: o teste da chuva ainda é fraco.`;
+    }
+    function desenharQuadra() {
+      const svg=$('map26'), {width:W,height:H}=svg.getBoundingClientRect();
+      if (!W || !H || !EN) return;
+      if (EN.erro) { svg.setAttribute('viewBox',`0 0 ${W} ${H}`); return semDados26(svg); }
+      if (!munTodos) { $('map26Status').hidden=false; $('map26Status').textContent='Carregando municípios…'; carregarMalhas(); return; }
+      $('map26Status').hidden=true;
+      const pts=features.flatMap(f=>aneis(f.geometry).flat(2)), [x0,y0,x1,y1]=caixa(pts);
+      const k=Math.min((W-8)/(x1-x0),(H-8)/(y1-y0)), ox=(W-(x1-x0)*k)/2, oy=(H-(y1-y0)*k)/2, xy=p=>[ox+(p[0]-x0)*k, oy+(y1-p[1])*k];
+      const uf=ufRecorte(); let vb=[0,0,W,H];
+      if (uf) { const f=features.find(f=>f.properties.SIGLA_UF===uf), [a,b,c,d]=caixa(aneis(f.geometry).flat(2).map(xy));
+        let w=(c-a)*1.1, h=(d-b)*1.1; if (w/h>W/H) h=w*H/W; else w=h*W/H; vb=[(a+c)/2-w/2,(b+d)/2-h/2,w,h]; }
+      svg.setAttribute('viewBox',vb.map(v=>v.toFixed(2)).join(' '));
+      const idx=new Map(EN.municipios.map(r=>[r.municipio_codigo_ibge,r]));
+      const fortes=EN.metodo.series.chuva.episodios_fortes, lim=limite(EN.municipios.map(r=>Number(r.anomalia_fortes_pct)),5);
+      let s='';
+      for (const f of munTodos) {
+        const r=idx.get(f.properties.cd), v=r?Number(r.anomalia_fortes_pct):null;
+        if (f._tam26!==`${W}x${H}`) { f._d26=caminho(f.geometry,xy); f._tam26=`${W}x${H}`; }
+        const dentro=!uf||f.uf===uf, cor=v===null?'#ece8f1':dentro?corDivergente(Math.max(-1,Math.min(1,v/lim)),false):'#eceaef';
+        const txt=v===null?`${f.properties.nome}: sem dado`:`${f.properties.nome} (${f.uf}): ${pct(v)} de chuva em fev–mai após os El Niños fortes; ${r.fortes_abaixo_da_media} de ${r.fortes} abaixo do normal (normal: ${fmt(r.chuva_quadra_climatologia_mm)} mm)`;
+        s+=`<path class="mun${cidade?.cd===f.properties.cd?' selected':''}" data-cd="${f.properties.cd}" data-uf="${f.uf}" d="${f._d26}" fill="${cor}" fill-rule="evenodd"><title>${txt}</title></path>`;
+      }
+      s+=features.map(f=>`<path d="${caminho(f.geometry,xy)}" fill="none" stroke="${COR.oni}" stroke-opacity=".55" stroke-width="1.2" vector-effect="non-scaling-stroke" pointer-events="none"/>`).join('');
+      svg.innerHTML=s;
+      svg.querySelectorAll('.mun').forEach(el=>el.addEventListener('click',()=>{
+        const u=el.dataset.uf, cd=el.dataset.cd;
+        if (regiao!==u) return selecionar(u);
+        if (munCarregado[u]) selecionarCidade(cd);
+      }));
+      $('scale26Min').textContent=`−${fmt(lim)}%`; $('scale26Max').textContent=`+${fmt(lim)}%`;
+      $('scale26Bar').style.background=`linear-gradient(90deg,${corDivergente(-1,false)},${corDivergente(0,false)},${corDivergente(1,false)})`;
+      // Título e nota calculados no recorte.
+      const rs=EN.municipios.filter(r=>!uf||r.uf_sigla===uf), vs=rs.map(r=>Number(r.anomalia_fortes_pct)).sort((a,b)=>a-b);
+      const secos=vs.filter(v=>v<0).length, mediana=vs[Math.floor(vs.length/2)];
+      const t26=`Fev–mai após El Niños fortes: ${fmt(100*secos/vs.length)}% dos municípios mais secos (mediana ${pct(mediana)})`;
+      $('m26Title').textContent=t26; $('m26Title').title=t26;
+      const porEvento=fortes.map(a=>{ const c=`anomalia_${a}_${a+1}_pct`, xs=rs.map(r=>Number(r[c])).sort((p,q)=>p-q); return {a,v:xs[Math.floor(xs.length/2)]}; });
+      const excecoes=porEvento.filter(e=>e.v>0).map(e=>`${e.a}–${String(e.a+1).slice(2)} (${pct(e.v)})`);
+      $('m26Note').textContent=`${fortes.map(a=>`${a}–${String(a+1).slice(2)}`).join(', ')} vs. 1991–2020. ${excecoes.length?`Exceção: ${excecoes.join(', ')}.`:'Todos abaixo do normal.'}`;
+    }
+    function render26() {
+      if ($('tab-2026').hidden) return;
+      if (!EN) { carregarElNino(); return; }
+      desenhar26('r26Chart','chuva',COR.chuva,'r26Title','r26Note');
+      desenhar26('f26Chart','focos',COR.fogo,'f26Title','f26Note');
+      desenharErros26();
+      desenharQuadra();
+    }
+    function abrirAba(nome) {
+      document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===nome)));
+      document.querySelectorAll('.tab').forEach(t=>t.hidden=t.id!==`tab-${nome}`);
+      try { if (location.hash!==`#${nome}`) history.pushState(null,'',`#${nome}`); } catch {}
+      render();
+    }
+    const munCarregado={};
+    function selecionar(sel) {
+      regiao=sel; cidade=null; $('regiao').value=sel;
+      const cs=$('cidade'); cs.innerHTML='<option value="">Todos os municípios</option>'; cs.disabled=true;
+      if (sel!=='NE') carregarUF(sel).then(m=>{
+        munCarregado[sel]=m;
+        if (regiao!==sel) return;
+        if (m) { cs.insertAdjacentHTML('beforeend',m.lista.map(([cd,n])=>`<option value="${cd}">${n}</option>`).join('')); cs.disabled=false; }
+        desenharMapa();
+      });
+      render();
+    }
+    function selecionarCidade(cd) {
+      const m=munCarregado[regiao];
+      cidade = !cd || cidade?.cd===cd || !m ? null : { cd, nome:m.lista.find(x=>x[0]===cd)[1] };
+      $('cidade').value=cidade?.cd||'';
+      render();
+    }
+
+    Promise.all([
+      fetch('/api/piloto-real').then(r=>{ if(!r.ok) throw Error('dados indisponíveis'); return r.json(); }),
+      fetch('/static/ufs_nordeste_ibge.geojson').then(r=>r.json())
+    ]).then(([dados,mapa])=>{
+      linhas=dados.linhas.map(r=>({...r,_ano:Number(r.ano),_mes:Number(r.mes)}));
+      features=mapa.features;
+      for (const r of linhas) fasePorMes.set(chave(r._ano,r._mes),r.fase_enso);
+      ufs=[...new Map(linhas.map(r=>[r.uf_sigla,r.uf_nome])).entries()].sort((a,b)=>a[1].localeCompare(b[1],'pt-BR'));
+      ANOS=[...new Set(linhas.map(r=>r._ano))].sort();
+      episodio=encontrarEpisodio();
+      if (!episodio.length) throw Error('não há meses de El Niño nos anos observados');
+      const anos=dados.anos_observados;
+      $('eyebrow').textContent=`Tema · impactos do El Niño · dados observados ${anos[0]}–${anos.at(-1)}`;
+      $('regiao').insertAdjacentHTML('beforeend',ufs.map(([s,n])=>`<option value="${s}">${n}</option>`).join(''));
+      $('regiao').addEventListener('change',e=>selecionar(e.target.value));
+      document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+        metricaMapa=b.dataset.m;
+        document.querySelectorAll('.toggle button').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));
+        desenharMapa();
+      }));
+      $('cidade').addEventListener('change',e=>selecionarCidade(e.target.value||null));
+      document.addEventListener('keydown',e=>{ if (e.key!=='Escape') return; if (cidade) selecionarCidade(null); else if (regiao!=='NE') selecionar('NE'); });
+      let pendente=0; const ro=new ResizeObserver(()=>{ cancelAnimationFrame(pendente); pendente=requestAnimationFrame(render); });
+      document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>abrirAba(b.dataset.tab)));
+      document.querySelectorAll('.tab').forEach(t=>ro.observe(t));
+      // Recorte inicial pelo endereço: /painel?uf=MA&mun=2105302#tempo
+      const q=new URLSearchParams(location.search), ufIni=q.get('uf')?.toUpperCase();
+      if (ufIni && ufs.some(u=>u[0]===ufIni)) { selecionar(ufIni); const cd=q.get('mun'); if (cd) carregarUF(ufIni).then(m=>{ munCarregado[ufIni]=m; if (m?.lista.some(x=>x[0]===cd)) selecionarCidade(cd); }); }
+      const ABAS=['geral','tempo','estados','2026'], inicial=location.hash.slice(1);
+      window.addEventListener('hashchange',()=>{ const n=location.hash.slice(1)||'geral'; if (ABAS.includes(n) && $(`tab-${n}`).hidden) abrirAba(n); });
+      carregarElNino();
+      if (ABAS.includes(inicial)) abrirAba(inicial); else render();
+    }).catch(err=>{ document.querySelector('.grid').innerHTML=`<p class="error">Não foi possível abrir o painel: ${err.message}. Confira as bases em amostras/ e o guia de processamento.</p>`; });
+  </script>
+</body>
+</html>

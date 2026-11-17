@@ -56,9 +56,15 @@ As dependências ficam em `pyproject.toml`; `uv.lock` fixa as versões para repr
 | `fetch_raw` | `uv run poe fetch_raw --range 2024 --effort medium` | Baixar as bases selecionadas para um ano ou intervalo. Sem `--range`, seleciona todos os anos disponíveis nos catálogos. |
 | `fetch_uf_geometry` | `uv run poe fetch_uf_geometry` | Baixar a malha simplificada das nove UFs pela API do IBGE. |
 | `process_pilot` | `uv run poe process_pilot --ano 2024` | Validar os arquivos reais e produzir tabelas mensais e relatório de qualidade em `amostras/piloto_2024/`. |
+| `process_municipalities` | `uv run poe process_municipalities --ano 2025` | Gerar chuva e focos por município (1.794 municípios) e a malha municipal usada no zoom do mapa. Também roda no `sync_data`. |
 | `project_2026` | `uv run poe project_2026` | Calcular a referência sazonal de 2026, a faixa de variação e o erro da comparação de 2024 para 2025. |
 | `sync_data` | `uv run poe sync_data` | Detectar anos completos em `raw/`, processar apenas os novos ou alterados e atualizar a projeção. O painel também executa essa sincronização ao abrir. |
 | `project_next` | `uv run poe project_next` | Refazer manualmente a projeção do ano posterior à última base observada. |
+| `process_history` | `uv run poe process_history` | Consolidar todos os anos completos em `raw/` numa série por UF e mês em `amostras/historico/`: chuva desde 1991, focos desde 2003 e ONI. Não cria pastas `piloto_<ano>`. |
+| `process_history_municipalities` | `uv run poe process_history_municipalities` | Gerar o CSV limpo `clean/chuva_mensal_municipio.csv` (cerca de 16 MB, fora do Git) com a chuva de todos os meses CHIRPS em `raw/` para os 1.793 municípios, mais `clean/municipios_nordeste.csv`. |
+| `process_partial` | `uv run poe process_partial --ano 2026` | Processar os meses já publicados de um ano em curso em `amostras/parcial_2026/`. Os focos vêm dos arquivos mensais do INPE, filtrados pelo satélite de referência (AQUA_M-T). |
+| `project_el_nino` | `uv run poe project_el_nino --ano 2026` | Comparar o último El Niño processado (2023–24) com a persistência nos meses observados do ano e projetar os meses seguintes até junho do ano seguinte. |
+| `el_nino_municipalities` | `uv run poe el_nino_municipalities --ano 2026` | Calcular, por município, a anomalia de chuva de fev–mai após os El Niños passados (todos e fortes) em `amostras/projecao_el_nino_2026/chuva_quadra_municipio.csv`. |
 | `ingest_raw` | `uv run poe ingest_raw` | Converter os arquivos presentes em `raw/` em tabelas DuckDB. |
 | `export_landing` | `uv run poe export_landing` | Exportar ONI, CHIRPS e INPE do DuckDB para Parquet de landing; aceita CSV apenas para baseline. |
 | `build_chirps_lookup` | `uv run poe build_chirps_lookup -- --uf-geojson CAMINHO` | Criar o mapa auditável de células CHIRPS para UFs do Nordeste. |
@@ -73,6 +79,8 @@ O esforço `low` usa 2 threads e blocos de 256 KiB; `medium`, 6 threads e blocos
 
 Para medir o volume do MVP de um ano antes de completar a coleta, use `uv run poe fetch_raw --range 2024 --sources oni chirps inpe --effort low`. Execute os downloads somente após decidir usar espaço e rede para a coleta.
 
+**El Niño de 2026.** O ONI publicado mostra El Niño a partir de mar-abr-mai de 2026 (+0,5), chegando a +2,5 em ago-set-out. Para validar e projetar, rode `uv run poe fetch_raw --range 1991-2026 --sources oni chirps inpe inpe_mensal --effort medium` (cerca de 1,9 GB), `uv run poe process_history`, `uv run poe process_partial --ano 2026` e `uv run poe project_el_nino --ano 2026`. O script compara cinco regras nos meses já observados de 2026: climatologia, persistência, último El Niño (2023), média dos El Niños passados ("composto") e média só dos El Niños fortes. Depois projeta nov/2026–jun/2027. A saída fica em `amostras/projecao_el_nino_2026/`: `validacao_mensal_uf.csv`, `projecao_mensal_uf.csv` (com a faixa entre os quartis dos El Niños passados) e `metodo.json` (erros por UF, episódios usados e limites). Para o recorte por município, rode também `uv run poe process_history_municipalities` e `uv run poe el_nino_municipalities --ano 2026`. A fonte `inpe_mensal` baixa só meses encerrados de anos ainda sem arquivo anual.
+
 Para reproduzir as bases de **2023–2025**, rode `uv run poe fetch_raw --range 2023-2025 --sources oni chirps inpe --effort low`, `uv run poe fetch_uf_geometry` e `uv run poe sync_data`. Essa rota usa pandas e NumPy; o [guia da frente de processamento](docs/guia-processamento-dados.md) descreve os métodos, resultados observados e como ampliar para a série histórica.
 
 **Quando um ano novo estiver publicado**, rode apenas `uv run poe fetch_raw --range ANO --sources oni chirps inpe --effort low` e atualize `/piloto-real`. A coleta renova o HTML cumulativo do ONI a cada execução; os arquivos anuais já baixados são reaproveitados. O servidor detecta os arquivos completos, processa o ano, preserva os anteriores e calcula a próxima referência sazonal. Uma base incompleta fica pendente; o painel informa quantos arquivos faltam. Para copiar arquivos manualmente, use os mesmos nomes e pastas em `raw/`; o pipeline registra os hashes locais e marca entradas sem manifesto.
@@ -82,6 +90,15 @@ O `ingest_raw` recria `raw.duckdb` na raiz do projeto, sem acumular linhas de ex
 O protótipo do painel pode ser aberto diretamente com `uv run python dashboard/prototipo/app.py` em <http://127.0.0.1:8000>. Para outra porta, acrescente `--port 8080`. Para encerrar, use `Ctrl+C`.
 
 Depois de iniciar o servidor, abra <http://127.0.0.1:8000/piloto-real> para ver os anos reais disponíveis por estado e mês, com mapa das UFs, gráficos de ONI, chuva e focos INPE, além da referência sazonal exploratória. A página inicial continua identificada como protótipo com simulação.
+
+A versão final para apresentação fica em <http://127.0.0.1:8000/painel>. Ela é focada em um tema, **os principais impactos do El Niño no Nordeste**, e cada aba cabe em uma tela, sem rolagem: Visão geral, Linha do tempo e Por estado. As decisões estão em [docs/visualizacao.md](docs/visualizacao.md).
+
+### Com Docker
+
+```bash
+docker compose up --build                          # painel em http://localhost:8000/painel
+docker compose run --rm app uv run poe sync_data   # qualquer tarefa da tabela acima
+```
 
 ## Frentes de trabalho
 
@@ -103,5 +120,6 @@ Cada frente é dona de uma etapa do pipeline e entrega algo que a próxima usa.
 - [Contrato de dados e plano de ingestão para o dashboard](docs/contrato-dados-dashboard.md)
 - [Guia de execução e roteiro de apresentação](docs/guia-execucao-apresentacao.md)
 - [Guia da frente de processamento de dados](docs/guia-processamento-dados.md)
+- [Decisões de visualização do painel](docs/visualizacao.md)
 - [Plano de trabalho](docs/plano-de-trabalho.pdf)
 - [Documentos da fase de protótipo](docs/legado/README.md)

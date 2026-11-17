@@ -1,0 +1,1897 @@
+{
+  "titulo": "El Niño 2026: validação e projeção de chuva e focos no Nordeste",
+  "ano": 2026,
+  "inicio_el_nino_ano_corrente_mes": 4,
+  "oni_ano_corrente": {
+    "1": -0.4,
+    "2": -0.2,
+    "3": 0.1,
+    "4": 0.5,
+    "5": 0.9,
+    "6": 1.4,
+    "7": 1.8,
+    "8": 2.2,
+    "9": 2.5
+  },
+  "el_ninos_passados": [
+    {
+      "ano": 1951,
+      "pico_oni": 1.0,
+      "meses_com_el_nino_no_ano_0": 7
+    },
+    {
+      "ano": 1953,
+      "pico_oni": 0.8,
+      "meses_com_el_nino_no_ano_0": 11
+    },
+    {
+      "ano": 1957,
+      "pico_oni": 1.7,
+      "meses_com_el_nino_no_ano_0": 9
+    },
+    {
+      "ano": 1963,
+      "pico_oni": 1.2,
+      "meses_com_el_nino_no_ano_0": 7
+    },
+    {
+      "ano": 1965,
+      "pico_oni": 1.8,
+      "meses_com_el_nino_no_ano_0": 8
+    },
+    {
+      "ano": 1969,
+      "pico_oni": 1.0,
+      "meses_com_el_nino_no_ano_0": 10
+    },
+    {
+      "ano": 1972,
+      "pico_oni": 1.8,
+      "meses_com_el_nino_no_ano_0": 8
+    },
+    {
+      "ano": 1976,
+      "pico_oni": 0.8,
+      "meses_com_el_nino_no_ano_0": 4
+    },
+    {
+      "ano": 1977,
+      "pico_oni": 0.8,
+      "meses_com_el_nino_no_ano_0": 6
+    },
+    {
+      "ano": 1982,
+      "pico_oni": 2.1,
+      "meses_com_el_nino_no_ano_0": 8
+    },
+    {
+      "ano": 1986,
+      "pico_oni": 1.2,
+      "meses_com_el_nino_no_ano_0": 5
+    },
+    {
+      "ano": 1987,
+      "pico_oni": 1.5,
+      "meses_com_el_nino_no_ano_0": 12
+    },
+    {
+      "ano": 1991,
+      "pico_oni": 1.5,
+      "meses_com_el_nino_no_ano_0": 8
+    },
+    {
+      "ano": 1994,
+      "pico_oni": 1.0,
+      "meses_com_el_nino_no_ano_0": 4
+    },
+    {
+      "ano": 1997,
+      "pico_oni": 2.4,
+      "meses_com_el_nino_no_ano_0": 8
+    },
+    {
+      "ano": 2002,
+      "pico_oni": 1.2,
+      "meses_com_el_nino_no_ano_0": 7
+    },
+    {
+      "ano": 2004,
+      "pico_oni": 0.7,
+      "meses_com_el_nino_no_ano_0": 5
+    },
+    {
+      "ano": 2006,
+      "pico_oni": 0.9,
+      "meses_com_el_nino_no_ano_0": 4
+    },
+    {
+      "ano": 2009,
+      "pico_oni": 1.5,
+      "meses_com_el_nino_no_ano_0": 6
+    },
+    {
+      "ano": 2015,
+      "pico_oni": 2.6,
+      "meses_com_el_nino_no_ano_0": 12
+    },
+    {
+      "ano": 2018,
+      "pico_oni": 1.1,
+      "meses_com_el_nino_no_ano_0": 4
+    },
+    {
+      "ano": 2023,
+      "pico_oni": 2.0,
+      "meses_com_el_nino_no_ano_0": 8
+    }
+  ],
+  "series": {
+    "chuva": {
+      "climatologia": [
+        1991,
+        2020
+      ],
+      "episodios": [
+        1991,
+        1994,
+        1997,
+        2002,
+        2004,
+        2006,
+        2009,
+        2015,
+        2018,
+        2023
+      ],
+      "episodios_fortes": [
+        1991,
+        1997,
+        2009,
+        2015,
+        2023
+      ],
+      "analogo": 2023
+    },
+    "focos": {
+      "climatologia": [
+        2003,
+        2025
+      ],
+      "episodios": [
+        2004,
+        2006,
+        2009,
+        2015,
+        2018,
+        2023
+      ],
+      "episodios_fortes": [
+        2009,
+        2015,
+        2023
+      ],
+      "analogo": 2023
+    }
+  },
+  "regras": {
+    "climatologia": "Média do mês por UF (chuva 1991–2020; focos do início da série ao ano anterior).",
+    "persistencia": "Valor do mesmo mês em 2025.",
+    "analogo": "Valor do último El Niño com dados (ano 0, depois o ano +1).",
+    "composto": "Climatologia + média das anomalias dos El Niños passados no mesmo mês do ciclo, limitada a zero.",
+    "composto_forte": "Igual ao composto, só com El Niños de pico de ONI >= 1.5. Cenário escolhido depois de ver os dados, porque o El Niño em curso é forte.",
+    "faixa": "q1 e q3: 1º e 3º quartis dos El Niños passados (climatologia + anomalia de cada um).",
+    "abaixo_da_media": "Quantos El Niños passados ficaram abaixo da climatologia naquele mês e UF."
+  },
+  "validacao": {
+    "descricao": "Erro das regras nos meses observados de 2026. vies = média de (previsto - observado); erro_relativo_pct = soma dos erros absolutos / soma do observado.",
+    "todos_os_meses": {
+      "meses": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "chuva": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 26.26,
+            "vies": 2.67,
+            "erro_relativo_pct": 31.2
+          },
+          "persistencia": {
+            "mae": 48.28,
+            "vies": -7.04,
+            "erro_relativo_pct": 57.4
+          },
+          "analogo": {
+            "mae": 30.08,
+            "vies": -4.39,
+            "erro_relativo_pct": 35.8
+          },
+          "composto": {
+            "mae": 27.46,
+            "vies": 8.63,
+            "erro_relativo_pct": 32.7
+          },
+          "composto_forte": {
+            "mae": 27.08,
+            "vies": 6.12,
+            "erro_relativo_pct": 32.2
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 3,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 32.23,
+              "vies": 14.86,
+              "erro_relativo_pct": 34.0
+            },
+            "persistencia": {
+              "mae": 55.71,
+              "vies": 11.0,
+              "erro_relativo_pct": 58.8
+            },
+            "analogo": {
+              "mae": 33.96,
+              "vies": 9.85,
+              "erro_relativo_pct": 35.8
+            },
+            "composto": {
+              "mae": 38.67,
+              "vies": 19.99,
+              "erro_relativo_pct": 40.8
+            },
+            "composto_forte": {
+              "mae": 35.28,
+              "vies": 17.67,
+              "erro_relativo_pct": 37.2
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 21.46,
+              "vies": -6.39,
+              "erro_relativo_pct": 31.0
+            },
+            "persistencia": {
+              "mae": 44.48,
+              "vies": -17.51,
+              "erro_relativo_pct": 64.2
+            },
+            "analogo": {
+              "mae": 32.38,
+              "vies": -24.18,
+              "erro_relativo_pct": 46.8
+            },
+            "composto": {
+              "mae": 21.91,
+              "vies": 0.63,
+              "erro_relativo_pct": 31.6
+            },
+            "composto_forte": {
+              "mae": 23.98,
+              "vies": -0.18,
+              "erro_relativo_pct": 34.6
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 19.75,
+              "vies": -0.55,
+              "erro_relativo_pct": 24.9
+            },
+            "persistencia": {
+              "mae": 34.9,
+              "vies": -10.5,
+              "erro_relativo_pct": 44.0
+            },
+            "analogo": {
+              "mae": 33.31,
+              "vies": 3.16,
+              "erro_relativo_pct": 42.0
+            },
+            "composto": {
+              "mae": 20.62,
+              "vies": 8.35,
+              "erro_relativo_pct": 26.0
+            },
+            "composto_forte": {
+              "mae": 20.57,
+              "vies": 4.77,
+              "erro_relativo_pct": 25.9
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 26.74,
+              "vies": 14.65,
+              "erro_relativo_pct": 22.8
+            },
+            "persistencia": {
+              "mae": 41.76,
+              "vies": -4.47,
+              "erro_relativo_pct": 35.5
+            },
+            "analogo": {
+              "mae": 22.07,
+              "vies": -2.02,
+              "erro_relativo_pct": 18.8
+            },
+            "composto": {
+              "mae": 25.85,
+              "vies": 17.3,
+              "erro_relativo_pct": 22.0
+            },
+            "composto_forte": {
+              "mae": 22.89,
+              "vies": 11.44,
+              "erro_relativo_pct": 19.5
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 31.46,
+              "vies": -10.49,
+              "erro_relativo_pct": 36.2
+            },
+            "persistencia": {
+              "mae": 58.2,
+              "vies": -22.69,
+              "erro_relativo_pct": 67.0
+            },
+            "analogo": {
+              "mae": 36.05,
+              "vies": -10.58,
+              "erro_relativo_pct": 41.5
+            },
+            "composto": {
+              "mae": 30.38,
+              "vies": -2.92,
+              "erro_relativo_pct": 35.0
+            },
+            "composto_forte": {
+              "mae": 27.98,
+              "vies": -7.42,
+              "erro_relativo_pct": 32.2
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 21.01,
+              "vies": -2.35,
+              "erro_relativo_pct": 29.5
+            },
+            "persistencia": {
+              "mae": 49.01,
+              "vies": -9.82,
+              "erro_relativo_pct": 68.7
+            },
+            "analogo": {
+              "mae": 23.94,
+              "vies": -4.33,
+              "erro_relativo_pct": 33.6
+            },
+            "composto": {
+              "mae": 22.14,
+              "vies": 3.74,
+              "erro_relativo_pct": 31.0
+            },
+            "composto_forte": {
+              "mae": 21.73,
+              "vies": 1.67,
+              "erro_relativo_pct": 30.5
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 17.89,
+              "vies": 1.12,
+              "erro_relativo_pct": 23.1
+            },
+            "persistencia": {
+              "mae": 41.97,
+              "vies": -15.92,
+              "erro_relativo_pct": 54.1
+            },
+            "analogo": {
+              "mae": 22.43,
+              "vies": -9.03,
+              "erro_relativo_pct": 28.9
+            },
+            "composto": {
+              "mae": 21.17,
+              "vies": 6.86,
+              "erro_relativo_pct": 27.3
+            },
+            "composto_forte": {
+              "mae": 23.6,
+              "vies": 5.25,
+              "erro_relativo_pct": 30.4
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 29.97,
+              "vies": -7.8,
+              "erro_relativo_pct": 36.9
+            },
+            "persistencia": {
+              "mae": 50.22,
+              "vies": -22.51,
+              "erro_relativo_pct": 61.8
+            },
+            "analogo": {
+              "mae": 37.73,
+              "vies": -13.38,
+              "erro_relativo_pct": 46.4
+            },
+            "composto": {
+              "mae": 28.92,
+              "vies": 1.21,
+              "erro_relativo_pct": 35.6
+            },
+            "composto_forte": {
+              "mae": 25.64,
+              "vies": -5.44,
+              "erro_relativo_pct": 31.5
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 35.79,
+              "vies": 21.01,
+              "erro_relativo_pct": 45.4
+            },
+            "persistencia": {
+              "mae": 58.31,
+              "vies": 29.06,
+              "erro_relativo_pct": 74.0
+            },
+            "analogo": {
+              "mae": 28.85,
+              "vies": 11.01,
+              "erro_relativo_pct": 36.6
+            },
+            "composto": {
+              "mae": 37.49,
+              "vies": 22.53,
+              "erro_relativo_pct": 47.6
+            },
+            "composto_forte": {
+              "mae": 42.07,
+              "vies": 27.33,
+              "erro_relativo_pct": 53.4
+            }
+          }
+        }
+      },
+      "focos": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 181.18,
+            "vies": 110.65,
+            "erro_relativo_pct": 50.6
+          },
+          "persistencia": {
+            "mae": 139.07,
+            "vies": 100.0,
+            "erro_relativo_pct": 38.9
+          },
+          "analogo": {
+            "mae": 185.54,
+            "vies": 117.61,
+            "erro_relativo_pct": 51.9
+          },
+          "composto": {
+            "mae": 143.97,
+            "vies": 51.21,
+            "erro_relativo_pct": 40.2
+          },
+          "composto_forte": {
+            "mae": 169.45,
+            "vies": 77.34,
+            "erro_relativo_pct": 47.4
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 4,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 12.53,
+              "vies": -12.53,
+              "erro_relativo_pct": 42.2
+            },
+            "persistencia": {
+              "mae": 15.0,
+              "vies": -15.0,
+              "erro_relativo_pct": 50.5
+            },
+            "analogo": {
+              "mae": 14.8,
+              "vies": -14.6,
+              "erro_relativo_pct": 49.8
+            },
+            "composto": {
+              "mae": 12.28,
+              "vies": -12.28,
+              "erro_relativo_pct": 41.4
+            },
+            "composto_forte": {
+              "mae": 12.97,
+              "vies": -8.97,
+              "erro_relativo_pct": 43.7
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 336.64,
+              "vies": 110.93,
+              "erro_relativo_pct": 32.5
+            },
+            "persistencia": {
+              "mae": 124.7,
+              "vies": 38.7,
+              "erro_relativo_pct": 12.0
+            },
+            "analogo": {
+              "mae": 195.6,
+              "vies": -62.8,
+              "erro_relativo_pct": 18.9
+            },
+            "composto": {
+              "mae": 350.02,
+              "vies": -12.62,
+              "erro_relativo_pct": 33.8
+            },
+            "composto_forte": {
+              "mae": 408.2,
+              "vies": 15.13,
+              "erro_relativo_pct": 39.4
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 59.51,
+              "vies": -52.98,
+              "erro_relativo_pct": 24.7
+            },
+            "persistencia": {
+              "mae": 101.2,
+              "vies": 47.0,
+              "erro_relativo_pct": 42.0
+            },
+            "analogo": {
+              "mae": 147.1,
+              "vies": 74.1,
+              "erro_relativo_pct": 61.0
+            },
+            "composto": {
+              "mae": 62.45,
+              "vies": -62.45,
+              "erro_relativo_pct": 25.9
+            },
+            "composto_forte": {
+              "mae": 58.7,
+              "vies": -58.5,
+              "erro_relativo_pct": 24.3
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 784.07,
+              "vies": 646.19,
+              "erro_relativo_pct": 69.1
+            },
+            "persistencia": {
+              "mae": 536.2,
+              "vies": 425.0,
+              "erro_relativo_pct": 47.2
+            },
+            "analogo": {
+              "mae": 638.1,
+              "vies": 499.7,
+              "erro_relativo_pct": 56.2
+            },
+            "composto": {
+              "mae": 505.03,
+              "vies": 343.13,
+              "erro_relativo_pct": 44.5
+            },
+            "composto_forte": {
+              "mae": 572.7,
+              "vies": 435.57,
+              "erro_relativo_pct": 50.5
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 9.68,
+              "vies": -9.37,
+              "erro_relativo_pct": 21.0
+            },
+            "persistencia": {
+              "mae": 12.8,
+              "vies": 10.8,
+              "erro_relativo_pct": 27.8
+            },
+            "analogo": {
+              "mae": 8.8,
+              "vies": 4.0,
+              "erro_relativo_pct": 19.1
+            },
+            "composto": {
+              "mae": 12.75,
+              "vies": -12.12,
+              "erro_relativo_pct": 27.7
+            },
+            "composto_forte": {
+              "mae": 12.97,
+              "vies": -11.37,
+              "erro_relativo_pct": 28.1
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 24.6,
+              "vies": -24.6,
+              "erro_relativo_pct": 22.6
+            },
+            "persistencia": {
+              "mae": 64.6,
+              "vies": 49.0,
+              "erro_relativo_pct": 59.4
+            },
+            "analogo": {
+              "mae": 47.3,
+              "vies": 14.9,
+              "erro_relativo_pct": 43.5
+            },
+            "composto": {
+              "mae": 29.23,
+              "vies": -29.23,
+              "erro_relativo_pct": 26.9
+            },
+            "composto_forte": {
+              "mae": 32.47,
+              "vies": -23.47,
+              "erro_relativo_pct": 29.9
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 385.85,
+              "vies": 347.42,
+              "erro_relativo_pct": 67.8
+            },
+            "persistencia": {
+              "mae": 371.7,
+              "vies": 346.9,
+              "erro_relativo_pct": 65.3
+            },
+            "analogo": {
+              "mae": 588.1,
+              "vies": 553.5,
+              "erro_relativo_pct": 103.3
+            },
+            "composto": {
+              "mae": 305.98,
+              "vies": 257.72,
+              "erro_relativo_pct": 53.7
+            },
+            "composto_forte": {
+              "mae": 406.37,
+              "vies": 358.37,
+              "erro_relativo_pct": 71.4
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 11.1,
+              "vies": -5.19,
+              "erro_relativo_pct": 31.3
+            },
+            "persistencia": {
+              "mae": 15.6,
+              "vies": 2.4,
+              "erro_relativo_pct": 43.9
+            },
+            "analogo": {
+              "mae": 20.4,
+              "vies": -1.2,
+              "erro_relativo_pct": 57.5
+            },
+            "composto": {
+              "mae": 10.13,
+              "vies": -7.4,
+              "erro_relativo_pct": 28.5
+            },
+            "composto_forte": {
+              "mae": 13.3,
+              "vies": -7.7,
+              "erro_relativo_pct": 37.5
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 6.67,
+              "vies": -4.04,
+              "erro_relativo_pct": 36.0
+            },
+            "persistencia": {
+              "mae": 9.8,
+              "vies": -4.8,
+              "erro_relativo_pct": 53.0
+            },
+            "analogo": {
+              "mae": 9.7,
+              "vies": -9.1,
+              "erro_relativo_pct": 52.4
+            },
+            "composto": {
+              "mae": 7.87,
+              "vies": -3.9,
+              "erro_relativo_pct": 42.5
+            },
+            "composto_forte": {
+              "mae": 7.4,
+              "vies": -3.0,
+              "erro_relativo_pct": 40.0
+            }
+          }
+        }
+      }
+    },
+    "antes_el_nino": {
+      "meses": [
+        1,
+        2,
+        3
+      ],
+      "chuva": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 38.63,
+            "vies": -2.13,
+            "erro_relativo_pct": 29.5
+          },
+          "persistencia": {
+            "mae": 85.81,
+            "vies": -8.84,
+            "erro_relativo_pct": 65.5
+          },
+          "analogo": {
+            "mae": 50.72,
+            "vies": -5.98,
+            "erro_relativo_pct": 38.7
+          },
+          "composto": {
+            "mae": 44.55,
+            "vies": 9.43,
+            "erro_relativo_pct": 34.0
+          },
+          "composto_forte": {
+            "mae": 41.94,
+            "vies": -1.73,
+            "erro_relativo_pct": 32.0
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 1,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 32.69,
+              "vies": -14.27,
+              "erro_relativo_pct": 37.8
+            },
+            "persistencia": {
+              "mae": 69.28,
+              "vies": -26.82,
+              "erro_relativo_pct": 80.0
+            },
+            "analogo": {
+              "mae": 38.09,
+              "vies": -24.81,
+              "erro_relativo_pct": 44.0
+            },
+            "composto": {
+              "mae": 40.19,
+              "vies": -6.34,
+              "erro_relativo_pct": 46.4
+            },
+            "composto_forte": {
+              "mae": 27.78,
+              "vies": -14.56,
+              "erro_relativo_pct": 32.1
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 40.89,
+              "vies": -38.12,
+              "erro_relativo_pct": 26.8
+            },
+            "persistencia": {
+              "mae": 117.74,
+              "vies": -67.11,
+              "erro_relativo_pct": 77.3
+            },
+            "analogo": {
+              "mae": 76.26,
+              "vies": -76.26,
+              "erro_relativo_pct": 50.1
+            },
+            "composto": {
+              "mae": 36.84,
+              "vies": -23.73,
+              "erro_relativo_pct": 24.2
+            },
+            "composto_forte": {
+              "mae": 37.84,
+              "vies": -36.63,
+              "erro_relativo_pct": 24.8
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 39.17,
+              "vies": 9.97,
+              "erro_relativo_pct": 28.1
+            },
+            "persistencia": {
+              "mae": 65.14,
+              "vies": 11.0,
+              "erro_relativo_pct": 46.8
+            },
+            "analogo": {
+              "mae": 74.84,
+              "vies": 41.22,
+              "erro_relativo_pct": 53.7
+            },
+            "composto": {
+              "mae": 50.92,
+              "vies": 24.66,
+              "erro_relativo_pct": 36.5
+            },
+            "composto_forte": {
+              "mae": 53.82,
+              "vies": 13.18,
+              "erro_relativo_pct": 38.6
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 45.3,
+              "vies": 45.3,
+              "erro_relativo_pct": 21.4
+            },
+            "persistencia": {
+              "mae": 64.17,
+              "vies": 46.21,
+              "erro_relativo_pct": 30.3
+            },
+            "analogo": {
+              "mae": 30.61,
+              "vies": 30.61,
+              "erro_relativo_pct": 14.4
+            },
+            "composto": {
+              "mae": 45.87,
+              "vies": 45.87,
+              "erro_relativo_pct": 21.6
+            },
+            "composto_forte": {
+              "mae": 36.9,
+              "vies": 34.79,
+              "erro_relativo_pct": 17.4
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 46.84,
+              "vies": -6.7,
+              "erro_relativo_pct": 37.9
+            },
+            "persistencia": {
+              "mae": 98.69,
+              "vies": -8.32,
+              "erro_relativo_pct": 79.8
+            },
+            "analogo": {
+              "mae": 58.97,
+              "vies": 0.5,
+              "erro_relativo_pct": 47.7
+            },
+            "composto": {
+              "mae": 54.48,
+              "vies": 10.47,
+              "erro_relativo_pct": 44.1
+            },
+            "composto_forte": {
+              "mae": 53.25,
+              "vies": -6.3,
+              "erro_relativo_pct": 43.1
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 40.97,
+              "vies": -9.38,
+              "erro_relativo_pct": 37.3
+            },
+            "persistencia": {
+              "mae": 113.98,
+              "vies": -24.0,
+              "erro_relativo_pct": 103.7
+            },
+            "analogo": {
+              "mae": 46.73,
+              "vies": -11.78,
+              "erro_relativo_pct": 42.5
+            },
+            "composto": {
+              "mae": 44.97,
+              "vies": 4.99,
+              "erro_relativo_pct": 40.9
+            },
+            "composto_forte": {
+              "mae": 42.14,
+              "vies": -5.51,
+              "erro_relativo_pct": 38.4
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 33.07,
+              "vies": -1.07,
+              "erro_relativo_pct": 18.7
+            },
+            "persistencia": {
+              "mae": 107.27,
+              "vies": -21.58,
+              "erro_relativo_pct": 60.6
+            },
+            "analogo": {
+              "mae": 38.43,
+              "vies": -22.09,
+              "erro_relativo_pct": 21.7
+            },
+            "composto": {
+              "mae": 44.8,
+              "vies": 8.69,
+              "erro_relativo_pct": 25.3
+            },
+            "composto_forte": {
+              "mae": 50.37,
+              "vies": -0.12,
+              "erro_relativo_pct": 28.4
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 32.31,
+              "vies": 7.92,
+              "erro_relativo_pct": 31.3
+            },
+            "persistencia": {
+              "mae": 57.62,
+              "vies": 24.02,
+              "erro_relativo_pct": 55.9
+            },
+            "analogo": {
+              "mae": 51.9,
+              "vies": 22.11,
+              "erro_relativo_pct": 50.3
+            },
+            "composto": {
+              "mae": 39.97,
+              "vies": 27.26,
+              "erro_relativo_pct": 38.8
+            },
+            "composto_forte": {
+              "mae": 39.26,
+              "vies": 12.41,
+              "erro_relativo_pct": 38.1
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 36.42,
+              "vies": -12.87,
+              "erro_relativo_pct": 48.1
+            },
+            "persistencia": {
+              "mae": 78.37,
+              "vies": -12.93,
+              "erro_relativo_pct": 103.6
+            },
+            "analogo": {
+              "mae": 40.62,
+              "vies": -13.27,
+              "erro_relativo_pct": 53.7
+            },
+            "composto": {
+              "mae": 42.89,
+              "vies": -6.99,
+              "erro_relativo_pct": 56.7
+            },
+            "composto_forte": {
+              "mae": 36.1,
+              "vies": -12.78,
+              "erro_relativo_pct": 47.7
+            }
+          }
+        }
+      },
+      "focos": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 52.55,
+            "vies": -48.69,
+            "erro_relativo_pct": 40.1
+          },
+          "persistencia": {
+            "mae": 48.7,
+            "vies": -35.59,
+            "erro_relativo_pct": 37.1
+          },
+          "analogo": {
+            "mae": 66.67,
+            "vies": -55.04,
+            "erro_relativo_pct": 50.8
+          },
+          "composto": {
+            "mae": 56.12,
+            "vies": -53.68,
+            "erro_relativo_pct": 42.8
+          },
+          "composto_forte": {
+            "mae": 51.95,
+            "vies": -45.9,
+            "erro_relativo_pct": 39.6
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 4,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 3.64,
+              "vies": -3.64,
+              "erro_relativo_pct": 9.1
+            },
+            "persistencia": {
+              "mae": 16.0,
+              "vies": -16.0,
+              "erro_relativo_pct": 40.0
+            },
+            "analogo": {
+              "mae": 19.0,
+              "vies": -19.0,
+              "erro_relativo_pct": 47.5
+            },
+            "composto": {
+              "mae": 6.22,
+              "vies": -6.22,
+              "erro_relativo_pct": 15.6
+            },
+            "composto_forte": {
+              "mae": 10.44,
+              "vies": 2.89,
+              "erro_relativo_pct": 26.1
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 26.23,
+              "vies": -14.09,
+              "erro_relativo_pct": 10.2
+            },
+            "persistencia": {
+              "mae": 24.33,
+              "vies": 5.0,
+              "erro_relativo_pct": 9.5
+            },
+            "analogo": {
+              "mae": 58.67,
+              "vies": -58.67,
+              "erro_relativo_pct": 22.8
+            },
+            "composto": {
+              "mae": 48.22,
+              "vies": -48.22,
+              "erro_relativo_pct": 18.8
+            },
+            "composto_forte": {
+              "mae": 48.89,
+              "vies": -48.89,
+              "erro_relativo_pct": 19.0
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 101.99,
+              "vies": -101.99,
+              "erro_relativo_pct": 53.7
+            },
+            "persistencia": {
+              "mae": 92.33,
+              "vies": -88.33,
+              "erro_relativo_pct": 48.6
+            },
+            "analogo": {
+              "mae": 108.0,
+              "vies": -102.67,
+              "erro_relativo_pct": 56.8
+            },
+            "composto": {
+              "mae": 95.0,
+              "vies": -95.0,
+              "erro_relativo_pct": 50.0
+            },
+            "composto_forte": {
+              "mae": 83.33,
+              "vies": -82.67,
+              "erro_relativo_pct": 43.9
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 217.16,
+              "vies": -209.01,
+              "erro_relativo_pct": 57.6
+            },
+            "persistencia": {
+              "mae": 194.0,
+              "vies": -176.67,
+              "erro_relativo_pct": 51.4
+            },
+            "analogo": {
+              "mae": 263.67,
+              "vies": -197.67,
+              "erro_relativo_pct": 69.9
+            },
+            "composto": {
+              "mae": 228.56,
+              "vies": -220.67,
+              "erro_relativo_pct": 60.6
+            },
+            "composto_forte": {
+              "mae": 212.56,
+              "vies": -201.22,
+              "erro_relativo_pct": 56.3
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 14.81,
+              "vies": -14.81,
+              "erro_relativo_pct": 35.8
+            },
+            "persistencia": {
+              "mae": 13.67,
+              "vies": 7.0,
+              "erro_relativo_pct": 33.1
+            },
+            "analogo": {
+              "mae": 7.67,
+              "vies": -7.67,
+              "erro_relativo_pct": 18.5
+            },
+            "composto": {
+              "mae": 13.89,
+              "vies": -13.89,
+              "erro_relativo_pct": 33.6
+            },
+            "composto_forte": {
+              "mae": 8.78,
+              "vies": -7.89,
+              "erro_relativo_pct": 21.2
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 29.35,
+              "vies": -29.35,
+              "erro_relativo_pct": 33.6
+            },
+            "persistencia": {
+              "mae": 9.0,
+              "vies": -9.0,
+              "erro_relativo_pct": 10.3
+            },
+            "analogo": {
+              "mae": 28.67,
+              "vies": -28.67,
+              "erro_relativo_pct": 32.8
+            },
+            "composto": {
+              "mae": 29.94,
+              "vies": -29.94,
+              "erro_relativo_pct": 34.3
+            },
+            "composto_forte": {
+              "mae": 23.22,
+              "vies": -10.33,
+              "erro_relativo_pct": 26.6
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 54.01,
+              "vies": -48.3,
+              "erro_relativo_pct": 51.3
+            },
+            "persistencia": {
+              "mae": 63.33,
+              "vies": -19.33,
+              "erro_relativo_pct": 60.1
+            },
+            "analogo": {
+              "mae": 68.33,
+              "vies": -35.0,
+              "erro_relativo_pct": 64.9
+            },
+            "composto": {
+              "mae": 53.39,
+              "vies": -51.17,
+              "erro_relativo_pct": 50.7
+            },
+            "composto_forte": {
+              "mae": 54.0,
+              "vies": -49.78,
+              "erro_relativo_pct": 51.3
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 21.38,
+              "vies": -21.38,
+              "erro_relativo_pct": 44.8
+            },
+            "persistencia": {
+              "mae": 19.0,
+              "vies": -19.0,
+              "erro_relativo_pct": 39.9
+            },
+            "analogo": {
+              "mae": 28.0,
+              "vies": -28.0,
+              "erro_relativo_pct": 58.7
+            },
+            "composto": {
+              "mae": 20.89,
+              "vies": -20.89,
+              "erro_relativo_pct": 43.8
+            },
+            "composto_forte": {
+              "mae": 20.44,
+              "vies": -20.44,
+              "erro_relativo_pct": 42.9
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 4.38,
+              "vies": 4.38,
+              "erro_relativo_pct": 12.7
+            },
+            "persistencia": {
+              "mae": 6.67,
+              "vies": -4.0,
+              "erro_relativo_pct": 19.4
+            },
+            "analogo": {
+              "mae": 18.0,
+              "vies": -18.0,
+              "erro_relativo_pct": 52.4
+            },
+            "composto": {
+              "mae": 9.0,
+              "vies": 2.89,
+              "erro_relativo_pct": 26.2
+            },
+            "composto_forte": {
+              "mae": 5.89,
+              "vies": 5.22,
+              "erro_relativo_pct": 17.2
+            }
+          }
+        }
+      }
+    },
+    "durante_el_nino": {
+      "meses": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "chuva": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 20.95,
+            "vies": 4.73,
+            "erro_relativo_pct": 32.8
+          },
+          "persistencia": {
+            "mae": 32.2,
+            "vies": -6.27,
+            "erro_relativo_pct": 50.4
+          },
+          "analogo": {
+            "mae": 21.24,
+            "vies": -3.71,
+            "erro_relativo_pct": 33.2
+          },
+          "composto": {
+            "mae": 20.14,
+            "vies": 8.29,
+            "erro_relativo_pct": 31.5
+          },
+          "composto_forte": {
+            "mae": 20.72,
+            "vies": 9.48,
+            "erro_relativo_pct": 32.4
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 7,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 32.04,
+              "vies": 27.35,
+              "erro_relativo_pct": 32.6
+            },
+            "persistencia": {
+              "mae": 49.89,
+              "vies": 27.2,
+              "erro_relativo_pct": 50.7
+            },
+            "analogo": {
+              "mae": 32.19,
+              "vies": 24.7,
+              "erro_relativo_pct": 32.7
+            },
+            "composto": {
+              "mae": 38.01,
+              "vies": 31.28,
+              "erro_relativo_pct": 38.7
+            },
+            "composto_forte": {
+              "mae": 38.5,
+              "vies": 31.48,
+              "erro_relativo_pct": 39.2
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 13.13,
+              "vies": 7.21,
+              "erro_relativo_pct": 39.0
+            },
+            "persistencia": {
+              "mae": 13.08,
+              "vies": 3.75,
+              "erro_relativo_pct": 38.9
+            },
+            "analogo": {
+              "mae": 13.57,
+              "vies": -1.86,
+              "erro_relativo_pct": 40.3
+            },
+            "composto": {
+              "mae": 15.51,
+              "vies": 11.08,
+              "erro_relativo_pct": 46.1
+            },
+            "composto_forte": {
+              "mae": 18.04,
+              "vies": 15.44,
+              "erro_relativo_pct": 53.6
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 11.43,
+              "vies": -5.06,
+              "erro_relativo_pct": 21.4
+            },
+            "persistencia": {
+              "mae": 21.94,
+              "vies": -19.71,
+              "erro_relativo_pct": 41.0
+            },
+            "analogo": {
+              "mae": 15.51,
+              "vies": -13.15,
+              "erro_relativo_pct": 29.0
+            },
+            "composto": {
+              "mae": 7.64,
+              "vies": 1.36,
+              "erro_relativo_pct": 14.3
+            },
+            "composto_forte": {
+              "mae": 6.32,
+              "vies": 1.17,
+              "erro_relativo_pct": 11.8
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 18.79,
+              "vies": 1.51,
+              "erro_relativo_pct": 24.4
+            },
+            "persistencia": {
+              "mae": 32.15,
+              "vies": -26.19,
+              "erro_relativo_pct": 41.7
+            },
+            "analogo": {
+              "mae": 18.41,
+              "vies": -16.01,
+              "erro_relativo_pct": 23.9
+            },
+            "composto": {
+              "mae": 17.26,
+              "vies": 5.05,
+              "erro_relativo_pct": 22.4
+            },
+            "composto_forte": {
+              "mae": 16.89,
+              "vies": 1.44,
+              "erro_relativo_pct": 21.9
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 24.87,
+              "vies": -12.11,
+              "erro_relativo_pct": 35.0
+            },
+            "persistencia": {
+              "mae": 40.85,
+              "vies": -28.85,
+              "erro_relativo_pct": 57.5
+            },
+            "analogo": {
+              "mae": 26.23,
+              "vies": -15.33,
+              "erro_relativo_pct": 36.9
+            },
+            "composto": {
+              "mae": 20.04,
+              "vies": -8.66,
+              "erro_relativo_pct": 28.2
+            },
+            "composto_forte": {
+              "mae": 17.15,
+              "vies": -7.9,
+              "erro_relativo_pct": 24.1
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 12.46,
+              "vies": 0.66,
+              "erro_relativo_pct": 22.7
+            },
+            "persistencia": {
+              "mae": 21.17,
+              "vies": -3.74,
+              "erro_relativo_pct": 38.6
+            },
+            "analogo": {
+              "mae": 14.17,
+              "vies": -1.14,
+              "erro_relativo_pct": 25.8
+            },
+            "composto": {
+              "mae": 12.35,
+              "vies": 3.2,
+              "erro_relativo_pct": 22.5
+            },
+            "composto_forte": {
+              "mae": 12.99,
+              "vies": 4.75,
+              "erro_relativo_pct": 23.7
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 11.39,
+              "vies": 2.06,
+              "erro_relativo_pct": 32.5
+            },
+            "persistencia": {
+              "mae": 13.98,
+              "vies": -13.5,
+              "erro_relativo_pct": 40.0
+            },
+            "analogo": {
+              "mae": 15.58,
+              "vies": -3.43,
+              "erro_relativo_pct": 44.5
+            },
+            "composto": {
+              "mae": 11.04,
+              "vies": 6.08,
+              "erro_relativo_pct": 31.6
+            },
+            "composto_forte": {
+              "mae": 12.13,
+              "vies": 7.55,
+              "erro_relativo_pct": 34.7
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 28.96,
+              "vies": -14.54,
+              "erro_relativo_pct": 40.3
+            },
+            "persistencia": {
+              "mae": 47.05,
+              "vies": -42.45,
+              "erro_relativo_pct": 65.4
+            },
+            "analogo": {
+              "mae": 31.65,
+              "vies": -28.59,
+              "erro_relativo_pct": 44.0
+            },
+            "composto": {
+              "mae": 24.19,
+              "vies": -9.95,
+              "erro_relativo_pct": 33.6
+            },
+            "composto_forte": {
+              "mae": 19.8,
+              "vies": -13.08,
+              "erro_relativo_pct": 27.5
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 35.53,
+              "vies": 35.53,
+              "erro_relativo_pct": 44.3
+            },
+            "persistencia": {
+              "mae": 49.72,
+              "vies": 47.06,
+              "erro_relativo_pct": 62.0
+            },
+            "analogo": {
+              "mae": 23.81,
+              "vies": 21.42,
+              "erro_relativo_pct": 29.7
+            },
+            "composto": {
+              "mae": 35.18,
+              "vies": 35.18,
+              "erro_relativo_pct": 43.9
+            },
+            "composto_forte": {
+              "mae": 44.62,
+              "vies": 44.52,
+              "erro_relativo_pct": 55.7
+            }
+          }
+        }
+      },
+      "focos": {
+        "nordeste_uf_mes": {
+          "climatologia": {
+            "mae": 236.31,
+            "vies": 178.93,
+            "erro_relativo_pct": 51.9
+          },
+          "persistencia": {
+            "mae": 177.79,
+            "vies": 158.11,
+            "erro_relativo_pct": 39.1
+          },
+          "analogo": {
+            "mae": 236.49,
+            "vies": 191.6,
+            "erro_relativo_pct": 52.0
+          },
+          "composto": {
+            "mae": 181.62,
+            "vies": 96.16,
+            "erro_relativo_pct": 39.9
+          },
+          "composto_forte": {
+            "mae": 219.81,
+            "vies": 130.16,
+            "erro_relativo_pct": 48.3
+          }
+        },
+        "ufs_em_que_composto_bate_climatologia": 5,
+        "por_uf": {
+          "AL": {
+            "climatologia": {
+              "mae": 16.35,
+              "vies": -16.35,
+              "erro_relativo_pct": 64.7
+            },
+            "persistencia": {
+              "mae": 14.57,
+              "vies": -14.57,
+              "erro_relativo_pct": 57.6
+            },
+            "analogo": {
+              "mae": 13.0,
+              "vies": -12.71,
+              "erro_relativo_pct": 51.4
+            },
+            "composto": {
+              "mae": 14.88,
+              "vies": -14.88,
+              "erro_relativo_pct": 58.9
+            },
+            "composto_forte": {
+              "mae": 14.05,
+              "vies": -14.05,
+              "erro_relativo_pct": 55.6
+            }
+          },
+          "BA": {
+            "climatologia": {
+              "mae": 469.67,
+              "vies": 164.52,
+              "erro_relativo_pct": 34.3
+            },
+            "persistencia": {
+              "mae": 167.71,
+              "vies": 53.14,
+              "erro_relativo_pct": 12.2
+            },
+            "analogo": {
+              "mae": 254.29,
+              "vies": -64.57,
+              "erro_relativo_pct": 18.6
+            },
+            "composto": {
+              "mae": 479.36,
+              "vies": 2.64,
+              "erro_relativo_pct": 35.0
+            },
+            "composto_forte": {
+              "mae": 562.19,
+              "vies": 42.57,
+              "erro_relativo_pct": 41.0
+            }
+          },
+          "CE": {
+            "climatologia": {
+              "mae": 41.3,
+              "vies": -31.98,
+              "erro_relativo_pct": 15.7
+            },
+            "persistencia": {
+              "mae": 105.0,
+              "vies": 105.0,
+              "erro_relativo_pct": 39.9
+            },
+            "analogo": {
+              "mae": 163.86,
+              "vies": 149.86,
+              "erro_relativo_pct": 62.3
+            },
+            "composto": {
+              "mae": 48.5,
+              "vies": -48.5,
+              "erro_relativo_pct": 18.4
+            },
+            "composto_forte": {
+              "mae": 48.14,
+              "vies": -48.14,
+              "erro_relativo_pct": 18.3
+            }
+          },
+          "MA": {
+            "climatologia": {
+              "mae": 1027.02,
+              "vies": 1012.7,
+              "erro_relativo_pct": 70.4
+            },
+            "persistencia": {
+              "mae": 682.86,
+              "vies": 682.86,
+              "erro_relativo_pct": 46.8
+            },
+            "analogo": {
+              "mae": 798.57,
+              "vies": 798.57,
+              "erro_relativo_pct": 54.7
+            },
+            "composto": {
+              "mae": 623.52,
+              "vies": 584.76,
+              "erro_relativo_pct": 42.7
+            },
+            "composto_forte": {
+              "mae": 727.05,
+              "vies": 708.48,
+              "erro_relativo_pct": 49.8
+            }
+          },
+          "PB": {
+            "climatologia": {
+              "mae": 7.48,
+              "vies": -7.04,
+              "erro_relativo_pct": 15.5
+            },
+            "persistencia": {
+              "mae": 12.43,
+              "vies": 12.43,
+              "erro_relativo_pct": 25.8
+            },
+            "analogo": {
+              "mae": 9.29,
+              "vies": 9.0,
+              "erro_relativo_pct": 19.3
+            },
+            "composto": {
+              "mae": 12.26,
+              "vies": -11.36,
+              "erro_relativo_pct": 25.5
+            },
+            "composto_forte": {
+              "mae": 14.76,
+              "vies": -12.86,
+              "erro_relativo_pct": 30.7
+            }
+          },
+          "PE": {
+            "climatologia": {
+              "mae": 22.57,
+              "vies": -22.57,
+              "erro_relativo_pct": 19.2
+            },
+            "persistencia": {
+              "mae": 88.43,
+              "vies": 73.86,
+              "erro_relativo_pct": 75.0
+            },
+            "analogo": {
+              "mae": 55.29,
+              "vies": 33.57,
+              "erro_relativo_pct": 46.9
+            },
+            "composto": {
+              "mae": 28.93,
+              "vies": -28.93,
+              "erro_relativo_pct": 24.5
+            },
+            "composto_forte": {
+              "mae": 36.43,
+              "vies": -29.1,
+              "erro_relativo_pct": 30.9
+            }
+          },
+          "PI": {
+            "climatologia": {
+              "mae": 528.06,
+              "vies": 517.02,
+              "erro_relativo_pct": 68.7
+            },
+            "persistencia": {
+              "mae": 503.86,
+              "vies": 503.86,
+              "erro_relativo_pct": 65.6
+            },
+            "analogo": {
+              "mae": 810.86,
+              "vies": 805.71,
+              "erro_relativo_pct": 105.6
+            },
+            "composto": {
+              "mae": 414.24,
+              "vies": 390.1,
+              "erro_relativo_pct": 53.9
+            },
+            "composto_forte": {
+              "mae": 557.38,
+              "vies": 533.29,
+              "erro_relativo_pct": 72.6
+            }
+          },
+          "RN": {
+            "climatologia": {
+              "mae": 6.69,
+              "vies": 1.75,
+              "erro_relativo_pct": 22.1
+            },
+            "persistencia": {
+              "mae": 14.14,
+              "vies": 11.57,
+              "erro_relativo_pct": 46.7
+            },
+            "analogo": {
+              "mae": 17.14,
+              "vies": 10.29,
+              "erro_relativo_pct": 56.6
+            },
+            "composto": {
+              "mae": 5.52,
+              "vies": -1.62,
+              "erro_relativo_pct": 18.2
+            },
+            "composto_forte": {
+              "mae": 10.24,
+              "vies": -2.24,
+              "erro_relativo_pct": 33.8
+            }
+          },
+          "SE": {
+            "climatologia": {
+              "mae": 7.65,
+              "vies": -7.65,
+              "erro_relativo_pct": 65.3
+            },
+            "persistencia": {
+              "mae": 11.14,
+              "vies": -5.14,
+              "erro_relativo_pct": 95.1
+            },
+            "analogo": {
+              "mae": 6.14,
+              "vies": -5.29,
+              "erro_relativo_pct": 52.4
+            },
+            "composto": {
+              "mae": 7.38,
+              "vies": -6.81,
+              "erro_relativo_pct": 63.0
+            },
+            "composto_forte": {
+              "mae": 8.05,
+              "vies": -6.52,
+              "erro_relativo_pct": 68.7
+            }
+          }
+        }
+      }
+    }
+  },
+  "projecao": {
+    "inicio": "2026-11-01",
+    "fim": "2027-06-01",
+    "linhas": 72
+  },
+  "fontes": [
+    {
+      "arquivo": "amostras/historico/chuva_mensal_uf.csv",
+      "sha256": "9211f26b2543a7e31df91f60646e245ee1ec2109fccd0932de70d1a8db38b9b7"
+    },
+    {
+      "arquivo": "amostras/historico/focos_mensais_uf.csv",
+      "sha256": "96126877aa14501320e7e0fcff8b3fd714c8943c3f39c29b793086894d8246b6"
+    },
+    {
+      "arquivo": "amostras/parcial_2026/fato_mensal_uf.csv",
+      "sha256": "1ec65a44c717be8f7c8b638d7f8d7f3e9a41eeecbb61cedd41dba0f08fd16553"
+    }
+  ],
+  "limites": [
+    "Poucos episódios (10 para chuva e 6 para focos); a faixa entre quartis é grosseira.",
+    "Os El Niños são alinhados pelo calendário (ano 0 = El Niño ativo em ago-set-out); episódios que começam tarde têm o 1º semestre do ano 0 ainda neutro.",
+    "O composto não escala pela intensidade; o composto_forte tem só 5 episódios de chuva e 3 de focos.",
+    "Na validação, os meses durante o El Niño caem na estação seca da maior parte do Nordeste; o teste diz mais sobre focos do que sobre chuva.",
+    "Focos do ano corrente vêm dos arquivos mensais preliminares do INPE.",
+    "Não é previsão meteorológica operacional nem atribuição causal."
+  ]
+}

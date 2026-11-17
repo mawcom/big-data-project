@@ -1,0 +1,225 @@
+{
+  "recorte": {
+    "ano": 2026,
+    "meses": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ufs": [
+      "MA",
+      "PI",
+      "CE",
+      "RN",
+      "PB",
+      "PE",
+      "AL",
+      "SE",
+      "BA"
+    ],
+    "grao": "uf_mes"
+  },
+  "oni": {
+    "arquivo": "raw/enso/oni_cpc_v6.html",
+    "sha256": "4b8e5ae8d2accf3673eabd49a9d5e7081d16cf9059b982f96e24130ad1c4c232",
+    "meses_com_oni": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "inpe": {
+    "satelite": "AQUA_M-T",
+    "arquivos": [
+      {
+        "mes": 1,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202601.csv",
+        "sha256": "d497f7c85bcd0c3a3efa3b4ed2309734fa12b5128b8850127d2ef544a889bf71",
+        "linhas_lidas": 86053,
+        "focos_satelite_referencia_brasil": 4560,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-01-01 00:00:00",
+        "ultima_data": "2026-01-31 23:52:00"
+      },
+      {
+        "mes": 2,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202602.csv",
+        "sha256": "62dab291af922c71f2bb1378148ef4b8949863ac312832deacd693a29c2f94e1",
+        "linhas_lidas": 42895,
+        "focos_satelite_referencia_brasil": 1860,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-02-01 00:00:00",
+        "ultima_data": "2026-02-28 23:50:00"
+      },
+      {
+        "mes": 3,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202603.csv",
+        "sha256": "c5253b7f00be76ca5d9d4e56bfd3544f5607dc1bfd6d9532ad79aa85bbcd83a7",
+        "linhas_lidas": 42954,
+        "focos_satelite_referencia_brasil": 1967,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-03-01 00:00:00",
+        "ultima_data": "2026-03-31 23:10:00"
+      },
+      {
+        "mes": 4,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202604.csv",
+        "sha256": "f5f148015c66e6af18b8878f535b8b3d35556a56a77df955b896c478594f999c",
+        "linhas_lidas": 31736,
+        "focos_satelite_referencia_brasil": 2035,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-04-01 00:37:00",
+        "ultima_data": "2026-04-30 23:50:00"
+      },
+      {
+        "mes": 5,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202605.csv",
+        "sha256": "352d625a68a75c2857e48ddc279a19f5ee29668ecfe874e52d32ceb7e8993754",
+        "linhas_lidas": 82458,
+        "focos_satelite_referencia_brasil": 3831,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-05-01 00:00:00",
+        "ultima_data": "2026-05-31 23:50:00"
+      },
+      {
+        "mes": 6,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202606.csv",
+        "sha256": "cc446e981774db3e3ac61dc7efcace43af22c754da035b572244b8f4451c57da",
+        "linhas_lidas": 132772,
+        "focos_satelite_referencia_brasil": 5209,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-06-01 00:00:00",
+        "ultima_data": "2026-06-30 23:50:00"
+      },
+      {
+        "mes": 7,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202607.csv",
+        "sha256": "8ef86ddfe417b9fb719f34a0ddb7efdca10425dddffdc9aa84c337b9cfe784d9",
+        "linhas_lidas": 159934,
+        "focos_satelite_referencia_brasil": 6284,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-07-01 00:00:00",
+        "ultima_data": "2026-07-31 23:56:00"
+      },
+      {
+        "mes": 8,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202608.csv",
+        "sha256": "4574013b15b785f42078fe72dfa73b0b48a773666e88025ebe5ef440cc3694da",
+        "linhas_lidas": 651243,
+        "focos_satelite_referencia_brasil": 20222,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-08-01 00:00:00",
+        "ultima_data": "2026-08-31 23:50:00"
+      },
+      {
+        "mes": 9,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202609.csv",
+        "sha256": "69ecef072d0e0db63698f7e3adc101cd68f593294eefc3dcd97eeaf554bd0248",
+        "linhas_lidas": 777214,
+        "focos_satelite_referencia_brasil": 24382,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-09-01 00:00:00",
+        "ultima_data": "2026-09-30 23:50:00"
+      },
+      {
+        "mes": 10,
+        "arquivo": "raw/inpe_focos_mensal/focos_mensal_br_202610.csv",
+        "sha256": "e8e09447152280c85935c83d65d818900593246070c96fbac61260a6ba94b64f",
+        "linhas_lidas": 931795,
+        "focos_satelite_referencia_brasil": 32454,
+        "fora_do_mes": 0,
+        "primeira_data": "2026-10-01 00:00:00",
+        "ultima_data": "2026-10-31 23:50:00"
+      }
+    ]
+  },
+  "chirps": {
+    "arquivos": [
+      {
+        "mes": 1,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202601.tar.gz",
+        "sha256": "b2d209e0649cd94b0313aab3ddab6829c92bbe3798ff80136a2349240d049d1b",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 2,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202602.tar.gz",
+        "sha256": "ed957b8999ceb160e11f7b61b567d06222c7d4e6b7ee2c7537993f76b6a2b371",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 3,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202603.tar.gz",
+        "sha256": "e275b77596d16cd2bcf1c1cd223fc7d5043d3b0ae9fbd431e727477bbac1cc8b",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 4,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202604.tar.gz",
+        "sha256": "19fa9fd1fcac96cb30c7b7757300d1d7851571c1767bb2608c0f8b238c41c6ae",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 5,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202605.tar.gz",
+        "sha256": "4d8304675485b0868d71c5e38783399bc81c3aecc4dab532b6967402a6c76529",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 6,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202606.tar.gz",
+        "sha256": "b1d63bb05c3355e790e16720cfc0372532610b37c5bf98644eb5c7f7c7590877",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 7,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202607.tar.gz",
+        "sha256": "c7255be737113573b8b2614d68b224c8154ad688f6a56a844e50332e65e76f5f",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 8,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202608.tar.gz",
+        "sha256": "d9d8bd11d61a52fd2e15309b8413a1b5bda0de4fa75dc00fca73f1efa417386a",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 9,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202609.tar.gz",
+        "sha256": "f51123a25fc0aa327759733c684c555ed7a80b46d0426a44897248d1cac4fce4",
+        "celulas_sem_valor": 0
+      },
+      {
+        "mes": 10,
+        "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202610.tar.gz",
+        "sha256": "3eaeeb77ac50009a411feb3b5525770d895932afd178f3dfb76afaade98c876c",
+        "celulas_sem_valor": 0
+      }
+    ],
+    "celulas_mapeadas": 51061,
+    "metodo_espacial": "centro_da_celula_em_malha_ibge_simplificada",
+    "agregacao": "media_aritmetica_de_celulas_validas; sem_peso_de_area"
+  },
+  "saidas": {
+    "linhas_fato": 90,
+    "focos_nordeste": 32202
+  },
+  "limites": [
+    "Ano incompleto: só os meses listados em recorte.meses.",
+    "Focos mensais são preliminares; o arquivo anual consolidado pode diferir.",
+    "ONI dos últimos meses pode faltar enquanto a janela trimestral não fecha."
+  ]
+}

@@ -1,0 +1,1801 @@
+{
+  "chuva": {
+    "anos": [
+      1991,
+      2025
+    ],
+    "linhas": 3780,
+    "fonte": "CHIRPS v3 mensal, média das células por UF"
+  },
+  "focos": {
+    "anos": [
+      2003,
+      2025
+    ],
+    "linhas": 2484,
+    "fonte": "INPE, arquivo anual do satélite de referência"
+  },
+  "oni": {
+    "arquivo": "raw/enso/oni_cpc_v6.html",
+    "sha256": "4b8e5ae8d2accf3673eabd49a9d5e7081d16cf9059b982f96e24130ad1c4c232",
+    "meses": 429
+  },
+  "entradas": [
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199101.tar.gz",
+      "sha256": "d0e3ed8382f0b2eadcbc6a1d9b8fcf45e84c42f819ccb7b7d068bdeb2ba6f005"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199102.tar.gz",
+      "sha256": "392622eb6f09ce91a499e8a842193df2c4f53a2568dd1650a4c01fb076751f9d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199103.tar.gz",
+      "sha256": "e6c0b98c35957df1ced4b8f867d20a006b514b5e42fb088531222062c526d9f4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199104.tar.gz",
+      "sha256": "6f321d44482e9f318847b1e3e9f1b05e16ca8741245f0530374f3300afa94471"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199105.tar.gz",
+      "sha256": "86f4b77e4cd91947f969a6c34f275a9b1f298ab8144bdc7d48a1cc2c830a80e0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199106.tar.gz",
+      "sha256": "d8698e96e53e7764096e194d9b24c9314c88eaf27ade9411665e9f5ebb8ab72d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199107.tar.gz",
+      "sha256": "df116d3367211fcb9399d61d991b86f1a58e506b790f867c98c906c68ef71b98"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199108.tar.gz",
+      "sha256": "8f6dc98ab7814c8e3c5213d7cbb81c96feac6afd6fee5792564a856e3ba08ca6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199109.tar.gz",
+      "sha256": "41bece6edf4f00cdb981e74cb2980c9aa0084b65faf8163eb889c9897688cc86"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199110.tar.gz",
+      "sha256": "bb2fc2658676f841f289d1d564bee5d3fe3117f5feb66cdd55290bb649ef2e2a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199111.tar.gz",
+      "sha256": "3681ecd448108d31dc2818a49100316f96c1585a53aa80ba47c1cb82d7c93a77"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199112.tar.gz",
+      "sha256": "17d6be839c3022945b144a42bfa3dce000cea19ce8237d6b4dfd0068e80ddf91"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199201.tar.gz",
+      "sha256": "33abedf0d1b9a78f7046c308f7ed9d4f8ba3d2c48bc8bd89f100e16448ea0bbb"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199202.tar.gz",
+      "sha256": "4eaa0a71817ee1d23114f3570414aa76b55bce34792b0454725fa600350fc4c5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199203.tar.gz",
+      "sha256": "74844f75641725da91158f380577eed1bc430b5ea88a1094df38a727ce07ab38"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199204.tar.gz",
+      "sha256": "276631483aa7f9cd0c0c93a735a89d633e3194baa85344deda32b5974fc50126"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199205.tar.gz",
+      "sha256": "d826fb2eb79dcb1b2bfef09649bdb49702ad2f57304792663acff24354c06c10"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199206.tar.gz",
+      "sha256": "7fb127ce7efdcbc9134b4fa31d0752cf10c00fabe28ce54febda4780e0cad3a7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199207.tar.gz",
+      "sha256": "341e99abe3227ddfc6d2dcd39f0a1c8234e2dc8ad5e1f2d9f63f93e6a6288294"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199208.tar.gz",
+      "sha256": "5dece27aaea432aa6cbbf1ba1c518ee540963c01126fc9661455be19c4643af1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199209.tar.gz",
+      "sha256": "ef96f93d8f4a93cc499a71062466de912e981d316053e647abddb3a5679789d7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199210.tar.gz",
+      "sha256": "3c480928a24411d629bdaf61605e313ba1d86263554f1fcae15b0b606f416a1d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199211.tar.gz",
+      "sha256": "6cbbd60cbf9fb3004340589da0d9c4f35aa68fa13282a20b61a8598b28c6e7e1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199212.tar.gz",
+      "sha256": "1983915ee22027e52790f87006630adab190c4d928fa97b517c2589ea2a90455"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199301.tar.gz",
+      "sha256": "d572af57c34f46101703f8e781f2b9d81551b724a075ae1212a46aedc6fce369"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199302.tar.gz",
+      "sha256": "810d08113bdd8a35a4428d298db1cb01898c9fca7566be2adb953ef48a6e14b7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199303.tar.gz",
+      "sha256": "68ad2272a1b819c04bb71c440b98a21ac5d5831d6d2f13b06a647d88f46578d3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199304.tar.gz",
+      "sha256": "34c0b90b94fa66a6df31e866a568fd23860115294232719fb43bbaf25f52a67b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199305.tar.gz",
+      "sha256": "e6410ed748c4dae7e7920a739b275a171ea00a903b8887fb524eb29457aa6f3a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199306.tar.gz",
+      "sha256": "ec962a5502306426ac522587cdced411a5343f4a690846b2bfde288167d1e6f0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199307.tar.gz",
+      "sha256": "ba06c940c3acc3916b0586ce1eed9b2bff96bb189553a17353aaa6f2cdca3054"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199308.tar.gz",
+      "sha256": "8f8d0ed941fa603305b309a1ba234c46b264ad09a946c95b56cc4d416e717763"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199309.tar.gz",
+      "sha256": "6962ea54c1866452aa85f546d6b7b3f68b869cfe7bad54663727602e70f3b2e1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199310.tar.gz",
+      "sha256": "d5e9c8b8c16941cfda7b5be7d560f3393340fe731c490f4f97be2130f47ee6be"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199311.tar.gz",
+      "sha256": "87ed77a3d5940753274bb538f81ba15279511a3d76a38ce4e6eebada7ecf6b3f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199312.tar.gz",
+      "sha256": "808ab155ae4eb546a738f9810846d883d5b30c8de8bccea9c10361c1214be71a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199401.tar.gz",
+      "sha256": "4fbb701ca1c5cb57672fafe69c63c2c32ba6818b6578796e2fb688bfaa734f6c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199402.tar.gz",
+      "sha256": "96c65d0cc4217ca2649d481c2ebd19cc2f4e6b6c9ffaa7dc26a642b1e16a8a22"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199403.tar.gz",
+      "sha256": "a967d6dbfc954cb6b31b7b9d073d7797201850674dce255a7cfa90970419568d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199404.tar.gz",
+      "sha256": "2833542a91cc849da850363b80f99920d773dbe77e4ba636ff03f632ac67502f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199405.tar.gz",
+      "sha256": "c267636e779642b0b0079d52c0bccacc437831f5d96521ff558f46d2be25a01a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199406.tar.gz",
+      "sha256": "521dde4d7365a4e6c36bdaef565bb844b8c7d87949f143cce7cd801cadc0f831"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199407.tar.gz",
+      "sha256": "d74f681b4d5367844e8f1050462fe565cbfd3ebe46b730a4acbf02089fcb0458"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199408.tar.gz",
+      "sha256": "0caac1c06818faa3be9af0c523e48405aac196ed783003921ce87c5c1a1b6443"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199409.tar.gz",
+      "sha256": "444e8238ccb95a92dc35cfc53d91a04d1fa80dfaea8403baaf5fc3c8d2035786"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199410.tar.gz",
+      "sha256": "106abfbdf6f11a83976f6bf924ebd6aeb92cd96cbf90c82b19d3ef9f9082403a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199411.tar.gz",
+      "sha256": "d2dffd67eb99e9dafe53a03872df5abd4ddf98da66e4f6ccbacf7b4ab3bb660d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199412.tar.gz",
+      "sha256": "5b5506ef386af40fa684ff8af9cd28276037050a8924316c0f64731630bfd4f1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199501.tar.gz",
+      "sha256": "6bffd1d33c1a1a1b6cc22db4f4d0ff9e5f17334a41112d6a5eee952b53344e40"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199502.tar.gz",
+      "sha256": "e51bedb9878da3cb5b11c4d87ff4fd90103badec4aecd53d997897baa5579b20"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199503.tar.gz",
+      "sha256": "99299896d0ed8943e2c4ed3958dce96baa9f0fe43ed7d364da55f2488c76aa04"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199504.tar.gz",
+      "sha256": "aa28bed8a2ee3d60cdc4444c0c1a4f628333a39846d2631fe9bd5577dfec7c46"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199505.tar.gz",
+      "sha256": "aaa78b9ac50e75092494193ceecb1e37a7afe3d84085db5d833d93f3801b364a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199506.tar.gz",
+      "sha256": "cdfec2f36ebf9d7ba232d56918b5ec1ca446d167afad288b554b4358a1dc78b4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199507.tar.gz",
+      "sha256": "2d1c4da2c64d1fa39ff0d7374feb5702c941c2e0e8561be44cef4168f69cefc9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199508.tar.gz",
+      "sha256": "327c0322f20ad528fa5767e09e3e71bda512d5938632f59704b34493714fd360"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199509.tar.gz",
+      "sha256": "c4868e424c0f47e9f5d899cf0649e05fb8b02dee043f508c203f9950a7d75fff"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199510.tar.gz",
+      "sha256": "ea4e6829854bbc15d43d5f806ebdd0d37f4c8a69615df7fb462f8d41e6e8b256"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199511.tar.gz",
+      "sha256": "c7b1311b97fde2219db8e002b93d5bd64a8ba81a44f7544fe8bed8cc1fef0aa1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199512.tar.gz",
+      "sha256": "ac0539122e257675936b27491a465c9a14fc8e68b3ee16deae1705c028e378ce"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199601.tar.gz",
+      "sha256": "f10a15bdac01251a040e428a3a02ac56ef1aea2ee96c8c947c36ea39b0aaca06"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199602.tar.gz",
+      "sha256": "d787c240b97f1f9a468b999b0e7e9124dcf0db4a1cd6fede09db6bb9d23dfd5a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199603.tar.gz",
+      "sha256": "b7114ff7c3ee0218eb22d3accee120f3846fe6fa4ce23c34870292240f90b93d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199604.tar.gz",
+      "sha256": "7446abb4733ab8a58b05b9ec08e0d3cb009c39665ae9099e7ab2fb3a1ae1a667"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199605.tar.gz",
+      "sha256": "1572f3585ba4475d5654f856f847b856570a8f249f594e6a3d24e82bb659fa02"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199606.tar.gz",
+      "sha256": "68315fc48b74910bd92b4989eaafb650dceaac349ea528f9098aba27c3af2d82"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199607.tar.gz",
+      "sha256": "bf1d0a2b8c460b6884217d7404a333fa35637d50494505d74d7a98d66b9b5cc9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199608.tar.gz",
+      "sha256": "70ccbbd7d88f26a8fba1ec1e1e46d4493d423f9b19caf89368a64119406eab5e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199609.tar.gz",
+      "sha256": "119385d03de77b687b9229c401e32212eb71217af3a3818ebc3e836ad1da5fbe"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199610.tar.gz",
+      "sha256": "29761b941649ab27248a1c4989f08821dde3df235392f38bb9a589a582cd4ee2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199611.tar.gz",
+      "sha256": "d9632f66e154be36f7ef4f7081b792c03355f7ebd48870c8e37aca932c5e586c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199612.tar.gz",
+      "sha256": "842925c8c7fdca7ed2d5e2f6126bd512f3372ed375580d45f1aed88b5c763c72"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199701.tar.gz",
+      "sha256": "9d153f1f746d7e14038a011094ec5f171f07d67c5860819250b5e4f8d822ca44"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199702.tar.gz",
+      "sha256": "f975e02147d3efeb4a0cc78581aee23c7039aecb7bbdbe4a2a9c77c7e8fc8211"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199703.tar.gz",
+      "sha256": "6c342f3f44a4a69915e77269917608c528803f8b0d0bf53b3d18f46c702f4532"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199704.tar.gz",
+      "sha256": "42093dcb4378f4bcc66e9d92d83bca37b8cc20c4028b89ecc17d4e88eec17221"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199705.tar.gz",
+      "sha256": "62ee7da84d10c81c0335216fe96ce48c9a04e7d58f0e3db5dc5d79e48a2a5edf"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199706.tar.gz",
+      "sha256": "4fb6bd77757c7e01a5da7e6f05be0ad155d525756e211e1e38daa1d16e93762b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199707.tar.gz",
+      "sha256": "3c5510e6d31e77ac3ab9f74c721465a03b728bc5c0558ee1f1c35887892dd4af"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199708.tar.gz",
+      "sha256": "6773158b34ec96dead33c0397a6f3b4a25c5e63132a2048e1cdedc48c92215ce"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199709.tar.gz",
+      "sha256": "3c6da9ba1d6bb4051a747b996d15982b91f9ca5422d0022cee735d54917c7ed1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199710.tar.gz",
+      "sha256": "dcff0236c0812069785b75f1d093763954cff6f960d52b1ba42cbbed4e3194bf"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199711.tar.gz",
+      "sha256": "6d66684ad488f86c606a1f4437bb053b0eae792bff8dac750702a3cfbfe9070b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199712.tar.gz",
+      "sha256": "b6062fd430f9d30f14bb3810791de6200f053dd38f2f1feb90935d76d09161b5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199801.tar.gz",
+      "sha256": "cab5deb11741f3fe9fe38046a1f52ee97bab2fe168024114b942fb4a9540d438"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199802.tar.gz",
+      "sha256": "db44c9bd2671cb23d2a70251702c2df7581f6a21e3951279d90fbb08e9a4885c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199803.tar.gz",
+      "sha256": "446e700880d8363dffa3e69148a4ca38307d07eead2db6cbbf3f11bbde1984aa"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199804.tar.gz",
+      "sha256": "ce1ce59677049be1d589eca1dea94fe0c094b5b4ef0485238d34baeda083674b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199805.tar.gz",
+      "sha256": "73da8278af2fac3b66a7646d4e0408922e09e76f84af946ea6d9906ae79feeec"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199806.tar.gz",
+      "sha256": "1a440cc9ab9925e675456cfe55a7ce2c08e32f358c854b10554133f9784b3c10"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199807.tar.gz",
+      "sha256": "e6738d1e5975af7c1b380697401e12ca31093ad8ae29a156361c20640ec1c3f0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199808.tar.gz",
+      "sha256": "26cfcb3693e52c2fa7ede4acd84fc24f156e3232055952c2f4521d46aa48e78c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199809.tar.gz",
+      "sha256": "bb616bb0e601f8bd6a88ba0bda5d4d822c2b4fe2e6e47ddb3ea863cc33865350"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199810.tar.gz",
+      "sha256": "8d99244d555a0b3b433a3b8ea914046718ac8fc1dcb9e9e48eda9c773dd69948"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199811.tar.gz",
+      "sha256": "5d0ba6290b9c3ee0afd7257f1f172209fd34cb3448de8c0fd0d6ace32e247383"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199812.tar.gz",
+      "sha256": "9f3aa205cadac288e970d1c5c6ae9a3567caecd9171cdadd2ec7f1ec482d8575"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199901.tar.gz",
+      "sha256": "557ccf010f7206595530c359218758fa610b3a0acffb06f4134ae79f5a5df5ec"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199902.tar.gz",
+      "sha256": "8aadfbf9bd9f26930d4b1f01b69f63be7cfa4a2f45a4ae6a3324845b1cfc2d9a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199903.tar.gz",
+      "sha256": "f700e599fa90e7d22567024bf4e58dc1fcc9c073df28245e7b83771a6205b3c5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199904.tar.gz",
+      "sha256": "aba2498fcfbc013f59dccf22cc9d96c16725c88a4fa2245227920a50f26f1d1b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199905.tar.gz",
+      "sha256": "481d37775795a09ccaba9ec3446df750512f7d39f09f2597ed3c1be1d4a889d9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199906.tar.gz",
+      "sha256": "7b4d63babdbad747d8712651889f50444e326be1dc5d0a99e2ffd524327fc46a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199907.tar.gz",
+      "sha256": "b97dccb8b3a91ac3175d9ed62ebfe2db39a1990586b9837fd8ec63a7a7bd9654"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199908.tar.gz",
+      "sha256": "b1f93f21911e76f3a27b8701cfb45a1ebeb74845f9f1a0658eb90fbd4d3a84bb"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199909.tar.gz",
+      "sha256": "7e923bbbb0bd78a6f4cb828ba7f12cf33461702ff3c06a85e7a1de25f0cf8f4a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199910.tar.gz",
+      "sha256": "e06013cd7c3d1ea6fc00c74fd9fd98320476eb1f149a0ebaaf09fa5f5b8ed900"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199911.tar.gz",
+      "sha256": "2b3b347d8fd8cc84d55ea7d0fdbc243ed96e7eb26259221922f2dce942f89512"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.199912.tar.gz",
+      "sha256": "abb82ec094d912611b8706875124c13073869e41f23549108f3bda1e3c5a5ca6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200001.tar.gz",
+      "sha256": "1722d57bbc2c0285b3367391e71067a51c0a45c5a59237d19668920bd527ecee"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200002.tar.gz",
+      "sha256": "558075e302b19082c787170015946468dd9002af8766228d47b1dc395d0fb69b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200003.tar.gz",
+      "sha256": "7c8580ed19546066712c7e6b80b3e63f51593ae1b112c1a94312d06ada624c5f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200004.tar.gz",
+      "sha256": "ca3bb1a8fa97e8ebfc7ddc98af2286fe5b2283801a58ee229cc07128cb312415"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200005.tar.gz",
+      "sha256": "552a9ec899f4a12d966d5e1d752c3ce5228d798f4d4b9a92a00b89d814416b30"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200006.tar.gz",
+      "sha256": "53bf139d733971080f26806652b20de7fab88f28d04de851f822d822f1b347d2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200007.tar.gz",
+      "sha256": "b15064e0e154f4809702d456bc793e7fef69fb0025f09d0b1870d32a57238b8c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200008.tar.gz",
+      "sha256": "42a99550b9e8ce2e9cd9dc24679127a7caaafdb399d34ebe7a2776c8b5aa8e8f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200009.tar.gz",
+      "sha256": "8199ff8c657877f31c5a75df029cc50630bf06c07a0ebbdf5cd7a3c52d992692"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200010.tar.gz",
+      "sha256": "9c689c19d3e228b15b36815215b7e6f4ed59d3723fdee4c4601a1c3dd64330d5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200011.tar.gz",
+      "sha256": "033c4f6b7f093cf0d3528be6ed2d92d23999f05eabf596d9af185b3d31071c26"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200012.tar.gz",
+      "sha256": "d0be8cdf3f5d894b147f71ec5b627180930c44ea5b90398d922b40a6b8d1f80e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200101.tar.gz",
+      "sha256": "c6806bc06d3d7d81156dbe98dc4d11647f5a14d8aceebf29bebbbae405181dac"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200102.tar.gz",
+      "sha256": "8cbcd2f16fc47d521e68f79a7f64319dbe9161ff6a8b7ad363a66c8867d974fe"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200103.tar.gz",
+      "sha256": "0b4f48f7f09312186366eb124b480393aa6a9574c7d91a20cd958b481539b0cc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200104.tar.gz",
+      "sha256": "04537ad410ed002e53869770b54d88c587f430f9861a446aed8a95c1bb318ece"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200105.tar.gz",
+      "sha256": "f8390c40f475659ed8056dae8d7ea3ae23cf40f4bd4d8403439de5d84ea53cd6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200106.tar.gz",
+      "sha256": "46a2ed58fa18de44fc3ad2a3e8d8025257da68bf42179844d8e1542085d5cee0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200107.tar.gz",
+      "sha256": "2a565ff5453388e518968941a97893317caaceefffe6369d3a36a665ff6a5199"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200108.tar.gz",
+      "sha256": "486215035a5d82794cd00f378f32387461bb5243ad9d832968573e0722931eb6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200109.tar.gz",
+      "sha256": "971082492bd594a444ad1439dfc966cbdf54635b7a438504390253ca4f7937fc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200110.tar.gz",
+      "sha256": "cf7ec6d9033dc9331aa8d6db3cbe4087e5df0276333e09a3c35b04cec380e6cf"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200111.tar.gz",
+      "sha256": "689fa80169c79048fe4c78bf8292f1b9a3c5cc3bfc8a785e8461aa74314ea727"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200112.tar.gz",
+      "sha256": "9256d55894ae8bc1af1dc75eb4590eb0d1601e0edd31d8eea7b2872672eb0d5e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200201.tar.gz",
+      "sha256": "e8c2a3f1ae85efa634d7a527c5562df8aac363461c80e084ebc2d5965a230fd2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200202.tar.gz",
+      "sha256": "d625ee1099b7d489a485ba2f0db3a379ba6d8e01c287981ad530a266c6903a2f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200203.tar.gz",
+      "sha256": "cc68bc60de194b5becefd3e621c8b531b1b9490c1705485a694d3b5e6093361e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200204.tar.gz",
+      "sha256": "22b84bbc0fff52c8308501dbe3c8e20733e44bbac91782496e7fd50e10084f8e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200205.tar.gz",
+      "sha256": "6a2cee8f9ad3ec406c18d546d7db8011ed2da28ab964cae384c5ec1109e3c6f9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200206.tar.gz",
+      "sha256": "049b550c99b1f30615db80e2ba19726ab532e82bc131980d284c3ca4c443b526"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200207.tar.gz",
+      "sha256": "04a25bab9d819e4b295de15f8f6d4c38b9524ae39d27eccedb31e7acd0f74b51"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200208.tar.gz",
+      "sha256": "581efd5521eea54c6858c23676bd4474819555eeafa2713e339ab7abc9263c9f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200209.tar.gz",
+      "sha256": "39193c6f2af5653445072a1e992368b8a6a691fdf2858e3b104e97e0ead9740f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200210.tar.gz",
+      "sha256": "98ef08dc41bde83fb493eb7ab71cd83853422d21ce172ae33ba6abdb10169085"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200211.tar.gz",
+      "sha256": "88468c27a9b81b6304db623beb7e58bd135835c14af00a95bcfe5db44a492e0d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200212.tar.gz",
+      "sha256": "b865a89760aa011968e7fc7bf5ce10915482078170a6d9458c5063ddee3bbcc5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200301.tar.gz",
+      "sha256": "3f22c2cf7befadb16e4fef362fb963cb9c268088a49a3f046aa2c4614df8754f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200302.tar.gz",
+      "sha256": "ed048fc94810b16a7cfb8e207764466e9c6c6620d66a9aec04e31d029af4384b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200303.tar.gz",
+      "sha256": "d9d0c26fde75f58da60c0173c793afe132cfa93beb8af1ae0489b37855374406"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200304.tar.gz",
+      "sha256": "763b2f198b71a804a8a6f9a5e6a44186fabc40349ce5f7877dbc29ee30ed8cdc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200305.tar.gz",
+      "sha256": "8dcecf0fa286769b68a10e5af6c8a1b0852f9ce959d87ae413abd042757068ce"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200306.tar.gz",
+      "sha256": "2692a4fa25c2d0a0afefd877d85eba5e753f9972252c0f94468e6baaa0ca0e35"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200307.tar.gz",
+      "sha256": "cad549b0b941f58400f4d96a860d53ff45cde151a3bf1f19e523636a340e451e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200308.tar.gz",
+      "sha256": "6bb61a491a1dee5d8139c224f8c0e5af35b0f59f4b5e9af55c97ec28d89e7357"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200309.tar.gz",
+      "sha256": "b623599bcab9c85811fd5917d13fae7a7b101a44cdf5ca7d4281ff76ebbebe70"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200310.tar.gz",
+      "sha256": "6cc8463141f337de6181023a8aa756b764871a26d8bf8e418bb6bbb15d749cab"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200311.tar.gz",
+      "sha256": "6a5e5b5f82e339faeea5cf322277915e042379d8b6d37d738650022b27bef7e2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200312.tar.gz",
+      "sha256": "3cb343b82d08ebf364cd17469b3000012772157156a6322e5d855f147265399b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200401.tar.gz",
+      "sha256": "03a2a016082050f2384adbcd79a2fffc0694026bc5173e6b58f1ddf5b2f380f2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200402.tar.gz",
+      "sha256": "8045fb83dc388d676b3756a18296418d7b79a15eedd0b5468a0188cb4fe35a96"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200403.tar.gz",
+      "sha256": "02b8539e3c243baa4f31eab833816915bd68a15be1b10f8d5bd084c8465acbb9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200404.tar.gz",
+      "sha256": "d07cad8274685bdacc0bd84d86c4bb3919918f3e52b5374282d0fadcb613a794"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200405.tar.gz",
+      "sha256": "1c7fcd2b2b102e325219c65b6ba14a34e58be4f013df0727d9939274a368bbb3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200406.tar.gz",
+      "sha256": "c396ca672c10fac7fb8ecf1ad7159f73a4f8c4c7c2dae115e3158c4060816604"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200407.tar.gz",
+      "sha256": "d4c0e44e4024205ed66575b6c3e92a4d0a2021ac9383fdb94481625314ea39c0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200408.tar.gz",
+      "sha256": "2c11d4cb07562d8935377b6348e7e01427c22439a9a79e33dc0347100688e462"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200409.tar.gz",
+      "sha256": "c2ef03142bcefd0ac19584321a22f803651dc7b59556230686ba543a6818e6cb"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200410.tar.gz",
+      "sha256": "15bbfd2ab83a1c6dd1812621f0ffbacc6b0e29c57013c493eadd87a7b4c5e2cd"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200411.tar.gz",
+      "sha256": "1f468e0d0a9f6d7fa1c72825af8813a2be823998ea6d28f74ccc5fa660b384ac"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200412.tar.gz",
+      "sha256": "b6fcf4433efa53cfc039a12dea92b37013221b9e1c2387cf81910553c039a100"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200501.tar.gz",
+      "sha256": "0227652722d85162a9736a6961100f52aeb20e8066d4333cce98aefe72892f9e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200502.tar.gz",
+      "sha256": "f0d61107b39be29b79c63fba5f827e7f1bb3ed30ea5281b72454b762ef46cd0f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200503.tar.gz",
+      "sha256": "27696b53c71b83ce624c5ef540ef16ebe800ed4e8869587d11879c9ac55665ad"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200504.tar.gz",
+      "sha256": "459e968e967791b7d48d491a9f655a3f52363f16439d02dfc3a1e136e225c726"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200505.tar.gz",
+      "sha256": "0f464b9bd02bc0172cbdc1e4773044ff69f69552444ad19fecbd2c38a76159f1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200506.tar.gz",
+      "sha256": "76b9d7354ec5f9ee1bc443653409bd27b127ae8277336a9db689191fa6e0dbe3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200507.tar.gz",
+      "sha256": "c6fca0c48473a599db3c972f01f70040615145b0774058ca9973df7f9de4f9b5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200508.tar.gz",
+      "sha256": "739c9cb09070a948a0c908c462e5d68aab88f2df0564ed3ad03ab5501414e2ee"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200509.tar.gz",
+      "sha256": "a6d142b9d4c45fbade5c3545eee739f55ae5e33b82795d34b9240b96f265577b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200510.tar.gz",
+      "sha256": "d18046dcdfdec486740035679791fb11a4d1935e26634b9d338fe589ebebfa78"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200511.tar.gz",
+      "sha256": "99c684070e56cb98131259f59f1533fbc816389bf04f1a0d9708f9704ace9c6c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200512.tar.gz",
+      "sha256": "f0a68694779b443574b8eafb56fe5b5e9dd2f3215d81ce8061c97a2faed04ab5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200601.tar.gz",
+      "sha256": "729a51553504f728b8cc0353b4bf9b9f5390a18ac24d9a03101ca815adef5667"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200602.tar.gz",
+      "sha256": "4bc156d15523e5e445f8483b5edef8cc97bbee224a439beca46fd19cd495dc0c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200603.tar.gz",
+      "sha256": "9bb5818285832fbb57c9e19af3ac3b5e6ebdaab0698900282e7795807ae546f9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200604.tar.gz",
+      "sha256": "a05f4def991fd3b86a32d4a5b73c6471562e14837b037e286134e423f7ca5f60"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200605.tar.gz",
+      "sha256": "c708bd50ad59d2eb2f46c0c6fbe08c199abe6d54c64e8519e5603cdbcae9d757"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200606.tar.gz",
+      "sha256": "1a91206ab4b1f068ef083029b189a0881555c870226aeda18c0e9c9198ddc710"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200607.tar.gz",
+      "sha256": "4dbfeb4a3242aa0175a2262b493c5e3a3d2e9ab9ffa28219d1311d7fc25f4191"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200608.tar.gz",
+      "sha256": "5e5153385bc70a86f643080933378e0a290e63683da0fc7550bf013be5d687ca"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200609.tar.gz",
+      "sha256": "aa458ffc2596dc2d04dcd08dd1b5c58df368a8b61bded6341bb28675e437532a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200610.tar.gz",
+      "sha256": "5a60e4349d62b62c98256e86a1e6fbe9350cbd12bb74c614ad1bba28b4966824"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200611.tar.gz",
+      "sha256": "99f8deffa96d07180161e38d5040cf5d904f3ea86faa08dd1043e2d134450aca"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200612.tar.gz",
+      "sha256": "4f7dba413d46f0fe43f75f580ef74cc220142e5f6d9feb4141f8205c65989c80"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200701.tar.gz",
+      "sha256": "c1d3b4e83e73a796e1608ad33a4ab2411efc8cf31dfee251c7c65682b1128c31"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200702.tar.gz",
+      "sha256": "e7e2891aecbe75c080a2ce30df664c1167f89a0ffcedd0849b444b6e733b270a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200703.tar.gz",
+      "sha256": "bd6ab16bdb294f8aacd29af228e0fe332540d0205ba5d402e7520b2a3fc93285"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200704.tar.gz",
+      "sha256": "c9ce0251bfaba5c636a31f26117324be61e80031db55608c20aa78cbc5c247dc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200705.tar.gz",
+      "sha256": "9a8b847afdfa6f4fe4e523cf0613826095b72a963c1cc350a3d7e1e8ff35d03a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200706.tar.gz",
+      "sha256": "273748c0d86e3f0c2219be734394b44832a5fd99f174318bd8797360f1b00a38"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200707.tar.gz",
+      "sha256": "d80c434c2152b62983e4aa0135539f101226fa5b993f27df9e4d7eff8dea2eec"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200708.tar.gz",
+      "sha256": "f988a972d4d2df5c1dcceb7c0b28dcdf049d2968a4eb5d1f9140e5b3a9b3f489"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200709.tar.gz",
+      "sha256": "99a25cbd612b8d5dbf9aabae58bd91814e3094025462979f63430ef1fda32477"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200710.tar.gz",
+      "sha256": "069e729abfcb8573dd9ebaf6227684504a03de79d177499cc0f30456cef2dfad"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200711.tar.gz",
+      "sha256": "4e884a16a50c5c7ebce85b93c9c3af708985be030bd64d93bf008e0c6c701371"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200712.tar.gz",
+      "sha256": "8fac44117b5133e748d5a4762296db1bc7aa89753972991f5c5e55ff51965605"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200801.tar.gz",
+      "sha256": "4634e58a5c07d8350e841790b7b79599ee4306849ba67a11b630712f81e66357"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200802.tar.gz",
+      "sha256": "0694c6be85843928efd9fb4b4de811de1ca6a595d703094f696d101a823d618a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200803.tar.gz",
+      "sha256": "a548b765f6e891f84a87bf528bb3cf069ab7341b7344a6cb5afc7052beadcf63"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200804.tar.gz",
+      "sha256": "6d3735765665ab56851f5220d6ab0a5d40f0690b11d908ba7900188630573f24"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200805.tar.gz",
+      "sha256": "133a26665df5b214daab4b65893f068b050c9159ce0bb0736312a0a8e0350113"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200806.tar.gz",
+      "sha256": "e4e56394cbf0e79d21793ba5b5f5f0f2483bfcc3130e1a9cbddfcffce891fead"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200807.tar.gz",
+      "sha256": "530121ab36fdcdba6d0628f3fdcb914a05bad4d8ad3cc57a6632e0fc9fda4b98"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200808.tar.gz",
+      "sha256": "46c9ae12aa345d284d1d9f0fd84f961f963e9314966dd7a42c13980733365024"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200809.tar.gz",
+      "sha256": "d5410b03885ea91770dd8f8a0e6a00bb3a1c4359037df57eb0c57a05afea0637"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200810.tar.gz",
+      "sha256": "24d1e568067e649f0ad537b50c7174d2af1f924d403d59ecbc7343876c8ee032"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200811.tar.gz",
+      "sha256": "7a6ee72bf2ab7d5f5166fdb72ae4a583d08ebef5056e748d1221c12a986706c4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200812.tar.gz",
+      "sha256": "ab86d12c477eba3769d21049fb0b16fc5a10b5e7a1a91a9a8160141abf3b152e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200901.tar.gz",
+      "sha256": "f491be6dfef05637c5c16c48eb461d47abcef465d4b607dfc42ee275bed4dd3e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200902.tar.gz",
+      "sha256": "0e3652175214e98096e3dbd288deaa043c8a256a985c95b33e9135a5b5ff7efd"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200903.tar.gz",
+      "sha256": "57454160adf4ad42588812505f55390868cda60b5a2c667c11b9563a7a43b701"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200904.tar.gz",
+      "sha256": "1fcdb6f610adcacdc639a466054762ba29fb26a8415f9fdfe506b4bca30202a3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200905.tar.gz",
+      "sha256": "db44c58eb241461741ba822c498d9f4c96d2b0537e41274e9bc6987f61888e2a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200906.tar.gz",
+      "sha256": "9f6eb4eb154a32c78cc67b3509a3961fbc5eaf0407b9ea1c328e4b44f8480014"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200907.tar.gz",
+      "sha256": "1d2ebd1a9fecae449fbd92b5e786e6dc8831b4ed22cb71033e83d0b711bac4e2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200908.tar.gz",
+      "sha256": "942b77821618cd91d61156573584d58e8dcb2507ef275a4d8ce947ff48bf756b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200909.tar.gz",
+      "sha256": "d956eb27682990fb037e52e691da9529b5302aca70294f677ee9601a1733363c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200910.tar.gz",
+      "sha256": "212c45149d79d071d8ddf64430aceca8c2d73dedcfbdadd9dd56f45a28097079"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200911.tar.gz",
+      "sha256": "87ebca37965475f0550859e8abc4cafedbab574a9fa05a5dec44c5bb68e81bf5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.200912.tar.gz",
+      "sha256": "c2a3e01b16b59a57cee002be86439f92efbf29afb9d669e9f0c045761c2386f8"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201001.tar.gz",
+      "sha256": "155d1dbe250a2b3c7d6c3d0af6ceb2bda7a12e9973162ab7c76e2d8cb124b383"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201002.tar.gz",
+      "sha256": "e31a36b69de78d54249df0c6471999165be7ccd5fcb736ba364067a08a6526d7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201003.tar.gz",
+      "sha256": "194c4a4f8c88063ea380737d234a90c58af369a1b273705f703aaa6116c599fb"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201004.tar.gz",
+      "sha256": "9b8ab28289fab28f232f814ea1773761a6b61b76f5cff0398df1d80de3b323be"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201005.tar.gz",
+      "sha256": "58d4902b200a907debc794dd774b3ae1052fe688bcf3f0fe6ac950f4b079387e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201006.tar.gz",
+      "sha256": "ba6c41ff893d62bcddba4a89d6721a117cbafe6c1e685ece03c92a4b82e68ad4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201007.tar.gz",
+      "sha256": "5985f2330c9a6a373e4545924486a71973cce450fd4577c5f9b2a5c3e8291315"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201008.tar.gz",
+      "sha256": "512b6f63e7be20e541206974096fe40ad1c2ff0c7e233f30e8a3072cab3f4cc1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201009.tar.gz",
+      "sha256": "3b36df16f5d6866db136a29464230420ae7f7fefc3abcfca10d0cc6da0bce224"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201010.tar.gz",
+      "sha256": "a11a3b3adbadbd9228ae0ae155062456c488f7ebac1ffe4e72df9c9b2261260a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201011.tar.gz",
+      "sha256": "dc8356abc174bf071af79bbb420b65ba608e77b1d846632dc335083d5d23e480"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201012.tar.gz",
+      "sha256": "2d537136bd4ffdc4c7d12db4d9d5365feb5509be0f0e6392b3d82ff30faea5c9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201101.tar.gz",
+      "sha256": "34cd9e6edf8b75aa71a22ace2b7a00b4f3380b6bdae7eee666c02e9bff7a2310"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201102.tar.gz",
+      "sha256": "6a34ce47eb9c6d38cd27218bcb14d77f7a431c526529ac1e3b4107b3543a36dc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201103.tar.gz",
+      "sha256": "a076e6b4b23aa1b40e7f6c7e71a5bdba92376609b96153eb7b5158a0c0651be6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201104.tar.gz",
+      "sha256": "ef8e05055e9e8bc348aa1e2ee1a544565563c28d06e385b3d669f3603f87af20"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201105.tar.gz",
+      "sha256": "dd67128059ee0bb16d7364e936fbbcbf881069922cf8ae51227c8041da693d42"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201106.tar.gz",
+      "sha256": "a27bb7da5bfdfb37e6873b084ca542554c86b36d14fd4e554096ad441ded90d5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201107.tar.gz",
+      "sha256": "a3fe44d1dfa165300c61c5329afd2dda01cec14601ca181bc5e2e0278375c21c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201108.tar.gz",
+      "sha256": "28cd8b8c1df80f95ce61773aeb8eca60f701ef30ca5d93f52b4db7ce55d44424"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201109.tar.gz",
+      "sha256": "0a3d0f3c3d87cb022f585ac04a974e9865900f81358f399b3a19be21eb44f4de"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201110.tar.gz",
+      "sha256": "8c24e395ccfd017084936665cdec1eaf5395d583eec38916f1d4d2cd9a786788"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201111.tar.gz",
+      "sha256": "fe9c6fdb6576206922f3b9f0a282742502a58cb2a60493ad6d5d348e1536930c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201112.tar.gz",
+      "sha256": "18d56c9338aeef02d6a8e56659c99e8ad20c8d09eca0e4b82bcf1ecd795549f7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201201.tar.gz",
+      "sha256": "9cf91afdefc5bad92257261b15867b313d5241cf7754594617598956bb7c5eec"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201202.tar.gz",
+      "sha256": "e84c28ce19dfecd63abf50a9b52e033d53ab29a6027f90d39400725df9b520b1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201203.tar.gz",
+      "sha256": "9ce139fe9ee3f93788abdd5cb0fe6678d986b12d22cdfe89a10e63dc21f2f476"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201204.tar.gz",
+      "sha256": "d05565c1381489d904b60176a2ec24869b51613118612b75fd86f0f1f86ec96b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201205.tar.gz",
+      "sha256": "074fa6f45c291e392be44fa4c2a15ec9809ce9e5ece03a354f4193ff66bc7b16"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201206.tar.gz",
+      "sha256": "b05cc09f208c0759d06d26ec64c5bd4e0132956e14fa89a99b93fe5243556280"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201207.tar.gz",
+      "sha256": "cac19ce22ec9304773f56389f85bace38ee1c85e85422e1978b3a590ba7c9ff3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201208.tar.gz",
+      "sha256": "80b1b9461b66e926aaeeb19a1dcd2cb4564ca223f5ece8714f82cec4d3470494"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201209.tar.gz",
+      "sha256": "af56e6706fd65134596125ee797f2b69da46895e38a1d7f067582fa07879471c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201210.tar.gz",
+      "sha256": "56d6d512af79a3382a39255e475558c5848a83cd74e73737e8cc8168c5a97065"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201211.tar.gz",
+      "sha256": "133fab6c92138a36db9be5970768b185549bfbfed46899cd983278ff9de2777a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201212.tar.gz",
+      "sha256": "6d0ae4f9074a15aef821fdf21fa51c1962441765da129db226646b26e647718c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201301.tar.gz",
+      "sha256": "55178590be5e254e399ba2d6bcd12a9f457bb2d2b242d042e9b293b858f046cc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201302.tar.gz",
+      "sha256": "121011894cc5c09521985e672894c13e22db4c00bcbafa1d5b6f0025cf4913b5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201303.tar.gz",
+      "sha256": "5fb1ae7107c5fbb507e3827c3f3b242731de4ea81a90c3803ec9ae990bd7f8df"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201304.tar.gz",
+      "sha256": "4aa9b7bb0437ba0c3f6585ab65029c53bba0fb78e492dfc01582fe607287fd9d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201305.tar.gz",
+      "sha256": "616bc1ac631f0b282a6d0802bce179eb9421c213b7cd8ab846bacc8a9cc00dbc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201306.tar.gz",
+      "sha256": "7cce149003127e9400a004dcd620052f887db2caf034250f89339cb20a6d64d1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201307.tar.gz",
+      "sha256": "a0a35b4f81d953c92d0844d6e6581f557b764f163adddbe4791e9072095a302f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201308.tar.gz",
+      "sha256": "cbe2ef8784092430ded0226bfe85c464bf6b8a2c2c7849acb62a0a5442db4a0b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201309.tar.gz",
+      "sha256": "e10dcfec20efa965a02a4eda96457c0d319e28d10f15fb16c504c18681745bcd"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201310.tar.gz",
+      "sha256": "f3ca9448df6038a523c03d0d18c1f33a047288de512a4ad8f1acb6e5b8e83668"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201311.tar.gz",
+      "sha256": "9531de64002f487f87add57a98be6dfb24f27dbcc2706cfadf84a88c5f80e16b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201312.tar.gz",
+      "sha256": "389e9a5b6f055e42f5914d2a6af817561fa065907bb35b3a77d7c52a6a930d4f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201401.tar.gz",
+      "sha256": "0a0ba7650c0aaa05727082819de0687569cabb84eae339e685c722d47135d9f5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201402.tar.gz",
+      "sha256": "49bb08864252dbf5513febf048120a51d7d5c240f7900e8ce60a9102a1b950b7"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201403.tar.gz",
+      "sha256": "2cc00213b54aae78223eb09332d0abfcc983c68144c1e377c7df5ff5a7436485"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201404.tar.gz",
+      "sha256": "62e432cb3b946a557c2656d4babb3f9f03617cc03cc62bd4bb2b9acda4aa5452"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201405.tar.gz",
+      "sha256": "224e0a7724255452ef6d7ab1de3d0ac44c1a938c27e1b40498aa6f51ed60f93e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201406.tar.gz",
+      "sha256": "288ed6acc262c5e4a929c9684f18b12c4e394453868a4abf8df040607f521103"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201407.tar.gz",
+      "sha256": "7d5b7af248ff81ca54939945e1b4b10229e4f41f06ccf5be811b2352f3214150"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201408.tar.gz",
+      "sha256": "d9557398465914ea01aef2099c0041332d98ddbc8842ebe15d6914c357f8b290"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201409.tar.gz",
+      "sha256": "be4578ad0e3e04a08cd0c11e3c9dd0cad1df08e7477d71b396ad7389d5a6d1e3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201410.tar.gz",
+      "sha256": "e47f5281e77e310a28e8aa47c43d977ea495098d435773853988ec289ed99767"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201411.tar.gz",
+      "sha256": "f36f129ae6b745f85deb853c1888d78f129384edba347bf5afd50596e13f682c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201412.tar.gz",
+      "sha256": "ecede95a19afc689de933bb40262231061e062c96a3239900441683b3aad48ab"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201501.tar.gz",
+      "sha256": "0507be23f71b0be255ec5e09614bef13bdf0eef49d6710a0f7225af63e86fadc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201502.tar.gz",
+      "sha256": "844a19206bce3add6a44ee7cc8cc5c0864b950f8d0cffa0af6c931bdc1b6ba1b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201503.tar.gz",
+      "sha256": "b7567e68456fdc47e30a7240d2123f9527d11946b51abaf34492fd27b47c495e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201504.tar.gz",
+      "sha256": "1c454e93579198c58c18c499e576f4a1aee4eee51387572ea7cae3514bc62c01"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201505.tar.gz",
+      "sha256": "0f1c2de063ebd69ab7f0b9e9edf07a121778b42cebc9cf7255e77ef356367592"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201506.tar.gz",
+      "sha256": "3a27b2df3709066ef0db7cbcec9f8e3c15e130b6f210f8ff7701a37d71d3892f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201507.tar.gz",
+      "sha256": "ed6a74d632cba0b41a6e4f6eba160507af5de492f6a41fd3abc3e5e26353ce3f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201508.tar.gz",
+      "sha256": "009f6191672deffc35b61f933ac7c80c8cd7df75a53d7716a209f217e1d14c3c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201509.tar.gz",
+      "sha256": "7c978ba527ecf2164bc88bea17cac816b56fd63727f9236a3da489fc18bc8721"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201510.tar.gz",
+      "sha256": "754120a87196f4c165644ee2130cd2322bab81672773f41fa3c94c2553fb9353"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201511.tar.gz",
+      "sha256": "e52aa9b88dd8bd8e58f5341e78be676c32ba2c172a0cb7c84a24ff1e89cd975b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201512.tar.gz",
+      "sha256": "ef74eaab50c6560f55ac54b6d760164d29630589d46764294b139c7b79665738"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201601.tar.gz",
+      "sha256": "76b2c1976b5cb19a136553c065da1095cebf0b9baf5b0ad8734ae8205e793d2b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201602.tar.gz",
+      "sha256": "563e376e5c663348cf639c1882277a418448164283d164cad2350e3579ff1524"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201603.tar.gz",
+      "sha256": "e653933c2689eaac856f4d9c55fc1be44f78768850750b9df465db85260efe1c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201604.tar.gz",
+      "sha256": "7ec1c7beab4c0dde189d89ebbac09e8a01954d234837e8e3cd0643287b324a37"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201605.tar.gz",
+      "sha256": "bc1e175835e4a5675958b98010c627e2462d252e7775d31294e3dbfee368f16d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201606.tar.gz",
+      "sha256": "b228c9bf9176bd395c52c2825a4bbf3e4e431801c5b073d22b3c6e276dcdfc2f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201607.tar.gz",
+      "sha256": "db544a77e015d1f452d2fc833649806fff22d5aad494a5f81dc5bd4711dbcf83"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201608.tar.gz",
+      "sha256": "2f5099b66a5824a56a90c9981fda1ba2efad2619be720263d2ec370dfc0981de"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201609.tar.gz",
+      "sha256": "be7e29159425cdb48fe127e9627297f11d6372dd6329d977e522741aa5c2a0e8"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201610.tar.gz",
+      "sha256": "f701128600a55598473851e2a8cb9d4374f893256b48c9e5825e80ebb567ff9e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201611.tar.gz",
+      "sha256": "706a0994bad5cac2055bc44b97cdf84fb2d66e8e6021f84497075611c7f09419"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201612.tar.gz",
+      "sha256": "a8ad6bd53b95c6b56c47a60d1fa6f273fc6f8e931e2878d5f4ec861a64c3b759"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201701.tar.gz",
+      "sha256": "d748b28963c3a68e29cabe8c05e314a91570b62c7b177ab0e08b809d27529d60"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201702.tar.gz",
+      "sha256": "6787313c8fc092786278aebf7c6c1477e00bfdeee0b67a69fe98e08104ea0c17"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201703.tar.gz",
+      "sha256": "a257fd0bf682e12dacef80db0d6b99276c5bfa43d240862a737a442d6403fa40"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201704.tar.gz",
+      "sha256": "b89a999aab5049c23d4e4c74da50ba425baaa4c49013f97bd3b13d7aed55cf79"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201705.tar.gz",
+      "sha256": "e5af831308f735962b96dc937c83397a80a7c2da72f541e74d36dca399704de0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201706.tar.gz",
+      "sha256": "1b2e38fa129c178b54ac2e4d4261d0eebb227e69aaaf626a192ac155b047aaad"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201707.tar.gz",
+      "sha256": "7cd7d8e4811fb8531ffe83bf6f23d2ceeff4f80d2b94af524a70d7643950859c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201708.tar.gz",
+      "sha256": "4393c4a8473eafd7504b9b231d2a364d55280b12e83b54d86d08e7323a85a6aa"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201709.tar.gz",
+      "sha256": "adf83f296b45b5805c4bf082379a2c2786751e75e5aa92595b55e3d0df123194"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201710.tar.gz",
+      "sha256": "fcd48b194b22ad2f9b9b8f364ff992ecb5fd7933c601450b176432b00f169ae2"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201711.tar.gz",
+      "sha256": "9a5e3ede2249bcdd5eec8bc4be7ae538908fb058c2d791f63b42564faca3a450"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201712.tar.gz",
+      "sha256": "585c2ee3dcafa653e76e52774f9b3344138d66f62864757e13e2c16d90412494"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201801.tar.gz",
+      "sha256": "e692b41790c928c056169c85c96866e7d665afb38063af5b9246f8c3de97e323"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201802.tar.gz",
+      "sha256": "564713adaec2f4e6f80d0247861f24b64d49358d89c43358196b59f523422361"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201803.tar.gz",
+      "sha256": "69db011f535d26cab555e329c7843d26e5c4c2e07716fb13d8be563e5ee75116"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201804.tar.gz",
+      "sha256": "110b5aa2faefa83560030a63f4cf1ae9216ec2eafcf314793ddc719c60e58120"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201805.tar.gz",
+      "sha256": "c34c179fd5913ae15049297a88ae49391984be59781dcff25db1f1bce0eb4d4e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201806.tar.gz",
+      "sha256": "fecc6e54599c48486e00453e7a98b1654b974077a086a9117d1b83eb63b67be0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201807.tar.gz",
+      "sha256": "47d8e5fe6bdce03933b2fe20b2c075334c5053b56b3d6e5861e6ccff489909b0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201808.tar.gz",
+      "sha256": "171cbaf9f9bf7347b894088732b42782d9de58e14eb47cb7fa18b42aa4d7502c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201809.tar.gz",
+      "sha256": "5de960f345324f9214a5bb78d7211b361db659d9e9328dd8834a9b641973c6ba"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201810.tar.gz",
+      "sha256": "383ce5f5b643cd09ed1b1ac9a0f8f490476ecf609428bed199f35fd917c59f2d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201811.tar.gz",
+      "sha256": "bb84f9e19e4b4fbc1f1084a4fc1ec69468931d4cd3b5b2fcaeab128d1c010fe6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201812.tar.gz",
+      "sha256": "9bcec375d91fb6ac77a0a12d7191cda8c45c375ff4b0f99183302d77fe9358d3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201901.tar.gz",
+      "sha256": "7e237a866d75ce96e57d7059ca675f8f242241f28c4447aa4a10203f351f2edc"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201902.tar.gz",
+      "sha256": "6991a195a4fec362cd099163505de49ee64013d1d06cb63ae869341e63183112"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201903.tar.gz",
+      "sha256": "8d5f8d012b457fcfa82c79e3ca679ce7a0f38bf9a9c732ae6a30bca75fad6d19"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201904.tar.gz",
+      "sha256": "74f0da7a4abe9d47a64c9f7ca26a32b0e0efd7b96d928d96518856ced5c1e319"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201905.tar.gz",
+      "sha256": "09bb0fbdb880354ff7706c2c58be98b260a2953b755b0aa060e2cef0ceafb2e6"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201906.tar.gz",
+      "sha256": "a44774127f301c6f94ebdf7b6ecbd35b210903ca7a1ae1291a6b749584dca759"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201907.tar.gz",
+      "sha256": "be5315e13f579d6fd7cbb133b117eb09d4d9d4266248eb14e2c82709f78e2f86"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201908.tar.gz",
+      "sha256": "b09b2a2d05799860088aca4302d003dd06dbd7bec898d28049c11fcdc2c88e6f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201909.tar.gz",
+      "sha256": "33b2a7a4aba7f6da85ad2f8fcf828af3579bf2e6f0acb89088271b7e4412429b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201910.tar.gz",
+      "sha256": "91571b93cdaf9235d42b05817e0c4a48a3338a5a2ab02fce6edfc768ad8302ba"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201911.tar.gz",
+      "sha256": "6fc02b0e523d0daf32fce10f0b7595ad733da519598b01921476dc5b57c09955"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.201912.tar.gz",
+      "sha256": "fd1ad019b76eb9d88eac9b20a99cd700c03e1c16b96cb6d8942ca4c8b8a259b0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202001.tar.gz",
+      "sha256": "d22e12092c4a168579f445632899b6f1b019c025accb5f1661e940e3189098ed"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202002.tar.gz",
+      "sha256": "af042fb057fd2eb701660a669b15cd1d1bc7d70d9d4a395db6efbe1fc74b3d04"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202003.tar.gz",
+      "sha256": "08580c7832b0e96794e14d60f39a5906b4a7f125ccc3217890ca8a9d70d7f62a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202004.tar.gz",
+      "sha256": "02a835f72471cc50560a9f163ab2adaee2a89f978e84d9e533b1933b8082c158"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202005.tar.gz",
+      "sha256": "09e871b90c2ad2c259a07ce5eeb192feee1efc2d1fef8626f2b00b143cec678c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202006.tar.gz",
+      "sha256": "6ae4041c460e5efa827d827ec494a3bea346397e341e40ba24789b83dd04481b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202007.tar.gz",
+      "sha256": "f653b62844d23874365011f0615360fe1a5397d143b7e356988fed8398e76298"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202008.tar.gz",
+      "sha256": "cc40de70b382e49f7de7e80eeb95c5873914743d2847b2725f0452db69febc18"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202009.tar.gz",
+      "sha256": "060ed57d92796aa290ee5d7ef9668f815136e6415fca05ad9444667149bc6619"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202010.tar.gz",
+      "sha256": "1933fd8601cd31cf5b05378169a8f3bc4d8fb8c166db7a6c35706e60985d6c21"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202011.tar.gz",
+      "sha256": "b04605b9271fb36acce3b6f3894d99adba2cae5e7b1dce93386c9ccbeeab5009"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202012.tar.gz",
+      "sha256": "13224e4713bf4ef488d5075365c679cb05ad786c448de222985deaf9d2885896"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202101.tar.gz",
+      "sha256": "f8876b1f392c0dad184cefc9816ee09d5fd5745dc8c8092027df20a55bd06f4e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202102.tar.gz",
+      "sha256": "ab2d491fe11006a6970d1f338bc85f2312d2967fdd8b6c9e69d5eecc64dfb5cf"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202103.tar.gz",
+      "sha256": "6c1835d83a46439609bc8780e3f265c9b4a025da8e7ea2e41708528a46139ff1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202104.tar.gz",
+      "sha256": "588343af0194a34fb3d1344c66b854cbbf98beb57299405e73457ba8f0b9e93e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202105.tar.gz",
+      "sha256": "d3cb82391048047bebd949082d39011844ae0a734a78710cc0f4b27f2ef72f5f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202106.tar.gz",
+      "sha256": "74e9438739053a0a5535823e26ce80ff1a030961d5b2d7c6382f4af8b92ebc4f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202107.tar.gz",
+      "sha256": "7ddf5e09f8f2bfce7c38352e75f223278982038f3ff1c7224009069d7b21d8ab"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202108.tar.gz",
+      "sha256": "9d35aa7589e631f04e81d504c4d0f8e2aa90a049f17da6ba2e76c0b02db0d414"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202109.tar.gz",
+      "sha256": "34bb07b022a65d549081ad685dd6e5ab15b8e8ef941c53317094be1dafae33f4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202110.tar.gz",
+      "sha256": "00a3df9588cad60230e093b51a3641cb7f7409d5210bebc23a29de8cd5ced77e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202111.tar.gz",
+      "sha256": "8ffbdf6648b0dc48a69db770d920ece8505a42908a39993a89cae328902323e4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202112.tar.gz",
+      "sha256": "76bef25f75741e6a73d566e4887f7fd92058afc4d35d92f8c515812ddb3f439d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202201.tar.gz",
+      "sha256": "bd36f5dc8cd031a947d87d8a7a0c558d051e8a9ac2582859da41d9d412360fc9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202202.tar.gz",
+      "sha256": "f4bfdc079642b90491c9eda42ddd42daa028670745ed7a762d240d2718310242"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202203.tar.gz",
+      "sha256": "0a67c9c58548c38c1ea77653e7fe3881a65998272347e6e960005e619316e7f1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202204.tar.gz",
+      "sha256": "4a356aa52c130b208ffd9cb6cd9370bbb18be3ced6427f48d0da02f50e724ef1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202205.tar.gz",
+      "sha256": "5d381b57d58e0790a0bac78a1fc1e54be4bbedcde4e84fa61ec93d339dd2d534"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202206.tar.gz",
+      "sha256": "24e8447d444f6639b8c4a7f6f3465061a83fcda442dffae3d41803444ef5827d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202207.tar.gz",
+      "sha256": "ae546386128e59eff97edf61af1d074795b869f140ca0c92d2879f36ad8d9259"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202208.tar.gz",
+      "sha256": "452aa8ee58caf9e227fc8fbff2f2ef314871a6a0be4a1d4b843bbcff5ec260c5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202209.tar.gz",
+      "sha256": "a122e5453b4b3a1ecfb9ad1f550f6eeadb19278b9181a8a712d2398d3a14a76c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202210.tar.gz",
+      "sha256": "8ecdefcd2dc3005d6fb534819c2339cef158affcb068c22403084e5c18ceff7a"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202211.tar.gz",
+      "sha256": "7fbae80346c1c3d42e08e409500ab081c69f17a86eb8c2d0f165ce53b83f1c8f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202212.tar.gz",
+      "sha256": "b5bd587411c1df26c4e63630f7f7b7ed23db8d1f9aa0bf0ded2aa89d233ca0c1"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202301.tar.gz",
+      "sha256": "67d68ff2720c53bb7165ecbde051f59618a7093805d6a8db320dc377974933a8"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202302.tar.gz",
+      "sha256": "7120c2bd64c97d619cfc7b52d765ac99bc40cbb27c1fb92124d29234c611fb39"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202303.tar.gz",
+      "sha256": "4cb61200f11dbd00d913003790cc3d5f3dc3dcc034c43aff585593577dd0aef9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202304.tar.gz",
+      "sha256": "e0de55dce044e5f547e8d02b7913f5ea688bfb594835f28126f30af8306c1523"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202305.tar.gz",
+      "sha256": "4f643aa311436ef2e9d6d033b9adf1d42a3fa4ae06f73ff58b8860274c4b8431"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202306.tar.gz",
+      "sha256": "912f96274a8b9a33f72a7b1648de7f06350d8301cc8ec29392998906eb86bc61"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202307.tar.gz",
+      "sha256": "117d7b4681f7de3ae388c74618270d59b1f04ce41ca030b727c93f581075157b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202308.tar.gz",
+      "sha256": "5b4023d20b15db5d1d4b6c85d606b253f0ed6dde026f70c601621efea73fa120"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202309.tar.gz",
+      "sha256": "03b7ca22d2fab6ab323faf36ee73ad4ae8e904137c3fdb48337e77b2608e0226"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202310.tar.gz",
+      "sha256": "e4ef67108a65d1a23f0a06ae1474723861ba861e75803d968d657690634938c3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202311.tar.gz",
+      "sha256": "e4b6e0a2c82e7a8918dad78fae6f4e837674ce0b5384e9763f5dbf29bdfaa67d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202312.tar.gz",
+      "sha256": "cd64477f00f8487f7a224ba0578f6852b956ab5f2b5b9a129236487be0ab3a69"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202401.tar.gz",
+      "sha256": "d5f9c48a9c550cb283616783ffb647dc83f4c03bbedc1f381df95f92e1d17145"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202402.tar.gz",
+      "sha256": "e49bb9cd5dfbb2560e378a4320c5dc47d128b2342a4a992558f5ba756467c9a0"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202403.tar.gz",
+      "sha256": "34b657e1746ce22aeab9d5785eb1443f44ffd69f79cb9a57434c62387bf38b0d"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202404.tar.gz",
+      "sha256": "c2a12ccf390f031cb35f407e8fbf40401cb43fbf0d9d3c7b26a38b7c5f2d0000"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202405.tar.gz",
+      "sha256": "3e96a54a7289f5e2e86339f2bad52f3af318fa01f82234856bd4518a9b44175e"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202406.tar.gz",
+      "sha256": "ffee1b24af91b02c189bfd23380da3315537d507b055be54be259ab340418b0c"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202407.tar.gz",
+      "sha256": "5232363b46e86b89ed7646062e940fe108e97f702f6beacc878c73665cd4ffcb"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202408.tar.gz",
+      "sha256": "fb7ba03389134caaa3266bbcabc3c1b07d419c4d9aeea927269d799c6c701e08"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202409.tar.gz",
+      "sha256": "d62d5170927685b07a1e960ac4f5f109eff54b78e2e8aa6cefdfd4d047c5010f"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202410.tar.gz",
+      "sha256": "6f97d0be3bc0e0e0d98bc0df71ee2c4c74650f48bdf46d49edba17c21dd956e5"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202411.tar.gz",
+      "sha256": "dc6b00da12ebf3d56d10f349ef28e4f58ad7c9d1108ad70c9177b43ea2952ffd"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202412.tar.gz",
+      "sha256": "e4a701cc3de93ce1d3c6bb6fed7c439b9b747d3138444f7ad144acf768073628"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202501.tar.gz",
+      "sha256": "ee1d059512a1b8474a73a3a8ed1f433a6e7a61af20fa9964e86bdeeba20429d3"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202502.tar.gz",
+      "sha256": "4b9359e9cc3174248c112fe3c8c2ee139d1de61aa5bd57c7e22058c488e9cfe4"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202503.tar.gz",
+      "sha256": "1821cce827fa3f7b6647d68c11b94897096c6052109a03161df6e6dfbda8015b"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202504.tar.gz",
+      "sha256": "c00621d5a9dce6c7a6d250ca79c2976a168bc52ba950ac2afa95962269199187"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202505.tar.gz",
+      "sha256": "9b4e9d690d0eb757922c78b14a20c2e2db78e98e8b7f8c05930e3dd0e56ab7a9"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202506.tar.gz",
+      "sha256": "4a9591fabd7965d7874703b7addd1ddac1076a6e099dd158474191296cbe1f97"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202507.tar.gz",
+      "sha256": "6e46d8ccb5178955a862b1f54490816e71e07f3d323eb1d89b36388a46512207"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202508.tar.gz",
+      "sha256": "bf28838cb4b17c3c9f8a735aed301aa8e214997ad437cf1d2bae6da5f76a5315"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202509.tar.gz",
+      "sha256": "b6e54f33ecc51d3561eee37e1bff02e2514705f4a797fdd08822c30ec21a5543"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202510.tar.gz",
+      "sha256": "055592d0d40f443f1930609c798058d15c8f8ff6df0451e4ab1731a73ba7cf03"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202511.tar.gz",
+      "sha256": "eb8cf1ce135c0f340ff1a482f410d70319343f97b1a6aae9d520373576aa1382"
+    },
+    {
+      "arquivo": "raw/chirps_v3_mensal_latam/chirps-v3.0.202512.tar.gz",
+      "sha256": "ca94b3c32bc853ba3ea4f21f5acccd0ebdef99bea3053e80ada739b42afa4548"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2003.zip",
+      "sha256": "6c0a71c0f35e5a02739b73b5544f69da73b7f95310558383ecf4ed0a60f9abc9"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2004.zip",
+      "sha256": "69b9f74ac8d86f4f18564f949440738f825550de36747bdd8432a32f5dca96e7"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2005.zip",
+      "sha256": "ebacf95a4489d7f5ef2ff3fd722f28b7b9547171e168b88f42cfd52693cf2b4e"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2006.zip",
+      "sha256": "9925ac3675b160653df44556b301389f44ffc9486b589527624595526db177fe"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2007.zip",
+      "sha256": "f61aa2ee5c3451a4e739416d8c863c598e1440c0d1d4a9d088fc2bde99d35901"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2008.zip",
+      "sha256": "1b68a545148d759f05fefa635a1b7db09e389549e29faca540f8e676b6d67615"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2009.zip",
+      "sha256": "9bc43627ab1c25910fbd76060f1753dcb9b01f915b91cf9c5a2d11324a5f9dd1"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2010.zip",
+      "sha256": "4537c5cdeee56e50ca6e7fa614eba77ea1eed5079394a8428f7d3ea75746c785"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2011.zip",
+      "sha256": "7b14ce9a8c98411bf8152de32892af25066a718a5c1c7bfe7928a885aca2f3e4"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2012.zip",
+      "sha256": "cf8378a7dec65f869315cc9dded0e35e0dce54957a82ed11b12d69c1635359e7"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2013.zip",
+      "sha256": "33cf264244d05ccc1b2bcbf1e62079a69582ad639b7c238d23011e3c622776a9"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2014.zip",
+      "sha256": "db34a8c4bc4c1c77769a186f7d384bc0f866ce3699fa739c7cd34e2cd2048792"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2015.zip",
+      "sha256": "72d1aac5db423d5226e0ba2efadb457c25df99fc3fdb5a3e7c271ebb69560d5e"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2016.zip",
+      "sha256": "aa26dc356923f573eb80bb5bef1bfa9ff27423cd382e2cc240ab0cf2ee9be73b"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2017.zip",
+      "sha256": "f1300f35c866ca7c2d699a3f806eba533d80272ab479a436005aa98451684d3c"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2018.zip",
+      "sha256": "f6d6168071d365073a3ba7e277f9464739f3f502cc411c9f64399c4ea740390d"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2019.zip",
+      "sha256": "58a6fe69d282d087822aade262826bf2139f2554781d0e37b672567369e4f733"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2020.zip",
+      "sha256": "fba793aa304863445dad6d434dd57bd0e904d97f50d9652a729c30ddf8fb7686"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2021.zip",
+      "sha256": "9edeb229c078b98df37d17b460bed74a0d13bd0688a530386ca815ba2f8a68e6"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2022.zip",
+      "sha256": "75538cbfb99bbbe543cb786d7b8f7650537a1333327f8bf17cda7178c01878ea"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2023.zip",
+      "sha256": "4cc635d1adf1a7f59d18640ff13a8779cb3b0f2aecbc867dacc86959d892b880"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2024.zip",
+      "sha256": "a2cec2f67483a4a95956a471d5cbdb7b3cbd93b21c9b87c845a649ef89abf4e1"
+    },
+    {
+      "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2025.zip",
+      "sha256": "63b144c47279991dca0f2007e23e15b4a932355b6c93d033d81a245a8eab56ca"
+    }
+  ],
+  "limites": [
+    "Média aritmética das células por UF, sem peso de área; malha IBGE simplificada.",
+    "Focos são detecções de satélite, não incêndios nem área queimada."
+  ]
+}

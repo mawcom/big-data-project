@@ -1,0 +1,22 @@
+.git
+.gitignore
+.gitattributes
+.venv
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# Dados grandes ou montados por volume no compose
+raw/
+*.duckdb
+*.duckdb.*
+
+# Não usados em runtime
+ignore/
+docs/
+tests/
+Dockerfile
+compose.yaml
+.dockerignore

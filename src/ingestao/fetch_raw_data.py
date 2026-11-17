@@ -29,6 +29,7 @@ COBERTURA = {
     "oni": "1950 até a última publicação (série cumulativa)",
     "chirps": "anos disponíveis no catálogo",
     "inpe": "anos disponíveis no catálogo",
+    "inpe_mensal": "meses encerrados de anos ainda sem arquivo anual de referência",
     "inmet": "anos disponíveis no catálogo",
     "ghcn_daily": "anos disponíveis no catálogo",
     "icoads": "anos disponíveis no catálogo",
@@ -66,7 +67,7 @@ def tamanho_remoto(url: str) -> int | None:
         with urllib.request.urlopen(pedido, timeout=20) as resposta:
             tamanho = resposta.headers.get("Content-Length")
             return int(tamanho) if tamanho is not None else None
-    except (urllib.error.URLError, TimeoutError):
+    except OSError:  # URLError, TimeoutError e quedas de conexão (RemoteDisconnected)
         return None
 
 
@@ -160,6 +161,10 @@ def verificar(caminho: Path) -> None:
         raise ValueError(f"Arquivo NetCDF inválido: {caminho.name}")
     if nome.endswith(".parquet") and inicio[:4] != b"PAR1":
         raise ValueError(f"Arquivo Parquet inválido: {caminho.name}")
+    if nome.startswith("focos_mensal_br_") and nome.endswith(".csv"):
+        cabecalho = caminho.open("rb").readline().decode("utf-8", errors="replace")
+        if not {"data_hora_gmt", "satelite", "estado"}.issubset(cabecalho.strip().split(",")):
+            raise ValueError(f"CSV mensal INPE sem data_hora_gmt/satelite/estado: {caminho.name}")
     if nome.endswith(".html") and b"Oceanic Ni" not in caminho.read_bytes():
         raise ValueError(f"Página ONI inválida: {caminho.name}")
 
@@ -375,6 +380,27 @@ def tarefas_coleta(
             tarefas.append(("inpe", inpe + nome, BRUTOS / "inpe_focos_sat_ref" / nome))
     else:
         periodos["inpe"] = "fonte não selecionada"
+
+    if "inpe_mensal" in fontes:
+        # Os arquivos mensais trazem todos os satélites e cobrem o ano corrente,
+        # que ainda não tem arquivo anual. O processamento filtra o satélite de
+        # referência (AQUA_M-T). Só entram meses encerrados de anos sem anual.
+        anual = "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/Brasil_sat_ref/"
+        mensal = "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/mensal/Brasil/"
+        com_anual = set(consultar_catalogo("inpe_mensal", anual, r"focos_br_ref_(\d{4})\.zip"))
+        hoje = datetime.now(timezone.utc)
+        mes_corrente = hoje.year * 100 + hoje.month
+        meses_inpe = [
+            mes for mes in consultar_catalogo("inpe_mensal", mensal, r"focos_mensal_br_(\d{6})\.csv")
+            if mes < mes_corrente and mes // 100 not in com_anual
+            and (intervalo is None or intervalo[0] <= mes // 100 <= intervalo[1])
+        ]
+        periodos["inpe_mensal"] = descrever_anos(sorted({mes // 100 for mes in meses_inpe}))
+        for mes in meses_inpe:
+            nome = f"focos_mensal_br_{mes}.csv"
+            tarefas.append(("inpe_mensal", mensal + nome, BRUTOS / "inpe_focos_mensal" / nome))
+    else:
+        periodos["inpe_mensal"] = "fonte não selecionada"
 
     if "inmet" in fontes:
         anos_inmet = selecionar_anos(consultar_catalogo(

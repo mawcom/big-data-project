@@ -8,50 +8,50 @@
   "avaliacao": "Erro da mesma regra ao usar 2024 como referência para 2025; só um ano de comparação.",
   "erros_por_uf": {
     "AL": {
-      "mae_chuva_mm": 45.018,
+      "mae_chuva_mm": 44.532,
       "mae_focos": 11.2
     },
     "BA": {
-      "mae_chuva_mm": 31.964,
+      "mae_chuva_mm": 31.57,
       "mae_focos": 277.1
     },
     "CE": {
-      "mae_chuva_mm": 35.245,
+      "mae_chuva_mm": 35.485,
       "mae_focos": 148.3
     },
     "MA": {
-      "mae_chuva_mm": 39.393,
+      "mae_chuva_mm": 39.546,
       "mae_focos": 401.9
     },
     "PB": {
-      "mae_chuva_mm": 42.205,
+      "mae_chuva_mm": 42.514,
       "mae_focos": 35.1
     },
     "PE": {
-      "mae_chuva_mm": 39.144,
+      "mae_chuva_mm": 38.687,
       "mae_focos": 47.8
     },
     "PI": {
-      "mae_chuva_mm": 38.434,
+      "mae_chuva_mm": 37.942,
       "mae_focos": 323.4
     },
     "RN": {
-      "mae_chuva_mm": 41.785,
+      "mae_chuva_mm": 41.95,
       "mae_focos": 16.2
     },
     "SE": {
-      "mae_chuva_mm": 32.064,
+      "mae_chuva_mm": 32.892,
       "mae_focos": 14.2
     }
   },
   "fontes": [
     {
       "arquivo": "amostras/piloto_2024/fato_mensal_uf.csv",
-      "sha256": "ad95c2c29d882753d22f5a310ee4428e97c677ea2bdc3ce54b1007000b112671"
+      "sha256": "dbbbf5cc3c0374c6f1e494faf65aba3d17e1d115aef2bff48477b7b1ca6c1dcf"
     },
     {
       "arquivo": "amostras/piloto_2025/fato_mensal_uf.csv",
-      "sha256": "7f4a78509761c5e73d493aef80e2463593c5fae453be8e9fe41fcf78d9ca379c"
+      "sha256": "64a96a5c57d232133518f45ac599db57c4473b49d79c4ac8228c3359c0e8b502"
     }
   ],
   "linhas": 108,

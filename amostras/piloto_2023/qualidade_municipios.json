@@ -1,0 +1,39 @@
+{
+  "recorte": {
+    "ano": 2023,
+    "municipios": 1794,
+    "grao": "municipio_mes"
+  },
+  "chirps": {
+    "municipios_sem_celula_valida": [
+      "2605459"
+    ],
+    "celulas_mapeadas": 51100,
+    "municipios_por_celula_mais_proxima": 10,
+    "metodo_espacial": "centro_da_celula_no_poligono_municipal; municipio_sem_centro_usa_celula_mais_proxima",
+    "agregacao": "media_aritmetica_de_celulas_validas; sem_peso_de_area"
+  },
+  "inpe": {
+    "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2023.zip",
+    "sha256": "4cc635d1adf1a7f59d18640ff13a8779cb3b0f2aecbc867dacc86959d892b880",
+    "focos_nordeste": 56537,
+    "ligados_pelo_nome": 56528,
+    "ligados_pela_coordenada": 9,
+    "sem_municipio": 0,
+    "nomes_inpe_sem_par_no_ibge": [
+      "RN: AÇU",
+      "SE: GRACHO CARDOSO"
+    ],
+    "diferenca_para_total_por_uf": 0
+  },
+  "malha_ibge": {
+    "pasta": "raw/referencias/municipios",
+    "versao": "API v3 malhas, qualidade intermediaria"
+  },
+  "limites": [
+    "Municípios menores que uma célula CHIRPS (~5,5 km) usam a célula mais próxima.",
+    "Média de células sem ponderação de área.",
+    "Ilhas oceânicas sem célula CHIRPS válida ficam sem chuva (metodo_chuva = sem_celula_valida).",
+    "Focos são detecções de satélite, não incêndios individuais ou área queimada."
+  ]
+}

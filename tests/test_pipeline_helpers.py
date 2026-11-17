@@ -51,3 +51,24 @@ class TestesGeometria(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestesComposto(unittest.TestCase):
+    def test_composto_soma_anomalia_media_a_climatologia(self) -> None:
+        import pandas as pd
+
+        from src.analise.projetar_el_nino import composto
+
+        serie = pd.DataFrame({
+            "ano": [2000, 2001, 2002, 2003],
+            "uf_codigo_ibge": ["23"] * 4,
+            "mes": [3] * 4,
+            "chuva_media_mm": [60.0, 120.0, 20.0, 200.0],
+        })
+        clim = pd.Series([100.0], index=pd.MultiIndex.from_tuples([("23", 3)], names=["uf_codigo_ibge", "mes"]))
+        resultado = composto("chuva", serie, clim, [2000, 2002], 0).iloc[0]
+        self.assertAlmostEqual(resultado.composto, 40.0)  # 100 + média(-40, -80)
+        self.assertEqual(resultado.abaixo_da_media, 2)
+        self.assertEqual(resultado.episodios, 2)
+        seguinte = composto("chuva", serie, clim, [2000, 2002], 1).iloc[0]
+        self.assertAlmostEqual(seguinte.composto, 160.0)  # anos +1: 2001 e 2003

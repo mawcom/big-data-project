@@ -20,6 +20,10 @@ RAW = RAIZ / "raw"
 AMOSTRAS = RAIZ / "amostras"
 MALHA = RAW / "referencias" / "ufs_ibge.geojson"
 ONI = RAW / "enso" / "oni_cpc_v6.html"
+# Primeiro ano exibido no painel. A série histórica (1991+ e 2003+) é baixada
+# para a análise do El Niño e entra só por processar_historico*.py; sem este
+# corte, abrir o painel criaria uma pasta piloto_<ano> para cada ano antigo.
+ANO_INICIAL_PAINEL = 2023
 
 
 def sha256(caminho: Path) -> str:
@@ -37,7 +41,7 @@ def entradas_ano(ano: int) -> list[Path]:
     ]
 
 
-def descobrir_anos() -> tuple[list[int], dict[int, list[str]]]:
+def descobrir_anos(desde: int = ANO_INICIAL_PAINEL) -> tuple[list[int], dict[int, list[str]]]:
     candidatos = set()
     for arquivo in (RAW / "inpe_focos_sat_ref").glob("focos_br_ref_*.zip"):
         corresponde = re.fullmatch(r"focos_br_ref_(\d{4})\.zip", arquivo.name)
@@ -49,7 +53,7 @@ def descobrir_anos() -> tuple[list[int], dict[int, list[str]]]:
             candidatos.add(int(corresponde.group(1)))
     completos = []
     pendentes = {}
-    for ano in sorted(candidatos):
+    for ano in sorted(a for a in candidatos if a >= desde):
         ausentes = [p.relative_to(RAIZ).as_posix() for p in entradas_ano(ano) if not p.is_file() or p.stat().st_size == 0]
         if ausentes:
             pendentes[ano] = ausentes
@@ -96,8 +100,8 @@ def executar(script: Path, *argumentos: str) -> None:
     subprocess.run([sys.executable, str(script), *argumentos], cwd=RAIZ, check=True)
 
 
-def sincronizar(force: bool = False) -> dict:
-    completos, pendentes = descobrir_anos()
+def sincronizar(force: bool = False, desde: int = ANO_INICIAL_PAINEL) -> dict:
+    completos, pendentes = descobrir_anos(desde)
     atualizados = []
     falhas = {}
     for ano in completos:
@@ -108,6 +112,13 @@ def sincronizar(force: bool = False) -> dict:
             atualizados.append(ano)
         except subprocess.CalledProcessError as erro:
             falhas[ano] = f"Processamento falhou (código {erro.returncode})."
+    for ano in completos:
+        if ano in falhas or not (force or ano in atualizados or not (AMOSTRAS / f"piloto_{ano}" / "fato_mensal_municipio.csv").is_file()):
+            continue
+        try:
+            executar(RAIZ / "src" / "limpeza" / "processar_municipios.py", "--ano", str(ano))
+        except subprocess.CalledProcessError as erro:
+            falhas[ano] = f"Processamento municipal falhou (código {erro.returncode})."
     disponiveis = [ano for ano in completos if produto_atualizado(ano)]
     ano_base = max((ano for ano in disponiveis if ano - 1 in disponiveis), default=None)
     projecao = None
@@ -129,8 +140,10 @@ def sincronizar(force: bool = False) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force", action="store_true", help="Reprocessa todos os anos completos.")
+    parser.add_argument("--desde", type=int, default=ANO_INICIAL_PAINEL,
+                        help=f"Primeiro ano a processar para o painel (padrão: {ANO_INICIAL_PAINEL}).")
     args = parser.parse_args()
-    estado = sincronizar(args.force)
+    estado = sincronizar(args.force, args.desde)
     if estado["falhas"]:
         raise SystemExit(1)
 

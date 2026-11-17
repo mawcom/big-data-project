@@ -11,7 +11,7 @@ import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from demo_data import demo_payload
 
@@ -24,6 +24,7 @@ OBSERVED_PATH = PROTOTYPE_DIR / "static" / "porto_alegre_chuva_maio_2024.json"
 OBSERVED_CSV_PATH = ROOT / "amostras" / "porto_alegre_chuva_maio_2024.csv"
 LEGACY_DOCS = ROOT / "docs" / "legado"
 PILOT_DIR = ROOT / "dashboard" / "piloto_real"
+PAINEL_DIR = ROOT / "dashboard" / "painel"
 PILOT_SAMPLES = ROOT / "amostras"
 RAW_DIR = ROOT / "raw"
 SYNC_SCRIPT = ROOT / "src" / "limpeza" / "sincronizar_dados.py"
@@ -118,10 +119,22 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
             return
 
-        if route in {"/piloto-real", "/piloto-real/"}:
-            body = (PILOT_DIR / "index.html").read_bytes()
+        if route in {"/piloto-real", "/piloto-real/", "/painel", "/painel/"}:
+            pasta = PAINEL_DIR if route.startswith("/painel") else PILOT_DIR
+            body = (pasta / "index.html").read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        # O painel pede "favicon.svg" relativo a /painel, que o navegador resolve para /favicon.svg.
+        if route in {"/favicon.svg", "/painel/favicon.svg"} and (PAINEL_DIR / "favicon.svg").is_file():
+            body = (PAINEL_DIR / "favicon.svg").read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "image/svg+xml")
+            self.send_header("Cache-Control", "public, max-age=86400")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
@@ -131,6 +144,64 @@ class DashboardHandler(BaseHTTPRequestHandler):
             body = (PILOT_DIR / "ufs_nordeste_ibge.geojson").read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "application/geo+json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/api/municipios":
+            consulta = parse_qs(urlparse(self.path).query)
+            ano, uf = consulta.get("ano", [""])[0], consulta.get("uf", [""])[0].upper()
+            caminho = PILOT_SAMPLES / f"piloto_{ano}" / "fato_mensal_municipio.csv"
+            if not re.fullmatch(r"\d{4}", ano) or not re.fullmatch(r"[A-Z]{2}", uf) or not caminho.is_file():
+                self.send_error(404, "Recorte municipal indisponível para este ano")
+                return
+            with caminho.open(encoding="utf-8", newline="") as arquivo:
+                linhas = [linha for linha in csv.DictReader(arquivo) if linha["uf_sigla"] == uf]
+            body = json.dumps({"ano": int(ano), "uf": uf, "linhas": linhas}, ensure_ascii=False).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/api/el-nino":
+            # Última saída de project_el_nino: 2026 observado vs. regras baseadas no passado.
+            pasta = next((p for p in sorted(PILOT_SAMPLES.glob("projecao_el_nino_*"), reverse=True)
+                          if (p / "metodo.json").is_file()), None)
+            if pasta is None:
+                self.send_error(404, "Projeção do El Niño indisponível; rode uv run poe project_el_nino")
+                return
+
+            def ler_csv(nome: str) -> list[dict]:
+                caminho = pasta / nome
+                if not caminho.is_file():
+                    return []
+                with caminho.open(encoding="utf-8", newline="") as arquivo:
+                    return list(csv.DictReader(arquivo))
+
+            metodo = json.loads((pasta / "metodo.json").read_text(encoding="utf-8"))
+            campos = ("validacao", "series", "el_ninos_passados", "oni_ano_corrente", "limites",
+                      "inicio_el_nino_ano_corrente_mes")
+            body = json.dumps({"ano": metodo["ano"], "metodo": {k: metodo.get(k) for k in campos},
+                               "validacao": ler_csv("validacao_mensal_uf.csv"),
+                               "projecao": ler_csv("projecao_mensal_uf.csv"),
+                               "municipios": ler_csv("chuva_quadra_municipio.csv")}, ensure_ascii=False).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        malha_uf = re.fullmatch(r"/static/municipios/([A-Z]{2})\.geojson", route)
+        if malha_uf and (PAINEL_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").is_file():
+            body = (PAINEL_DIR / "municipios" / f"{malha_uf.group(1)}.geojson").read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/geo+json; charset=utf-8")
+            self.send_header("Cache-Control", "public, max-age=86400")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
@@ -203,7 +274,7 @@ def main() -> None:
     args = parser.parse_args()
 
     server = ThreadingHTTPServer((args.host, args.port), DashboardHandler)
-    print("Página inicial: simulação. /piloto-real: anos observados disponíveis e projeção exploratória.")
+    print("Página inicial: simulação. /piloto-real: anos observados disponíveis e projeção exploratória. /painel: versão final do painel.")
     print(f"Painel disponível em http://{args.host}:{args.port} — Ctrl+C para encerrar")
     try:
         server.serve_forever()
