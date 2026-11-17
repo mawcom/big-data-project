@@ -9,17 +9,30 @@ Este documento aplica ao painel os conceitos da aula *Visualização de Dados* (
 - **O que o público precisa saber:** quando a temporada de focos acontece no seu estado, quanto ela acompanha a seca e se o El Niño mudou a chuva.
 - **Big Idea (gerada a partir dos dados):** "Maranhão, 2025: 63% dos focos do ano ocorreram entre set e nov, meses com 30 mm de chuva em média, contra 143 mm no resto do ano." A frase muda com o estado e o ano selecionados.
 
-## Estrutura narrativa (começo, meio e fim)
+## Tela única (sem rolagem)
 
-| Seção | Papel na história | Conteúdo |
-|---|---|---|
-| 1 · Contexto | Começo | Big Idea, KPIs, faixa do episódio El Niño |
-| 2 · Evidência mês a mês | Meio | Focos, chuva e ONI ao longo do ano |
-| 3 · Hipóteses | Meio | H1 e H2 com veredito calculado |
-| 4 · Onde | Meio | Ranking, calendário, mapa e tabela |
-| 5 · O que observar a seguir | Fim | Ação recomendada e referência sazonal do próximo ano |
+Tudo o que a apresentação precisa cabe em uma janela, a partir de 1100 × 600 px. O layout foi verificado em 1366 × 768 e 1715 × 969.
 
-A página segue o **padrão Z**. O KPI principal (focos no ano, em laranja e maior) fica no canto superior esquerdo. Tendências ficam no meio, e tabela, notas e fontes ficam embaixo.
+```
+┌ título · filtros (estado, ano, mês) · Limpar filtros ───────────────┐
+│ Big Idea: frase com a conclusão                                     │
+│ [Focos no ano] [vs. ano anterior] [Mês crítico] [Chuva acumulada]   │
+├────────────────────┬────────────────────┬───────────────────────────┤
+│ Focos por mês      │ Chuva por mês      │ Mapa (estados →           │
+├────────────────────┼────────────────────┤  municípios)              │
+│ ONI + El Niño      │ Hipóteses H1 e H2  │                           │
+└────────────────────┴────────────────────┴───────────────────────────┘
+```
+
+A narrativa segue começo, meio e fim dentro da própria tela:
+
+- **Começo:** Big Idea e KPIs.
+- **Meio:** gráficos de evidência, veredito das hipóteses e mapa.
+- **Fim:** a ação recomendada fica logo abaixo, em "O que observar a seguir".
+
+O **padrão Z** guia a leitura. O KPI principal (focos no ano, em laranja e maior) fica no canto superior esquerdo, as tendências no meio e o mapa e as hipóteses à direita e embaixo.
+
+Abaixo da tela ficam os **detalhes para consulta**: gráficos completos das hipóteses, ranking, calendário, tabela e referência sazonal do próximo ano. Em telas menores, o painel volta ao fluxo normal com rolagem.
 
 ## Checklist de defesa por visual
 
