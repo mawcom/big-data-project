@@ -66,7 +66,7 @@ def tamanho_remoto(url: str) -> int | None:
         with urllib.request.urlopen(pedido, timeout=20) as resposta:
             tamanho = resposta.headers.get("Content-Length")
             return int(tamanho) if tamanho is not None else None
-    except (urllib.error.URLError, TimeoutError):
+    except OSError:  # URLError, TimeoutError e quedas de conexão (RemoteDisconnected)
         return None
 
 

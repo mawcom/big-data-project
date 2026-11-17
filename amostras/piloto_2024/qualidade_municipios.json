@@ -1,0 +1,41 @@
+{
+  "recorte": {
+    "ano": 2024,
+    "municipios": 1794,
+    "grao": "municipio_mes"
+  },
+  "chirps": {
+    "municipios_sem_celula_valida": [
+      "2605459"
+    ],
+    "celulas_mapeadas": 51100,
+    "municipios_por_celula_mais_proxima": 10,
+    "metodo_espacial": "centro_da_celula_no_poligono_municipal; municipio_sem_centro_usa_celula_mais_proxima",
+    "agregacao": "media_aritmetica_de_celulas_validas; sem_peso_de_area"
+  },
+  "inpe": {
+    "arquivo": "raw/inpe_focos_sat_ref/focos_br_ref_2024.zip",
+    "sha256": "a2cec2f67483a4a95956a471d5cbdb7b3cbd93b21c9b87c845a649ef89abf4e1",
+    "focos_nordeste": 54016,
+    "ligados_pelo_nome": 53991,
+    "ligados_pela_coordenada": 25,
+    "sem_municipio": 0,
+    "nomes_inpe_sem_par_no_ibge": [
+      "RN: ARÊS",
+      "RN: AUGUSTO SEVERO",
+      "RN: AÇU",
+      "SE: GRACHO CARDOSO"
+    ],
+    "diferenca_para_total_por_uf": 0
+  },
+  "malha_ibge": {
+    "pasta": "raw/referencias/municipios",
+    "versao": "API v3 malhas, qualidade intermediaria"
+  },
+  "limites": [
+    "Municípios menores que uma célula CHIRPS (~5,5 km) usam a célula mais próxima.",
+    "Média de células sem ponderação de área.",
+    "Ilhas oceânicas sem célula CHIRPS válida ficam sem chuva (metodo_chuva = sem_celula_valida).",
+    "Focos são detecções de satélite, não incêndios individuais ou área queimada."
+  ]
+}
