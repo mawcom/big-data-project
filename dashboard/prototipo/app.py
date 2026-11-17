@@ -129,6 +129,17 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
             return
 
+        # O painel pede "favicon.svg" relativo a /painel, que o navegador resolve para /favicon.svg.
+        if route in {"/favicon.svg", "/painel/favicon.svg"} and (PAINEL_DIR / "favicon.svg").is_file():
+            body = (PAINEL_DIR / "favicon.svg").read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "image/svg+xml")
+            self.send_header("Cache-Control", "public, max-age=86400")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
         if route == "/static/ufs_nordeste_ibge.geojson":
             body = (PILOT_DIR / "ufs_nordeste_ibge.geojson").read_bytes()
             self.send_response(200)
@@ -150,6 +161,36 @@ class DashboardHandler(BaseHTTPRequestHandler):
             body = json.dumps({"ano": int(ano), "uf": uf, "linhas": linhas}, ensure_ascii=False).encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if route == "/api/el-nino":
+            # Última saída de project_el_nino: 2026 observado vs. regras baseadas no passado.
+            pasta = next((p for p in sorted(PILOT_SAMPLES.glob("projecao_el_nino_*"), reverse=True)
+                          if (p / "metodo.json").is_file()), None)
+            if pasta is None:
+                self.send_error(404, "Projeção do El Niño indisponível; rode uv run poe project_el_nino")
+                return
+
+            def ler_csv(nome: str) -> list[dict]:
+                caminho = pasta / nome
+                if not caminho.is_file():
+                    return []
+                with caminho.open(encoding="utf-8", newline="") as arquivo:
+                    return list(csv.DictReader(arquivo))
+
+            metodo = json.loads((pasta / "metodo.json").read_text(encoding="utf-8"))
+            campos = ("validacao", "series", "el_ninos_passados", "oni_ano_corrente", "limites",
+                      "inicio_el_nino_ano_corrente_mes")
+            body = json.dumps({"ano": metodo["ano"], "metodo": {k: metodo.get(k) for k in campos},
+                               "validacao": ler_csv("validacao_mensal_uf.csv"),
+                               "projecao": ler_csv("projecao_mensal_uf.csv"),
+                               "municipios": ler_csv("chuva_quadra_municipio.csv")}, ensure_ascii=False).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)

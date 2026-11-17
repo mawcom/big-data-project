@@ -23,22 +23,29 @@ Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verific
 ┌ título · filtro único: Recorte (Nordeste ou estado) ────────────────┐
 │ Big Idea                                                             │
 │ [Episódio] [Pico ONI] [Chuva vs. normal] [Focos vs. normal]          │
-│ Visão geral | Linha do tempo | Por estado                            │
+│ Visão geral | Linha do tempo | Por estado | 2026 vs. passado         │
 ├──────────────────────────────────────────────────────────────────────┤
 │ Visão geral:    chuva mês a mês │ mapa (chuva/focos)  │ Leitura      │
 │                 focos mês a mês │                     │              │
 │ Linha do tempo: ONI, chuva e focos 2023–2025 alinhados, El Niño      │
 │                 sombreado                                            │
 │ Por estado:     ranking de chuva %  │  ranking de focos %            │
+│ 2026 vs. passado: chuva 2026–27 │ erro de cada │ mapa: fev–mai após   │
+│                   focos 2026–27 │ regra        │ El Niños fortes      │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 - **Paleta da aula** (extraída do PDF da disciplina), em tema claro: fundo neutro `#f5f5f6`, títulos `#2b1055`, texto `#3e3a47`; **roxo `#6a1b9a` = chuva**, **magenta `#d81b60` = focos**, **laranja `#f7941d` = período de El Niño**, cinza-lilás `#d3cfda` = referência (meses sem El Niño). No mapa, a escala é divergente entre roxo e magenta, com o zero em cinza-lilás.
 - **Um único filtro.** O recorte pode ser escolhido no seletor, no mapa ou nas barras por estado. Clicar de novo no mesmo estado, ou apertar `Esc`, volta ao Nordeste.
-- **Cada aba tem um endereço** (`/painel#geral`, `#tempo`, `#estados`), para abrir direto na apresentação.
+- **Cada aba tem um endereço** (`/painel#geral`, `#tempo`, `#estados`, `#2026`), para abrir direto na apresentação.
 - **Foco em municípios (opcional):** escolher um estado aproxima o mapa e pinta os municípios pela variação no El Niño. A chuva aparece em %; os focos aparecem como diferença em número de focos, porque muitos municípios têm poucos focos e o % explode. A escala usa o percentil 95, para um município extremo não apagar os outros, e os estados vizinhos ficam em cinza. Escolher um município, no mapa ou no segundo seletor, foca nele o painel inteiro: frase, KPIs, gráficos e linha do tempo. Um caminho "Nordeste › Estado › Município" sobre o mapa e a tecla `Esc` voltam um nível. Os dados municipais só são carregados quando um estado é escolhido.
 - **Recorte pelo endereço:** `/painel?uf=MA&mun=2105302#tempo` abre Imperatriz na aba Linha do tempo, útil para a apresentação.
-- **Ficaram fora** a projeção de 2026, a tabela, o calendário e o ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
+- **Aba "2026 vs. passado"** (`#2026`): compara o El Niño em curso com o que os El Niños passados previam. Lê `amostras/projecao_el_nino_<ano>/` pela rota `/api/el-nino`; sem essa pasta, a aba mostra o comando que falta rodar.
+  - *Chuva e focos 2026–27:* barra cinza = normal (chuva 1991–2020; focos 2003–2025), barra colorida = observado em 2026, linha laranja = média dos El Niños passados, tracejada = só os fortes (pico ONI ≥ 1,5), traço vertical = faixa entre os El Niños nos meses projetados. A área laranja clara marca a projeção. O título compara o observado nos meses de El Niño com o que a média previa; a nota traz a projeção do trecho-chave (quadra chuvosa para chuva; nov–dez para focos).
+  - *Quanto cada regra errou:* cinco regras fixadas antes de olhar 2026 (média histórica, repetir o ano anterior, repetir o último El Niño, média dos El Niños, média dos fortes), com a melhor de cada medida em cor e as outras em cinza.
+  - *Mapa:* anomalia de chuva em fev–mai do ano seguinte, média dos El Niños fortes, por município. A nota cita a exceção (2023–24).
+  - Segue o recorte do painel; com um município escolhido, os gráficos usam o estado dele.
+- **Ficaram fora** a projeção sazonal simples, a tabela, o calendário e o ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
 
 ## Checklist de defesa por visual
 
