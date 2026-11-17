@@ -36,7 +36,9 @@ Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verific
 - **Paleta da aula** (extraída do PDF da disciplina), em tema claro: fundo neutro `#f5f5f6`, títulos `#2b1055`, texto `#3e3a47`; **roxo `#6a1b9a` = chuva**, **magenta `#d81b60` = focos**, **laranja `#f7941d` = período de El Niño**, cinza-lilás `#d3cfda` = referência (meses sem El Niño). No mapa, a escala é divergente entre roxo e magenta, com o zero em cinza-lilás.
 - **Um único filtro.** O recorte pode ser escolhido no seletor, no mapa ou nas barras por estado. Clicar de novo no mesmo estado, ou apertar `Esc`, volta ao Nordeste.
 - **Cada aba tem um endereço** (`/painel#geral`, `#tempo`, `#estados`), para abrir direto na apresentação.
-- **Ficaram fora** municípios, projeção de 2026, tabela, calendário e ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
+- **Foco em municípios (opcional):** escolher um estado aproxima o mapa e pinta os municípios pela variação no El Niño. A chuva aparece em %; os focos aparecem como diferença em número de focos, porque muitos municípios têm poucos focos e o % explode. A escala usa o percentil 95, para um município extremo não apagar os outros, e os estados vizinhos ficam em cinza. Escolher um município, no mapa ou no segundo seletor, foca nele o painel inteiro: frase, KPIs, gráficos e linha do tempo. Um caminho "Nordeste › Estado › Município" sobre o mapa e a tecla `Esc` voltam um nível. Os dados municipais só são carregados quando um estado é escolhido.
+- **Recorte pelo endereço:** `/painel?uf=MA&mun=2105302#tempo` abre Imperatriz na aba Linha do tempo, útil para a apresentação.
+- **Ficaram fora** a projeção de 2026, a tabela, o calendário e o ranking mensal, porque não respondem ao tema. Eles continuam no `/piloto-real`.
 
 ## Checklist de defesa por visual
 
@@ -44,7 +46,7 @@ Cada aba cabe inteira na janela a partir de 1000 × 600 px; o layout foi verific
 |---|---|---|---|---|
 | KPIs | Quanto durou, quão forte foi e o que mudou? | "Às vezes o melhor gráfico é um número" | Cor da métrica (roxo = chuva, magenta = focos) | Cada % mostra os dois totais comparados |
 | Chuva / focos mês a mês | Em que meses o El Niño se afastou do normal? | Barra colorida (El Niño) dentro de barra cinza (normal), mesmo eixo | Rótulo direto só no mês com maior diferença | Eixo no zero; ONI de cada mês sob o eixo; anos de referência no tooltip |
-| Mapa | Onde mudou? | Coroplético divergente, com zero em cinza | Estado do recorte com contorno branco | Escala simétrica (−X% a +X%); valor escrito nos estados grandes, tooltip nos pequenos |
+| Mapa | Onde mudou? (estado → município) | Coroplético divergente, com zero em cinza | Estado do recorte com contorno branco | Escala simétrica (−X% a +X%); valor escrito nos estados grandes, tooltip nos pequenos |
 | Leitura | O que concluir? | Texto curto calculado | Rótulos coloridos por métrica | Último item sempre traz a ressalva: um episódio só, associação não é causa |
 | Linha do tempo | O efeito aparece antes, durante e depois? | Small multiples alinhados no mesmo eixo de meses, sem eixo Y duplo | Barras coloridas só no episódio, cinza fora dele; faixa sombreada | Limiar +0,5 °C desenhado e rotulado |
 | Por estado | Quais estados mudaram mais? | Barras horizontais divergentes e ordenadas | Estado do recorte em cor, os demais em cinza | Zero rotulado ("igual ao normal"); intervalo citado no título |

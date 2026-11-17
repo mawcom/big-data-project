@@ -31,7 +31,7 @@
     .card small { color:var(--muted); font-size:11px; }
     .card.rain strong { color:var(--chuva); } .card.fire strong { color:var(--fogo); } .card.rain { border-top:3px solid var(--chuva); } .card.fire { border-top:3px solid var(--fogo); }
     .grid { display:grid; gap:10px; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr) minmax(250px,.72fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"rain map read" "fire map read"; }
-    .p-rain { grid-area:rain; } .p-fire { grid-area:fire; } .p-map { grid-area:map; } .p-read { grid-area:read; }
+    .p-rain { grid-area:rain; } .p-fire { grid-area:fire; } .p-map { grid-area:map; } .p-map h2 { font-size:16px; } .p-read { grid-area:read; }
     .panel { padding:12px 14px; min-width:0; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
     h2 { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:18px; line-height:1.25; margin:0 0 2px; }
     .note { color:var(--muted); font-size:11px; line-height:1.4; margin:4px 0 0; }
@@ -50,8 +50,21 @@
     .state { stroke:#ffffff; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
     .state:hover,.state:focus-visible { stroke:var(--title); stroke-width:2; outline:none; }
     .state.selected { stroke:var(--title); stroke-width:3; }
-    .state-label { fill:var(--title); font:800 11px Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:3px; }
-    .state-value { fill:var(--text); font:600 10px Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:3px; }
+    .state-label { fill:var(--title); font:800 calc(11px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    .state-value { fill:var(--text); font:600 calc(10px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    #map.zoomed .state { fill:#eceaef; cursor:pointer; }
+    #map.zoomed .state.selected { opacity:1; fill:#ffffff; }
+    #map.zoomed .state-label,#map.zoomed .state-value { display:none; }
+    .mun { stroke:#ffffff; stroke-width:.5; vector-effect:non-scaling-stroke; cursor:pointer; }
+    .mun:hover,.mun:focus-visible { stroke:var(--title); stroke-width:1.5; outline:none; }
+    .mun.selected { stroke:var(--title); stroke-width:2.5; }
+    .mun-label { fill:var(--title); font:800 calc(12px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(4px * var(--k,1)); }
+    .crumbs { position:absolute; top:6px; left:6px; display:flex; gap:6px; align-items:center; font-size:12px; background:#ffffffe6; border:1px solid var(--line); border-radius:9px; padding:5px 9px; }
+    .crumbs button { border:0; background:none; padding:0; font:inherit; color:var(--chuva); cursor:pointer; }
+    .crumbs button:disabled { color:var(--title); font-weight:700; cursor:default; }
+    .crumbs .sep { color:var(--muted); }
+    .map-status { position:absolute; inset:auto 6px 6px auto; font-size:11px; color:var(--muted); background:#ffffffe6; padding:3px 8px; border-radius:7px; }
+    select:disabled { opacity:.5; cursor:default; }
     .scale { display:flex; align-items:center; gap:8px; font-size:10px; color:var(--muted); font-variant-numeric:tabular-nums; margin-top:4px; }
     .scale i { flex:1; height:8px; border-radius:9px; }
     .reading { list-style:none; padding:0; margin:6px 0 0; display:grid; gap:9px; font-size:13px; line-height:1.4; color:var(--muted); }
@@ -82,7 +95,7 @@
         <div class="eyebrow" id="eyebrow">Carregando dados observados…</div>
         <h1>O que o El Niño mudou no Nordeste</h1>
       </div>
-      <div class="filter"><label for="regiao">Recorte</label><select id="regiao"><option value="NE">Nordeste inteiro</option></select></div>
+      <div class="filter"><label for="regiao">Recorte</label><select id="regiao"><option value="NE">Nordeste inteiro</option></select><select id="cidade" disabled aria-label="Município"><option value="">Todos os municípios</option></select></div>
     </header>
     <p class="big-idea" id="bigIdea">Carregando…</p>
     <div class="cards">
@@ -112,9 +125,9 @@
           <h2 id="mapTitle">Onde mudou</h2>
           <div class="toggle" role="group" aria-label="Medida do mapa"><button type="button" data-m="chuva" aria-pressed="true">Chuva</button><button type="button" class="fire" data-m="focos" aria-pressed="false">Focos</button></div>
         </div>
-        <div class="map-wrap"><svg id="map" role="img" aria-label="Variação por estado durante o El Niño"></svg></div>
+        <div class="map-wrap"><svg id="map" role="img" aria-label="Variação por estado ou município durante o El Niño"></svg><nav class="crumbs" id="crumbs" aria-label="Navegação do mapa" hidden></nav><span class="map-status" id="mapStatus" hidden></span></div>
         <div class="scale"><span id="scaleMin"></span><i id="scaleBar"></i><span id="scaleMax"></span></div>
-        <p class="note">Variação do episódio inteiro contra os mesmos meses sem El Niño. Clique em um estado para filtrar; clique de novo para voltar ao Nordeste.</p>
+        <p class="note" id="mapNote"></p>
       </section>
       <section class="panel p-read">
         <h2>Leitura</h2>
@@ -151,12 +164,16 @@
     const media = xs => xs.length ? xs.reduce((a,b)=>a+b,0)/xs.length : 0;
     const COR = { chuva:'#6a1b9a', fogo:'#d81b60', nino:'#f7941d', oni:'#2b1055', contexto:'#d3cfda', eixo:'#c9c4d1', limiar:'#6e6880', neutro:[236,232,241] };
     const svgNS = 'http://www.w3.org/2000/svg';
-    let linhas=[], features=[], ufs=[], episodio=[], fasePorMes=new Map(), regiao='NE', metricaMapa='chuva';
+    let linhas=[], features=[], ufs=[], episodio=[], fasePorMes=new Map(), regiao='NE', metricaMapa='chuva', ANOS=[];
+    // Recorte municipal: carregado sob demanda quando um estado é escolhido.
+    let cidade=null; const munIdx=new Map(), munUF={};
+    const alvo = () => cidade ? `m:${cidade.cd}` : regiao;
 
     const chave = (ano,mes) => `${ano}-${mes}`;
     const rotuloMes = (ano,mes) => `${mesesCurtos[mes-1]}/${String(ano).slice(2)}`;
     // Valor de um mês no recorte: chuva = média dos estados (mm); focos = soma dos estados.
     function valor(ano,mes,campo,sel) {
+      if (sel.startsWith('m:')) { const r=munIdx.get(`${sel.slice(2)}-${ano}-${mes}`); return !r || r[campo]==='' ? null : Number(r[campo]); }
       const rs = linhas.filter(r=>r._ano===ano && r._mes===mes && (sel==='NE' || r.uf_sigla===sel));
       if (!rs.length) return null;
       const vs = rs.map(r=>Number(r[campo]));
@@ -164,7 +181,7 @@
     }
     // Referência: média do mesmo mês do calendário nos anos em que não havia El Niño.
     function referencia(mes,campo,sel) {
-      const anos = [...new Set(linhas.map(r=>r._ano))].filter(a=>fasePorMes.get(chave(a,mes)) && fasePorMes.get(chave(a,mes))!=='El Niño');
+      const anos = ANOS.filter(a=>fasePorMes.get(chave(a,mes)) && fasePorMes.get(chave(a,mes))!=='El Niño');
       const vs = anos.map(a=>valor(a,mes,campo,sel)).filter(v=>v!==null);
       return vs.length ? { v:media(vs), anos } : null;
     }
@@ -173,7 +190,7 @@
       const nino = meses.reduce((s,m)=>s+m.nino,0), ref = meses.reduce((s,m)=>s+m.ref.v,0);
       return { meses, nino, ref, dif: ref ? 100*(nino/ref-1) : 0 };
     }
-    const nomeRecorte = sel => sel==='NE' ? 'Nordeste' : ufs.find(u=>u[0]===sel)[1];
+    const nomeRecorte = sel => sel==='NE' ? 'Nordeste' : sel.startsWith('m:') ? `${cidade.nome} (${regiao})` : ufs.find(u=>u[0]===sel)[1];
 
     // Último trecho contínuo de meses classificados como El Niño.
     function encontrarEpisodio() {
@@ -223,54 +240,113 @@
       const [r,g,b]=COR.neutro.map((n,i)=>Math.round(n+(alvo[i]-n)*a));
       return `rgb(${r},${g},${b})`;
     }
+    function carregarUF(uf) {
+      munUF[uf] ??= Promise.all([
+        fetch(`/static/municipios/${uf}.geojson`).then(x=>x.ok?x.json():Promise.reject()),
+        ...ANOS.map(a=>fetch(`/api/municipios?ano=${a}&uf=${uf}`).then(x=>x.ok?x.json():Promise.reject()))
+      ]).then(([malha,...anos])=>{
+        for (const d of anos) for (const r of d.linhas) munIdx.set(`${r.municipio_codigo_ibge}-${Number(r.ano)}-${Number(r.mes)}`,r);
+        return { features:malha.features, lista:malha.features.map(f=>[f.properties.cd,f.properties.nome]).sort((a,b)=>a[1].localeCompare(b[1],'pt-BR')) };
+      }).catch(()=>null);
+      return munUF[uf];
+    }
+    const aneis = g => g.type==='Polygon' ? [g.coordinates] : g.coordinates;
+    const caminho = (g,xy) => aneis(g).map(pol=>pol.map(anel=>anel.map((p,i)=>{const [a,b]=xy(p);return `${i?'L':'M'}${a.toFixed(2)},${b.toFixed(2)}`;}).join('')+'Z').join('')).join('');
+    const caixa = pts => [Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))];
+    // Limite da escala: percentil 95 do valor absoluto, para um município extremo não apagar os demais.
+    const limite = (vs,passo) => { const a=vs.map(Math.abs).sort((x,y)=>x-y); return Math.max(passo,Math.ceil((a[Math.floor(.95*(a.length-1))]||0)/passo)*passo); };
     function desenharMapa() {
       const svg=$('map'), {width:W,height:H}=svg.getBoundingClientRect();
       if (!W || !H) return;
-      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-      const fogo=metricaMapa==='focos', campo=fogo?'focos_inpe':'chuva_media_mm';
-      const difs=Object.fromEntries(ufs.map(([s])=>[s,comparar(campo,s).dif]));
-      const lim=Math.max(5,Math.ceil(Math.max(...Object.values(difs).map(Math.abs))/5)*5);
-      const pts=features.flatMap(f=>(f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates).flat(2));
-      const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
-      const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+      const fogo=metricaMapa==='focos', campo=fogo?'focos_inpe':'chuva_media_mm', medida=fogo?'focos':'chuva';
+      const pts=features.flatMap(f=>aneis(f.geometry).flat(2));
+      const [x0,y0,x1,y1]=caixa(pts);
       const k=Math.min((W-8)/(x1-x0),(H-8)/(y1-y0)), ox=(W-(x1-x0)*k)/2, oy=(H-(y1-y0)*k)/2;
       const xy=p=>[ox+(p[0]-x0)*k, oy+(y1-p[1])*k];
+      const uf=regiao!=='NE'?regiao:null, malha=uf?munCarregado[uf]:null;
+      // Enquadramento: Nordeste inteiro ou o estado escolhido, mantendo a proporção do painel.
+      let vb=[0,0,W,H];
+      if (uf) {
+        const f=features.find(f=>f.properties.SIGLA_UF===uf), [a,b,c,d]=caixa(aneis(f.geometry).flat(2).map(xy));
+        let w=(c-a)*1.1, h=(d-b)*1.1; if (w/h>W/H) h=w*H/W; else w=h*W/H;
+        vb=[(a+c)/2-w/2,(b+d)/2-h/2,w,h];
+      }
+      svg.setAttribute('viewBox',vb.map(v=>v.toFixed(2)).join(' '));
+      svg.style.setProperty('--k',(vb[2]/W).toFixed(4));
+      svg.classList.toggle('zoomed',Boolean(uf));
       svg.replaceChildren();
+      const difs=Object.fromEntries(ufs.map(([s])=>[s,comparar(campo,s).dif]));
+      const limUF=Math.max(5,Math.ceil(Math.max(...Object.values(difs).map(Math.abs))/5)*5);
       const rotulos=[];
       for (const f of features) {
         const sigla=f.properties.SIGLA_UF, dif=difs[sigla], nome=nomeRecorte(sigla);
-        const polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
-        const d=polys.map(pol=>pol.map(anel=>anel.map((p,i)=>{const [a,b]=xy(p);return `${i?'L':'M'}${a.toFixed(1)},${b.toFixed(1)}`;}).join('')+'Z').join('')).join('');
         const path=document.createElementNS(svgNS,'path');
-        path.setAttribute('d',d); path.setAttribute('fill',corDivergente(dif/lim,fogo)); path.setAttribute('fill-rule','evenodd');
+        path.setAttribute('d',caminho(f.geometry,xy)); path.setAttribute('fill',corDivergente(dif/limUF,fogo)); path.setAttribute('fill-rule','evenodd');
         path.setAttribute('class',`state${sigla===regiao?' selected':''}`); path.setAttribute('tabindex','0');
-        path.setAttribute('aria-label',`${nome}: ${pct(dif)} de ${fogo?'focos':'chuva'} no El Niño`);
-        const t=document.createElementNS(svgNS,'title'); t.textContent=`${nome}: ${pct(dif)} de ${fogo?'focos':'chuva'} nos meses de El Niño`; path.appendChild(t);
+        path.setAttribute('aria-label',`${nome}: ${pct(dif)} de ${medida} no El Niño`);
+        const t=document.createElementNS(svgNS,'title'); t.textContent=`${nome}: ${pct(dif)} de ${medida} nos meses de El Niño`; path.appendChild(t);
         const escolher=()=>selecionar(regiao===sigla?'NE':sigla);
         path.addEventListener('click',escolher);
         path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();escolher();}});
         svg.appendChild(path);
-        // Rótulo no centro da maior parte do estado.
-        const anel=polys.reduce((a,b)=>b[0].length>a[0].length?b:a)[0];
-        const [cx,cy]=xy([media(anel.map(p=>p[0])),media(anel.map(p=>p[1]))]);
-        const tela=anel.map(xy), larg=Math.max(...tela.map(p=>p[0]))-Math.min(...tela.map(p=>p[0])), alt=Math.max(...tela.map(p=>p[1]))-Math.min(...tela.map(p=>p[1]));
+        const anel=aneis(f.geometry).reduce((a,b)=>b[0].length>a[0].length?b:a)[0];
+        const [cx,cy]=xy([media(anel.map(p=>p[0])),media(anel.map(p=>p[1]))]), [a,b,c,d]=caixa(anel.map(xy));
         // Estados pequenos ficam só com a sigla; o valor aparece no tooltip.
-        rotulos.push(`<text class="state-label" x="${cx}" y="${cy}">${sigla}</text>`+(larg>62&&alt>42?`<text class="state-value" x="${cx}" y="${cy+13}">${pct(dif)}</text>`:''));
+        rotulos.push(`<text class="state-label" x="${cx}" y="${cy}">${sigla}</text>`+(c-a>62&&d-b>42?`<text class="state-value" x="${cx}" y="${cy+13}">${pct(dif)}</text>`:''));
+      }
+      let lim=limUF, unidade='%', titulo, nota;
+      if (uf && malha) {
+        // Municípios: chuva em %; focos em diferença absoluta, porque muitos municípios têm poucos focos e o % explode.
+        const dados=malha.features.map(f=>{ const c=comparar(campo,`m:${f.properties.cd}`); return {f,c,v:fogo?c.nino-c.ref:c.dif,ok:c.meses.length>0}; });
+        const validos=dados.filter(d=>d.ok);
+        lim=fogo?limite(validos.map(d=>d.v),10):limite(validos.map(d=>d.v),5); unidade=fogo?' focos':'%';
+        const g=document.createElementNS(svgNS,'g');
+        for (const d of dados) {
+          const p=document.createElementNS(svgNS,'path'), cd=d.f.properties.cd, nome=d.f.properties.nome;
+          // O traçado depende do tamanho do mapa: refaz quando o painel muda de tamanho.
+          if (d.f._tam!==`${W}x${H}`) { d.f._d=caminho(d.f.geometry,xy); d.f._tam=`${W}x${H}`; }
+          p.setAttribute('d',d.f._d); p.setAttribute('fill-rule','evenodd');
+          p.setAttribute('fill',d.ok?corDivergente(Math.max(-1,Math.min(1,d.v/lim)),fogo):'#ece8f1');
+          p.setAttribute('class',`mun${cidade?.cd===cd?' selected':''}`); p.setAttribute('tabindex','0');
+          const txt=!d.ok?`${nome}: sem dado`:fogo?`${nome}: ${fmt(d.c.nino)} focos no El Niño vs. ${fmt(d.c.ref)} sem El Niño (${d.v>=0?'+':'−'}${fmt(Math.abs(d.v))})`:`${nome}: ${pct(d.v)} de chuva no El Niño (${fmt(d.c.nino)} vs. ${fmt(d.c.ref)} mm)`;
+          const t=document.createElementNS(svgNS,'title'); t.textContent=txt; p.appendChild(t);
+          const escolher=()=>selecionarCidade(cd);
+          p.addEventListener('click',escolher);
+          p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();escolher();}});
+          g.appendChild(p);
+        }
+        const sel=g.querySelector('.mun.selected'); if (sel) g.appendChild(sel);
+        svg.appendChild(g);
+        if (cidade) { const f=malha.features.find(f=>f.properties.cd===cidade.cd); if (f) { const [a,b,c]=caixa(aneis(f.geometry).flat(2).map(xy)); rotulos.push(`<text class="mun-label" x="${(a+c)/2}" y="${b-6*vb[2]/W}">${cidade.nome}</text>`); } }
+        const subiram=validos.filter(d=>fogo?d.v>=1:Math.round(d.v)>0).length;
+        titulo=`Mais ${medida} em ${subiram}/${validos.length} municípios`;
+        nota=`Cada município no El Niño vs. os mesmos meses sem El Niño${fogo?' (diferença em número de focos)':''}. Clique em um município para focar o painel nele.`;
+      } else {
+        const subiram=Object.values(difs).filter(v=>Math.round(v)>0).length;
+        titulo=`Mais ${medida} em ${subiram} de ${ufs.length} estados`;
+        nota=uf?'Carregando municípios…':'Variação do episódio inteiro vs. os mesmos meses sem El Niño. Clique em um estado para ver os municípios.';
       }
       svg.insertAdjacentHTML('beforeend',rotulos.join(''));
-      $('scaleMin').textContent=`−${lim}%`; $('scaleMax').textContent=`+${lim}%`;
+      $('mapTitle').textContent=titulo; $('mapNote').textContent=nota;
+      $('mapStatus').hidden=!(uf && munUF[uf] && munCarregado[uf]===null);
+      $('mapStatus').textContent='Recorte municipal indisponível';
+      $('scaleMin').textContent=`−${fmt(lim)}${unidade}`; $('scaleMax').textContent=`+${fmt(lim)}${unidade}`;
       $('scaleBar').style.background=`linear-gradient(90deg,${corDivergente(-1,fogo)},${corDivergente(0,fogo)},${corDivergente(1,fogo)})`;
-      const subiram=Object.values(difs).filter(v=>Math.round(v)>0).length;
-      $('mapTitle').textContent=fogo?`Mais focos em ${subiram} de ${ufs.length} estados`:`Mais chuva em ${subiram} de ${ufs.length} estados`;
+      // Navegação estrutural: Nordeste › estado › município.
+      const crumbs=$('crumbs'); crumbs.hidden=!uf;
+      if (uf) {
+        crumbs.innerHTML=`<button type="button" data-nav="NE">Nordeste</button><span class="sep">›</span><button type="button" data-nav="UF"${cidade?'':' disabled'}>${nomeRecorte(uf)}</button>`+(cidade?`<span class="sep">›</span><button type="button" disabled>${cidade.nome}</button>`:'');
+        crumbs.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>b.dataset.nav==='NE'?selecionar('NE'):selecionarCidade(null)));
+      }
     }
 
     function render() {
-      const nome=nomeRecorte(regiao), ini=episodio[0], fim=episodio.at(-1);
+      const nome=nomeRecorte(alvo()), ini=episodio[0], fim=episodio.at(-1);
       const periodo=`${rotuloMes(ini.ano,ini.mes)} a ${rotuloMes(fim.ano,fim.mes)}`;
-      const chuva=comparar('chuva_media_mm',regiao), fogo=comparar('focos_inpe',regiao);
+      const chuva=comparar('chuva_media_mm',alvo()), fogo=comparar('focos_inpe',alvo());
       // Só desenha a aba visível: as outras têm tamanho zero e são ignoradas.
-      desenharComparacao('rainChart','chuva_media_mm',COR.chuva,regiao);
-      desenharComparacao('fireChart','focos_inpe',COR.fogo,regiao);
+      desenharComparacao('rainChart','chuva_media_mm',COR.chuva,alvo());
+      desenharComparacao('fireChart','focos_inpe',COR.fogo,alvo());
       desenharLinhaTempo();
       desenharEstados('stRain','chuva_media_mm',COR.chuva,'stRainTitle');
       desenharEstados('stFire','focos_inpe',COR.fogo,'stFireTitle');
@@ -305,7 +381,7 @@
       if (!W || !H) return;
       svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
       const meses=[...fasePorMes.keys()].map(k=>k.split('-').map(Number)).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
-      const nino=new Set(episodio.map(e=>chave(e.ano,e.mes))), nome=nomeRecorte(regiao);
+      const nino=new Set(episodio.map(e=>chave(e.ano,e.mes))), nome=nomeRecorte(alvo());
       const L=78,R=10,T=26,B=24, n=meses.length, passo=(W-L-R)/n, x=i=>L+passo*i+passo/2, gap=14;
       const util=H-T-B-2*gap, hOni=util*.24, hRow=util*.38;
       const linhas3=[{nome:'ONI (°C)',y0:T,h:hOni},{nome:'Chuva (mm)',y0:T+hOni+gap,h:hRow},{nome:'Focos',y0:T+hOni+hRow+2*gap,h:hRow}];
@@ -321,16 +397,16 @@
       s+=`<text class="annot" x="${x(iPico)}" y="${yo(oni[iPico])-6}" text-anchor="middle">${sinal(oni[iPico])} °C</text>`;
       // Chuva e focos: barras coloridas no episódio, cinza fora dele.
       [['chuva_media_mm',COR.chuva,1],['focos_inpe',COR.fogo,2]].forEach(([campo,cor,k])=>{
-        const l=linhas3[k], vs=meses.map(([a,m])=>valor(a,m,campo,regiao)||0), mx=Math.max(...vs,1), base=l.y0+l.h;
+        const l=linhas3[k], vs=meses.map(([a,m])=>valor(a,m,campo,alvo())||0), mx=Math.max(...vs,1), base=l.y0+l.h;
         s+=`<line x1="${L}" x2="${W-R}" y1="${base}" y2="${base}" stroke="${COR.eixo}"/><text x="${L-10}" y="${l.y0+8}" text-anchor="end">${fmt(mx)}</text>`;
         s+=vs.map((v,i)=>`<rect x="${x(i)-passo*.34}" y="${base-l.h*v/mx}" width="${passo*.68}" height="${l.h*v/mx}" rx="2" fill="${nino.has(chave(...meses[i]))?cor:COR.contexto}"/>`).join('');
       });
       s+=meses.map(([a,m],i)=>m%3===1?`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${m===1?' class="annot"':''}>${m===1?a:mesesCurtos[m-1]}</text>`:'').join('');
-      s+=meses.map(([a,m],i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${H-B-T}" fill="transparent"><title>${rotuloMes(a,m)} · ONI ${sinal(oniDe(a,m))} °C (${fasePorMes.get(chave(a,m))}) · ${fmt(valor(a,m,'chuva_media_mm',regiao),1)} mm · ${fmt(valor(a,m,'focos_inpe',regiao))} focos</title></rect>`).join('');
+      s+=meses.map(([a,m],i)=>`<rect class="hit" x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${H-B-T}" fill="transparent"><title>${rotuloMes(a,m)} · ONI ${sinal(oniDe(a,m))} °C (${fasePorMes.get(chave(a,m))}) · ${fmt(valor(a,m,'chuva_media_mm',alvo())??0,1)} mm · ${fmt(valor(a,m,'focos_inpe',alvo())??0)} focos</title></rect>`).join('');
       svg.innerHTML=s;
       // Título: o pico de focos cai no mesmo período todo ano, com ou sem El Niño?
       const anos=[...new Set(meses.map(([a])=>a))];
-      const picos=[...new Set(anos.map(a=>{ const ms=meses.filter(([b])=>b===a); return ms.reduce((best,[b,m])=>valor(b,m,'focos_inpe',regiao)>valor(b,best,'focos_inpe',regiao)?m:best,ms[0][1]); }))].sort((a,b)=>a-b);
+      const picos=[...new Set(anos.map(a=>{ const ms=meses.filter(([b])=>b===a); return ms.reduce((best,[b,m])=>valor(b,m,'focos_inpe',alvo())>valor(b,best,'focos_inpe',alvo())?m:best,ms[0][1]); }))].sort((a,b)=>a-b);
       $('timeTitle').textContent=`${nome}: o pico de focos cai em ${picos.map(m=>mesesCurtos[m-1]).join(' ou ')} todo ano, com ou sem El Niño`;
     }
     function desenharEstados(id,campo,cor,tituloId) {
@@ -363,7 +439,24 @@
       try { history.replaceState(null,'',`#${nome}`); } catch {}
       render();
     }
-    function selecionar(sel) { regiao=sel; $('regiao').value=sel; render(); }
+    const munCarregado={};
+    function selecionar(sel) {
+      regiao=sel; cidade=null; $('regiao').value=sel;
+      const cs=$('cidade'); cs.innerHTML='<option value="">Todos os municípios</option>'; cs.disabled=true;
+      if (sel!=='NE') carregarUF(sel).then(m=>{
+        munCarregado[sel]=m;
+        if (regiao!==sel) return;
+        if (m) { cs.insertAdjacentHTML('beforeend',m.lista.map(([cd,n])=>`<option value="${cd}">${n}</option>`).join('')); cs.disabled=false; }
+        desenharMapa();
+      });
+      render();
+    }
+    function selecionarCidade(cd) {
+      const m=munCarregado[regiao];
+      cidade = !cd || cidade?.cd===cd || !m ? null : { cd, nome:m.lista.find(x=>x[0]===cd)[1] };
+      $('cidade').value=cidade?.cd||'';
+      render();
+    }
 
     Promise.all([
       fetch('/api/piloto-real').then(r=>{ if(!r.ok) throw Error('dados indisponíveis'); return r.json(); }),
@@ -373,6 +466,7 @@
       features=mapa.features;
       for (const r of linhas) fasePorMes.set(chave(r._ano,r._mes),r.fase_enso);
       ufs=[...new Map(linhas.map(r=>[r.uf_sigla,r.uf_nome])).entries()].sort((a,b)=>a[1].localeCompare(b[1],'pt-BR'));
+      ANOS=[...new Set(linhas.map(r=>r._ano))].sort();
       episodio=encontrarEpisodio();
       if (!episodio.length) throw Error('não há meses de El Niño nos anos observados');
       const anos=dados.anos_observados;
@@ -384,10 +478,14 @@
         document.querySelectorAll('.toggle button').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));
         desenharMapa();
       }));
-      document.addEventListener('keydown',e=>{ if (e.key==='Escape' && regiao!=='NE') selecionar('NE'); });
+      $('cidade').addEventListener('change',e=>selecionarCidade(e.target.value||null));
+      document.addEventListener('keydown',e=>{ if (e.key!=='Escape') return; if (cidade) selecionarCidade(null); else if (regiao!=='NE') selecionar('NE'); });
       let pendente=0; const ro=new ResizeObserver(()=>{ cancelAnimationFrame(pendente); pendente=requestAnimationFrame(render); });
       document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>abrirAba(b.dataset.tab)));
       document.querySelectorAll('.tab').forEach(t=>ro.observe(t));
+      // Recorte inicial pelo endereço: /painel?uf=MA&mun=2105302#tempo
+      const q=new URLSearchParams(location.search), ufIni=q.get('uf')?.toUpperCase();
+      if (ufIni && ufs.some(u=>u[0]===ufIni)) { selecionar(ufIni); const cd=q.get('mun'); if (cd) carregarUF(ufIni).then(m=>{ munCarregado[ufIni]=m; if (m?.lista.some(x=>x[0]===cd)) selecionarCidade(cd); }); }
       const inicial=location.hash.slice(1);
       if (['geral','tempo','estados'].includes(inicial)) abrirAba(inicial); else render();
     }).catch(err=>{ document.querySelector('.grid').innerHTML=`<p class="error">Não foi possível abrir o painel: ${err.message}. Confira as bases em amostras/ e o guia de processamento.</p>`; });
