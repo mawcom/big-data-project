@@ -19,7 +19,7 @@
     .eyebrow { color:var(--chuva); text-transform:uppercase; letter-spacing:.15em; font-size:11px; font-weight:800; }
     h1 { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-weight:500; letter-spacing:-.03em; font-size:clamp(24px,2.3vw,34px); line-height:1.1; margin:4px 0 0; }
     .filter { display:flex; gap:10px; align-items:center; }
-    label { text-transform:uppercase; letter-spacing:.1em; font-size:10px; font-weight:750; color:var(--muted); }
+    label { text-transform:uppercase; letter-spacing:.1em; font-size:11px; font-weight:750; color:var(--muted); }
     select { font:inherit; font-size:14px; color:var(--text); background:#fff; border:1px solid #c9c4d1; border-radius:9px; padding:8px 12px; cursor:pointer; }
     .big-idea { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-size:clamp(17px,1.45vw,22px); line-height:1.3; margin:0; }
     .big-idea b { color:var(--fogo); font-weight:700; }
@@ -27,23 +27,23 @@
     .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
     .card,.panel { border:1px solid var(--line); background:var(--panel); border-radius:13px; box-shadow:0 1px 2px #2b105510; }
     .card { padding:10px 14px; }
-    .card span { display:block; font-size:11px; color:var(--muted); }
+    .card span { display:block; font-size:12px; color:var(--muted); }
     .card strong { display:block; color:var(--title); font-family:Georgia,"Times New Roman",serif; font-size:26px; font-weight:500; margin-top:4px; font-variant-numeric:tabular-nums; }
-    .card small { color:var(--muted); font-size:11px; }
+    .card small { color:var(--muted); font-size:12px; }
     .card.rain strong { color:var(--chuva); } .card.fire strong { color:var(--fogo); } .card.rain { border-top:3px solid var(--chuva); } .card.fire { border-top:3px solid var(--fogo); }
-    .grid { display:grid; gap:10px; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr) minmax(250px,.72fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"rain map read" "fire map read"; }
+    .grid { display:grid; gap:10px; grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr) minmax(270px,.9fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"rain map read" "fire map read"; }
     .p-rain { grid-area:rain; } .p-fire { grid-area:fire; } .p-map { grid-area:map; } .p-map h2 { font-size:16px; } .p-read { grid-area:read; }
     .panel { padding:12px 14px; min-width:0; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
     h2 { color:var(--title); font-family:Georgia,"Times New Roman",serif; font-weight:500; font-size:18px; line-height:1.25; margin:0 0 2px; }
-    .note { color:var(--muted); font-size:11px; line-height:1.4; margin:4px 0 0; }
-    .key { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+    .note { color:var(--muted); font-size:12px; line-height:1.4; margin:4px 0 0; }
     .chart { flex:1; min-height:150px; width:100%; display:block; }
-    .chart text { fill:var(--muted); font:11px Inter,ui-sans-serif,system-ui,sans-serif; }
+    .chart text { fill:var(--muted); font:12px Inter,ui-sans-serif,system-ui,sans-serif; }
     .chart text.annot { fill:var(--text); font-weight:700; }
-    .chart text.oni { font-size:10px; fill:#b86a0c; }
+    .chart text.halo { paint-order:stroke; stroke:#fff; stroke-width:3px; }
+    .chart text.oni { font-size:11px; fill:#b86a0c; }
     .panel-top { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
     .toggle { display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; flex:none; }
-    .toggle button { border:0; background:none; color:var(--muted); font:600 11px Inter,ui-sans-serif,system-ui,sans-serif; padding:6px 10px; cursor:pointer; }
+    .toggle button { border:0; background:none; color:var(--muted); font:600 12px Inter,ui-sans-serif,system-ui,sans-serif; padding:6px 10px; cursor:pointer; }
     .toggle button[aria-pressed=true] { background:#eaddf5; color:var(--chuva); }
     .toggle button.fire[aria-pressed=true] { background:#fbe3ec; color:var(--fogo); }
     .map-wrap { flex:1; min-height:0; position:relative; }
@@ -51,8 +51,8 @@
     .state { stroke:#ffffff; stroke-width:1.2; vector-effect:non-scaling-stroke; cursor:pointer; }
     .state:hover,.state:focus-visible { stroke:var(--title); stroke-width:2; outline:none; }
     .state.selected { stroke:var(--title); stroke-width:3; }
-    .state-label { fill:var(--title); font:800 calc(11px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
-    .state-value { fill:var(--text); font:600 calc(10px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    .state-label { fill:var(--title); font:800 calc(12px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
+    .state-value { fill:var(--text); font:600 calc(11px * var(--k,1)) Inter,ui-sans-serif,system-ui,sans-serif; text-anchor:middle; pointer-events:none; paint-order:stroke; stroke:#ffffff; stroke-width:calc(3px * var(--k,1)); }
     #map.zoomed .state { fill:#eceaef; cursor:pointer; }
     #map.zoomed .state.selected { opacity:1; fill:#ffffff; }
     #map.zoomed .state-label,#map.zoomed .state-value { display:none; }
@@ -66,11 +66,12 @@
     .crumbs .sep { color:var(--muted); }
     .map-status { position:absolute; inset:auto 6px 6px auto; font-size:11px; color:var(--muted); background:#ffffffe6; padding:3px 8px; border-radius:7px; }
     select:disabled { opacity:.5; cursor:default; }
-    .scale { display:flex; align-items:center; gap:8px; font-size:10px; color:var(--muted); font-variant-numeric:tabular-nums; margin-top:4px; }
+    .scale { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; margin-top:4px; }
     .scale i { flex:1; height:8px; border-radius:9px; }
-    .reading { list-style:none; padding:0; margin:6px 0 0; display:grid; gap:9px; font-size:13px; line-height:1.4; color:var(--muted); }
+    .p-read { overflow-y:auto; }
+    .reading { list-style:none; padding:0; margin:6px 0 0; display:grid; gap:7px; font-size:12.5px; line-height:1.35; color:var(--muted); }
     .reading b { color:var(--text); font-weight:650; }
-    .reading .tag { display:inline-block; min-width:62px; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-right:4px; }
+    .reading .tag { display:inline-block; min-width:62px; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-right:4px; }
     .tag.rain { color:var(--chuva); } .tag.fire { color:var(--fogo); } .tag.warn { color:var(--muted); } .tag.act { color:var(--title); }
     .reading li.act { border-top:1px solid var(--line); padding-top:9px; color:var(--text); }
     .tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); }
@@ -124,12 +125,12 @@
       <section class="panel p-rain">
         <h2 id="rainTitle">Chuva mês a mês</h2>
         <svg id="rainChart" class="chart" role="img" aria-label="Chuva em cada mês do El Niño comparada com os mesmos meses sem El Niño"></svg>
-        <p class="note"><i class="key" style="background:var(--chuva)"></i>Mês do El Niño · <i class="key" style="background:var(--context)"></i>média do mesmo mês em anos sem El Niño · abaixo do mês, o ONI (°C). Fonte: CHIRPS v3.</p>
+        <p class="note">Normal = média do mesmo mês em anos sem El Niño. Abaixo do mês, o ONI (°C). Fonte: CHIRPS v3.</p>
       </section>
       <section class="panel p-fire">
         <h2 id="fireTitle">Focos de fogo mês a mês</h2>
         <svg id="fireChart" class="chart" role="img" aria-label="Focos em cada mês do El Niño comparados com os mesmos meses sem El Niño"></svg>
-        <p class="note"><i class="key" style="background:var(--fogo)"></i>Mês do El Niño · <i class="key" style="background:var(--context)"></i>média do mesmo mês em anos sem El Niño. Fonte: INPE (satélite de referência).</p>
+        <p class="note">Normal = média do mesmo mês em anos sem El Niño. Fonte: INPE (satélite de referência).</p>
       </section>
       <section class="panel p-map">
         <div class="panel-top">
@@ -245,7 +246,7 @@
       if (!W || !H) return;
       svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
       const c=comparar(campo,sel), chuva=campo==='chuva_media_mm', un=chuva?' mm':'';
-      const L=46,R=8,T=20,B=34, base=H-B, alto=base-T, n=c.meses.length, passo=(W-L-R)/n;
+      const L=54,R=62,T=20,B=34, base=H-B, alto=base-T, n=c.meses.length, passo=(W-L-R)/n;
       const maior=Math.max(...c.meses.flatMap(m=>[m.nino,m.ref.v]),1);
       const p10=Math.pow(10,Math.floor(Math.log10(maior))), teto=Math.ceil(maior/p10/2)*p10*2;
       const y=v=>base-(v/teto)*alto, x=i=>L+passo*i+passo/2;
@@ -260,18 +261,28 @@
           `<rect x="${x(i)-wRef/2}" y="${y(m.ref.v)}" width="${wRef}" height="${Math.max(0,base-y(m.ref.v))}" rx="3" fill="${COR.contexto}"/>`+
           `<rect x="${x(i)-wNino/2}" y="${y(m.nino)}" width="${wNino}" height="${Math.max(0,base-y(m.nino))}" rx="2" fill="${cor}"/>`+
           `<rect x="${x(i)-passo/2}" y="${T}" width="${passo}" height="${alto}" fill="transparent"/></g>`;
-        if (i===iDestaque) s+=`<text class="annot" x="${x(i)}" y="${Math.min(y(m.nino),y(m.ref.v))-7}" text-anchor="middle">${dif>0?'+':'−'}${fmt(Math.abs(dif))}${un||' focos'}</text>`;
-        s+=`<text x="${x(i)}" y="${H-19}" text-anchor="middle"${i===iDestaque?' class="annot"':''}>${rotuloMes(m.ano,m.mes)}</text>`;
-        if (chuva) s+=`<text class="oni" x="${x(i)}" y="${H-5}" text-anchor="middle">${sinal(oniDe(m.ano,m.mes))}</text>`;
+        // Rótulo acima das barras do mês e das vizinhas, com contorno branco, para não encostar em nenhuma.
+        if (i===iDestaque) { const topo=Math.min(...c.meses.slice(Math.max(0,i-1),i+2).flatMap(v=>[y(v.nino),y(v.ref.v)]));
+          s+=`<text class="annot halo" x="${x(i)}" y="${Math.max(T-6,topo-7)}" text-anchor="middle">${dif>0?'+':'−'}${fmt(Math.abs(dif))}${un||' focos'}</text>`; }
+        // Sem espaço para todos os meses, mostra um sim, um não (e sempre o mês em destaque).
+        const cabe=passo>=46 || i%2===iDestaque%2;
+        if (cabe) s+=`<text x="${x(i)}" y="${H-19}" text-anchor="middle"${i===iDestaque?' class="annot"':''}>${rotuloMes(m.ano,m.mes)}</text>`;
+        if (chuva && cabe) s+=`<text class="oni" x="${x(i)}" y="${H-5}" text-anchor="middle">${sinal(oniDe(m.ano,m.mes))}</text>`;
       });
+      // Rótulo direto (proximidade) no último mês, no lugar da legenda embaixo do gráfico.
+      const u=c.meses.at(-1), xl=x(n-1)+wRef/2+6; let ya=y(u.nino), yb=y(u.ref.v);
+      if (Math.abs(ya-yb)<14) { const m=(ya+yb)/2, cima=ya<=yb; ya=m+(cima?-7:7); yb=m+(cima?7:-7); }
+      ya=Math.min(base-2,ya); yb=Math.min(base-2,yb); if (Math.abs(ya-yb)<14) ya=yb-14;
+      s+=`<text class="annot" x="${xl}" y="${ya+4}" style="fill:${cor}">El Niño</text><text x="${xl}" y="${yb+4}">normal</text>`;
       svg.innerHTML=s;
       return c;
     }
 
     // Escala divergente: zero em cinza-lilás, "mais" na cor da métrica (roxo = chuva, magenta = focos) e "menos" em cinza escuro.
     // O lado negativo nunca usa a cor da outra métrica (Gestalt, similaridade: mesma cor = mesma métrica no painel todo).
+    // Focos usam um cinza mais claro: na protanopia, magenta e cinza escuro ficam quase iguais (ΔE 4; com #9b98a3, ΔE 26).
     function corDivergente(t,fogo) {
-      const alvo = t>0 ? (fogo ? [216,27,96] : [106,27,154]) : [95,90,107], a=Math.min(1,Math.abs(t));
+      const alvo = t>0 ? (fogo ? [216,27,96] : [106,27,154]) : (fogo ? [155,152,163] : [95,90,107]), a=Math.min(1,Math.abs(t));
       const [r,g,b]=COR.neutro.map((n,i)=>Math.round(n+(alvo[i]-n)*a));
       return `rgb(${r},${g},${b})`;
     }
@@ -404,10 +415,11 @@
       const chuvosa=trecho(chuva,[2,3,4]), seca=trecho(fogo,[8,9,10,11,12]);
       const estadosMaisChuva=ufs.filter(([s])=>comparar('chuva_media_mm',s).dif>0).length;
       const itens=[];
-      itens.push(`<li><span class="tag rain">Chuva</span><b>${estadosMaisChuva} de ${ufs.length} estados</b> tiveram mais chuva no episódio. A expectativa clássica é seca no norte do Nordeste; ela não apareceu neste El Niño.</li>`);
-      if (chuvosa) itens.push(`<li><span class="tag rain">Estação</span>Na estação chuvosa (${rotuloMes(chuvosa.de.ano,chuvosa.de.mes)}–${rotuloMes(chuvosa.ate.ano,chuvosa.ate.mes)}), ${nome} teve <b>${pct(chuvosa.dif)}</b> de chuva vs. o normal.</li>`);
-      if (seca) itens.push(`<li><span class="tag fire">Fogo</span>Na temporada de focos (${rotuloMes(seca.de.ano,seca.de.mes)}–${rotuloMes(seca.ate.ano,seca.ate.mes)}), ${nome} teve <b>${pct(seca.dif)}</b> de focos: o fogo segue o calendário seco, ${Math.abs(seca.dif)<15?'com pouca mudança':mais(seca.dif)==='mais'?'e foi mais intenso':'e foi menos intenso'} no El Niño.</li>`);
-      itens.push(`<li><span class="tag warn">Cuidado</span>Um único episódio, comparado com os mesmos meses de ${anosRef.length>1?anosRef.slice(0,-1).join(', ')+' e '+anosRef.at(-1):anosRef[0]}. Mostra associação, não causa.</li>`);
+      itens.push(`<li><span class="tag rain">Chuva</span><b>${estadosMaisChuva} de ${ufs.length} estados</b> tiveram mais chuva no episódio: a seca esperada no norte do Nordeste não apareceu.</li>`);
+      const faixaMeses=t=>t.de.ano===t.ate.ano?`${mesesCurtos[t.de.mes-1]}–${rotuloMes(t.ate.ano,t.ate.mes)}`:`${rotuloMes(t.de.ano,t.de.mes)}–${rotuloMes(t.ate.ano,t.ate.mes)}`;
+      if (chuvosa) itens.push(`<li><span class="tag rain">Estação</span>Na estação chuvosa (${faixaMeses(chuvosa)}), ${nome} teve <b>${pct(chuvosa.dif)}</b> de chuva vs. o normal.</li>`);
+      if (seca) itens.push(`<li><span class="tag fire">Fogo</span>Na temporada de focos (${faixaMeses(seca)}), ${nome} teve <b>${pct(seca.dif)}</b>: o fogo segue o calendário seco, ${Math.abs(seca.dif)<15?'com pouca mudança':mais(seca.dif)==='mais'?'e foi mais intenso':'e foi menos intenso'} no El Niño.</li>`);
+      itens.push(`<li><span class="tag warn">Cuidado</span>Um único episódio, vs. os mesmos meses de ${anosRef.length>1?anosRef.slice(0,-1).join(', ')+' e '+anosRef.at(-1):anosRef[0]}: associação, não causa.</li>`);
       const acao=acaoQuadra(); if (acao) itens.push(`<li class="act"><span class="tag act">O que fazer</span>${acao}</li>`);
       $('reading').innerHTML=itens.join('');
       desenharMapa();
@@ -419,16 +431,16 @@
       svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
       const meses=[...fasePorMes.keys()].map(k=>k.split('-').map(Number)).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
       const nino=new Set(episodio.map(e=>chave(e.ano,e.mes))), nome=nomeRecorte(alvo());
-      const L=78,R=10,T=26,B=24, n=meses.length, passo=(W-L-R)/n, x=i=>L+passo*i+passo/2, gap=14;
+      const L=88,R=10,T=26,B=24, n=meses.length, passo=(W-L-R)/n, x=i=>L+passo*i+passo/2, gap=14;
       const util=H-T-B-2*gap, hOni=util*.24, hRow=util*.38;
       const linhas3=[{nome:'ONI (°C)',y0:T,h:hOni},{nome:'Chuva (mm)',y0:T+hOni+gap,h:hRow},{nome:'Focos',y0:T+hOni+hRow+2*gap,h:hRow}];
       const iIni=meses.findIndex(([a,m])=>nino.has(chave(a,m))), iFim=meses.map(([a,m])=>nino.has(chave(a,m))).lastIndexOf(true);
       let s=`<rect x="${x(iIni)-passo/2}" y="${T-14}" width="${passo*(iFim-iIni+1)}" height="${H-B-T+14}" fill="${COR.nino}" opacity=".12"/>`+
-        `<text class="annot" x="${x(iIni)-passo/2+6}" y="${T-3}" style="fill:#b86a0c;font-size:10px;letter-spacing:.08em">EL NIÑO ${rotuloMes(episodio[0].ano,episodio[0].mes).toUpperCase()}–${rotuloMes(episodio.at(-1).ano,episodio.at(-1).mes).toUpperCase()}</text>`;
+        `<text class="annot" x="${x(iIni)-passo/2+6}" y="${T-3}" style="fill:#b86a0c;font-size:11px;letter-spacing:.08em">EL NIÑO ${rotuloMes(episodio[0].ano,episodio[0].mes).toUpperCase()}–${rotuloMes(episodio.at(-1).ano,episodio.at(-1).mes).toUpperCase()}</text>`;
       s+=linhas3.map(l=>`<text x="${L-10}" y="${l.y0+l.h/2+4}" text-anchor="end" class="annot">${l.nome}</text>`).join('');
       // ONI: linha com limiar de El Niño.
       const oni=meses.map(([a,m])=>oniDe(a,m)), oMax=Math.max(2,...oni), oMin=Math.min(-1,...oni), yo=v=>linhas3[0].y0+(oMax-v)/(oMax-oMin)*linhas3[0].h;
-      s+=`<line x1="${L}" x2="${W-R}" y1="${yo(0)}" y2="${yo(0)}" stroke="${COR.eixo}"/><line x1="${L}" x2="${W-R}" y1="${yo(.5)}" y2="${yo(.5)}" stroke="${COR.limiar}" stroke-dasharray="4 5"/><text x="${L-10}" y="${yo(.5)-12}" text-anchor="end" style="font-size:10px">≥ +0,5 = El Niño</text>`;
+      s+=`<line x1="${L}" x2="${W-R}" y1="${yo(0)}" y2="${yo(0)}" stroke="${COR.eixo}"/><line x1="${L}" x2="${W-R}" y1="${yo(.5)}" y2="${yo(.5)}" stroke="${COR.limiar}" stroke-dasharray="4 5"/><text class="halo" x="${L+4}" y="${yo(.5)-4}" style="font-size:11px">≥ +0,5 °C = El Niño</text>`;
       s+=`<polyline points="${oni.map((v,i)=>`${x(i)},${yo(v)}`).join(' ')}" fill="none" stroke="${COR.oni}" stroke-width="2.2" stroke-linejoin="round"/>`;
       const iPico=oni.indexOf(Math.max(...oni));
       s+=`<text class="annot" x="${x(iPico)}" y="${yo(oni[iPico])-6}" text-anchor="middle">${sinal(oni[iPico])} °C</text>`;
@@ -488,16 +500,16 @@
       const ps=serie26('chuva').filter(p=>p.obs===null && p.ano>EN.ano && p.mes>=2 && p.mes<=5);
       if (!ps.length) return null;
       const soma=c=>ps.reduce((a,p)=>a+p[c],0), comp=100*(soma('comp')/soma('clim')-1), forte=100*(soma('forte')/soma('clim')-1);
-      const quadra=`fev–mai/${String(EN.ano+1).slice(2)}`, uf=ufRecorte(), faixa=`${pct(comp)} (média dos El Niños) a ${pct(forte)} (só os fortes) vs. o normal`;
+      const quadra=`fev–mai/${String(EN.ano+1).slice(2)}`, uf=ufRecorte(), faixa=`${pct(comp)} a ${pct(forte)} vs. o normal`;
       const linha=cidade && EN.municipios.find(r=>String(r.municipio_codigo_ibge)===String(cidade.cd));
       let hist='';
-      if (linha) hist=`${cidade.nome} ficou abaixo do normal em ${linha.fortes_abaixo_da_media} de ${linha.fortes} quadras depois de El Niños fortes`;
+      if (linha) hist=`${cidade.nome} ficou abaixo do normal depois de ${linha.fortes_abaixo_da_media} de ${linha.fortes} El Niños fortes`;
       else { const vs=EN.municipios.filter(r=>!uf||r.uf_sigla===uf).map(r=>Number(r.anomalia_fortes_pct));
-        if (vs.length) hist=`${fmt(100*vs.filter(v=>v<0).length/vs.length)}% dos municípios${uf?' do estado':''} ficaram mais secos nas quadras depois de El Niños fortes`; }
-      const fim=' Reavaliar com a previsão sazonal oficial antes de fevereiro.', onde=cidade?' do estado':'';
-      if (Math.max(comp,forte)<=-5) return `<b>Planejar a quadra chuvosa de ${quadra} para chuva abaixo do normal.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
-      if (Math.min(comp,forte)>=5) return `<b>Preparar a quadra chuvosa de ${quadra} para chuva acima do normal.</b> Projeção${onde}: ${faixa}.${fim}`;
-      return `<b>Sem sinal claro para a quadra chuvosa de ${quadra}.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
+        if (vs.length) hist=`${fmt(100*vs.filter(v=>v<0).length/vs.length)}% dos municípios${uf?' do estado':''} ficaram mais secos depois de El Niños fortes`; }
+      const fim=' Reavaliar com a previsão oficial em fevereiro.', onde=cidade?' do estado':'';
+      if (Math.max(comp,forte)<=-5) return `<b>Planejar ${quadra} para chuva abaixo do normal.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
+      if (Math.min(comp,forte)>=5) return `<b>Preparar ${quadra} para chuva acima do normal.</b> Projeção${onde}: ${faixa}.${fim}`;
+      return `<b>Sem sinal claro para ${quadra}.</b> Projeção${onde}: ${faixa}${hist?`; ${hist}`:''}.${fim}`;
     }
     function carregarMalhas() {
       malhasPedido ??= Promise.all(ufs.map(([s])=>fetch(`/static/municipios/${s}.geojson`).then(r=>r.ok?r.json():null).catch(()=>null)))
@@ -538,8 +550,8 @@
       const iFut=ps.findIndex(p=>p.obs===null), obsPs=ps.map((p,i)=>[p,i]).filter(([p])=>p.obs!==null);
       let s='';
       if (iFut>=0) s+=`<rect x="${x(iFut)-passo/2}" y="${T-18}" width="${W-R-(x(iFut)-passo/2)}" height="${alto+18}" fill="${COR.nino}" opacity=".07"/>`+
-        `<text class="annot" x="${x(iFut)-passo/2+6}" y="${T-6}" style="fill:#b86a0c;font-size:10px;letter-spacing:.08em">PROJEÇÃO →</text>`+
-        `<text class="annot" x="${x(iFut)-passo/2-6}" y="${T-6}" text-anchor="end" style="font-size:10px;letter-spacing:.08em">← OBSERVADO</text>`;
+        `<text class="annot" x="${x(iFut)-passo/2+6}" y="${T-6}" style="fill:#b86a0c;font-size:11px;letter-spacing:.08em">PROJEÇÃO →</text>`+
+        `<text class="annot" x="${x(iFut)-passo/2-6}" y="${T-6}" text-anchor="end" style="font-size:11px;letter-spacing:.08em">← OBSERVADO</text>`;
       s+=[lo,hi].filter(v=>v!==0).map(v=>`<text x="${L-8}" y="${y(v)+4}" text-anchor="end">${com(v)}</text>`).join('');
       s+=`<text x="${L-8}" y="${y(0)+4}" text-anchor="end">0</text><line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="${COR.limiar}"/>`;
       ps.forEach((p,i)=>{ if (passo>=34 || p.mes%2===1) s+=`<text x="${x(i)}" y="${H-6}" text-anchor="middle"${p.mes===1?' class="annot"':''}>${p.mes===1?p.ano:mesesCurtos[p.mes-1]}</text>`; });
@@ -579,7 +591,7 @@
       // Pequenos múltiplos (um bloco por medida, mesma escala) no lugar de barras agrupadas;
       // cada bloco ordenado do menor erro para o maior, com só a melhor regra em cor.
       const curtos={climatologia:'Média histórica',persistencia:`Repetir ${EN.ano-1}`,analogo:`Repetir ${EN.metodo.series.chuva.analogo}`,composto:'Média El Niños',composto_forte:'Só El Niños fortes'};
-      const L=112,R=40,B=18,gap=12,cab=16, hBloco=(H-B-gap)/2, linha=(hBloco-cab)/dados.length, hb=Math.max(5,Math.min(16,linha*.72));
+      const L=124,R=40,B=18,gap=12,cab=17, hBloco=(H-B-gap)/2, linha=(hBloco-cab)/dados.length, hb=Math.max(5,Math.min(16,linha*.72));
       const mx=Math.max(...dados.flatMap(d=>[d.chuva,d.focos]),1), xv=e=>(e/mx)*(W-L-R);
       let s='';
       [['chuva','Chuva',COR.chuva],['focos','Focos',COR.fogo]].forEach(([m,rot,cor],k)=>{
@@ -598,7 +610,9 @@
       $('e26Title').textContent=`Quanto cada regra errou em ${per}`;
       $('e26Title').title=`Melhor: ${nomeDe(melhor.chuva)} (chuva) e ${nomeDe(melhor.focos)} (focos)`;
       const clim=dados[0], comp=dados[3];
-      $('e26Note').textContent=`Usar a média dos El Niños ${comp.chuva<clim.chuva?'reduziu':'não reduziu'} o erro da chuva e ${comp.focos<clim.focos?'reduziu':'não reduziu'} o dos focos vs. o normal. Abr–out é estação seca: o teste da chuva ainda é fraco.`;
+      const rc=comp.chuva<clim.chuva, rf=comp.focos<clim.focos;
+      const efeito=rc&&rf?'reduziu o erro na chuva e nos focos':!rc&&!rf?'não reduziu o erro na chuva nem nos focos':rc?'reduziu o erro na chuva, mas não nos focos':'reduziu o erro nos focos, mas não na chuva';
+      $('e26Note').textContent=`Comparada à média histórica, a média dos El Niños ${efeito}. Abr–out é estação seca: o teste da chuva ainda é fraco.`;
     }
     function desenharQuadra() {
       const svg=$('map26'), {width:W,height:H}=svg.getBoundingClientRect();
